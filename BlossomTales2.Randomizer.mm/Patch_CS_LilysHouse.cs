@@ -2,7 +2,7 @@
 
 namespace BlossomTales2
 {
-    class Patch_CS_LilysHouse : CS_LilysHouse
+    class patch_CS_LilysHouse : CS_LilysHouse
     {
         public extern void orig_equipShield();
         
