@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net10.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <Reference Include="BlossomTales2">
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Blossom Tales 2\BlossomTales2.exe</HintPath>
+        <Private>False</Private>
+      </Reference>
+      <Reference Include="FNA">
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Blossom Tales 2\FNA.dll</HintPath>
+      </Reference>
+      <Reference Include="MonoMod">
+        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Blossom Tales 2\MonoMod.exe</HintPath>
+        <Private>False</Private>
+      </Reference>
+    </ItemGroup>
+
+</Project>
