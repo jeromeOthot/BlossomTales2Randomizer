@@ -14,7 +14,7 @@ public class patch_Player : Player
     public void GiveItem(EquipableItem.ItemList item, bool playAnimation = true)
     {
       //ICI on met un quart de coeur pour chaque fois qu'on recoit un item ;) Plus facile a tester et voir une progression
-      item = EquipableItem.ItemList.HeartQ_1;
+      item = EquipableItem.ItemList.HeartQ_4;
       
       this.idleCount = 0;
       this.idleFrame = 0;
