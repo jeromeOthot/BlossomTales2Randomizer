@@ -18,6 +18,12 @@ namespace BlossomTales2
         
         public override void Update(GameTime gameTime)
         {
+          //patch_Game1 patchGame = new patch_Game1();
+          //TODO: Je n'arrive pas a creer un nouveau parametre LootSpots dans la classe patch_Game1. Ca lag quand je lance le jeu.
+          Dictionary<string, EquipableItem.ItemList> LootSpots = new Dictionary<string, EquipableItem.ItemList> { { "blossom-house2.tmx:11:5", EquipableItem.ItemList.Guitar }};
+          string mapName = Game1.LevelName;
+          //int objectId = this.IDNumber;//Ne marche pas donne 0 
+          
           patch_Player patchPlayer = new patch_Player();
           this.tweener.Update((float) gameTime.ElapsedGameTime.TotalSeconds * Game1.TimeDelta);
           this.underwater = false;
@@ -79,11 +85,28 @@ namespace BlossomTales2
                     if (Game1.CurrentLevel.LevelObjects[index4] is SpawnRectangle && ((SpawnRectangle) Game1.CurrentLevel.LevelObjects[index4]).WaitToDie > 0)
                       ((SpawnRectangle) Game1.CurrentLevel.LevelObjects[index4]).WaitToDie = 2;
                   }
+
                   Game1.playSoundCue("chestOpen");
+                  string indexChest = mapName.ToString() + ":" + index1.ToString() + ":" + index2.ToString();
+                  
+                  Game1.Dialoger.AddLine($"indexChest: {indexChest}");
                   Game1.Perma_Objects.Add(new PermaListItem(Game1.CurrentLevel.Name, this.Name, this.Position));
                   Game1.player.LockPosition = false;
                   Game1.player.LockDirection = false;
                   Game1.player.RemovePlayerControls = false;
+                  
+                  //Juste pour un test d'un coffre est bien mapper au dictionnaire
+                  if (LootSpots.TryGetValue(indexChest, out EquipableItem.ItemList item))
+                  {
+                      patchPlayer.GiveItem(item);
+                  }
+                  //Ne devrait pas arrivé une fois le jeu fini, pour le moment on va juste sortir un coeur
+                  else
+                  {
+                      patchPlayer.GiveItem(EquipableItem.ItemList.HeartQ_4);
+                  }
+
+                  /*
                   if (this.IDNumber == 0)
                   {
                     patchPlayer.GiveItem(EquipableItem.ItemList.GoldCoin);
@@ -96,7 +119,7 @@ namespace BlossomTales2
                       Game1.CurrentLevel.LevelObjects.Add((LevelObject) new Coin_PU(this.Position, velocity));
                     }
                     if (Game1.LevelName == "blossom-house4.tmx" && this.Position == new Vector3(408f, 0.0f, 340f))
-                      Game1.Globals.BlossomHouse4Chest = 2; */
+                      Game1.Globals.BlossomHouse4Chest = 2; *
                   }
                   else if (this.IDNumber == 1)
                   {
@@ -177,8 +200,8 @@ namespace BlossomTales2
                     int num = Game1.RandomNumber.Next(30, 40);
                     for (int index6 = 0; index6 < num; ++index6)
                       Game1.CurrentLevel.LevelObjects.Add((LevelObject) new Coin_PU(this.Position, new Vector3(Game1.RandomFloat(-1000, 1000, 100f), Game1.RandomFloat(500, 900, 100f), Game1.RandomFloat(200, 800, 100f))));
-                    */
-                  }
+                    *
+                  }*/
                 }
               }
             }
