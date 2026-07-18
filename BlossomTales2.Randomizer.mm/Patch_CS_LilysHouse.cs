@@ -14,7 +14,7 @@ namespace BlossomTales2
             lily.play("getItem");
             Game1.playSoundCue("newWeapon");
             Game1.player.Position = lily.getPosition();
-            Game1.Particles.Add((Particle) new P_GetItem(lily.getPosition() + new Vector3(0.0f, 100f, 0.0f), 48));
+            Game1.Particles.Add((Particle) new P_GetItem(lily.getPosition() + new Vector3(0.0f, 100f, 0.0f), 9));
             Game1.Particles.Add((Particle) new GetItemLight(lily.getPosition()));
             Game1.player.Inventory.Add(EquipableItem.ItemList.Guitar);
             //Game1.player.Ability[0] = (EquipableItem) new E_Shield();
