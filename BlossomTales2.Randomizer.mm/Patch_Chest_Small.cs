@@ -18,9 +18,6 @@ namespace BlossomTales2
         
         public override void Update(GameTime gameTime)
         {
-          //patch_Game1 patchGame = new patch_Game1();
-          //TODO: Je n'arrive pas a creer un nouveau parametre LootSpots dans la classe patch_Game1. Ca lag quand je lance le jeu.
-          Dictionary<string, EquipableItem.ItemList> LootSpots = new Dictionary<string, EquipableItem.ItemList> { { "blossom-house2.tmx:11:5", EquipableItem.ItemList.Guitar }};
           string mapName = Game1.LevelName;
           //int objectId = this.IDNumber;//Ne marche pas donne 0 
           
@@ -96,7 +93,7 @@ namespace BlossomTales2
                   Game1.player.RemovePlayerControls = false;
                   
                   //Juste pour un test d'un coffre est bien mapper au dictionnaire
-                  if (LootSpots.TryGetValue(indexChest, out EquipableItem.ItemList item))
+                  if (patch_Game1.LootSpots.TryGetValue(indexChest, out EquipableItem.ItemList item))
                   {
                       patchPlayer.GiveItem(item);
                   }

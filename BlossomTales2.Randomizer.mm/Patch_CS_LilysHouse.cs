@@ -16,7 +16,7 @@ namespace BlossomTales2
             Game1.player.Position = lily.getPosition();
             Game1.Particles.Add((Particle) new P_GetItem(lily.getPosition() + new Vector3(0.0f, 100f, 0.0f), 9));
             Game1.Particles.Add((Particle) new GetItemLight(lily.getPosition()));
-            Game1.player.Inventory.Add(EquipableItem.ItemList.Guitar);
+            Game1.player.Inventory.Add(patch_Game1.LootSpots["grandma_1"]);
             //Game1.player.Ability[0] = (EquipableItem) new E_Shield();
             this.tweener.Timer(2.3f).OnComplete((Action) (() =>
             {
