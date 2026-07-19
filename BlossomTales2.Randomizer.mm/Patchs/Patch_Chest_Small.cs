@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using BlossomTales2.Randomizer.mm;
+using Microsoft.Xna.Framework;
 using MonoMod;
 #nullable disable
 namespace BlossomTales2
@@ -93,7 +94,7 @@ namespace BlossomTales2
                   Game1.player.RemovePlayerControls = false;
                   
                   //Juste pour un test d'un coffre est bien mapper au dictionnaire
-                  if (patch_Game1.LootSpots.TryGetValue(indexChest, out EquipableItem.ItemList item))
+                  if (RandomizerSingleton.Instance.TryGetItemAtLocation(indexChest, out EquipableItem.ItemList item))
                   {
                       patchPlayer.GiveItem(item);
                   }

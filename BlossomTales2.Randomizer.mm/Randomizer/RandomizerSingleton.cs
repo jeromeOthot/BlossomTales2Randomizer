@@ -18,7 +18,13 @@ namespace BlossomTales2.Randomizer.mm
 
         public EquipableItem.ItemList GetItemAtLocation(string location)
         {
-            return _lootSpots[location];
+            TryGetItemAtLocation(location, out EquipableItem.ItemList item);
+            return item;
+        }
+
+        public bool TryGetItemAtLocation(string location, out EquipableItem.ItemList item)
+        {
+            return _lootSpots.TryGetValue(location, out item);
         }
 
         private void InitializeLootTables()
