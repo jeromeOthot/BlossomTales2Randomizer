@@ -20,6 +20,11 @@ namespace BlossomTales2.Randomizer.mm
             Position = position;
         }
 
+        public override string ToString()
+        {
+            return "Map: [" + MapName + "] Object: [" + Name + "] Position: " + Position;
+        }
+
         public override readonly bool Equals(object obj)
         {
             if (obj is not LocationId other)

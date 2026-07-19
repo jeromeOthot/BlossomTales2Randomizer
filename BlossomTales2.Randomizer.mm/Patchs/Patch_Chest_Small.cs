@@ -19,10 +19,6 @@ namespace BlossomTales2
         
         public override void Update(GameTime gameTime)
         {
-          string mapName = Game1.LevelName;
-          //int objectId = this.IDNumber;//Ne marche pas donne 0 
-          
-          patch_Player patchPlayer = new patch_Player();
           this.tweener.Update((float) gameTime.ElapsedGameTime.TotalSeconds * Game1.TimeDelta);
           this.underwater = false;
           int index1 = (int) this.Position.X / 64 /*0x40*/;
@@ -85,23 +81,21 @@ namespace BlossomTales2
                   }
 
                   Game1.playSoundCue("chestOpen");
-                  string indexChest = mapName.ToString() + ":" + index1.ToString() + ":" + index2.ToString();
-                  
-                  Game1.Dialoger.AddLine($"indexChest: {indexChest}");
                   Game1.Perma_Objects.Add(new PermaListItem(Game1.CurrentLevel.Name, this.Name, this.Position));
                   Game1.player.LockPosition = false;
                   Game1.player.LockDirection = false;
                   Game1.player.RemovePlayerControls = false;
-                  
+
                   //Juste pour un test d'un coffre est bien mapper au dictionnaire
-                  if (RandomizerSingleton.Instance.TryGetItemAtLocation(indexChest, out EquipableItem.ItemList item))
+                  GameLogger.LogInfo(new LocationId(Game1.CurrentLevel.Name, Name, Position).ToString());
+                  if (RandomizerSingleton.Instance.TryGetItemAtLocation(new LocationId(Game1.CurrentLevel.Name, Name, Position), out EquipableItem.ItemList item))
                   {
-                      patchPlayer.GiveItem(item);
+                        Game1.player.GiveItemReflection(item);
                   }
                   //Ne devrait pas arrivé une fois le jeu fini, pour le moment on va juste sortir un coeur
                   else
                   {
-                      patchPlayer.GiveItem(EquipableItem.ItemList.HeartQ_4);
+                        Game1.player.GiveItemReflection(EquipableItem.ItemList.HeartQ_4);
                   }
 
                   /*
