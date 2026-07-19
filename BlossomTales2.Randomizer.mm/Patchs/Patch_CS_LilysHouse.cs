@@ -6,7 +6,7 @@ namespace BlossomTales2
     class patch_CS_LilysHouse : CS_LilysHouse
     {
         private Puppet lily = new Puppet("lily", new Vector3(0f, 0.0f, 0f));
-        private Puppet grandma = new Puppet("grandma", new Vector3(0f, 0f, 0f));
+        private Puppet grandma = new Puppet("Fake grandma", new Vector3(0f, 0f, 0f));
 
         public extern void orig_equipShield();
         
@@ -15,11 +15,11 @@ namespace BlossomTales2
             lily.play("getItem");
             Game1.playSoundCue("newWeapon");
             Game1.player.Position = lily.getPosition();
-            EquipableItem.ItemList item = RandomizerSingleton.Instance.GetItemAtLocation("grandma_1");
+            GameLogger.LogInfo(Game1.CurrentLevel.Name + " " + grandma.name + " " + grandma.getPosition());
+            EquipableItem.ItemList item = RandomizerSingleton.Instance.GetItemAtLocation(new LocationId(Game1.CurrentLevel.Name, grandma.name, grandma.getPosition()));
             Game1.Particles.Add((Particle) new P_GetItem(lily.getPosition() + new Vector3(0.0f, 100f, 0.0f), (int)item));
             Game1.Particles.Add((Particle) new GetItemLight(lily.getPosition()));
             Game1.player.GiveItemReflection(item, false);
-            GameLogger.LogInfo(Game1.CurrentLevel.Name + " " + grandma.Name + " " + grandma.getPosition());
             //Game1.player.Inventory.Add(patch_Game1.LootSpots["grandma_1"]);
             //Game1.player.Ability[0] = (EquipableItem) new E_Shield();
             this.tweener.Timer(2.3f).OnComplete((Action) (() =>
