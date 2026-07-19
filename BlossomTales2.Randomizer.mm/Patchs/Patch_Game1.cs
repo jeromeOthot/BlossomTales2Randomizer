@@ -9,6 +9,7 @@ namespace BlossomTales2
         protected override void Initialize()
         {
             RandomizerSingleton.Initialize();
+            GameLogger.LogInfo("Hello world");
             orig_Initialize();
         }
     }
