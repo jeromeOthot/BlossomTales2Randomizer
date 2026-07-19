@@ -1,5 +1,5 @@
-﻿using Microsoft.Xna.Framework;
-using MonoMod;
+﻿using BlossomTales2.Randomizer.mm;
+using Microsoft.Xna.Framework;
 #nullable disable
 namespace BlossomTales2
 {
@@ -14,9 +14,10 @@ namespace BlossomTales2
             lily.play("getItem");
             Game1.playSoundCue("newWeapon");
             Game1.player.Position = lily.getPosition();
-            Game1.Particles.Add((Particle) new P_GetItem(lily.getPosition() + new Vector3(0.0f, 100f, 0.0f), 9));
+            Game1.Particles.Add((Particle) new P_GetItem(lily.getPosition() + new Vector3(0.0f, 100f, 0.0f), (int)patch_Game1.LootSpots["grandma_1"]));
             Game1.Particles.Add((Particle) new GetItemLight(lily.getPosition()));
-            Game1.player.Inventory.Add(patch_Game1.LootSpots["grandma_1"]);
+            Game1.player.GiveItemReflection(patch_Game1.LootSpots["grandma_1"], false);
+            //Game1.player.Inventory.Add(patch_Game1.LootSpots["grandma_1"]);
             //Game1.player.Ability[0] = (EquipableItem) new E_Shield();
             this.tweener.Timer(2.3f).OnComplete((Action) (() =>
             {
