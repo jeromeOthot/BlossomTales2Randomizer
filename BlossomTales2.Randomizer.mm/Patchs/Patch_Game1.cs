@@ -12,5 +12,16 @@ namespace BlossomTales2
             GameLogger.LogInfo("Hello world");
             orig_Initialize();
         }
+
+        //TODO: Trouver une façon de caller la vraie fonction. Game1.RandomFloat 
+        public static float RandomFloat(int a, int b, float divisor)
+        {
+            if (a == 0 && b == 0)
+            {
+                return 0f;
+            }
+
+            return (float)RandomNumber.Next(a, b) / divisor;
+        }
     }
 }
