@@ -101,6 +101,9 @@ namespace BlossomTales2
                             if (RandomizerSingleton.Instance.TryGetItemAtLocation(new LocationId(Game1.CurrentLevel.Name, Name, Position), out EquipableItem.ItemList item))
                             {
                                 Game1.player.GiveItemReflection(item);
+                                //TODO: Find a better way to store information that we should open doors.
+                                if(Game1.CurrentLevel.Name == "orchid-tomb-3.tmx")
+                                    opendoors = true;
                             }
                             else //Conserver le comportement de base si le chest n'est pas dans la liste.
                             {
@@ -259,8 +262,42 @@ namespace BlossomTales2
             shadowScale = 4f - Position.Y / 90f;
         }
 
-        //Stub for compiler
-        private void OpenDoorGates() { }
+        //TODO: Appeler la fonction parent, sans reflection.
+        private void OpenDoorGates()
+        {
+            bool flag = false;
+            for (int i = 0; i < Game1.CurrentLevel.LevelObjects.Count; i++)
+            {
+                if (Game1.CurrentLevel.LevelObjects[i] is CameraOverrideObject && Game1.CurrentLevel.LevelObjects[i].IDNumber == IDNumber)
+                {
+                    Game1.CamController.focusCameraOnTarget(new Vector2(Game1.CurrentLevel.LevelObjects[i].Position.X, Game1.CurrentLevel.LevelObjects[i].Position.Z), Game1.CurrentLevel.LevelObjects[i].Velocity.X, Game1.CurrentLevel.LevelObjects[i].Velocity.Y);
+                    Game1.CamController.IDNumber = IDNumber;
+                    Game1.CamController.OpenBoth = true;
+                    flag = true;
+                    break;
+                }
+            }
+
+            if (flag)
+            {
+                return;
+            }
+
+            bool flag2 = false;
+            for (int j = 0; j < Game1.CurrentLevel.LevelObjects.Count; j++)
+            {
+                if (Game1.CurrentLevel.LevelObjects[j] is DoorGate)
+                {
+                    Game1.CurrentLevel.LevelObjects[j].Velocity.Y = 0f;
+                    flag2 = true;
+                }
+            }
+
+            if (flag2)
+            {
+                Game1.Camera.Shake(8f, 0.96f);
+            }
+        }
     }
 }
     
