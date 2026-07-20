@@ -42,6 +42,7 @@ namespace BlossomTales2.Randomizer.mm
                 { new LocationId("overworld-21x20-cave.tmx", "Chest_Small", new Vector3(1192f, 0f, 612f)), EquipableItem.ItemList.GoldCoin }, //Random small
                 { new LocationId("overworld-20x18.tmx", "lanternGuy", new Vector3(1036f, 0f, 660f)), EquipableItem.ItemList.Torch },
                 { new LocationId("orchid-tomb-3.tmx", "Chest_Small", new Vector3(416f, 0f, 320f)), EquipableItem.ItemList.Gold_Key }, // Besoin lampe && moyen de hit switch && moyen de tuer rats
+                { new LocationId("orchid-tomb-4.tmx", "orchid", new Vector3(604f, 0f, 304f)), EquipableItem.ItemList.HeartQ_4 },
             };
         }
     }
