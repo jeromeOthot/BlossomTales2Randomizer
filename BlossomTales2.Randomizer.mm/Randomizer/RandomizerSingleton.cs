@@ -31,7 +31,8 @@ namespace BlossomTales2.Randomizer.mm
         {
             _locations = new Dictionary<LocationId, EquipableItem.ItemList>
             {
-                { new LocationId("blossom-lilyHouse.tmx", "npc7", new Vector3(480f, 0f, 328f)), EquipableItem.ItemList.Guitar },
+                { new LocationId("blossom-lilyHouse.tmx", "npc7_1", new Vector3(480f, 0f, 328f)), EquipableItem.ItemList.WoodShield },
+                { new LocationId("blossom-lilyHouse.tmx", "npc7_2", new Vector3(480f, 0f, 328f)), EquipableItem.ItemList.WoodSword },
                 { new LocationId("blossom-house1.tmx", "Chest_Small", new Vector3(672f, 0f, 308f)), EquipableItem.ItemList.GoldCoin }, //Random small
                 { new LocationId("blossom-house2.tmx", "Chest_Small", new Vector3(708f, 0f, 356f)), EquipableItem.ItemList.GoldCoin }, //Random small
                 { new LocationId("blossom-house3.tmx", "Chest_Small", new Vector3(368f, 0f, 148f)), EquipableItem.ItemList.GoldCoin }, //Random small

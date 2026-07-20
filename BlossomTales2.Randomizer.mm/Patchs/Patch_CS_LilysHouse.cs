@@ -9,19 +9,17 @@ namespace BlossomTales2
         private Puppet grandma = new Puppet("Fake grandma", new Vector3(0f, 0f, 0f));
 
         public extern void orig_equipShield();
-        
+
         public void equipShield()
         {
             lily.play("getItem");
             Game1.playSoundCue("newWeapon");
             Game1.player.Position = lily.getPosition();
             GameLogger.LogInfo(Game1.CurrentLevel.Name + " " + grandma.name + " " + grandma.getPosition());
-            EquipableItem.ItemList item = RandomizerSingleton.Instance.GetItemAtLocation(new LocationId(Game1.CurrentLevel.Name, grandma.name, grandma.getPosition()));
+            EquipableItem.ItemList item = RandomizerSingleton.Instance.GetItemAtLocation(new LocationId(Game1.CurrentLevel.Name, grandma.name + "_1", grandma.getPosition()));
             Game1.Particles.Add((Particle) new P_GetItem(lily.getPosition() + new Vector3(0.0f, 100f, 0.0f), (int)item));
             Game1.Particles.Add((Particle) new GetItemLight(lily.getPosition()));
             Game1.player.GiveItemReflection(item, false);
-            //Game1.player.Inventory.Add(patch_Game1.LootSpots["grandma_1"]);
-            //Game1.player.Ability[0] = (EquipableItem) new E_Shield();
             this.tweener.Timer(2.3f).OnComplete((Action) (() =>
             {
                 lily.play("idleDown");
