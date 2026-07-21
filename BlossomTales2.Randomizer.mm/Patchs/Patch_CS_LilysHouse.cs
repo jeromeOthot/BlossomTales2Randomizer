@@ -22,31 +22,40 @@ namespace BlossomTales2
             Game1.Particles.Add(new P_GetItem(lily.getPosition() + new Vector3(0.0f, 100f, 0.0f), (int)item));
             Game1.Particles.Add(new GetItemLight(lily.getPosition()));
             Game1.player.GiveItemReflection(item, false);
-            tweener.Timer(2.3f).OnComplete((() =>
+            tweener.Timer(2.3f).OnComplete(delegate
             {
                 lily.play("idleDown");
-                tweener.Timer(0.2f).OnComplete(new Action(this.endCutScene));
-            }));
+                if(ModGlobals.SkipCutscenes)
+                    tweener.Timer(0.2f).OnComplete(endCutScene);
+                else
+                    tweener.Timer(0.2f).OnComplete(equipSword);
+            });
         }
         
         //hack pour skipper le tutoriel festival
         public void endCutScene()
         {
+            if(!ModGlobals.SkipFestival)
+            {
+                orig_endCutScene();
+                return;
+            }
+
             //On change de quete pour skipper le tutoriel festival
             Game1.Globals.MainQuestObjective = Globaler.MainGameObjective.intro_getLantern;
-            this.giveControlToPlayer(this.lily, false, 3);
+            giveControlToPlayer(lily, false, 3);
             Game1.LOPuppets.Clear();
            // this.bedSheetLily.Zdepth = -99.5f;
           //  this.bedSheetChrys.Zdepth = -99.5f;
             //Game1.LOPuppets.Add(this.bedSheetLily);
             //Game1.LOPuppets.Add(this.bedSheetChrys);
             Game1.Gui.HideHud = false;
-            this.grandma.play("hide");
-            NPC npc = new NPC(new Vector3(this.grandma.myX, this.grandma.myY, this.grandma.myZ));
+            grandma.play("hide");
+            NPC npc = new NPC(new Vector3(grandma.myX, grandma.myY, grandma.myZ));
             npc.IDNumber = 6;
             npc.linePointer = 199;
-            Game1.CurrentLevel.LevelObjects.Add((LevelObject) npc);
-            this.Running = false;
+            Game1.CurrentLevel.LevelObjects.Add(npc);
+            Running = false;
         }
     }
 }

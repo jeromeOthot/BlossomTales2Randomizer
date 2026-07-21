@@ -74,7 +74,10 @@ namespace BlossomTales2
 
         public void wakeUpLanternGuy()
         {
-            giveLantern();
+            if (ModGlobals.SkipCutscenes)
+                giveLantern();
+            else
+                orig_wakeUpLanternGuy();
         }
 
         public void giveLantern()
@@ -93,7 +96,17 @@ namespace BlossomTales2
             }
 
             EraseNPCStuff();
-            tweener.Timer(2f).OnComplete(runOff);
+            if(ModGlobals.SkipCutscenes)
+            {
+                tweener.Timer(2f).OnComplete(runOff);
+            }
+            else
+            {
+                tweener.Timer(2f).OnComplete(delegate
+                {
+                    Game1.Dialoger.AddLine("Traveler: I'm getting out of here before you wake up something truly terrifying!", runOff);
+                });
+            }
         }
 
         private void openDoor()
