@@ -10,7 +10,8 @@ namespace BlossomTales2
         private Puppet grandma = new Puppet("Fake grandma", new Vector3(0f, 0f, 0f));
 
         public extern void orig_equipShield();
-
+        public extern void orig_endCutScene();
+        
         public void equipShield()
         {
             lily.play("getItem");
@@ -24,8 +25,28 @@ namespace BlossomTales2
             tweener.Timer(2.3f).OnComplete((() =>
             {
                 lily.play("idleDown");
-                tweener.Timer(0.2f).OnComplete(new Action(equipSword));
+                tweener.Timer(0.2f).OnComplete(new Action(this.endCutScene));
             }));
+        }
+        
+        //hack pour skipper le tutoriel festival
+        public void endCutScene()
+        {
+            //On change de quete pour skipper le tutoriel festival
+            Game1.Globals.MainQuestObjective = Globaler.MainGameObjective.intro_getLantern;
+            this.giveControlToPlayer(this.lily, false, 3);
+            Game1.LOPuppets.Clear();
+           // this.bedSheetLily.Zdepth = -99.5f;
+          //  this.bedSheetChrys.Zdepth = -99.5f;
+            //Game1.LOPuppets.Add(this.bedSheetLily);
+            //Game1.LOPuppets.Add(this.bedSheetChrys);
+            Game1.Gui.HideHud = false;
+            this.grandma.play("hide");
+            NPC npc = new NPC(new Vector3(this.grandma.myX, this.grandma.myY, this.grandma.myZ));
+            npc.IDNumber = 6;
+            npc.linePointer = 199;
+            Game1.CurrentLevel.LevelObjects.Add((LevelObject) npc);
+            this.Running = false;
         }
     }
 }

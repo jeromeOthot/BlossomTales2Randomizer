@@ -88,6 +88,7 @@ namespace BlossomTales2
                                     ((SpawnRectangle)Game1.CurrentLevel.LevelObjects[j]).WaitToDie = 2;
                                 }
                             }
+                            
 
                             Game1.playSoundCue("chestOpen");
                             Game1.Perma_Objects.Add(new PermaListItem(Game1.CurrentLevel.Name, Name, Position));
