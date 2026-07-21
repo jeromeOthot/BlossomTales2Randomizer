@@ -24,24 +24,7 @@ namespace BlossomTales2
             {
                 //TODO: Je n'ai pas arrivé encore a faire que Lily n'est aucun épée
                 case EquipableItem.ItemList.Sword:
-                  for (int index = 0; index < this.Inventory.Count; ++index)
-                  {
-                    //Si on a l' épée de bois
-                    if ((object)this.Inventory[index] is EquipableItem.ItemList.WoodSword)
-                    {
-                      this.SwordLevel =2;
-                      break;
-                    }
-                      
-                    //Si on a l' épée normal
-                    if ((object)this.Inventory[index] is EquipableItem.ItemList.Sword)
-                    {
-                      this.SwordLevel = 3;
-                      this.HasChargeSword = true;
-                      break;
-                    }
-                  }
-                  this.SwordLevel = 1;
+                  this.SwordLevel = 2;
                   break;
                 case EquipableItem.ItemList.Shield:
                     this.ShieldLevel = 1;
@@ -104,8 +87,13 @@ namespace BlossomTales2
                     //Si on passe de bow --> tribow
                     if ((object)this.Inventory[index] is EquipableItem.ItemList.Bow)
                     {
-                      this.Inventory[index] = EquipableItem.ItemList.TriBow;
-                      this.Inventory.Add(EquipableItem.ItemList.TriBow);
+                      Game1.player.BowUpgrade = true;
+                      //this.Inventory[index] = EquipableItem.ItemList.TriBow;
+                      //this.Inventory.Add(EquipableItem.ItemList.TriBow);
+                      
+                     // if (!this.Inventory.Contains(EquipableItem.ItemList.TriBow))
+                      //  this.Inventory.Add(EquipableItem.ItemList.TriBow);
+                      
                       item = EquipableItem.ItemList.TriBow;
                       break;
                     }
