@@ -1,27 +1,27 @@
 ﻿using Microsoft.Xna.Framework;
 
-namespace BlossomTales2;
-
-public class patch_Player : Player
+namespace BlossomTales2
 {
-    private int idleCount = 0;
-    private int idleFrame = 0;
-    private int idleRow = 0;
-    private int idleWait = 0;
-  
-    public extern void orig_GiveItem(EquipableItem.ItemList item, bool playAnimation = true);
-    
-    public void GiveItem(EquipableItem.ItemList item, bool playAnimation = true)
+    public class patch_Player : Player
     {
-      this.idleCount = 0;
-      this.idleFrame = 0;
-      this.idleTimer = 0;
-      this.idleCount = 0;
-      this.idleRow = 0;
-      this.idleWait = 0;
-      switch (item)
-      {
-        //TODO: Je n'ai pas arrivé encore a faire que Lily n'est aucun épée
+        private int idleCount = 0;
+        private int idleFrame = 0;
+        private int idleRow = 0;
+        private int idleWait = 0;
+
+        public extern void orig_GiveItem(EquipableItem.ItemList item, bool playAnimation = true);
+
+        public void GiveItem(EquipableItem.ItemList item, bool playAnimation = true)
+        {
+            this.idleCount = 0;
+            this.idleFrame = 0;
+            this.idleTimer = 0;
+            this.idleCount = 0;
+            this.idleRow = 0;
+            this.idleWait = 0;
+            switch (item)
+            {
+                //TODO: Je n'ai pas arrivé encore a faire que Lily n'est aucun épée
         case EquipableItem.ItemList.Sword:
           for (int index = 0; index < this.Inventory.Count; ++index)
           {
@@ -44,9 +44,9 @@ public class patch_Player : Player
           break;
         case EquipableItem.ItemList.Shield:
           this.ShieldLevel = 1;
-          for (int index = 0; index < this.Inventory.Count; ++index)
-          {
-            //Si on passe de woodShield --> Shield
+                    for (int index = 0; index < this.Inventory.Count; ++index)
+                    {
+                        //Si on passe de woodShield --> Shield
             if ((object)this.Inventory[index] is EquipableItem.ItemList.WoodShield)
             {
               this.ShieldLevel = 2;
@@ -206,35 +206,36 @@ public class patch_Player : Player
           this.SwordLevel = 1;
           break;
         
-        case EquipableItem.ItemList.KingSword:
-          this.SwordLevel = 3;
-          this.HasChargeSword = true;
-          break;
-        default:
-          if (item.ToString().Contains("Jar_"))
-          {
-            this.Inventory.Add(item);
-            break;
-          }
-          if (!this.Inventory.Contains(item))
-          {
-            this.Inventory.Add(item);
-            break;
-          }
-          break;
-      }
-      if (!playAnimation)
-        return;
-      if (this.ghostTimer < 1)
-      {
-        this.ClearPlayer();
-        this.CurrentAnimation = Player.Animations.GetItem;
-      }
-      else
-        Game1.playSoundCue("newWeapon");
-      Game1.playSoundCue("blank098");
-      Game1.Particles.Add((Particle) new P_GetItem(this.Position + new Vector3(0.0f, 100f, 0.0f), (int) item));
-      Game1.Particles.Add((Particle) new GetItemLight(this.Position));
-      this.giveNewItemDescription = (int) item;
+                case EquipableItem.ItemList.KingSword:
+                    this.SwordLevel = 3;
+                    this.HasChargeSword = true;
+                    break;
+                default:
+                    if (item.ToString().Contains("Jar_"))
+                    {
+                        this.Inventory.Add(item);
+                        break;
+                    }
+                    if (!this.Inventory.Contains(item))
+                    {
+                        this.Inventory.Add(item);
+                        break;
+                    }
+                    break;
+            }
+            if (!playAnimation)
+                return;
+            if (this.ghostTimer < 1)
+            {
+                this.ClearPlayer();
+                this.CurrentAnimation = Player.Animations.GetItem;
+            }
+            else
+                Game1.playSoundCue("newWeapon");
+            Game1.playSoundCue("blank098");
+            Game1.Particles.Add((Particle)new P_GetItem(this.Position + new Vector3(0.0f, 100f, 0.0f), (int)item));
+            Game1.Particles.Add((Particle)new GetItemLight(this.Position));
+            this.giveNewItemDescription = (int)item;
+        }
     }
 }

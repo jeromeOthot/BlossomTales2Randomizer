@@ -1,6 +1,7 @@
 ﻿using BlossomTales2.Randomizer.mm;
 using Microsoft.Xna.Framework;
-#nullable disable
+using System;
+
 namespace BlossomTales2
 {
     class patch_CS_LilysHouse : CS_LilysHouse
@@ -17,13 +18,13 @@ namespace BlossomTales2
             Game1.player.Position = lily.getPosition();
             GameLogger.LogInfo(Game1.CurrentLevel.Name + " " + grandma.name + " " + grandma.getPosition());
             EquipableItem.ItemList item = RandomizerSingleton.Instance.GetItemAtLocation(new LocationId(Game1.CurrentLevel.Name, grandma.name + "_1", grandma.getPosition()));
-            Game1.Particles.Add((Particle) new P_GetItem(lily.getPosition() + new Vector3(0.0f, 100f, 0.0f), (int)item));
-            Game1.Particles.Add((Particle) new GetItemLight(lily.getPosition()));
+            Game1.Particles.Add(new P_GetItem(lily.getPosition() + new Vector3(0.0f, 100f, 0.0f), (int)item));
+            Game1.Particles.Add(new GetItemLight(lily.getPosition()));
             Game1.player.GiveItemReflection(item, false);
-            this.tweener.Timer(2.3f).OnComplete((Action) (() =>
+            tweener.Timer(2.3f).OnComplete((() =>
             {
                 lily.play("idleDown");
-                this.tweener.Timer(0.2f).OnComplete(new Action(this.equipSword));
+                tweener.Timer(0.2f).OnComplete(new Action(equipSword));
             }));
         }
     }

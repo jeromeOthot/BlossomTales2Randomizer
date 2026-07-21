@@ -1,7 +1,6 @@
 ﻿using BlossomTales2.Randomizer.mm;
 using Microsoft.Xna.Framework;
-using MonoMod;
-#nullable disable
+
 namespace BlossomTales2
 {
     class patch_Chest_Small : Chest_Small

@@ -1,12 +1,12 @@
 ﻿using BlossomTales2.Randomizer.mm;
 using Microsoft.Xna.Framework;
 
-#nullable disable
 namespace BlossomTales2
 {
     internal class patch_CS_OrchidGhost : CS_OrchidGhost
     {
-        private Puppet orchid = new("Fake king", new Vector3(0f, 0f, 0f));
+        private Puppet orchid = new Puppet ("Fake king", Vector3.Zero);
+        private Puppet orchidLight = new Puppet ("Fake light", Vector3.Zero);
 
         public extern void orig_giveHeart();
 
