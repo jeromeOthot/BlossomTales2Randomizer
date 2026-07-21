@@ -21,28 +21,88 @@ public class patch_Player : Player
       this.idleWait = 0;
       switch (item)
       {
+        //TODO: Je n'ai pas arrivé encore a faire que Lily n'est aucun épée
         case EquipableItem.ItemList.Sword:
-          this.SwordLevel = 2;
-          break;
-        case EquipableItem.ItemList.Shield:
-          this.ShieldLevel = 2;
           for (int index = 0; index < this.Inventory.Count; ++index)
           {
-            if ((object) this.Inventory[index] is EquipableItem.ItemList.WoodShield)
+            //Si on a l' épée de bois
+            if ((object)this.Inventory[index] is EquipableItem.ItemList.WoodSword)
+            {
+              this.SwordLevel =2;
+              break;
+            }
+              
+            //Si on a l' épée normal
+            if ((object)this.Inventory[index] is EquipableItem.ItemList.Sword)
+            {
+              this.SwordLevel = 3;
+              this.HasChargeSword = true;
+              break;
+            }
+          }
+          this.SwordLevel = 1;
+          break;
+        case EquipableItem.ItemList.Shield:
+          this.ShieldLevel = 1;
+          for (int index = 0; index < this.Inventory.Count; ++index)
+          {
+            //Si on passe de woodShield --> Shield
+            if ((object)this.Inventory[index] is EquipableItem.ItemList.WoodShield)
+            {
+              this.ShieldLevel = 2;
               this.Inventory[index] = EquipableItem.ItemList.Shield;
+             
+              if (!this.Inventory.Contains(EquipableItem.ItemList.Shield))
+                this.Inventory.Add(EquipableItem.ItemList.Shield);
+          
+              if (this.Ability[0] is E_Shield || this.Ability[0] is E_Empty && !(this.Ability[1] is E_Shield))
+              {
+                this.Ability[0] = (EquipableItem) new E_Shield();
+                break;
+              }
+              if (this.Ability[1] is E_Shield)
+              {
+                this.Ability[1] = (EquipableItem) new E_Shield();
+                break;
+              }
+              break;
+            }
+            
+            //On upgrade au shield -> mirror shield
+            if ((object)this.Inventory[index] is EquipableItem.ItemList.Shield)
+            {
+              this.ShieldLevel = 3;
+              this.Inventory[index] = EquipableItem.ItemList.MirrorShield;
+              if (!this.Inventory.Contains(EquipableItem.ItemList.MirrorShield))
+                this.Inventory.Add(EquipableItem.ItemList.MirrorShield);
+              if (this.Ability[0] is E_Shield)
+                this.Ability[0] = (EquipableItem) new E_Shield();
+              if (this.Ability[1] is E_Shield)
+              {
+                this.Ability[1] = (EquipableItem) new E_Shield();
+              }
+              break;
+            }
           }
-          if (!this.Inventory.Contains(EquipableItem.ItemList.Shield))
-            this.Inventory.Add(EquipableItem.ItemList.Shield);
-          if (this.Ability[0] is E_Shield || this.Ability[0] is E_Empty && !(this.Ability[1] is E_Shield))
+
+          //Si on passe de aucun shield --> wood shield
+          if (this.ShieldLevel == 1)
           {
-            this.Ability[0] = (EquipableItem) new E_Shield();
-            break;
+            Game1.player.Inventory.Add(EquipableItem.ItemList.WoodShield);
+            Game1.player.Ability[0] = (EquipableItem) new E_Shield();
           }
-          if (this.Ability[1] is E_Shield)
-          {
-            this.Ability[1] = (EquipableItem) new E_Shield();
-            break;
-          }
+
+          break;
+          
+         
+        case EquipableItem.ItemList.Bombs:
+          Game1.player.Inventory.Add(EquipableItem.ItemList.Bombs);
+          break;
+        case EquipableItem.ItemList.Boomerang:
+          Game1.player.Inventory.Add(EquipableItem.ItemList.Boomerang);
+          break;
+        case EquipableItem.ItemList.FishingRod:
+          Game1.player.Inventory.Add(EquipableItem.ItemList.FishingRod);
           break;
         case EquipableItem.ItemList.Torch:
           if (!this.Inventory.Contains(EquipableItem.ItemList.Torch))
@@ -145,23 +205,7 @@ public class patch_Player : Player
         case EquipableItem.ItemList.WoodSword:
           this.SwordLevel = 1;
           break;
-        case EquipableItem.ItemList.MirrorShield:
-          this.ShieldLevel = 3;
-          for (int index = 0; index < this.Inventory.Count; ++index)
-          {
-            if ((object) this.Inventory[index] is EquipableItem.ItemList.Shield)
-              this.Inventory[index] = EquipableItem.ItemList.MirrorShield;
-          }
-          if (!this.Inventory.Contains(EquipableItem.ItemList.MirrorShield))
-            this.Inventory.Add(EquipableItem.ItemList.MirrorShield);
-          if (this.Ability[0] is E_Shield)
-            this.Ability[0] = (EquipableItem) new E_Shield();
-          if (this.Ability[1] is E_Shield)
-          {
-            this.Ability[1] = (EquipableItem) new E_Shield();
-            break;
-          }
-          break;
+        
         case EquipableItem.ItemList.KingSword:
           this.SwordLevel = 3;
           this.HasChargeSword = true;
