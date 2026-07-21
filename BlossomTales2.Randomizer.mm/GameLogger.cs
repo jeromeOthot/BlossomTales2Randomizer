@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Reflection;
-#nullable disable
+
 namespace BlossomTales2.Randomizer.mm
 {
     public static class GameLogger
@@ -16,7 +16,7 @@ namespace BlossomTales2.Randomizer.mm
                 Type loggerClass = typeof(Game1).Assembly.GetType("BlossomTales2.Logger");
                 _cachedLogInfoMethod = loggerClass.GetMethod("LogInfo", BindingFlags.Static | BindingFlags.Public);
             }
-            _cachedLogInfoMethod.Invoke(null, [message]);
+            _cachedLogInfoMethod.Invoke(null, new object[] { message });
         }
     }
 }

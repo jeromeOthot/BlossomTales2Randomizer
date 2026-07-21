@@ -1,5 +1,4 @@
 ﻿using BlossomTales2.Randomizer.mm;
-#nullable disable
 
 namespace BlossomTales2
 {

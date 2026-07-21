@@ -1,13 +1,13 @@
 ﻿using BlossomTales2.Randomizer.mm;
 using Microsoft.Xna.Framework;
+using System.Linq;
 
-#nullable disable
 namespace BlossomTales2
 {
     internal class patch_CS_Cemetery : CS_Cemetery
     {
-        private Puppet lanternGuy = new("Stub Lantern", new Vector3(0f, 0f, 0f));
-        private Puppet doorPuppet = new("Stub tombDoor", new Vector3(0f, 0f, 0f));
+        private Puppet lanternGuy = new Puppet ("Stub Lantern", new Vector3(0f, 0f, 0f));
+        private Puppet doorPuppet = new Puppet ("Stub tombDoor", new Vector3(0f, 0f, 0f));
 
         public extern void orig_Init();
         public extern void orig_wakeUpLanternGuy();

@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text;
 
-#nullable disable
 namespace BlossomTales2.Randomizer.mm
 {
     public struct LocationId
@@ -25,15 +24,15 @@ namespace BlossomTales2.Randomizer.mm
             return "Map: [" + MapName + "] Object: [" + Name + "] Position: " + Position;
         }
 
-        public override readonly bool Equals(object obj)
+        public override bool Equals(object obj)
         {
-            if (obj is not LocationId other)
+            if (!(obj is LocationId other))
                 return false;
 
             return other.MapName == MapName && other.Name == Name && other.Position == Position;
         }
 
-        public override readonly int GetHashCode()
+        public override int GetHashCode()
         {
             unchecked
             {
