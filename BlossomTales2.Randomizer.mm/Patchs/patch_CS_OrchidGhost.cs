@@ -49,6 +49,26 @@ namespace BlossomTales2
             });
         }
 
+        public void takeSword()
+        {
+            Game1.Achievementer.CheckAchievment(1);
+            orchidTomb.play("noSword");
+            Vector3 position = orchid.getPosition();
+            position.Y = 0;
+            EquipableItem.ItemList item = RandomizerSingleton.Instance.GetItemAtLocation(new LocationId(Game1.CurrentLevel.Name, orchid.name + "_sword", position));
+            Game1.player.GiveItemReflection(item);
+            tweener.Timer(3f).OnComplete(delegate
+            {
+                orchidTomb.play("empty");
+                item = RandomizerSingleton.Instance.GetItemAtLocation(new LocationId(Game1.CurrentLevel.Name, orchid.name + "_shield", position));
+                Game1.player.GiveItemReflection(item);
+                tweener.Timer(3f).OnComplete(delegate
+                {
+                    orchidMorkla();
+                });
+            });
+        }
+
         private void Mod_SkipOpenTombCutscene()
         {
             takeSword();
