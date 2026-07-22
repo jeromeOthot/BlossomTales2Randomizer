@@ -4,7 +4,7 @@
         <TargetFramework>net40</TargetFramework>
         <ImplicitUsings>disable</ImplicitUsings>
         <Nullable>disable</Nullable>
-        <RootNamespace />
+        <RootNamespace>BlossomTales2</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
