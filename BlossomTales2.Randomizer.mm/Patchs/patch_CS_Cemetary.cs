@@ -29,17 +29,17 @@ namespace BlossomTales2
                 }
             }
 
-            if (Game1.Perma_Objects.FirstOrDefault((obj) => obj.LevelName == Game1.CurrentLevel.Name && obj.Name == "lanternGuy") != null)
-            {
-                EraseNPCStuff();
-            }
-            else
+            if (Game1.Perma_Objects.FirstOrDefault((obj) => obj.LevelName == Game1.CurrentLevel.Name && obj.Name == "lanternGuy") == null)
             {
                 lanternGuy = new Puppet("lanternGuy", new Vector3(1036f, 0f, 660f));
                 lanternGuy.isNPC = true;
                 lanternGuy.DialogNum = 70;
                 lanternGuy.play("sitEyesClosed");
                 puppets.Add(lanternGuy);
+            }
+            else
+            {
+                EraseNPCStuff();
             }
 
             if (Game1.Perma_Objects.FirstOrDefault((obj) => obj.LevelName == Game1.CurrentLevel.Name && obj.Name == "tombDoor") == null)
