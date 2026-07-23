@@ -24,7 +24,9 @@ namespace BlossomTales2
             {
                 //TODO: Je n'ai pas arrivé encore a faire que Lily n'est aucun épée
                 case EquipableItem.ItemList.Sword:
-                  this.SwordLevel = 2;
+                  SwordLevel++;
+                    if (SwordLevel >= 3)
+                        HasChargeSword = true;
                   break;
                 case EquipableItem.ItemList.Shield:
                     this.ShieldLevel = 1;
@@ -218,14 +220,6 @@ namespace BlossomTales2
                     break;
                   }
                   break;
-                case EquipableItem.ItemList.WoodSword:
-                  this.SwordLevel = 1;
-                  break;
-                
-                case EquipableItem.ItemList.KingSword:
-                    this.SwordLevel = 3;
-                    this.HasChargeSword = true;
-                    break;
                 default:
                     if (item.ToString().Contains("Jar_"))
                     {
