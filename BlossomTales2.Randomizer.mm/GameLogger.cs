@@ -18,5 +18,11 @@ namespace BlossomTales2.Randomizer.mm
             }
             _cachedLogInfoMethod.Invoke(null, new object[] { message });
         }
+
+        public static void LogStack()
+        {
+            System.Diagnostics.StackTrace t = new System.Diagnostics.StackTrace();
+            LogInfo(t.ToString());
+        }
     }
 }
