@@ -22,6 +22,10 @@ namespace BlossomTales2
             Game1.Particles.Add(new P_GetItem(lily.getPosition() + new Vector3(0.0f, 100f, 0.0f), (int)item));
             Game1.Particles.Add(new GetItemLight(lily.getPosition()));
             Game1.player.GiveItemReflection(item, false);
+
+            //TODO: Move later if we skip cutscene.
+            Game1.player.SwordLevel = 0;
+
             tweener.Timer(2.3f).OnComplete(delegate
             {
                 lily.play("idleDown");
