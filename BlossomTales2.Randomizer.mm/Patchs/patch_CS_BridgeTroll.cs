@@ -21,8 +21,7 @@ namespace BlossomTales2
             bridgeTroll.Zdepth = -163.41f;
 
             //if (Game1.Globals.MainQuestObjective == Globaler.MainGameObjective.jungles_talkToWitch || Game1.Globals.MainQuestObjective == Globaler.MainGameObjective.jungles_giveGruffJuice)
-            if ((ModGlobals.SkipCutscenes || RandomizerSingleton.IsObjectiveCompleted(Globaler.MainGameObjective.jungles_talkToGruff)) 
-                && !RandomizerSingleton.IsObjectiveCompleted(Globaler.MainGameObjective.jungles_giveGruffJuice))
+            if (Mod_ShouldDisplayTroll())
             {
                 putTrollOnBridge();
             }
@@ -55,6 +54,12 @@ namespace BlossomTales2
         {
             orig_armPump();
             RandomizerSingleton.MarkObjectiveComplete(Globaler.MainGameObjective.jungles_talkToGruff);
+        }
+
+        private bool Mod_ShouldDisplayTroll()
+        {
+            return (ModGlobals.SkipCutscenes || RandomizerSingleton.IsObjectiveCompleted(Globaler.MainGameObjective.jungles_talkToGruff))
+                && !RandomizerSingleton.IsObjectiveCompleted(Globaler.MainGameObjective.jungles_giveGruffJuice);
         }
     }
 }

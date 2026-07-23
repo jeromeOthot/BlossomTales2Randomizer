@@ -33,12 +33,8 @@ namespace BlossomTales2
 
         public void giveHeart()
         {
-            Game1.Gui.HideHud = false;
-            GameLogger.LogInfo(Game1.CurrentLevel.Name + " " + orchid.name + " " + orchid.getPosition());
-            Vector3 positionOffset = orchid.getPosition();
-            positionOffset.Y = 0f; //King is floating and it screws the LocationId.
-            EquipableItem.ItemList item = RandomizerSingleton.Instance.GetItemAtLocation(new LocationId(Game1.CurrentLevel.Name, orchid.name + "_heart", positionOffset));
-            Game1.player.GiveItemReflection(item);
+            Game1.Gui.HideHud = false;            
+            Mod_OrchidGiveItem("_heart");
             if (ModGlobals.SkipCutscenes)
             {
                 tweener.Timer(3f).OnComplete(delegate
@@ -96,15 +92,11 @@ namespace BlossomTales2
         {
             Game1.Achievementer.CheckAchievment(1);
             orchidTomb.play("noSword");
-            Vector3 position = orchid.getPosition();
-            position.Y = 0;
-            EquipableItem.ItemList item = RandomizerSingleton.Instance.GetItemAtLocation(new LocationId(Game1.CurrentLevel.Name, orchid.name + "_sword", position));
-            Game1.player.GiveItemReflection(item);
+            Mod_OrchidGiveItem("_sword");
             tweener.Timer(3f).OnComplete(delegate
             {
                 orchidTomb.play("empty");
-                item = RandomizerSingleton.Instance.GetItemAtLocation(new LocationId(Game1.CurrentLevel.Name, orchid.name + "_shield", position));
-                Game1.player.GiveItemReflection(item);
+                Mod_OrchidGiveItem("_shield");
                 tweener.Timer(3f).OnComplete(delegate
                 {
                     if (ModGlobals.SkipCutscenes)
@@ -113,6 +105,15 @@ namespace BlossomTales2
                         orchidMorkla();
                 });
             });
+        }
+
+        private void Mod_OrchidGiveItem(string locationName)
+        {
+            Vector3 position = orchid.getPosition();
+            GameLogger.LogInfo(Game1.CurrentLevel.Name + " " + orchid.name + " " + position);
+            position.Y = 0;
+            EquipableItem.ItemList item = RandomizerSingleton.Instance.GetItemAtLocation(new LocationId(Game1.CurrentLevel.Name, orchid.name + locationName, position));
+            Game1.player.GiveItemReflection(item);
         }
 
         private void Mod_SkipOpenTombCutscene()

@@ -29,19 +29,12 @@ namespace BlossomTales2
                 }
             }
 
-            if (Game1.Perma_Objects.FirstOrDefault((obj) => obj.LevelName == Game1.CurrentLevel.Name && obj.Name == "lanternGuy") == null)
-            {
-                lanternGuy = new Puppet("lanternGuy", new Vector3(1036f, 0f, 660f));
-                lanternGuy.isNPC = true;
-                lanternGuy.DialogNum = 70;
-                lanternGuy.play("sitEyesClosed");
-                puppets.Add(lanternGuy);
-            }
-            else
-            {
-                EraseNPCStuff();
-            }
+            Mod_HandleLanternGuy();
+            Mod_HandleDoorAndTorches();
+        }
 
+        private void Mod_HandleDoorAndTorches()
+        {
             if (Game1.Perma_Objects.FirstOrDefault((obj) => obj.LevelName == Game1.CurrentLevel.Name && obj.Name == "tombDoor") == null)
             {
                 doorPuppet = new Puppet("tombDoor", new Vector3(1280f, 0f, 472f));
@@ -72,6 +65,22 @@ namespace BlossomTales2
             }
         }
 
+        private void Mod_HandleLanternGuy()
+        {
+            if (Game1.Perma_Objects.FirstOrDefault((obj) => obj.LevelName == Game1.CurrentLevel.Name && obj.Name == "lanternGuy") == null)
+            {
+                lanternGuy = new Puppet("lanternGuy", new Vector3(1036f, 0f, 660f));
+                lanternGuy.isNPC = true;
+                lanternGuy.DialogNum = 70;
+                lanternGuy.play("sitEyesClosed");
+                puppets.Add(lanternGuy);
+            }
+            else
+            {
+                EraseNPCStuff();
+            }
+        }
+
         public void wakeUpLanternGuy()
         {
             if (ModGlobals.SkipCutscenes)
@@ -83,10 +92,7 @@ namespace BlossomTales2
         public void giveLantern()
         {
             lanternGuy.play("stand");
-            GameLogger.LogInfo(Game1.CurrentLevel.Name + " " + lanternGuy.name + " " + lanternGuy.getPosition());
-            EquipableItem.ItemList item = RandomizerSingleton.Instance.GetItemAtLocation(new LocationId(Game1.CurrentLevel.Name, lanternGuy.name, lanternGuy.getPosition()));
-            Game1.player.GiveItemReflection(item);
-            Game1.Perma_Objects.Add(new PermaListItem(Game1.CurrentLevel.Name, lanternGuy.name, lanternGuy.getPosition()));
+            Mod_GiveLanternItem();
             for (int i = 0; i < Game1.CurrentLevel.Lights.Count; i++)
             {
                 if (Game1.CurrentLevel.Lights[i].position.X == 740f)
@@ -96,7 +102,7 @@ namespace BlossomTales2
             }
 
             EraseNPCStuff();
-            if(ModGlobals.SkipCutscenes)
+            if (ModGlobals.SkipCutscenes)
             {
                 tweener.Timer(2f).OnComplete(runOff);
             }
@@ -107,6 +113,14 @@ namespace BlossomTales2
                     Game1.Dialoger.AddLine("Traveler: I'm getting out of here before you wake up something truly terrifying!", runOff);
                 });
             }
+        }
+
+        private void Mod_GiveLanternItem()
+        {
+            GameLogger.LogInfo(Game1.CurrentLevel.Name + " " + lanternGuy.name + " " + lanternGuy.getPosition());
+            EquipableItem.ItemList item = RandomizerSingleton.Instance.GetItemAtLocation(new LocationId(Game1.CurrentLevel.Name, lanternGuy.name, lanternGuy.getPosition()));
+            Game1.player.GiveItemReflection(item);
+            Game1.Perma_Objects.Add(new PermaListItem(Game1.CurrentLevel.Name, lanternGuy.name, lanternGuy.getPosition()));
         }
 
         private void openDoor()
