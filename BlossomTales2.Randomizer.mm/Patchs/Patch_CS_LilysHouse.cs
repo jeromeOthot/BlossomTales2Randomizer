@@ -10,6 +10,7 @@ namespace BlossomTales2
         private Puppet grandma = new Puppet("Fake grandma", new Vector3(0f, 0f, 0f));
 
         public extern void orig_equipShield();
+        public extern void orig_equipSword();
         public extern void orig_endCutScene();
         
         public void equipShield()
@@ -22,20 +23,33 @@ namespace BlossomTales2
             Game1.Particles.Add(new P_GetItem(lily.getPosition() + new Vector3(0.0f, 100f, 0.0f), (int)item));
             Game1.Particles.Add(new GetItemLight(lily.getPosition()));
             Game1.player.GiveItemReflection(item, false);
-
-            //TODO: Move later if we skip cutscene.
-            Game1.player.SwordLevel = 0;
-
             tweener.Timer(2.3f).OnComplete(delegate
             {
                 lily.play("idleDown");
-                if(ModGlobals.SkipCutscenes)
-                    tweener.Timer(0.2f).OnComplete(endCutScene);
-                else
-                    tweener.Timer(0.2f).OnComplete(equipSword);
+                tweener.Timer(0.2f).OnComplete(equipSword);
             });
         }
-        
+
+        public void equipSword()
+        {
+            //TODO: Move later if we skip cutscene.
+            Game1.player.SwordLevel = 0;
+            lily.play("getItem");
+            Game1.playSoundCue("newWeapon");
+            EquipableItem.ItemList item = RandomizerSingleton.Instance.GetItemAtLocation(new LocationId(Game1.CurrentLevel.Name, grandma.name + "_2", grandma.getPosition()));
+            Game1.Particles.Add(new P_GetItem(lily.getPosition() + new Vector3(0f, 100f, 0f), (int)item));
+            Game1.Particles.Add(new GetItemLight(lily.getPosition()));
+            Game1.player.GiveItemReflection(item, false);
+            tweener.Timer(2.3f).OnComplete(delegate
+            {
+                lily.play("idleDown");
+                if (ModGlobals.SkipCutscenes)
+                    tweener.Timer(0.2f).OnComplete(endCutScene);
+                else
+                    Game1.Dialoger.AddLine("Lily: Thanks, Grandma. Love you!", endCutScene);
+            });
+        }
+
         //hack pour skipper le tutoriel festival
         public void endCutScene()
         {
