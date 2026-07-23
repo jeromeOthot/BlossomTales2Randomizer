@@ -82,23 +82,30 @@ namespace BlossomTales2
                     }
                     break;
                 case EquipableItem.ItemList.Bow:
-                  for (int index = 0; index < this.Inventory.Count; ++index)
+                  for (int index = 0; index < Inventory.Count; ++index)
                   {
                     //Si on passe de bow --> tribow
-                    if ((object)this.Inventory[index] is EquipableItem.ItemList.Bow)
+                    if (Inventory[index] == EquipableItem.ItemList.Bow)
                     {
-                      Game1.player.BowUpgrade = true;
-                      //this.Inventory[index] = EquipableItem.ItemList.TriBow;
-                      //this.Inventory.Add(EquipableItem.ItemList.TriBow);
-                      
-                     // if (!this.Inventory.Contains(EquipableItem.ItemList.TriBow))
-                      //  this.Inventory.Add(EquipableItem.ItemList.TriBow);
-                      
-                      item = EquipableItem.ItemList.TriBow;
-                      break;
+                            Game1.player.BowUpgrade = true;
+                            for (int n = 0; n < Game1.player.Inventory.Count; n++)
+                            {
+                                if (Equals(EquipableItem.ItemList.Bow, Game1.player.Inventory[n]))
+                                    Game1.player.Inventory[n] = EquipableItem.ItemList.TriBow;
+                            }
+
+                            if (Game1.player.Ability[0] is E_Bow)
+                                Game1.player.Ability[0].ListType = EquipableItem.ItemList.TriBow;
+
+                            if (Game1.player.Ability[1] is E_Bow)
+                                Game1.player.Ability[1].ListType = EquipableItem.ItemList.TriBow;
+
+                            item = EquipableItem.ItemList.TriBow;
+                            break;
                     }
                   }
-                  Game1.player.Inventory.Add(EquipableItem.ItemList.Bow);
+                  if(!Game1.player.BowUpgrade)
+                    Game1.player.Inventory.Add(EquipableItem.ItemList.Bow);
                   break;
                 case EquipableItem.ItemList.Bombs:
                   Game1.player.Inventory.Add(EquipableItem.ItemList.Bombs);
