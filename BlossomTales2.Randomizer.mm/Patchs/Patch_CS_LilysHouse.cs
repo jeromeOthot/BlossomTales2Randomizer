@@ -15,6 +15,8 @@ namespace BlossomTales2
         
         public void equipShield()
         {
+            //TODO: Move later if we skip cutscene.
+            Game1.player.SwordLevel = 0;
             lily.play("getItem");
             Game1.playSoundCue("newWeapon");
             Game1.player.Position = lily.getPosition();
@@ -31,9 +33,7 @@ namespace BlossomTales2
         }
 
         public void equipSword()
-        {
-            //TODO: Move later if we skip cutscene.
-            Game1.player.SwordLevel = 0;
+        {            
             lily.play("getItem");
             Game1.playSoundCue("newWeapon");
             EquipableItem.ItemList item = RandomizerSingleton.Instance.GetItemAtLocation(new LocationId(Game1.CurrentLevel.Name, grandma.name + "_2", grandma.getPosition()));
