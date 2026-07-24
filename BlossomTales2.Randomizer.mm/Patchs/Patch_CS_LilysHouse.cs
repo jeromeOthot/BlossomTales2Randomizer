@@ -17,14 +17,11 @@ namespace BlossomTales2
         {
             //TODO: Move later if we skip cutscene.
             Game1.player.SwordLevel = 0;
+            Game1.player.Position = lily.getPosition();
+
             lily.play("getItem");
             Game1.playSoundCue("newWeapon");
-            Game1.player.Position = lily.getPosition();
-            GameLogger.LogInfo(Game1.CurrentLevel.Name + " " + grandma.name + " " + grandma.getPosition());
-            EquipableItem.ItemList item = RandomizerSingleton.Instance.GetItemAtLocation(new LocationId(Game1.CurrentLevel.Name, grandma.name + "_1", grandma.getPosition()));
-            Game1.Particles.Add(new P_GetItem(lily.getPosition() + new Vector3(0.0f, 100f, 0.0f), (int)item));
-            Game1.Particles.Add(new GetItemLight(lily.getPosition()));
-            Game1.player.GiveItemReflection(item, false);
+            Mod_GrandmaGiveItem("_1");
             tweener.Timer(2.3f).OnComplete(delegate
             {
                 lily.play("idleDown");
@@ -36,10 +33,7 @@ namespace BlossomTales2
         {            
             lily.play("getItem");
             Game1.playSoundCue("newWeapon");
-            EquipableItem.ItemList item = RandomizerSingleton.Instance.GetItemAtLocation(new LocationId(Game1.CurrentLevel.Name, grandma.name + "_2", grandma.getPosition()));
-            Game1.Particles.Add(new P_GetItem(lily.getPosition() + new Vector3(0f, 100f, 0f), (int)item));
-            Game1.Particles.Add(new GetItemLight(lily.getPosition()));
-            Game1.player.GiveItemReflection(item, false);
+            Mod_GrandmaGiveItem("_2");
             tweener.Timer(2.3f).OnComplete(delegate
             {
                 lily.play("idleDown");
@@ -74,6 +68,13 @@ namespace BlossomTales2
             npc.linePointer = 199;
             Game1.CurrentLevel.LevelObjects.Add(npc);
             Running = false;
+        }
+
+        private void Mod_GrandmaGiveItem(string locationName)
+        {
+            GameLogger.LogInfo(Game1.CurrentLevel.Name + " " + grandma.name + " " + grandma.getPosition());
+            EquipableItem.ItemList item = RandomizerSingleton.Instance.GetItemAtLocation(new LocationId(Game1.CurrentLevel.Name, grandma.name + locationName, grandma.getPosition()));
+            Game1.player.GiveItemReflection(item);
         }
     }
 }
