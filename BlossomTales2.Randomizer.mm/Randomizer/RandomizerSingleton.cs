@@ -46,22 +46,22 @@ namespace BlossomTales2.Randomizer.mm
         {
             _locations = new Dictionary<LocationId, EquipableItem.ItemList>
             {
-                //{ new LocationId("anchor-house4.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), EquipableItem.ItemList.GoldCoin }, //unknown
-                { new LocationId("blossom-house1.tmx", "Chest_Small", new Vector3(672f, 0f, 308f)), EquipableItem.ItemList.GoldCoin }, //Random small
-                { new LocationId("blossom-house2.tmx", "Chest_Small", new Vector3(708f, 0f, 356f)), EquipableItem.ItemList.GoldCoin }, //Random small
-                { new LocationId("blossom-house3.tmx", "Chest_Small", new Vector3(368f, 0f, 148f)), EquipableItem.ItemList.GoldCoin }, //Random small
-                { new LocationId("blossom-house4.tmx", "Chest_Small", new Vector3(696f, 0f, 416f)), EquipableItem.ItemList.GoldCoin }, //Random small
-                { new LocationId("blossom-house4.tmx", "Chest_Small", new Vector3(780f, 0f, 156f)), EquipableItem.ItemList.GoldCoin }, //Random small
+                { new LocationId("anchor-house4.tmx", "Chest_Small", new Vector3(348f, 0f, 436f)), EquipableItem.ItemList.GoldCoin }, //accès jungle
+                { new LocationId("blossom-house1.tmx", "Chest_Small", new Vector3(672f, 0f, 308f)), EquipableItem.ItemList.GoldCoin }, 
+                { new LocationId("blossom-house2.tmx", "Chest_Small", new Vector3(708f, 0f, 356f)), EquipableItem.ItemList.GoldCoin }, 
+                { new LocationId("blossom-house3.tmx", "Chest_Small", new Vector3(368f, 0f, 148f)), EquipableItem.ItemList.GoldCoin }, 
+                { new LocationId("blossom-house4.tmx", "Chest_Small", new Vector3(696f, 0f, 416f)), EquipableItem.ItemList.GoldCoin }, 
+                { new LocationId("blossom-house4.tmx", "Chest_Small", new Vector3(780f, 0f, 156f)), EquipableItem.ItemList.GoldCoin }, 
                 { new LocationId("blossom-house4.tmx", "Chest_Small", new Vector3(408f, 0f, 340f)), EquipableItem.ItemList.GoldCoin }, //Besoin lampe
-                { new LocationId("blossom-house5.tmx", "Chest_Small", new Vector3(480f, 0f, 172f)), EquipableItem.ItemList.GoldCoin }, //Random small, accès est && lampe
-                { new LocationId("blossom-house5.tmx", "Chest_Small", new Vector3(660f, 0f, 348f)), EquipableItem.ItemList.GoldCoin }, //Random small, accès est && lampe
+                { new LocationId("blossom-house5.tmx", "Chest_Small", new Vector3(480f, 0f, 172f)), EquipableItem.ItemList.GoldCoin }, //accès est && lampe
+                { new LocationId("blossom-house5.tmx", "Chest_Small", new Vector3(660f, 0f, 348f)), EquipableItem.ItemList.GoldCoin }, //accès est && lampe
                 { new LocationId("blossom-lilyHouse.tmx", "npc7_1", new Vector3(480f, 0f, 328f)), EquipableItem.ItemList.Shield }, // WoodShield
                 { new LocationId("blossom-lilyHouse.tmx", "npc7_2", new Vector3(480f, 0f, 328f)), EquipableItem.ItemList.Sword }, // WoodSword
                 //Blossom tavern  Chest
-                { new LocationId("blossom-tavern-basement.tmx", "Chest_Small", new Vector3(256f, 0f, 272f)), EquipableItem.ItemList.GoldCoin }, //Random small
-                { new LocationId("blossom-tavern-basement.tmx", "Chest_Small", new Vector3(256f, 0f, 464f)), EquipableItem.ItemList.GoldCoin },  //Random small
-                { new LocationId("blossom-tavern-basement.tmx", "Chest_Small", new Vector3(448f, 0f, 272f)), EquipableItem.ItemList.GoldCoin },  //Random small
-                { new LocationId("blossom-tavern-basement.tmx", "Chest_Small", new Vector3(448f, 0f, 464f)), EquipableItem.ItemList.HeartQ_1 },  //Heart piece
+                { new LocationId("blossom-tavern-basement.tmx", "Chest_Small", new Vector3(256f, 0f, 272f)), EquipableItem.ItemList.GoldCoin }, //bombes
+                { new LocationId("blossom-tavern-basement.tmx", "Chest_Small", new Vector3(256f, 0f, 464f)), EquipableItem.ItemList.GoldCoin },  //bombes
+                { new LocationId("blossom-tavern-basement.tmx", "Chest_Small", new Vector3(448f, 0f, 272f)), EquipableItem.ItemList.GoldCoin },  //bombes
+                { new LocationId("blossom-tavern-basement.tmx", "Chest_Small", new Vector3(448f, 0f, 464f)), EquipableItem.ItemList.HeartQ_1 },  //bombes
                 //...
                 //{ new LocationId("canyon-house1.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), EquipableItem.ItemList.GoldCoin }, //unknown
                 //{ new LocationId("canyon-house3.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), EquipableItem.ItemList.GoldCoin }, //unknown
@@ -89,17 +89,17 @@ namespace BlossomTales2.Randomizer.mm
                 //{ new LocationId("jungles-22x21-noteCave.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), EquipableItem.ItemList.GoldCoin }, //unknown
                 //{ new LocationId("jungles-22x21-noteCave.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), EquipableItem.ItemList.GoldCoin }, //unknown
                 //{ new LocationId("jungles-22x22.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), EquipableItem.ItemList.GoldCoin }, //unknown
-                //{ new LocationId("jungles-22x22.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), EquipableItem.ItemList.GoldCoin }, //unknown
+                { new LocationId("jungles-22x22.tmx", "Chest_Small", new Vector3(1668f, 0f, 512f)), EquipableItem.ItemList.GoldCoin }, //accès jungle
                 //{ new LocationId("jungles-22x22-lighthouse.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), EquipableItem.ItemList.GoldCoin }, //unknown
                 //{ new LocationId("jungles-23x19.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), EquipableItem.ItemList.Crystal }, //unknown
-                //{ new LocationId("jungles-23x20.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), EquipableItem.ItemList.GoldCoin }, //unknown
+                { new LocationId("jungles-23x20.tmx", "Chest_Small", new Vector3(2264f, 0f, 1928f)), EquipableItem.ItemList.GoldCoin }, //accès jungle
                 //{ new LocationId("jungles-23x20-cave.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), EquipableItem.ItemList.GoldCoin }, //unknown
                 //{ new LocationId("jungles-23x20-cave.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), EquipableItem.ItemList.GoldCoin }, //unknown
                 //{ new LocationId("jungles-23x20-cave.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), EquipableItem.ItemList.GoldCoin }, //unknown
                 //{ new LocationId("jungles-23x20-cave.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), EquipableItem.ItemList.GoldCoin }, //unknown
                 //{ new LocationId("jungles-23x20-cave.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), EquipableItem.ItemList.GoldCoin }, //unknown
                 { new LocationId("jungles-23x21.tmx", "fisherman", new Vector3(0f, 0f, 0f)), EquipableItem.ItemList.FishingRod }, //accès jungle
-                //{ new LocationId("jungles-23x22.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), EquipableItem.ItemList.GoldCoin }, //unknown
+                { new LocationId("jungles-23x22.tmx", "Chest_Small", new Vector3(740f, 0f, 1252f)), EquipableItem.ItemList.GoldCoin }, //accès jungle
                 //{ new LocationId("jungles-24x19.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), EquipableItem.ItemList.GoldCoin }, //unknown
                 //{ new LocationId("jungles-24x19.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), EquipableItem.ItemList.GoldCoin }, //unknown
                 //{ new LocationId("jungles-24x19-cave.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), EquipableItem.ItemList.GoldCoin }, //unknown
@@ -214,7 +214,7 @@ namespace BlossomTales2.Randomizer.mm
                 //{ new LocationId("overworld-20x17-cave.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), EquipableItem.ItemList.HeartQ_1 }, //unknown
                 { new LocationId("overworld-20x18.tmx", "lanternGuy", new Vector3(1036f, 0f, 660f)), EquipableItem.ItemList.Torch },
                 { new LocationId("overworld-20x18-cave1.tmx", "Chest_Small", new Vector3(1184f, 0f, 2208f)), EquipableItem.ItemList.HeartQ_1 }, //épée 2 && lanterne
-                //{ new LocationId("overworld-20x20.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), EquipableItem.ItemList.GoldCoin }, //Random small, besoin bombes
+                //{ new LocationId("overworld-20x20.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), EquipableItem.ItemList.GoldCoin }, //besoin bombes
                 //{ new LocationId("overworld-20x21-cave.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), EquipableItem.ItemList.GoldCoin }, //unknown
                 //{ new LocationId("overworld-20x21-cave.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), EquipableItem.ItemList.GoldCoin }, //unknown
                 //{ new LocationId("overworld-20x21-cave.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), EquipableItem.ItemList.GoldCoin }, //unknown
@@ -233,8 +233,8 @@ namespace BlossomTales2.Randomizer.mm
                 //{ new LocationId("overworld-21x18-cave.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), EquipableItem.ItemList.GoldCoin }, //unknown
                 //{ new LocationId("overworld-21x18-cave.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), EquipableItem.ItemList.GoldCoin }, //unknown
                 //{ new LocationId("overworld-21x18-cave.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), EquipableItem.ItemList.GoldCoin }, //unknown
-                { new LocationId("overworld-21x20-cave.tmx", "Chest_Small", new Vector3(1192f, 0f, 612f)), EquipableItem.ItemList.GoldCoin }, //Random small
-                { new LocationId("overworld-21x20-cave.tmx", "Chest_Small", new Vector3(1268f, 0f, 612f)), EquipableItem.ItemList.GoldCoin }, //Random small
+                { new LocationId("overworld-21x20-cave.tmx", "Chest_Small", new Vector3(1192f, 0f, 612f)), EquipableItem.ItemList.GoldCoin }, 
+                { new LocationId("overworld-21x20-cave.tmx", "Chest_Small", new Vector3(1268f, 0f, 612f)), EquipableItem.ItemList.GoldCoin }, 
                 //{ new LocationId("overworld-22x16.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), EquipableItem.ItemList.GoldCoin }, //unknown
                 //{ new LocationId("overworld-22x16.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), EquipableItem.ItemList.GoldCoin }, //unknown
                 //{ new LocationId("overworld-22x16.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), EquipableItem.ItemList.GoldCoin }, //unknown
