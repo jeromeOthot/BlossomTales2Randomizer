@@ -1,4 +1,5 @@
-﻿using BlossomTales2.Randomizer.mm;
+﻿using BlossomTales2.Extensions;
+using BlossomTales2.Randomizer.mm;
 using Microsoft.Xna.Framework;
 using System.Linq;
 
@@ -35,7 +36,7 @@ namespace BlossomTales2
 
         private void Mod_HandleDoorAndTorches()
         {
-            if (Game1.Perma_Objects.FirstOrDefault((obj) => obj.LevelName == Game1.CurrentLevel.Name && obj.Name == "tombDoor") == null)
+            if (!Game1Extensions.HasLevelPermaObject("tombDoor"))
             {
                 doorPuppet = new Puppet("tombDoor", new Vector3(1280f, 0f, 472f));
                 doorPuppet.Zdepth = 36.4f;
@@ -67,7 +68,7 @@ namespace BlossomTales2
 
         private void Mod_HandleLanternGuy()
         {
-            if (Game1.Perma_Objects.FirstOrDefault((obj) => obj.LevelName == Game1.CurrentLevel.Name && obj.Name == "lanternGuy") == null)
+            if (!Game1Extensions.HasLevelPermaObject("lanternGuy"))
             {
                 lanternGuy = new Puppet("lanternGuy", new Vector3(1036f, 0f, 660f));
                 lanternGuy.isNPC = true;
@@ -120,7 +121,7 @@ namespace BlossomTales2
             GameLogger.LogInfo(Game1.CurrentLevel.Name + " " + lanternGuy.name + " " + lanternGuy.getPosition());
             EquipableItem.ItemList item = RandomizerSingleton.Instance.GetItemAtLocation(new LocationId(Game1.CurrentLevel.Name, lanternGuy.name, lanternGuy.getPosition()));
             Game1.player.GiveItemReflection(item);
-            Game1.Perma_Objects.Add(new PermaListItem(Game1.CurrentLevel.Name, lanternGuy.name, lanternGuy.getPosition()));
+            Game1Extensions.AddLevelPermaObject(lanternGuy.name, lanternGuy.getPosition());
         }
 
         private void openDoor()
@@ -130,7 +131,7 @@ namespace BlossomTales2
 
             if (ModGlobals.OpenWorldState)
                 Game1.Globals.MainQuestObjective = mainGameObjective;
-            Game1.Perma_Objects.Add(new PermaListItem(Game1.CurrentLevel.Name, doorPuppet.name, doorPuppet.getPosition()));
+            Game1Extensions.AddLevelPermaObject(doorPuppet.name, doorPuppet.getPosition());
         }
 
         //TODO: Find a way to call base method, without reflection if possible.
