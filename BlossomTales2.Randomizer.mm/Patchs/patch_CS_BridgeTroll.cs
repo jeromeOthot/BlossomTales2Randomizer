@@ -1,10 +1,5 @@
-﻿using BlossomTales2;
-using BlossomTales2.Randomizer.mm;
+﻿using BlossomTales2.Randomizer.mm;
 using Microsoft.Xna.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace BlossomTales2
 {
@@ -14,20 +9,20 @@ namespace BlossomTales2
 
         public extern void orig_Init();
         public extern void orig_armPump();
+        public extern void orig_goPlayer();
 
         public override void Init()
         {
             bridgeTroll = new Puppet("bridgeTroll", new Vector3(1100f, 0f, 968f));
             bridgeTroll.Zdepth = -163.41f;
 
-            //if (Game1.Globals.MainQuestObjective == Globaler.MainGameObjective.jungles_talkToWitch || Game1.Globals.MainQuestObjective == Globaler.MainGameObjective.jungles_giveGruffJuice)
             if (Mod_ShouldDisplayTroll())
             {
                 putTrollOnBridge();
             }
             else
             {
-                if (Game1.Globals.MainQuestObjective < Globaler.MainGameObjective.jungles_headToTown)
+                if (!ModGlobals.OpenWorldState && Game1.Globals.MainQuestObjective < Globaler.MainGameObjective.jungles_headToTown)
                 {
                     return;
                 }
@@ -56,10 +51,31 @@ namespace BlossomTales2
             RandomizerSingleton.MarkObjectiveComplete(Globaler.MainGameObjective.jungles_talkToGruff);
         }
 
+        public void goPlayer()
+        {
+            orig_goPlayer();
+            //The "bye" function is too long to mod the objective value.
+            //Modding it here instead.
+            RandomizerSingleton.MarkObjectiveComplete(Globaler.MainGameObjective.jungles_giveGruffJuice);
+            Globaler.MainGameObjective mainGameObjective = Game1.Globals.MainQuestObjective;
+            tweener.Timer(0.1f).OnComplete(delegate
+            {
+                if (ModGlobals.OpenWorldState)
+                    Game1.Globals.MainQuestObjective = mainGameObjective;
+            });
+        }
+
         private bool Mod_ShouldDisplayTroll()
         {
-            return (ModGlobals.SkipCutscenes || RandomizerSingleton.IsObjectiveCompleted(Globaler.MainGameObjective.jungles_talkToGruff))
+            if(ModGlobals.OpenWorldState)
+            {
+                return (ModGlobals.SkipCutscenes || RandomizerSingleton.IsObjectiveCompleted(Globaler.MainGameObjective.jungles_talkToGruff))
                 && !RandomizerSingleton.IsObjectiveCompleted(Globaler.MainGameObjective.jungles_giveGruffJuice);
+            }
+            else
+            {
+                return Game1.Globals.MainQuestObjective == Globaler.MainGameObjective.jungles_talkToWitch || Game1.Globals.MainQuestObjective == Globaler.MainGameObjective.jungles_giveGruffJuice;
+            }
         }
     }
 }

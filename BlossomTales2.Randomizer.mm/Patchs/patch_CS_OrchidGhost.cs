@@ -7,13 +7,45 @@ namespace BlossomTales2
     internal class patch_CS_OrchidGhost : CS_OrchidGhost
     {
         private Puppet orchid = new Puppet ("Fake king", Vector3.Zero);
-        private Puppet orchidLight = new Puppet ("Fake light", Vector3.Zero);
         private Puppet orchidTomb = new Puppet("Fake tomb", Vector3.Zero);
 
+        public extern void orig_Init();
         public extern void orig_howDareYou();
         public extern void orig_talkOrchid();
         public extern void orig_giveHeart();
         public extern void orig_openTomb();
+
+        public override void Init()
+        {
+            orchidTomb = new Puppet("orchidTomb", new Vector3(608f, 0f, 284f));
+            foreach (Light light in Game1.CurrentLevel.Lights)
+            {
+                if (light.position.X == 492f)
+                {
+                    light.opacity = 0f;
+                    light.maxOpacity = 255;
+                    light.minOpacity = 255;
+                }
+            }
+
+            puppets.Add(orchidTomb);
+            puppetList.Add(orchidTomb);
+            Game1.CurrentLevel.LevelObjects.Add(new CollisionRect(new Vector3(1248f, 0f, 448f)));
+            orchidTomb.play("closed");
+
+            if (Mod_CanInteractWithTomb())
+            {
+                return;
+            }
+
+            foreach (LevelObject levelObject in Game1.CurrentLevel.LevelObjects)
+            {
+                if (levelObject is Sign)
+                {
+                    levelObject.Alive = false;
+                }
+            }
+        }
 
         public void howDareYou()
         {
@@ -99,12 +131,15 @@ namespace BlossomTales2
                 Mod_OrchidGiveItem("_shield");
                 tweener.Timer(3f).OnComplete(delegate
                 {
-                    if (ModGlobals.SkipCutscenes)
-                        fadeOut(); //TODO: Skip la cutscene du minotaure et sortir du donjon.
-                    else
-                        orchidMorkla();
+                    Mod_SkipMorklaCutscene();
                 });
             });
+        }
+
+        private bool Mod_CanInteractWithTomb()
+        {
+            return ModGlobals.OpenWorldState && !RandomizerSingleton.IsObjectiveCompleted(Globaler.MainGameObjective.intro_enterCatacombs)
+                            || !ModGlobals.OpenWorldState && Game1.Globals.MainQuestObjective <= Globaler.MainGameObjective.intro_enterCatacombs;
         }
 
         private void Mod_OrchidGiveItem(string locationName)
@@ -118,7 +153,24 @@ namespace BlossomTales2
 
         private void Mod_SkipOpenTombCutscene()
         {
-            takeSword();
+            if (ModGlobals.SkipCutscenes)
+            {
+                takeSword();
+            }
+            else
+            {
+                Game1.playSoundCue("blank079");
+                Game1.Dialoger.AddLine("<E>Old King: I hereby dub thee a true knight! Accept my gifts, and with them, my royal blessing.", takeSword);
+            }
+        }
+
+        private void Mod_SkipMorklaCutscene()
+        {
+            RandomizerSingleton.MarkObjectiveComplete(Globaler.MainGameObjective.intro_enterCatacombs);
+            if (ModGlobals.SkipCutscenes)
+                fadeOut(); //TODO: Skip la cutscene du minotaure et sortir du donjon.
+            else
+                orchidMorkla();
         }
     }
 }

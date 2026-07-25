@@ -125,7 +125,11 @@ namespace BlossomTales2
 
         private void openDoor()
         {
+            Globaler.MainGameObjective mainGameObjective = Game1.Globals.MainQuestObjective;
             orig_openDoor();
+
+            if (ModGlobals.OpenWorldState)
+                Game1.Globals.MainQuestObjective = mainGameObjective;
             Game1.Perma_Objects.Add(new PermaListItem(Game1.CurrentLevel.Name, doorPuppet.name, doorPuppet.getPosition()));
         }
 

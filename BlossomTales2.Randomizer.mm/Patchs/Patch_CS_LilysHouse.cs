@@ -1,6 +1,5 @@
 ﻿using BlossomTales2.Randomizer.mm;
 using Microsoft.Xna.Framework;
-using System;
 
 namespace BlossomTales2
 {
@@ -54,7 +53,11 @@ namespace BlossomTales2
             }
 
             //On change de quete pour skipper le tutoriel festival
-            Game1.Globals.MainQuestObjective = Globaler.MainGameObjective.intro_getLantern;
+            if(ModGlobals.OpenWorldState)
+                Game1.Globals.MainQuestObjective = Globaler.MainGameObjective.lab_openDoor;
+            else
+                Game1.Globals.MainQuestObjective = Globaler.MainGameObjective.intro_enterFestival;
+
             giveControlToPlayer(lily, false, 3);
             Game1.LOPuppets.Clear();
            // this.bedSheetLily.Zdepth = -99.5f;
