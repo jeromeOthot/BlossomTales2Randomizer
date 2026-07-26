@@ -1,4 +1,4 @@
-﻿using BlossomTales2.Randomizer.mm;
+﻿using BlossomTales2.Extensions;
 using Microsoft.Xna.Framework;
 
 namespace BlossomTales2
@@ -48,7 +48,7 @@ namespace BlossomTales2
         public void armPump()
         {
             orig_armPump();
-            RandomizerSingleton.MarkObjectiveComplete(Globaler.MainGameObjective.jungles_talkToGruff);
+            Game1Extensions.MarkObjectiveComplete(Globaler.MainGameObjective.jungles_talkToGruff);
         }
 
         public void goPlayer()
@@ -56,7 +56,7 @@ namespace BlossomTales2
             orig_goPlayer();
             //The "bye" function is too long to mod the objective value.
             //Modding it here instead.
-            RandomizerSingleton.MarkObjectiveComplete(Globaler.MainGameObjective.jungles_giveGruffJuice);
+            Game1Extensions.MarkObjectiveComplete(Globaler.MainGameObjective.jungles_giveGruffJuice);
             Globaler.MainGameObjective mainGameObjective = Game1.Globals.MainQuestObjective;
             tweener.Timer(0.1f).OnComplete(delegate
             {
@@ -69,8 +69,8 @@ namespace BlossomTales2
         {
             if(ModGlobals.OpenWorldState)
             {
-                return (ModGlobals.SkipCutscenes || RandomizerSingleton.IsObjectiveCompleted(Globaler.MainGameObjective.jungles_talkToGruff))
-                && !RandomizerSingleton.IsObjectiveCompleted(Globaler.MainGameObjective.jungles_giveGruffJuice);
+                return (ModGlobals.SkipCutscenes || Game1Extensions.IsObjectiveCompleted(Globaler.MainGameObjective.jungles_talkToGruff))
+                && !Game1Extensions.IsObjectiveCompleted(Globaler.MainGameObjective.jungles_giveGruffJuice);
             }
             else
             {

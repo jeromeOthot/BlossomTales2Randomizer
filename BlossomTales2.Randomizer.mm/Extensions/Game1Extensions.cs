@@ -1,13 +1,25 @@
 ﻿using Microsoft.Xna.Framework;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace BlossomTales2.Extensions
 {
     internal class Game1Extensions
     {
+        //Use PermaObjects to abstract the game objectives and make them non-linear.
+        public static void MarkObjectiveComplete(Globaler.MainGameObjective objective)
+        {
+            if (IsObjectiveCompleted(objective))
+                return;
+
+            Game1.Perma_Objects.Add(new PermaListItem(string.Empty, objective.ToString(), Vector3.Zero));
+        }
+
+        public static bool IsObjectiveCompleted(Globaler.MainGameObjective objective)
+        {
+            string objectiveName = objective.ToString();
+            return Game1.Perma_Objects.FirstOrDefault(obj => obj.Name == objectiveName) != null;
+        }
+
         public static bool HasLevelPermaObject(string name)
         {
             return Game1.Perma_Objects.FirstOrDefault(predicate) != null;

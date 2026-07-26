@@ -1,10 +1,5 @@
-﻿using BlossomTales2.Randomizer.mm;
+﻿using BlossomTales2.Extensions;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace BlossomTales2
 {
@@ -25,10 +20,10 @@ namespace BlossomTales2
         {
             if (ModGlobals.OpenWorldState)
             {
-                if (!RandomizerSingleton.IsObjectiveCompleted(Globaler.MainGameObjective.jungles_headToTown))
+                if (!Game1Extensions.IsObjectiveCompleted(Globaler.MainGameObjective.jungles_headToTown))
                 {
                     SpawnPirates();
-                    RandomizerSingleton.MarkObjectiveComplete(Globaler.MainGameObjective.jungles_headToTown);
+                    Game1Extensions.MarkObjectiveComplete(Globaler.MainGameObjective.jungles_headToTown);
                 }
                 return;
             }

@@ -1,4 +1,5 @@
-﻿using BlossomTales2.Randomizer.mm;
+﻿using BlossomTales2.Extensions;
+using BlossomTales2.Randomizer.mm;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 
@@ -138,7 +139,7 @@ namespace BlossomTales2
 
         private bool Mod_CanInteractWithTomb()
         {
-            return ModGlobals.OpenWorldState && !RandomizerSingleton.IsObjectiveCompleted(Globaler.MainGameObjective.intro_enterCatacombs)
+            return ModGlobals.OpenWorldState && !Game1Extensions.IsObjectiveCompleted(Globaler.MainGameObjective.intro_enterCatacombs)
                             || !ModGlobals.OpenWorldState && Game1.Globals.MainQuestObjective <= Globaler.MainGameObjective.intro_enterCatacombs;
         }
 
@@ -166,7 +167,7 @@ namespace BlossomTales2
 
         private void Mod_SkipMorklaCutscene()
         {
-            RandomizerSingleton.MarkObjectiveComplete(Globaler.MainGameObjective.intro_enterCatacombs);
+            Game1Extensions.MarkObjectiveComplete(Globaler.MainGameObjective.intro_enterCatacombs);
             if (ModGlobals.SkipCutscenes)
                 fadeOut(); //TODO: Skip la cutscene du minotaure et sortir du donjon.
             else
