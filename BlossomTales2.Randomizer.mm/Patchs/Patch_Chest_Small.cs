@@ -88,129 +88,14 @@ namespace BlossomTales2
                                     ((SpawnRectangle)Game1.CurrentLevel.LevelObjects[j]).WaitToDie = 2;
                                 }
                             }
-                            
+
 
                             Game1.playSoundCue("chestOpen");
                             Game1.Perma_Objects.Add(new PermaListItem(Game1.CurrentLevel.Name, Name, Position));
                             Game1.player.LockPosition = false;
                             Game1.player.LockDirection = false;
                             Game1.player.RemovePlayerControls = false;
-
-                            //Juste pour un test d'un coffre est bien mapper au dictionnaire
-                            GameLogger.LogInfo(new LocationId(Game1.CurrentLevel.Name, Name, Position).ToString());
-                            if (RandomizerSingleton.Instance.TryGetItemAtLocation(new LocationId(Game1.CurrentLevel.Name, Name, Position), out EquipableItem.ItemList item))
-                            {
-                                Game1.player.GiveItemReflection(item);
-                                //TODO: Find a better way to store information that we should open doors.
-                                if(Game1.CurrentLevel.Name == "orchid-tomb-3.tmx")
-                                    opendoors = true;
-                            }
-                            else //Conserver le comportement de base si le chest n'est pas dans la liste.
-                            {
-                                if (IDNumber == 0)
-                                {
-                                    int num3 = Game1.RandomNumber.Next(20, 26);
-                                    for (int k = 0; k < num3; k++)
-                                    {
-                                        Vector3 velocity = new Vector3(patch_Game1.RandomFloat(-60, 60, 10f), patch_Game1.RandomFloat(40, 70, 10f), patch_Game1.RandomFloat(30, 60, 10f));
-                                        Game1.CurrentLevel.LevelObjects.Add(new Coin_PU(Position, velocity));
-                                    }
-
-                                    if (Game1.LevelName == "blossom-house4.tmx" && Position == new Vector3(408f, 0f, 340f))
-                                    {
-                                        Game1.Globals.BlossomHouse4Chest = 2;
-                                    }
-                                }
-                                else if (IDNumber == 1)
-                                {
-                                    Game1.player.GiveItemReflection(EquipableItem.ItemList.Gold_Key);
-                                    if (Game1.LevelName == "mansion-4.tmx")
-                                    {
-                                        Game1.Globals.Mansion4Chest = 2;
-                                    }
-                                    else if (Game1.LevelName == "mansion-16.tmx")
-                                    {
-                                        Game1.Globals.Mansion16Chest = 2;
-                                    }
-                                    else if (Game1.LevelName == "mansion-20.tmx")
-                                    {
-                                        Game1.Globals.Mansion20Chest = 2;
-                                    }
-                                    else if (Game1.LevelName == "castle-7.tmx")
-                                    {
-                                        Game1.Globals.Castle7Chest = 2;
-                                        opendoors = true;
-                                        IDNumber = 4;
-                                    }
-                                    else if (Game1.LevelName == "morkla-8.tmx")
-                                    {
-                                        Game1.Globals.Morkla8Chest = 2;
-                                    }
-                                }
-                                else if (IDNumber == 2)
-                                {
-                                    Game1.player.GiveItemReflection(EquipableItem.ItemList.Gold_Key);
-                                    opendoors = true;
-                                }
-                                else if (IDNumber == 3)
-                                {
-                                    Game1.player.GiveItemReflection(EquipableItem.ItemList.HeartQ_1);
-                                    if (Game1.LevelName == "overworld-23x18.tmx")
-                                    {
-                                        Game1.Globals.Ow23x18Chest = 2;
-                                    }
-                                }
-                                else if (IDNumber == 4)
-                                {
-                                    Game1.player.GiveItemReflection(EquipableItem.ItemList.Crystal);
-                                }
-                                else if (IDNumber == 5)
-                                {
-                                    Game1.player.GiveItemReflection(EquipableItem.ItemList.Five_Gems);
-                                }
-                                else if (IDNumber == 10)
-                                {
-                                    Game1.player.GiveItemReflection(EquipableItem.ItemList.BlueGem);
-                                    Game1.Globals.foundBlueGem = true;
-                                }
-                                else if (IDNumber == 11)
-                                {
-                                    Game1.player.GiveItemReflection(EquipableItem.ItemList.GreenGem);
-                                    Game1.Globals.foundGreenGem = true;
-                                }
-                                else if (IDNumber == 13)
-                                {
-                                    Game1.player.GiveItemReflection(EquipableItem.ItemList.CombatScroll);
-                                }
-                                else if (IDNumber == 14)
-                                {
-                                    Game1.player.GiveItemReflection(EquipableItem.ItemList.Honeycomb);
-                                    Game1.Gui.AddGuiTicker(EquipableItem.IngredientList.HoneycombOLD, Game1.player.Count_Honeycombs);
-                                }
-                                else if (IDNumber == 20)
-                                {
-                                    Game1.player.GiveItemReflection(EquipableItem.ItemList.HeartQ_1);
-                                    Game1.Globals.sleepyManState = 3;
-                                }
-                                else if (IDNumber == 21)
-                                {
-                                    Game1.player.GiveItemReflection(EquipableItem.ItemList.HeartQ_1);
-                                    Game1.Globals.Lighthouse_State = 5;
-                                }
-                                else if (IDNumber == 22)
-                                {
-                                    Game1.player.GiveItemReflection(EquipableItem.ItemList.Crystal);
-                                    Game1.Globals.darklandsGhostTreasureState = 3;
-                                }
-                                else if (IDNumber == 30)
-                                {
-                                    int num4 = Game1.RandomNumber.Next(30, 40);
-                                    for (int l = 0; l < num4; l++)
-                                    {
-                                        Game1.CurrentLevel.LevelObjects.Add(new Coin_PU(Position, new Vector3(patch_Game1.RandomFloat(-1000, 1000, 100f), patch_Game1.RandomFloat(500, 900, 100f), patch_Game1.RandomFloat(200, 800, 100f))));
-                                    }
-                                }
-                            }
+                            Mod_GiveItem();
                         }
                     }
                 }
@@ -298,6 +183,125 @@ namespace BlossomTales2
                 Game1.Camera.Shake(8f, 0.96f);
             }
         }
+
+        private void Mod_GiveItem()
+        {
+            //Juste pour un test d'un coffre est bien mapper au dictionnaire
+            GameLogger.LogInfo(new LocationId(Game1.CurrentLevel.Name, Name, Position).ToString());
+            if (RandomizerSingleton.Instance.TryGetItemAtLocation(new LocationId(Game1.CurrentLevel.Name, Name, Position), out EquipableItem.ItemList item))
+            {
+                Game1.player.GiveItemReflection(item);
+
+                if (IDNumber == 2)
+                    opendoors = true;
+            }
+            else //Conserver le comportement de base si le chest n'est pas dans la liste.
+            {
+                if (IDNumber == 0)
+                {
+                    int num3 = Game1.RandomNumber.Next(20, 26);
+                    for (int k = 0; k < num3; k++)
+                    {
+                        Vector3 velocity = new Vector3(patch_Game1.RandomFloat(-60, 60, 10f), patch_Game1.RandomFloat(40, 70, 10f), patch_Game1.RandomFloat(30, 60, 10f));
+                        Game1.CurrentLevel.LevelObjects.Add(new Coin_PU(Position, velocity));
+                    }
+
+                    if (Game1.LevelName == "blossom-house4.tmx" && Position == new Vector3(408f, 0f, 340f))
+                    {
+                        Game1.Globals.BlossomHouse4Chest = 2;
+                    }
+                }
+                else if (IDNumber == 1)
+                {
+                    Game1.player.GiveItemReflection(EquipableItem.ItemList.Gold_Key);
+                    if (Game1.LevelName == "mansion-4.tmx")
+                    {
+                        Game1.Globals.Mansion4Chest = 2;
+                    }
+                    else if (Game1.LevelName == "mansion-16.tmx")
+                    {
+                        Game1.Globals.Mansion16Chest = 2;
+                    }
+                    else if (Game1.LevelName == "mansion-20.tmx")
+                    {
+                        Game1.Globals.Mansion20Chest = 2;
+                    }
+                    else if (Game1.LevelName == "castle-7.tmx")
+                    {
+                        Game1.Globals.Castle7Chest = 2;
+                        opendoors = true;
+                        IDNumber = 4;
+                    }
+                    else if (Game1.LevelName == "morkla-8.tmx")
+                    {
+                        Game1.Globals.Morkla8Chest = 2;
+                    }
+                }
+                else if (IDNumber == 2)
+                {
+                    Game1.player.GiveItemReflection(EquipableItem.ItemList.Gold_Key);
+                    opendoors = true;
+                }
+                else if (IDNumber == 3)
+                {
+                    Game1.player.GiveItemReflection(EquipableItem.ItemList.HeartQ_1);
+                    if (Game1.LevelName == "overworld-23x18.tmx")
+                    {
+                        Game1.Globals.Ow23x18Chest = 2;
+                    }
+                }
+                else if (IDNumber == 4)
+                {
+                    Game1.player.GiveItemReflection(EquipableItem.ItemList.Crystal);
+                }
+                else if (IDNumber == 5)
+                {
+                    Game1.player.GiveItemReflection(EquipableItem.ItemList.Five_Gems);
+                }
+                else if (IDNumber == 10)
+                {
+                    Game1.player.GiveItemReflection(EquipableItem.ItemList.BlueGem);
+                    Game1.Globals.foundBlueGem = true;
+                }
+                else if (IDNumber == 11)
+                {
+                    Game1.player.GiveItemReflection(EquipableItem.ItemList.GreenGem);
+                    Game1.Globals.foundGreenGem = true;
+                }
+                else if (IDNumber == 13)
+                {
+                    Game1.player.GiveItemReflection(EquipableItem.ItemList.CombatScroll);
+                }
+                else if (IDNumber == 14)
+                {
+                    Game1.player.GiveItemReflection(EquipableItem.ItemList.Honeycomb);
+                    Game1.Gui.AddGuiTicker(EquipableItem.IngredientList.HoneycombOLD, Game1.player.Count_Honeycombs);
+                }
+                else if (IDNumber == 20)
+                {
+                    Game1.player.GiveItemReflection(EquipableItem.ItemList.HeartQ_1);
+                    Game1.Globals.sleepyManState = 3;
+                }
+                else if (IDNumber == 21)
+                {
+                    Game1.player.GiveItemReflection(EquipableItem.ItemList.HeartQ_1);
+                    Game1.Globals.Lighthouse_State = 5;
+                }
+                else if (IDNumber == 22)
+                {
+                    Game1.player.GiveItemReflection(EquipableItem.ItemList.Crystal);
+                    Game1.Globals.darklandsGhostTreasureState = 3;
+                }
+                else if (IDNumber == 30)
+                {
+                    int num4 = Game1.RandomNumber.Next(30, 40);
+                    for (int l = 0; l < num4; l++)
+                    {
+                        Game1.CurrentLevel.LevelObjects.Add(new Coin_PU(Position, new Vector3(patch_Game1.RandomFloat(-1000, 1000, 100f), patch_Game1.RandomFloat(500, 900, 100f), patch_Game1.RandomFloat(200, 800, 100f))));
+                    }
+                }
+            }
+        }    
     }
 }
     
