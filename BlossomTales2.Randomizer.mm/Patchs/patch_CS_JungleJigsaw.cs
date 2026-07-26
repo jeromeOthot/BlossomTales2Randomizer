@@ -1,0 +1,27 @@
+﻿using BlossomTales2.Randomizer.mm;
+using Microsoft.Xna.Framework;
+
+namespace BlossomTales2
+{
+    internal class patch_CS_JungleJigsaw : CS_JungleJigsaw
+    {
+        public extern void orig_giveShovel();
+
+        public void giveShovel()
+        {
+            focusCam = false;
+            Game1.player.CamOffset = Vector2.Zero;
+            Game1.player.HasMoved = false;
+            Game1.Globals.ArchJungle_State = 3;
+            Mod_GiveItem();
+        }
+
+        private void Mod_GiveItem()
+        {
+            GameLogger.LogInfo(Game1.CurrentLevel.Name);
+            //Don't register position.
+            EquipableItem.ItemList item = RandomizerSingleton.Instance.GetItemAtLocation(new LocationId(Game1.CurrentLevel.Name, "ArchJungle", Vector3.Zero));
+            Game1.player.GiveItemReflection(item);
+        }
+    }
+}
