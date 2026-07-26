@@ -77,7 +77,7 @@ namespace BlossomTales2.Randomizer.mm
                 { new LocationId("jungles-22x22.tmx", "Chest_Small", new Vector3(1668f, 0f, 512f)), EquipableItem.ItemList.GoldCoin }, //accès jungle
                 //{ new LocationId("jungles-22x22-lighthouse.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), EquipableItem.ItemList.GoldCoin }, //unknown
                 //{ new LocationId("jungles-23x19-cave.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), EquipableItem.ItemList.Crystal }, //unknown
-                { new LocationId("jungles-23x19.tmx", "ArchJungle", new Vector3(0f, 0f, 0f)), EquipableItem.ItemList.Shovel }, //accès jungle
+                { new LocationId("jungles-23x19.tmx", "archJungle", new Vector3(0f, 0f, 0f)), EquipableItem.ItemList.Shovel }, //accès jungle
 
                 { new LocationId("jungles-23x20.tmx", "Chest_Small", new Vector3(2264f, 0f, 1928f)), EquipableItem.ItemList.GoldCoin }, //accès jungle
                 //{ new LocationId("jungles-23x20-cave.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), EquipableItem.ItemList.GoldCoin }, //unknown
