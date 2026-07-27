@@ -178,6 +178,9 @@ namespace BlossomTales2
                 case EquipableItem.ItemList.GreenGem:
                 case EquipableItem.ItemList.BlueGem:
                 case EquipableItem.ItemList.Flippers:
+                    Game1.player.Inventory.Add(EquipableItem.ItemList.Flippers);
+                    Game1.player.HasFlippers = true;
+                    break;
                 case EquipableItem.ItemList.CombatScroll:
                 case EquipableItem.ItemList.MinotaurCoin:
                   if (!this.Inventory_NE.Contains(item))
