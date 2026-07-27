@@ -1,12 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Text;
 
 namespace BlossomTales2.Randomizer.mm
 {
-    public struct LocationId
+    public struct LocationId : IEquatable<LocationId>
     {
         public string MapName { get; private set; }
         public string Name { get; private set; }
@@ -24,14 +21,6 @@ namespace BlossomTales2.Randomizer.mm
             return "Map: [" + MapName + "] Object: [" + Name + "] Position: " + Position;
         }
 
-        public override bool Equals(object obj)
-        {
-            if (!(obj is LocationId other))
-                return false;
-
-            return other.MapName == MapName && other.Name == Name && other.Position == Position;
-        }
-
         public override int GetHashCode()
         {
             unchecked
@@ -42,6 +31,11 @@ namespace BlossomTales2.Randomizer.mm
                 hash = hash * 23 + Position.GetHashCode();
                 return hash;
             }
+        }
+
+        public bool Equals(LocationId other)
+        {
+            return other.MapName == MapName && other.Name == Name && other.Position == Position;
         }
     }
 }
