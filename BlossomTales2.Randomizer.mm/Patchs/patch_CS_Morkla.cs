@@ -5,6 +5,7 @@ using System;
 
 namespace BlossomTales2
 {
+    //TODO: Refactor conditions if we remove cutscenes.
     internal class patch_CS_Morkla : CS_Morkla
     {
         public extern void orig_Init();
@@ -78,6 +79,15 @@ namespace BlossomTales2
         {
             if (Mod_ShouldPlayMorklaIntro())
             {
+                if(ModGlobals.SkipCutscenes)
+                {
+                    if(ModGlobals.OpenWorldState)
+                        Game1Extensions.MarkObjectiveComplete(Globaler.MainGameObjective.jungles_talkToMorkla);
+                    else
+                        Game1.Globals.MainQuestObjective = Globaler.MainGameObjective.jungles_fishCrabsMorkla;
+                    return;
+                }
+
                 Game1.Gui.HideHud = true;
                 Game1.player.MoveToTarget = true;
                 Game1.player.RemovePlayerControls = true;
