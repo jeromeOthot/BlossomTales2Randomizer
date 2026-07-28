@@ -25,7 +25,9 @@ namespace BlossomTales2
                 //TODO: Je n'ai pas arrivé encore a faire que Lily n'est aucun épée
                 case EquipableItem.ItemList.Sword:
                   SwordLevel++;
-                    if (SwordLevel >= 3)
+                  if (SwordLevel >= 4)
+                    HasSwordBeams = true;
+                  if (SwordLevel >= 3)
                         HasChargeSword = true;
                   break;
                 case EquipableItem.ItemList.Shield:
