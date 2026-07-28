@@ -216,6 +216,15 @@ namespace BlossomTales2
                     else
                         Game1.Globals.MainQuestObjective = Globaler.MainGameObjective.jungles_talkToMorkla;
                 }
+                if (IDNumber == 11)
+                {
+                    Game1Extensions.AddLevelPermaObject(Name, Position);
+                    if (!Game1.WaterLevelUp)
+                    {
+                        Game1.playSoundCue("blank154");
+                        Game1.WaterLevelUp = true;
+                    }
+                }
             }
             else
             {
@@ -240,16 +249,6 @@ namespace BlossomTales2
                 else if (IDNumber == 5)
                 {
                     Game1.player.GiveItemReflection(EquipableItem.ItemList.HeartQ_1);
-                }
-                else if (IDNumber == 11)
-                {
-                    Game1.player.HasFlippers = true;
-                    Game1.player.GiveItemReflection(EquipableItem.ItemList.Flippers);
-                    if (!Game1.WaterLevelUp)
-                    {
-                        Game1.playSoundCue("blank154");
-                        Game1.WaterLevelUp = true;
-                    }
                 }
                 else if (IDNumber == 12)
                 {
