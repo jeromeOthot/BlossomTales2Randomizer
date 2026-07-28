@@ -9,6 +9,7 @@ namespace BlossomTales2
         private Puppet captain;
 
         public extern void orig_Init();
+        public extern void orig_initScene();
 
         public override void Init()
         {
@@ -35,6 +36,26 @@ namespace BlossomTales2
                 captain.Alpha = 0f;
                 puppets.Add(captain);
             }
+        }
+
+        public void initScene()
+        {
+            Game1.SwitchBGMusic("stop", 0.01f);
+            DoorGate doorGate = new DoorGate(new Vector3(736f, 0f, 1480f));
+            doorGate.Velocity.X = 2f;
+            doorGate.Velocity.Y = 1f;
+            doorGate.Row = 2;
+            Game1.CurrentLevel.LevelObjects.Add(doorGate);
+            Game1.player.RemovePlayerControls = true;
+            Game1.Gui.HideHud = true;
+            Mod_MovePlayerPosition();
+            focusCameraOnTarget(new Vector2(Game1.CurrentLevel.Width * 32, 480f), 2f, raiseWater);
+        }
+
+        private void Mod_MovePlayerPosition()
+        {
+            if (Game1.player.Position.Z > 480f)
+                Game1.player.MoveToPosition(new Vector3(Game1.CurrentLevel.Width * 32, 0f, Game1.player.Position.Z - 112f), 1);
         }
 
         private bool Mod_IsPirateDefeated()
