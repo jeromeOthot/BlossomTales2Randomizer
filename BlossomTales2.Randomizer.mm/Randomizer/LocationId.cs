@@ -21,6 +21,14 @@ namespace BlossomTales2.Randomizer.mm
             return "Map: [" + MapName + "] Object: [" + Name + "] Position: " + Position;
         }
 
+        public override bool Equals(object obj)
+        {
+            if (!(obj is LocationId other))
+                return false;
+
+            return Equals(other);
+        }
+
         public override int GetHashCode()
         {
             unchecked
