@@ -228,6 +228,15 @@ namespace BlossomTales2
                     break;
                   }
                   break;
+                case EquipableItem.ItemList.GoldCoin:
+                  int num4 = Game1.RandomNumber.Next(20, 40);
+                  for (int l = 0; l < num4; l++)
+                  {
+                    Game1.CurrentLevel.LevelObjects.Add(new Coin_PU(Position, new Vector3(patch_Game1.RandomFloat(-1000, 1000, 100f), patch_Game1.RandomFloat(500, 900, 100f), patch_Game1.RandomFloat(200, 800, 100f))));
+                  }
+
+                  playAnimation = false;
+                  break;
                 default:
                     if (item.ToString().Contains("Jar_"))
                     {
