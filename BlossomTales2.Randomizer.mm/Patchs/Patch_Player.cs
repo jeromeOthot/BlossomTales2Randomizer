@@ -183,9 +183,6 @@ namespace BlossomTales2
                 case EquipableItem.ItemList.GreenGem:
                 case EquipableItem.ItemList.BlueGem:
                 case EquipableItem.ItemList.Flippers:
-                    Game1.player.Inventory.Add(EquipableItem.ItemList.Flippers);
-                    Game1.player.HasFlippers = true;
-                    break;
                 case EquipableItem.ItemList.CombatScroll:
                 case EquipableItem.ItemList.MinotaurCoin:
                   if (!this.Inventory_NE.Contains(item))
@@ -200,7 +197,9 @@ namespace BlossomTales2
                     ++this.Count_MinotaurCoins;
                   if (item == EquipableItem.ItemList.TreeSeed)
                     ++this.Count_TreeSeeds;
-                  if (item == EquipableItem.ItemList.Ingred_Gem)
+                    if (item == EquipableItem.ItemList.Flippers)
+                        HasFlippers = true;
+                    if (item == EquipableItem.ItemList.Ingred_Gem)
                   {
                     ++this.Count_Gems;
                     playAnimation = false;
