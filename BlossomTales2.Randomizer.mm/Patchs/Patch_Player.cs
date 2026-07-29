@@ -265,11 +265,15 @@ namespace BlossomTales2
             }
             else
                 Game1.playSoundCue("newWeapon");
+
+            int itemIndex = (int)item;
             Game1.playSoundCue("blank098");
-            GameLogger.LogInfo("Play animation item: " + (int)item );
-            Game1.Particles.Add((Particle)new P_GetItem(this.Position + new Vector3(0.0f, 100f, 0.0f), (int)item));
+            GameLogger.LogInfo("Play animation item: " + itemIndex);
+            Game1.Particles.Add((Particle)new P_GetItem(this.Position + new Vector3(0.0f, 100f, 0.0f), itemIndex));
             Game1.Particles.Add((Particle)new GetItemLight(this.Position));
-            this.giveNewItemDescription = (int)item;
+
+            if(itemIndex == 40 || itemIndex == 41 || itemIndex == 42 || itemIndex == 100)
+                giveNewItemDescription = itemIndex;
         }
     }
 }
