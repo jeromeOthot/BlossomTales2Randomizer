@@ -122,18 +122,18 @@ namespace BlossomTales2.Randomizer.mm
                 //{ new LocationId("mansion-15-secret.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), EquipableItem.ItemList.HeartQ_1 }, //unknown
                 //{ new LocationId("mansion-20.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), EquipableItem.ItemList.GoldCoin }, //unknown
                 { new LocationId("morkla-3.tmx", "Chest_Small", new Vector3(704f, 0f, 1732f)), EquipableItem.ItemList.GoldCoin }, //accès Morkla && water switch && (lanterne && damage || flippers) 
-                //{ new LocationId("morkla-4.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), EquipableItem.ItemList.GoldCoin }, //unknown
-                //{ new LocationId("morkla-4.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), EquipableItem.ItemList.GoldCoin }, //unknown
+                { new LocationId("morkla-4.tmx", "Chest_Small", new Vector3(1216f, 0f, 384f)), EquipableItem.ItemList.GoldCoin }, //accès Morkla && water switch && flippers && leviers
+                { new LocationId("morkla-4.tmx", "Chest_Small", new Vector3(448f, 0f, 768f)), EquipableItem.ItemList.GoldCoin }, //accès Morkla && water switch && flippers && leviers
                 { new LocationId("morkla-8.tmx", "Chest_Small", new Vector3(736f, 0f, 556f)), EquipableItem.ItemList.Gold_Key }, //accès Morkla && lanterne && water switch && (damage || flippers) 
-                //{ new LocationId("morkla-17.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), EquipableItem.ItemList.BlueGem }, //unknown
-                //{ new LocationId("morkla-18.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), EquipableItem.ItemList.GoldCoin }, //unknown
-                //{ new LocationId("morkla-18.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), EquipableItem.ItemList.GoldCoin }, //unknown
-                //{ new LocationId("morkla-18.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), EquipableItem.ItemList.GoldCoin }, //unknown
-                //{ new LocationId("morkla-18.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), EquipableItem.ItemList.GoldCoin }, //unknown
-                //{ new LocationId("morkla-19.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), EquipableItem.ItemList.HeartQ_1 }, //unknown
+                { new LocationId("morkla-17.tmx", "Chest_Small", new Vector3(1732f, 0f, 384f)), EquipableItem.ItemList.BlueGem }, //accès Morkla && water switch && flippers && leviers
+                { new LocationId("morkla-18.tmx", "Chest_Small", new Vector3(736f, 0f, 288f)), EquipableItem.ItemList.GoldCoin }, //accès Morkla && flippers && (water switch && leviers || lanterne)
+                { new LocationId("morkla-18.tmx", "Chest_Small", new Vector3(928f,0f, 288f)), EquipableItem.ItemList.GoldCoin }, //accès Morkla && flippers && (water switch && leviers || lanterne)
+                { new LocationId("morkla-18.tmx", "Chest_Small", new Vector3(928f, 0f, 608f)), EquipableItem.ItemList.GoldCoin }, //accès Morkla && flippers && (water switch && leviers || lanterne)
+                { new LocationId("morkla-18.tmx", "Chest_Small", new Vector3(736f, 0f, 608f)), EquipableItem.ItemList.GoldCoin }, //accès Morkla && flippers && (water switch && leviers || lanterne)
+                { new LocationId("morkla-19.tmx", "Chest_Small", new Vector3(640f, 0f, 312f)), EquipableItem.ItemList.HeartQ_1 }, //accès Morkla && water switch && flippers && bombes
                 { new LocationId("morkla-20.tmx", "Chest_Small", new Vector3(640f, 0f, 384f)), EquipableItem.ItemList.HeartQ_1 }, //accès Morkla && bombes && (lanterne || flippers)
-                //{ new LocationId("morkla-21.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), EquipableItem.ItemList.GreenGem }, //unknown
-                { new LocationId("morkla-pirateBoss.tmx", "Chest", new Vector3(768f, 0f, 640f)), EquipableItem.ItemList.Flippers }, //accès Morkla && && damage && (lanterne && water switch && clé || flippers)
+                { new LocationId("morkla-21.tmx", "Chest_Small", new Vector3(896f, 0f, 776f)), EquipableItem.ItemList.GreenGem }, //accès Morkla && water switch && flippers && leviers
+                { new LocationId("morkla-pirateBoss.tmx", "Chest", new Vector3(768f, 0f, 640f)), EquipableItem.ItemList.Flippers }, //accès Morkla && damage && (lanterne && water switch && clé || flippers)
                 //{ new LocationId("objectPalette.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), EquipableItem.ItemList.GoldCoin }, //pas sur si vraie location, semble etre tool debug
                 { new LocationId("orchid-tomb-3.tmx", "Chest_Small", new Vector3(416f, 0f, 320f)), EquipableItem.ItemList.Gold_Key }, //lampe && levier && damage
                 { new LocationId("orchid-tomb-4.tmx", "orchid_heart", new Vector3(604f, 0f, 304f)), EquipableItem.ItemList.HeartQ_4 }, //lampe && damage && clé
