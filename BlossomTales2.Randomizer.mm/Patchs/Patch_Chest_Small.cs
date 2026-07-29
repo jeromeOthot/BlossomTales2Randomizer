@@ -163,7 +163,7 @@ namespace BlossomTales2
                 }
             }
 
-            if (flag)
+            if (flag && IDNumber != 11)
             {
                 return;
             }
