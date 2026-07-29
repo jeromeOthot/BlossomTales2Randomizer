@@ -171,14 +171,14 @@ namespace BlossomTales2
                     break;
                   }
                   break;
+                case EquipableItem.ItemList.Shovel:
+                    Game1.player.Inventory.Add(EquipableItem.ItemList.Shovel);
+                    break;
                 case EquipableItem.ItemList.Ingred_Gem:
                 case EquipableItem.ItemList.Letter:
                 case EquipableItem.ItemList.Honeycomb:
                 case EquipableItem.ItemList.CanyonBone:
                 case EquipableItem.ItemList.Package:
-                case EquipableItem.ItemList.Shovel:
-                  Game1.player.Inventory.Add(EquipableItem.ItemList.Shovel);
-                  break;
                 case EquipableItem.ItemList.TreeSeed:
                 case EquipableItem.ItemList.GreenGem:
                 case EquipableItem.ItemList.BlueGem:
@@ -190,7 +190,10 @@ namespace BlossomTales2
                   if (item == EquipableItem.ItemList.CanyonBone)
                     ++this.Count_CanyonBones;
                   if (item == EquipableItem.ItemList.Honeycomb)
-                    ++this.Count_Honeycombs;
+                    {
+                        Count_Honeycombs++;
+                        Game1.Gui.AddGuiTicker(EquipableItem.IngredientList.HoneycombOLD, Game1.player.Count_Honeycombs);
+                    }
                   if (item == EquipableItem.ItemList.CombatScroll)
                     ++this.Count_CombatScrolls;
                   if (item == EquipableItem.ItemList.MinotaurCoin)
@@ -199,6 +202,10 @@ namespace BlossomTales2
                     ++this.Count_TreeSeeds;
                     if (item == EquipableItem.ItemList.Flippers)
                         HasFlippers = true;
+                    if (item == EquipableItem.ItemList.BlueGem)
+                        Game1.Globals.foundBlueGem = true;
+                    if (item == EquipableItem.ItemList.GreenGem)
+                        Game1.Globals.foundGreenGem = true;
                     if (item == EquipableItem.ItemList.Ingred_Gem)
                   {
                     ++this.Count_Gems;

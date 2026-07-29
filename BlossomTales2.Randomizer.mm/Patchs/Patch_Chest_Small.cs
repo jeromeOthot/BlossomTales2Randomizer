@@ -191,9 +191,7 @@ namespace BlossomTales2
             if (RandomizerSingleton.Instance.TryGetItemAtLocation(new LocationId(Game1.CurrentLevel.Name, Name, Position), out EquipableItem.ItemList item))
             {
                 Game1.player.GiveItemReflection(item);
-
-                if (IDNumber == 2)
-                    opendoors = true;
+                HandleSpecialChests();
             }
             else //Conserver le comportement de base si le chest n'est pas dans la liste.
             {
@@ -301,7 +299,66 @@ namespace BlossomTales2
                     }
                 }
             }
-        }    
+        }
+        
+        private void HandleSpecialChests()
+        {
+            if (IDNumber == 0)
+            {
+                if (Game1.LevelName == "blossom-house4.tmx" && Position == new Vector3(408f, 0f, 340f))
+                    Game1.Globals.BlossomHouse4Chest = 2;
+            }
+            else if (IDNumber == 1)
+            {
+                if (Game1.LevelName == "mansion-4.tmx")
+                {
+                    Game1.Globals.Mansion4Chest = 2;
+                }
+                else if (Game1.LevelName == "mansion-16.tmx")
+                {
+                    Game1.Globals.Mansion16Chest = 2;
+                }
+                else if (Game1.LevelName == "mansion-20.tmx")
+                {
+                    Game1.Globals.Mansion20Chest = 2;
+                }
+                else if (Game1.LevelName == "castle-7.tmx")
+                {
+                    Game1.Globals.Castle7Chest = 2;
+                    opendoors = true;
+                    IDNumber = 4;
+                }
+                else if (Game1.LevelName == "morkla-8.tmx")
+                {
+                    Game1.Globals.Morkla8Chest = 2;
+                }
+            }
+            else if (IDNumber == 2)
+            {
+                opendoors = true;
+            }
+            else if (IDNumber == 3)
+            {
+                if (Game1.LevelName == "overworld-23x18.tmx")
+                    Game1.Globals.Ow23x18Chest = 2;
+            }
+            else if (IDNumber == 11)
+            {
+                opendoors = true;
+            }
+            else if (IDNumber == 20)
+            {
+                Game1.Globals.sleepyManState = 3;
+            }
+            else if (IDNumber == 21)
+            {
+                Game1.Globals.Lighthouse_State = 5;
+            }
+            else if (IDNumber == 22)
+            {
+                Game1.Globals.darklandsGhostTreasureState = 3;
+            }
+        }
     }
 }
     
