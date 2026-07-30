@@ -134,6 +134,8 @@ namespace BlossomTales2.Randomizer.mm
                 { new LocationId("morkla-20.tmx", "Chest_Small", new Vector3(640f, 0f, 384f)), EquipableItem.ItemList.HeartQ_1 }, //accès Morkla && bombes && (lanterne || flippers)
                 { new LocationId("morkla-21.tmx", "Chest_Small", new Vector3(896f, 0f, 776f)), EquipableItem.ItemList.GreenGem }, //accès Morkla && water switch && flippers && leviers
                 { new LocationId("morkla-pirateBoss.tmx", "Chest", new Vector3(768f, 0f, 640f)), EquipableItem.ItemList.Flippers }, //accès Morkla && damage && (lanterne && water switch && clé || flippers)
+                { new LocationId("morkla-octopus.tmx", "BossOctopus", new Vector3(0f, 0f, 0f)), EquipableItem.ItemList.HeartQ_4 }, //accès Morkla && damage && flippers && water switch && blue gem && green gem
+                { new LocationId("morkla-octopus.tmx", "Chest", new Vector3(896f, 0f, 624f)), EquipableItem.ItemList.KeyPiece1 }, //accès Morkla && damage && flippers && water switch && blue gem && green gem
                 //{ new LocationId("objectPalette.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), EquipableItem.ItemList.GoldCoin }, //pas sur si vraie location, semble etre tool debug
                 { new LocationId("orchid-tomb-3.tmx", "Chest_Small", new Vector3(416f, 0f, 320f)), EquipableItem.ItemList.Gold_Key }, //lampe && levier && damage
                 { new LocationId("orchid-tomb-4.tmx", "orchid_heart", new Vector3(604f, 0f, 304f)), EquipableItem.ItemList.HeartQ_4 }, //lampe && damage && clé
