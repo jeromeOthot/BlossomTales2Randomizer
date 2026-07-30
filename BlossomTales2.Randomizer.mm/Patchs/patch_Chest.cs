@@ -208,23 +208,7 @@ namespace BlossomTales2
             if (RandomizerSingleton.Instance.TryGetItemAtLocation(new LocationId(Game1.CurrentLevel.Name, Name, Position), out EquipableItem.ItemList item))
             {
                 Game1.player.GiveItemReflection(item);
-
-                if (IDNumber == 10)
-                {
-                    if (ModGlobals.OpenWorldState)
-                        Game1Extensions.MarkObjectiveComplete(Globaler.MainGameObjective.jungles_getBombs);
-                    else
-                        Game1.Globals.MainQuestObjective = Globaler.MainGameObjective.jungles_talkToMorkla;
-                }
-                if (IDNumber == 11)
-                {
-                    Game1Extensions.AddLevelPermaObject(Name, Position);
-                    if (!Game1.WaterLevelUp)
-                    {
-                        Game1.playSoundCue("blank154");
-                        Game1.WaterLevelUp = true;
-                    }
-                }
+                HandleSpecialChests();
             }
             else
             {
@@ -268,9 +252,7 @@ namespace BlossomTales2
                 }
                 else if (IDNumber == 21)
                 {
-                    Game1.player.GiveItemReflection(EquipableItem.ItemList.KeyPiece1);
                     Game1.player.RemovePlayerControls = true;
-                    Game1.Achievementer.CheckAchievment(2);
                 }
                 else if (IDNumber == 22)
                 {
@@ -293,6 +275,49 @@ namespace BlossomTales2
                         Game1.CurrentLevel.LevelObjects.Add(new Coin_PU(Position, velocity2));
                     }
                 }
+            }
+        }
+
+        private void HandleSpecialChests()
+        {
+            if (IDNumber == 2)
+            {
+                opendoors = true;
+            }
+            else if (IDNumber == 10)
+            {
+                if (ModGlobals.OpenWorldState)
+                    Game1Extensions.MarkObjectiveComplete(Globaler.MainGameObjective.jungles_getBombs);
+                else
+                    Game1.Globals.MainQuestObjective = Globaler.MainGameObjective.jungles_talkToMorkla;
+            }
+            else if (IDNumber == 11)
+            {
+                Game1Extensions.AddLevelPermaObject(Name, Position);
+                if (!Game1.WaterLevelUp)
+                {
+                    Game1.playSoundCue("blank154");
+                    Game1.WaterLevelUp = true;
+                }
+            }
+            else if (IDNumber == 14)
+            {
+                if (Game1.Globals.MainQuestObjective < Globaler.MainGameObjective.lab_findCastleEntrance)
+                {
+                    Game1.Globals.MainQuestObjective = Globaler.MainGameObjective.lab_findCastleEntrance;
+                }
+            }
+            else if (IDNumber == 21)
+            {
+                Game1.player.RemovePlayerControls = true;
+            }
+            else if (IDNumber == 22)
+            {
+                Game1.player.RemovePlayerControls = true;
+            }
+            else if (IDNumber == 23)
+            {
+                Game1.player.RemovePlayerControls = true;
             }
         }
     }
