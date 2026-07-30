@@ -1,10 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net40</TargetFramework>
+        <TargetFramework>net452</TargetFramework>
         <ImplicitUsings>disable</ImplicitUsings>
         <Nullable>disable</Nullable>
         <RootNamespace>BlossomTales2</RootNamespace>
+        <PlatformTarget>x64</PlatformTarget>
     </PropertyGroup>
 
     <ItemGroup>
@@ -14,9 +15,18 @@
       </Reference>
       <Reference Include="FNA">
         <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Blossom Tales 2\FNA.dll</HintPath>
+        <Private>False</Private>
+      </Reference>
+      <Reference Include="Mono.Cecil">
+        <HintPath>..\..\..\..\Program Files (x86)\Steam\steamapps\common\Blossom Tales 2\Mono.Cecil.dll</HintPath>
+        <Private>False</Private>
       </Reference>
       <Reference Include="MonoMod">
-        <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Blossom Tales 2\MonoMod.exe</HintPath>
+        <HintPath>..\..\..\..\Program Files (x86)\Steam\steamapps\common\Blossom Tales 2\MonoMod.exe</HintPath>
+        <Private>False</Private>
+      </Reference>
+      <Reference Include="MonoMod.Utils">
+        <HintPath>..\..\..\..\Program Files (x86)\Steam\steamapps\common\Blossom Tales 2\MonoMod.Utils.dll</HintPath>
         <Private>False</Private>
       </Reference>
     </ItemGroup>
