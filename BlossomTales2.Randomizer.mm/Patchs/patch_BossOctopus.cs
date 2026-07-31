@@ -40,30 +40,23 @@ namespace MonoMod
     {
         public static void PatchBossOctopusUpdate(ILContext context, CustomAttribute attrib)
         {
-            TypeDefinition patchType = MonoModRule.Modder.FindType("BlossomTales2.ModBossOctopus").Resolve();
-            MethodDefinition mod_GiveHeartMethod = patchType.FindMethod("Mod_GiveHeart");
+            TypeDefinition modBossOctopusType = MonoModRule.Modder.FindType("BlossomTales2.ModBossOctopus").Resolve();
+            MethodDefinition mod_GiveHeartMethod = modBossOctopusType.FindMethod("Mod_GiveHeart");
 
             ILCursor cursor = new ILCursor(context);
-
-            //IL_01e0: ldsfld       class BlossomTales2.Player BlossomTales2.Game1::player
-            //IL_01e5: ldc.i4.s     27 // 0x1b
-            //IL_01e7: ldc.i4.1
-            //IL_01e8: callvirt instance void BlossomTales2.Player::GiveItem(valuetype BlossomTales2.EquipableItem / ItemList, bool)
+            //Find
+            //Game1.player.GiveItem(EquipableItem.ItemList.HeartQ_4);
             cursor.GotoNext(MoveType.Before,
                 instr => instr.MatchLdsfld("BlossomTales2.Game1", "player"),
                 instr => instr.MatchLdcI4(27),
                 instr => instr.MatchLdcI4(1),
                 instr => instr.MatchCallvirt("BlossomTales2.Player", "GiveItem")
             );
-
-            //en
-            //IL_001c: ldarg.0      // this
-            //IL_001d: call instance void BlossomTales2.patch_BossOctopus::Mod_GiveHeart()
-            //IL_0022: nop
             cursor.RemoveRange(4);
+            //Replace with
+            //ModBossOctopus.Mod_GiveHeart(this)
             cursor.Emit(OpCodes.Ldarg_0);
             cursor.Emit(OpCodes.Call, mod_GiveHeartMethod);
-            cursor.Emit(OpCodes.Nop);
         }
     }
 }

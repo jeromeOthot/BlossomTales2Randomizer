@@ -16,7 +16,7 @@ namespace BlossomTales2
         public patch_Chest(Vector3 position) : base(position)
         {
         }
-        
+
         [MonoModIgnore]
         [PatchChestUpdate]
         public extern void Update(GameTime gameTime);
@@ -154,42 +154,32 @@ namespace MonoMod
     {
         public static void PatchChestUpdate(ILContext context, CustomAttribute attrib)
         {
-            TypeDefinition patchType = MonoModRule.Modder.FindType("BlossomTales2.ModChest").Resolve();
-            MethodDefinition mod_GiveItemMethod = patchType.FindMethod("Mod_GiveItem");
+            TypeDefinition modChestType = MonoModRule.Modder.FindType("BlossomTales2.ModChest").Resolve();
+            MethodDefinition modGiveItemMethod = modChestType.FindMethod("Mod_GiveItem");
 
             ILCursor cursor = new ILCursor(context);
-            
-            // IL_06b0: ldarg.0      // this
-            // IL_06b1: ldfld        int32 BlossomTales2.LevelObject::Frame
-            // IL_06b6: ldc.i4.6
-            // IL_06b7: ble.s        IL_0706
+            //Find
+            //if (this.Frame > 6 ...)
             cursor.GotoNext(MoveType.Before,
                 instr => instr.MatchLdarg(0),
                 instr => instr.MatchLdfld("BlossomTales2.LevelObject", "Frame"),
                 instr => instr.MatchLdcI4(6),
                 instr => instr.MatchBle(out ILLabel label)
             );
-
             int endIndex = cursor.Index;
-            
-            //IL_03f7: ldarg.0      // this
-            //IL_03f8: ldfld        int32 BlossomTales2.LevelObject::IDNumber
-            //IL_03fd: brtrue.s     IL_0473
+            //Find
+            //if (this.IDNumber == 0)
             cursor.GotoPrev(MoveType.Before,
                 instr => instr.MatchLdarg(0),
                 instr => instr.MatchLdfld("BlossomTales2.LevelObject", "IDNumber"),
                 instr => instr.MatchBrtrue(out ILLabel label)
             );
-
             int startIndex = cursor.Index;
-            
-            //en
-            //IL_001c: ldarg.0      // this
-            //IL_001d: call instance void BlossomTales2.patch_Chest::Mod_GiveItem()
-            //IL_0022: nop
+            //Replace
+            //ModChest.Mod_GiveItem(this)
             cursor.RemoveRange(endIndex - startIndex);
             cursor.Emit(OpCodes.Ldarg_0);
-            cursor.Emit(OpCodes.Call, mod_GiveItemMethod);
+            cursor.Emit(OpCodes.Call, modGiveItemMethod);
         }
     }
 }
