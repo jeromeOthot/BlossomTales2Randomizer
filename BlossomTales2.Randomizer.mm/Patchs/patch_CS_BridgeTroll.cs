@@ -17,6 +17,10 @@ namespace BlossomTales2
         [MonoModIgnore]
         [PatchCSBridgeTrollInit]
         public extern void Init();
+        
+        [MonoModIgnore]
+        [PatchCSBridgeTrollBye]
+        public extern void bye();
 
         public void armPump()
         {
@@ -57,6 +61,14 @@ namespace BlossomTales2
             return !ModGlobals.OpenWorldState &&
                    Game1.Globals.MainQuestObjective < Globaler.MainGameObjective.jungles_headToTown;
         }
+
+        public static void Mod_CompleteTrollObjective()
+        {
+            if (ModGlobals.OpenWorldState)
+                Game1Extensions.MarkObjectiveComplete(Globaler.MainGameObjective.jungles_giveGruffJuice);
+            else
+                Game1.Globals.MainQuestObjective = Globaler.MainGameObjective.jungles_headToTown;
+        }
     }
 }
 
@@ -64,6 +76,11 @@ namespace MonoMod
 {
     [MonoModCustomMethodAttribute(nameof(MonoModRules.PatchCSBridgeTrollInit))]
     class PatchCSBridgeTrollInitAttribute : Attribute
+    {
+    }
+    
+    [MonoModCustomMethodAttribute(nameof(MonoModRules.PatchCSBridgeTrollBye))]
+    class PatchCSBridgeTrollByeAttribute : Attribute
     {
     }
 
@@ -108,6 +125,25 @@ namespace MonoMod
             cursor.RemoveRange(8);
             cursor.Emit(OpCodes.Call, mod_ShouldDisplayTrollMethod);
             cursor.Emit(OpCodes.Brfalse, branchFalseLabel);
+        }
+
+        public static void PatchCSBridgeTrollBye(ILContext context, CustomAttribute attrib)
+        {
+            TypeDefinition modCSBridgeTroll = MonoModRule.Modder.FindType("BlossomTales2.ModCSBridgeTroll").Resolve();
+            MethodDefinition mod_CompleteTrollObjectiveMethod = modCSBridgeTroll.FindMethod("Mod_CompleteTrollObjective");
+
+            ILCursor cursor = new ILCursor(context);
+            //Find
+            //Game1.Globals.MainQuestObjective = Globaler.MainGameObjective.jungles_pirateDefeated;
+            cursor.GotoNext(MoveType.Before,
+                instr => instr.MatchLdsfld("BlossomTales2.Game1", "Globals"),
+                instr => instr.MatchLdcI4(11),
+                instr => instr.MatchStfld("BlossomTales2.Globaler", "MainQuestObjective")
+            );
+            cursor.RemoveRange(3);
+            //Replace with
+            //ModBossPirateCaptain.Mod_SetPiratesDefeated();
+            cursor.Emit(OpCodes.Call, mod_CompleteTrollObjectiveMethod);
         }
     }
 }
