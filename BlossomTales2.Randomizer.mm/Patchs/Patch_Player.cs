@@ -1,5 +1,7 @@
-﻿using BlossomTales2.Randomizer.mm;
+﻿using System;
+using BlossomTales2.Randomizer.mm;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace BlossomTales2
 {
@@ -9,8 +11,16 @@ namespace BlossomTales2
         private int idleFrame = 0;
         private int idleRow = 0;
         private int idleWait = 0;
+        
+        private float resFlowerX = 0.0f;
+        private float resFlowerY = 0.0f;
+        private float resFlowerAlpha = 0.0f;
+        private float resFlowerScale = 0.0f;
+        private float resFlowerRotation = 0.0f;
 
         public extern void orig_GiveItem(EquipableItem.ItemList item, bool playAnimation = true);
+
+        public extern void orig_GiveIngredient(EquipableItem.IngredientList ingred, int amount = 1, bool playAnimation = false);
 
         public void GiveItem(EquipableItem.ItemList item, bool playAnimation = true)
         {
@@ -171,53 +181,100 @@ namespace BlossomTales2
                     break;
                   }
                   break;
+                case  EquipableItem.ItemList.ResurrectionFlower:
+                  //TODO: Code qui crash au niveau du tween a corrigé
+                  /*
+                  Game1.player.RemovePlayerControls = true;
+                  Game1.player.CanResurrectState = 1;
+                  int num1 = (int) ((double) Game1.player.Position.X - (double) Game1.Camera.Center.X);
+                  int num2 = (int) ((double) Game1.player.Position.Z - (double) Game1.Camera.Center.Y);
+                  this.resFlowerX = (float) (Game1.ScreenWidth / 2 + num1);
+                  this.resFlowerY = (float) (Game1.ScreenHeight / 2 + num2 - 30);
+                  this.resFlowerAlpha = 0.0f;
+                  this.resFlowerScale = 0.0f;
+                  this.resFlowerRotation = 0.0f;
+                  this.tweener.Tween((object) this, (object) new
+                  {
+                    resFlowerAlpha = 1
+                  }, 0.5f).Ease(new Func<float, float>(Ease.SineInOut));
+                  this.tweener.Tween((object) this, (object) new
+                  {
+                    resFlowerScale = 4
+                  }, 0.5f).Ease(new Func<float, float>(Ease.SineInOut));
+                  this.tweener.Tween((object) this, (object) new
+                  {
+                    resFlowerRotation = 6.2831855f
+                  }, 0.5f).Ease(new Func<float, float>(Ease.SineInOut));
+                  this.tweener.Tween((object) this, (object) new
+                  {
+                    resFlowerY = ((int) this.resFlowerY - 50)
+                  }, 0.5f).Ease(new Func<float, float>(Ease.SineInOut)).OnComplete((Action) (() =>
+                  {
+                    Game1.player.RemovePlayerControls = false;
+                    int num3 = 164;
+                    if (Game1.player.MaxHealth > 20)
+                      num3 += 44;
+                    this.tweener.Tween((object) this, (object) new
+                    {
+                      resFlowerX = 80 /*0x50*,
+                      resFlowerY = num3
+                    }, 2f, 0.5f).Ease(new Func<float, float>(Ease.SineInOut)).OnComplete((Action) (() => Game1.player.CanResurrectState = 2));
+                  }));
+                  */
+                  break;
                 case EquipableItem.ItemList.Shovel:
                     Game1.player.Inventory.Add(EquipableItem.ItemList.Shovel);
                     break;
                 case EquipableItem.ItemList.Ingred_Gem:
+                  Count_Gems++;
+                  Game1.Gui.AddGuiTicker(EquipableItem.IngredientList.Gem, Game1.player.Count_Gems);
+                  this.GiveIngredient(EquipableItem.IngredientList.Gem);
+                  break;
+                case EquipableItem.ItemList.Five_Gems:
+                  Count_Gems +=5;
+                  Game1.Gui.AddGuiTicker(EquipableItem.IngredientList.Gem, 5);
+                  this.GiveIngredient(EquipableItem.IngredientList.Gem, 5);
+                  break;
                 case EquipableItem.ItemList.Letter:
                 case EquipableItem.ItemList.Honeycomb:
+                  Count_Honeycombs++;
+                  Game1.Gui.AddGuiTicker(EquipableItem.IngredientList.HoneycombOLD, Game1.player.Count_Honeycombs);
+                  this.GiveIngredient(EquipableItem.IngredientList.HoneycombOLD);
+                  break;
                 case EquipableItem.ItemList.CanyonBone:
+                  Count_CanyonBones++;
+                  Game1.Gui.AddGuiTicker(EquipableItem.IngredientList.Bones, Game1.player.Count_CanyonBones);
+                  this.GiveIngredient(EquipableItem.IngredientList.Bones);
+                  break;
                 case EquipableItem.ItemList.Package:
+                  Game1.Gui.AddGuiTicker(EquipableItem.IngredientList.NewSong, Game1.player.Count_CanyonBones);
+                  this.GiveIngredient(EquipableItem.IngredientList.Bones);
+                  break;
                 case EquipableItem.ItemList.TreeSeed:
+                  if (!this.Inventory_NE.Contains(item))
+                    this.Inventory_NE.Add(item);
+                  if (item == EquipableItem.ItemList.TreeSeed)
+                    ++this.Count_TreeSeeds;
+                  break;
                 case EquipableItem.ItemList.GreenGem:
                 case EquipableItem.ItemList.BlueGem:
                 case EquipableItem.ItemList.Flippers:
                 case EquipableItem.ItemList.CombatScroll:
+                  ++this.Count_CombatScrolls;
+                  break;
                 case EquipableItem.ItemList.MinotaurCoin:
                   if (!this.Inventory_NE.Contains(item))
                     this.Inventory_NE.Add(item);
-                  if (item == EquipableItem.ItemList.CanyonBone)
-                    ++this.Count_CanyonBones;
-                  if (item == EquipableItem.ItemList.Honeycomb)
-                    {
-                        Count_Honeycombs++;
-                        Game1.Gui.AddGuiTicker(EquipableItem.IngredientList.HoneycombOLD, Game1.player.Count_Honeycombs);
-                    }
-                  if (item == EquipableItem.ItemList.CombatScroll)
-                    ++this.Count_CombatScrolls;
                   if (item == EquipableItem.ItemList.MinotaurCoin)
                     ++this.Count_MinotaurCoins;
-                  if (item == EquipableItem.ItemList.TreeSeed)
-                    ++this.Count_TreeSeeds;
-                    if (item == EquipableItem.ItemList.Flippers)
-                        HasFlippers = true;
-                    if (item == EquipableItem.ItemList.BlueGem)
-                        Game1.Globals.foundBlueGem = true;
-                    if (item == EquipableItem.ItemList.GreenGem)
-                        Game1.Globals.foundGreenGem = true;
-                    if (item == EquipableItem.ItemList.Ingred_Gem)
-                  {
-                    ++this.Count_Gems;
-                    playAnimation = false;
-                    break;
-                  }
+
                   break;
+                /*
                 case EquipableItem.ItemList.Five_Gems:
                   if (!this.Inventory_NE.Contains(EquipableItem.ItemList.Ingred_Gem))
                     this.Inventory_NE.Add(EquipableItem.ItemList.Ingred_Gem);
                   this.Count_Gems += 5;
-                  break;
+                  break; */
                 case EquipableItem.ItemList.KeyPiece1:
                   Game1.player.KeyPiece1 = true;
                   break;
@@ -274,6 +331,131 @@ namespace BlossomTales2
 
             if(itemIndex == 26 || itemIndex == 27 || itemIndex == 40 || itemIndex == 41 || itemIndex == 42 || itemIndex == 100)
                 giveNewItemDescription = itemIndex;
+        }
+        
+        public void GiveIngredient(EquipableItem.IngredientList ingred, int amount = 1, bool playAnimation = false)
+        {
+          this.idleCount = 0;
+          this.idleFrame = 0;
+          this.idleTimer = 0;
+          this.idleCount = 0;
+          this.idleRow = 0;
+          this.idleWait = 0;
+          switch (ingred)
+          {
+            case EquipableItem.IngredientList.MinotaurCoin:
+              ++this.Count_MinotaurCoins;
+              if (!this.Inventory_NE.Contains(EquipableItem.ItemList.MinotaurCoin))
+                this.Inventory_NE.Add(EquipableItem.ItemList.MinotaurCoin);
+              Game1.Gui.AddGuiTicker(EquipableItem.IngredientList.MinotaurCoin, this.Count_MinotaurCoins);
+              break;
+            /* not used
+            case EquipableItem.IngredientList.GoldCoin:
+              this.ChangeGoldAmount(1);
+              playAnimation = false;
+              break; */
+            case EquipableItem.IngredientList.Necklace:
+              this.GiveItem(EquipableItem.ItemList.HeartNecklace);
+              break;
+            default:
+              if (!this.Ingredients.Contains(ingred))
+                this.Ingredients.Add(ingred);
+              this.Items_Count[(int) ingred] += amount;
+              Game1.Gui.AddGuiTicker(ingred, this.Items_Count[(int) ingred]);
+              break;
+          }
+          switch (ingred)
+          {
+            case EquipableItem.IngredientList.Fish1:
+              if (Game1.Globals.Fish1_State == 0)
+              {
+                Game1.Globals.Fish1_State = 1;
+                Game1.Gui.AddGuiTicker(EquipableItem.IngredientList.NewFish, 1);
+                break;
+              }
+              break;
+            case EquipableItem.IngredientList.Fish2:
+              if (Game1.Globals.Fish2_State == 0)
+              {
+                Game1.Globals.Fish2_State = 1;
+                Game1.Gui.AddGuiTicker(EquipableItem.IngredientList.NewFish, 1);
+                break;
+              }
+              break;
+            case EquipableItem.IngredientList.Fish3:
+              if (Game1.Globals.Fish3_State == 0)
+              {
+                Game1.Globals.Fish3_State = 1;
+                Game1.Gui.AddGuiTicker(EquipableItem.IngredientList.NewFish, 1);
+                break;
+              }
+              break;
+            case EquipableItem.IngredientList.Fish4:
+              if (Game1.Globals.Fish4_State == 0)
+              {
+                Game1.Globals.Fish4_State = 1;
+                Game1.Gui.AddGuiTicker(EquipableItem.IngredientList.NewFish, 1);
+                break;
+              }
+              break;
+            case EquipableItem.IngredientList.Fish5:
+              if (Game1.Globals.Fish5_State == 0)
+              {
+                Game1.Globals.Fish5_State = 1;
+                Game1.Gui.AddGuiTicker(EquipableItem.IngredientList.NewFish, 1);
+                break;
+              }
+              break;
+            case EquipableItem.IngredientList.Fish6:
+              if (Game1.Globals.Fish6_State == 0)
+              {
+                Game1.Globals.Fish6_State = 1;
+                Game1.Gui.AddGuiTicker(EquipableItem.IngredientList.NewFish, 1);
+                break;
+              }
+              break;
+            case EquipableItem.IngredientList.Fish7:
+              if (Game1.Globals.Fish7_State == 0)
+              {
+                Game1.Globals.Fish7_State = 1;
+                Game1.Gui.AddGuiTicker(EquipableItem.IngredientList.NewFish, 1);
+                break;
+              }
+              break;
+            case EquipableItem.IngredientList.Fish8:
+              if (Game1.Globals.Fish8_State == 0)
+              {
+                Game1.Globals.Fish8_State = 1;
+                Game1.Gui.AddGuiTicker(EquipableItem.IngredientList.NewFish, 1);
+                break;
+              }
+              break;
+            case EquipableItem.IngredientList.Fish9:
+              if (Game1.Globals.Fish9_State == 0)
+              {
+                Game1.Globals.Fish9_State = 1;
+                Game1.Gui.AddGuiTicker(EquipableItem.IngredientList.NewFish, 1);
+                break;
+              }
+              break;
+            case EquipableItem.IngredientList.Fish10:
+              if (Game1.Globals.Fish10_State == 0)
+              {
+                Game1.Globals.Fish10_State = 1;
+                Game1.Gui.AddGuiTicker(EquipableItem.IngredientList.NewFish, 1);
+                break;
+              }
+              break;
+          }
+          if (!playAnimation)
+            return;
+          this.giveNewItemDescription = -1;
+          Game1.playSoundCue("blank098");
+          this.ClearPlayer();
+          this.Se = SpriteEffects.None;
+          this.CurrentAnimation = Player.Animations.GetItem;
+          Game1.Particles.Add((Particle) new P_GetItem(this.Position + new Vector3(0.0f, 100f, 0.0f), (int) ingred, 1));
+          Game1.Particles.Add((Particle) new GetItemLight(this.Position));
         }
     }
 }
