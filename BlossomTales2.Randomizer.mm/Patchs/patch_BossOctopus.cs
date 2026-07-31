@@ -52,9 +52,9 @@ namespace MonoMod
                 instr => instr.MatchLdcI4(1),
                 instr => instr.MatchCallvirt("BlossomTales2.Player", "GiveItem")
             );
-            cursor.RemoveRange(4);
             //Replace with
             //ModBossOctopus.Mod_GiveHeart(this)
+            cursor.RemoveRange(4);
             cursor.Emit(OpCodes.Ldarg_0);
             cursor.Emit(OpCodes.Call, mod_GiveHeartMethod);
         }

@@ -76,9 +76,9 @@ namespace MonoMod
                 instr => instr.MatchLdcI4(17),
                 instr => instr.MatchBge(out ILLabel label)
             );
-            cursor.RemoveRange(7);
             //Replace with
             //ModBossPirateCaptain.Mod_CompleteMorklaObjective()
+            cursor.RemoveRange(7);
             cursor.Emit(OpCodes.Call, mod_CompleteMorklaObjectiveMethod);
         }
 

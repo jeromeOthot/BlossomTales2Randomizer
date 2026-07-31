@@ -1,49 +1,22 @@
-﻿using BlossomTales2.Extensions;
-using Microsoft.Xna.Framework;
+﻿using System;
+using BlossomTales2.Extensions;
+using Mono.Cecil;
+using Mono.Cecil.Cil;
+using MonoMod;
+using MonoMod.Cil;
+using MonoMod.InlineRT;
+using MonoMod.Utils;
 
 namespace BlossomTales2
 {
     public class patch_CS_BridgeTroll : CS_BridgeTroll
     {
-        private Puppet bridgeTroll = new Puppet("Fake Troll", Vector3.Zero);
-
-        public extern void orig_Init();
         public extern void orig_armPump();
         public extern void orig_goPlayer();
 
-        public override void Init()
-        {
-            bridgeTroll = new Puppet("bridgeTroll", new Vector3(1100f, 0f, 968f));
-            bridgeTroll.Zdepth = -163.41f;
-
-            if (Mod_ShouldDisplayTroll())
-            {
-                putTrollOnBridge();
-            }
-            else
-            {
-                if (!ModGlobals.OpenWorldState && Game1.Globals.MainQuestObjective < Globaler.MainGameObjective.jungles_headToTown)
-                {
-                    return;
-                }
-
-                foreach (LevelObject levelObject in Game1.CurrentLevel.LevelObjects)
-                {
-                    if (levelObject is CollisionRect && levelObject.IDNumber == 9)
-                    {
-                        levelObject.Alive = false;
-                    }
-                    else if (levelObject is Sign)
-                    {
-                        levelObject.Alive = false;
-                    }
-                    else if (levelObject is SpawnDialogRect && levelObject.IDNumber < 5)
-                    {
-                        levelObject.Alive = false;
-                    }
-                }
-            }
-        }
+        [MonoModIgnore]
+        [PatchCSBridgeTrollInit]
+        public extern void Init();
 
         public void armPump()
         {
@@ -64,18 +37,77 @@ namespace BlossomTales2
                     Game1.Globals.MainQuestObjective = mainGameObjective;
             });
         }
+    }
 
-        private bool Mod_ShouldDisplayTroll()
+    public class ModCSBridgeTroll
+    {
+        public static bool Mod_ShouldDisplayTroll()
         {
             if(ModGlobals.OpenWorldState)
             {
                 return (ModGlobals.SkipCutscenes || Game1Extensions.IsObjectiveCompleted(Globaler.MainGameObjective.jungles_talkToGruff))
-                && !Game1Extensions.IsObjectiveCompleted(Globaler.MainGameObjective.jungles_giveGruffJuice);
+                       && !Game1Extensions.IsObjectiveCompleted(Globaler.MainGameObjective.jungles_giveGruffJuice);
             }
-            else
-            {
-                return Game1.Globals.MainQuestObjective == Globaler.MainGameObjective.jungles_talkToWitch || Game1.Globals.MainQuestObjective == Globaler.MainGameObjective.jungles_giveGruffJuice;
-            }
+
+            return Game1.Globals.MainQuestObjective == Globaler.MainGameObjective.jungles_talkToWitch || Game1.Globals.MainQuestObjective == Globaler.MainGameObjective.jungles_giveGruffJuice;
+        }
+
+        public static bool Mod_ShouldTriggerTrollCutscene()
+        {
+            return !ModGlobals.OpenWorldState &&
+                   Game1.Globals.MainQuestObjective < Globaler.MainGameObjective.jungles_headToTown;
+        }
+    }
+}
+
+namespace MonoMod
+{
+    [MonoModCustomMethodAttribute(nameof(MonoModRules.PatchCSBridgeTrollInit))]
+    class PatchCSBridgeTrollInitAttribute : Attribute
+    {
+    }
+
+    static partial class MonoModRules
+    {
+        public static void PatchCSBridgeTrollInit(ILContext context, CustomAttribute attrib)
+        {
+            TypeDefinition modCSBridgeTroll = MonoModRule.Modder.FindType("BlossomTales2.ModCSBridgeTroll").Resolve();
+            MethodDefinition mod_ShouldDisplayTrollMethod = modCSBridgeTroll.FindMethod("Mod_ShouldDisplayTroll");
+            MethodDefinition mod_ShouldTriggerTrollCutscene = modCSBridgeTroll.FindMethod("Mod_ShouldTriggerTrollCutscene");
+
+            ILCursor cursor = new ILCursor(context);
+            //Find
+            //if (Game1.Globals.MainQuestObjective < Globaler.MainGameObjective.jungles_headToTown)
+            ILLabel returnLabel = null;
+            cursor.GotoNext(MoveType.Before,
+                instr => instr.MatchLdsfld("BlossomTales2.Game1", "Globals"),
+                instr => instr.MatchLdfld("BlossomTales2.Globaler", "MainQuestObjective"),
+                instr => instr.MatchLdcI4(11),
+                instr => instr.MatchBlt(out returnLabel)
+            );
+            //Replace with
+            //if(ModCSBridgeTroll.Mod_ShouldTriggerTrollCutscene())
+            cursor.RemoveRange(4);
+            ILLabel branchFalseLabel = cursor.MarkLabel();
+            cursor.Emit(OpCodes.Call, mod_ShouldTriggerTrollCutscene);
+            cursor.Emit(OpCodes.Brtrue, returnLabel);
+            //Find
+            //if (Game1.Globals.MainQuestObjective == Globaler.MainGameObjective.jungles_talkToWitch ...)
+            cursor.GotoPrev(MoveType.Before,
+                instr => instr.MatchLdsfld("BlossomTales2.Game1", "Globals"),
+                instr => instr.MatchLdfld("BlossomTales2.Globaler", "MainQuestObjective"),
+                instr => instr.MatchLdcI4(9),
+                instr => instr.MatchBeq(out ILLabel label),
+                instr => instr.MatchLdsfld("BlossomTales2.Game1", "Globals"),
+                instr => instr.MatchLdfld("BlossomTales2.Globaler", "MainQuestObjective"),
+                instr => instr.MatchLdcI4(10),
+                instr => instr.MatchBneUn(out ILLabel label)
+            );
+            //Replace with
+            //if(ModCSBridgeTroll.Mod_ShouldDisplayTroll())
+            cursor.RemoveRange(8);
+            cursor.Emit(OpCodes.Call, mod_ShouldDisplayTrollMethod);
+            cursor.Emit(OpCodes.Brfalse, branchFalseLabel);
         }
     }
 }
