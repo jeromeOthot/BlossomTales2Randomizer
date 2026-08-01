@@ -42,16 +42,17 @@ namespace BlossomTales2.Randomizer.mm
             _locations = new Dictionary<LocationId, EquipableItem.ItemList>
             {
                 { new LocationId("anchor-house4.tmx", "Chest_Small", new Vector3(348f, 0f, 436f)), EquipableItem.ItemList.GoldCoin }, //accès jungle
+                { new LocationId("blossom-blacksmith.tmx", "npc21", new Vector3(480f, 0f, 312f)), EquipableItem.ItemList.Bow }, //Flag: MorklaComplete
                 { new LocationId("blossom-house1.tmx", "Chest_Small", new Vector3(672f, 0f, 308f)), EquipableItem.ItemList.GoldCoin }, 
                 { new LocationId("blossom-house2.tmx", "Chest_Small", new Vector3(708f, 0f, 356f)), EquipableItem.ItemList.GoldCoin }, 
                 { new LocationId("blossom-house3.tmx", "Chest_Small", new Vector3(368f, 0f, 148f)), EquipableItem.ItemList.GoldCoin }, 
                 { new LocationId("blossom-house4.tmx", "Chest_Small", new Vector3(696f, 0f, 416f)), EquipableItem.ItemList.GoldCoin }, 
                 { new LocationId("blossom-house4.tmx", "Chest_Small", new Vector3(780f, 0f, 156f)), EquipableItem.ItemList.GoldCoin }, 
-                { new LocationId("blossom-house4.tmx", "Chest_Small", new Vector3(408f, 0f, 340f)), EquipableItem.ItemList.GoldCoin }, //Besoin lampe
+                { new LocationId("blossom-house4.tmx", "Chest_Small", new Vector3(408f, 0f, 340f)), EquipableItem.ItemList.GoldCoin }, //lampe
                 { new LocationId("blossom-house5.tmx", "Chest_Small", new Vector3(480f, 0f, 172f)), EquipableItem.ItemList.GoldCoin }, //accès est && lampe
                 { new LocationId("blossom-house5.tmx", "Chest_Small", new Vector3(660f, 0f, 348f)), EquipableItem.ItemList.GoldCoin }, //accès est && lampe
-                { new LocationId("blossom-lilyHouse.tmx", "npc7_1", new Vector3(480f, 0f, 328f)), EquipableItem.ItemList.Shield }, // WoodShield
-                { new LocationId("blossom-lilyHouse.tmx", "npc7_2", new Vector3(480f, 0f, 328f)), EquipableItem.ItemList.Sword }, // WoodSword
+                { new LocationId("blossom-lilyHouse.tmx", "npc7_1", new Vector3(480f, 0f, 328f)), EquipableItem.ItemList.Shield },
+                { new LocationId("blossom-lilyHouse.tmx", "npc7_2", new Vector3(480f, 0f, 328f)), EquipableItem.ItemList.Sword },
                 //Blossom tavern  Chest
                 { new LocationId("blossom-tavern-basement.tmx", "Chest_Small", new Vector3(256f, 0f, 272f)), EquipableItem.ItemList.GoldCoin }, //bombes
                 { new LocationId("blossom-tavern-basement.tmx", "Chest_Small", new Vector3(256f, 0f, 464f)), EquipableItem.ItemList.GoldCoin },  //bombes
