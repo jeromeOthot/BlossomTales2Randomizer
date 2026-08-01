@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Diagnostics.Eventing.Reader;
 using BlossomTales2.Extensions;
 using BlossomTales2.Randomizer.mm;
 using Microsoft.Xna.Framework;
@@ -11,10 +10,13 @@ namespace BlossomTales2
     {
         private Puppet cage;
         private Puppet bard;
+        private bool showSheet;
+        private bool shownotes;
 
         public extern void orig_Init();
         public extern void orig_giveGuitar();
         public extern void orig_giveAccordion();
+        public extern void orig_startTheSong();
         public extern void orig_goPlayer();
 
         public override void Init()
@@ -55,6 +57,29 @@ namespace BlossomTales2
             Mod_GiveItem();
         }
 
+        public void startTheSong()
+        {
+            Mod_GiveSong();
+
+            showSheet = false;
+            Game1.player.StopUpdating = false;
+            Game1.player.RemovePlayerControls = true;
+            Game1.player.MusicSuccessful = 1;
+            Game1.player.SongTimer = 10000;
+            Game1.player.SongStartWait = 500;
+            tweener.Timer(0.5f).OnComplete(delegate
+            {
+                bard.play("playHarpForever");
+                shownotes = true;
+            });
+            tweener.Timer(9f).OnComplete(delegate
+            {
+                bard.play("holdHarp");
+                shownotes = false;
+            });
+            tweener.Timer(10f).OnComplete(focusMusicDoor2);
+        }
+
         public void goPlayer()
         {
             Globaler.MainGameObjective mainGameObjective = Game1.Globals.MainQuestObjective;
@@ -80,6 +105,15 @@ namespace BlossomTales2
             GameLogger.LogInfo(Game1.CurrentLevel.Name + " " + bard.name + " " + bard.getPosition());
             EquipableItem.ItemList item = RandomizerSingleton.Instance.GetItemAtLocation(new LocationId(Game1.CurrentLevel.Name, bard.name, bard.getPosition()));
             Game1.player.GiveItemReflection(item);
+        }
+
+        private void Mod_GiveSong()
+        {
+            if (!Game1.Globals.Learned_Songs.Contains(Globaler.Songs.OpenSesame))
+            {
+                Game1.Gui.AddGuiTicker(EquipableItem.IngredientList.NewSong, 1);
+                Game1.Globals.Learned_Songs.Add(Globaler.Songs.OpenSesame);
+            }
         }
     }
 }
