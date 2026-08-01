@@ -134,11 +134,13 @@ namespace BlossomTales2
                   Game1.player.Inventory.Add(EquipableItem.ItemList.FishingRod);
                   break;
                 case EquipableItem.ItemList.Accordian:
-                  Game1.player.Inventory.Add(EquipableItem.ItemList.Accordian);
-                  break;
+                    ChoseGuitar = false;
+                    Game1.player.Inventory.Add(EquipableItem.ItemList.Accordian);
+                    break;
                 case EquipableItem.ItemList.Guitar:
-                  Game1.player.Inventory.Add(EquipableItem.ItemList.Guitar);
-                  break;
+                    ChoseGuitar = true;
+                    Game1.player.Inventory.Add(EquipableItem.ItemList.Guitar);
+                    break;
                 case EquipableItem.ItemList.RexTeleporter:
                   Game1.player.Inventory.Add(EquipableItem.ItemList.RexTeleporter);
                   break;
