@@ -38,6 +38,7 @@ namespace BlossomTales2.Randomizer.mm
             //accès morkla: accès jungle && canne pêche && (bombes || flippers) 
             //accès jungle ile: accès est && flippers
             //accès jungle NE: accès jungle && flippers
+            //accès canyon: accès ouest && bow
 
             _locations = new Dictionary<LocationId, EquipableItem.ItemList>
             {
@@ -175,6 +176,7 @@ namespace BlossomTales2.Randomizer.mm
                 //{ new LocationId("overworld-16x17.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), EquipableItem.ItemList.GoldCoin }, //unknown
                 //{ new LocationId("overworld-16x18.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), EquipableItem.ItemList.GoldCoin }, //unknown
                 //{ new LocationId("overworld-16x21-cave.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), EquipableItem.ItemList.HeartQ_1 }, //unknown
+                { new LocationId("overworld-16x22.tmx", "beggar", new Vector3(980f, 0f, 1616f)), EquipableItem.ItemList.HeartQ_1 }, //accès canyon
                 //{ new LocationId("overworld-17x16.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), EquipableItem.ItemList.GoldCoin }, //unknown
                 //{ new LocationId("overworld-17x16-cave.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), EquipableItem.ItemList.GoldCoin }, //unknown
                 //{ new LocationId("overworld-17x16-cave.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), EquipableItem.ItemList.GoldCoin }, //unknown

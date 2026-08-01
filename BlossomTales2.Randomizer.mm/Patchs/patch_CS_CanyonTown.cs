@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using BlossomTales2.Randomizer.mm;
+using Microsoft.Xna.Framework;
 
 namespace BlossomTales2
 {
@@ -7,6 +8,7 @@ namespace BlossomTales2
         private Puppet beggar;
 
         public extern void orig_Init();
+        public extern void orig_giveHeart();
 
         public override void Init()
         {
@@ -28,6 +30,24 @@ namespace BlossomTales2
             {
                 orig_Init();
             }
+        }
+
+        public void giveHeart()
+        {
+            Mod_GiveItem();
+            tweener.Timer(3f).OnBegin(delegate
+            {
+                Game1.Dialoger.AddLine("Beggar Fairy: Farewell.", flyAway);
+            });
+        }
+
+        private void Mod_GiveItem()
+        {
+            GameLogger.LogInfo(Game1.CurrentLevel.Name + " " + beggar.name + " " + beggar.getPosition());
+            Vector3 positionOffset = beggar.getPosition();
+            positionOffset.Y = 0f;
+            EquipableItem.ItemList item = RandomizerSingleton.Instance.GetItemAtLocation(new LocationId(Game1.CurrentLevel.Name, beggar.name, positionOffset));
+            Game1.player.GiveItemReflection(item);
         }
     }
 }
