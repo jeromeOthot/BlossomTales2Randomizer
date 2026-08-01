@@ -32,21 +32,17 @@ namespace BlossomTales2
             }
             else if (Mod_IsMorklaCompleted())
             {
-                orig_Init();
-                //placeMorklaOutOfWater();
-                //tweener.Tween(head, new
-                //{
-                //    myY = 20
-                //}, 0f);
-                //Game1.player.RemovePlayerControls = true;
-                //focusCam = true;
-                //Game1.FadeNewDoorNumber = 4;
-                //Game1.FadeNewLevelName = "jungles-24x20.tmx";
-                //Game1.FadeNewDoorType = 0;
-                //Game1.FadeNewDoorNumber_B = 4;
-                //Game1.FadeNewLevelName_B = "jungles-24x20.tmx";
-                //Game1.FadeNewDoorType_B = 0;
-                //finalSneeze();
+                placeMorklaOutOfWater();
+                head.myY = 20;
+                Game1.player.RemovePlayerControls = true;
+                focusCam = true;
+                Game1.FadeNewDoorNumber = 4;
+                Game1.FadeNewLevelName = "jungles-24x20.tmx";
+                Game1.FadeNewDoorType = 0;
+                Game1.FadeNewDoorNumber_B = 4;
+                Game1.FadeNewLevelName_B = "jungles-24x20.tmx";
+                Game1.FadeNewDoorType_B = 0;
+                finalSneeze();
             }
             else
             {
@@ -60,7 +56,10 @@ namespace BlossomTales2
             orig_morklaDone();
 
             if (ModGlobals.OpenWorldState)
+            {
+                Game1Extensions.MarkObjectiveComplete(Globaler.MainGameObjective.jungles_morklaComplete);
                 Game1.Globals.MainQuestObjective = mainGameObjective;
+            }
         }
 
         public void fishCaught()
@@ -167,9 +166,9 @@ namespace BlossomTales2
 
         private bool Mod_IsMorklaCompleted()
         {
-            //if (ModGlobals.OpenWorldState)
-            //    return Game1Extensions.IsObjectiveCompleted(Globaler.MainGameObjective.jungles_morklaComplete);
-            //else
+            if (ModGlobals.OpenWorldState)
+                return Game1Extensions.IsObjectiveCompleted(Globaler.MainGameObjective.jungles_morklaGetEyes) && !Game1Extensions.IsObjectiveCompleted(Globaler.MainGameObjective.jungles_morklaComplete);
+            else
                 return Game1.Globals.MainQuestObjective == Globaler.MainGameObjective.jungles_morklaComplete;
         }
 
