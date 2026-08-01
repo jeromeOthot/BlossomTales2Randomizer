@@ -11,13 +11,17 @@ namespace BlossomTales2
 
         public static void NPC_RunLine(int number, int dialogPointer, Vector2 position)
         {
-            if(dialogPointer == 81)
+            switch (dialogPointer)
             {
-                MorklaDialog();
-            }
-            else
-            {
-                orig_NPC_RunLine(number, dialogPointer, position);
+                case 81:
+                    MorklaDialog();
+                    break;
+                case 102:
+                    BlacksmithDialog();
+                    break;
+                default:
+                    orig_NPC_RunLine(number, dialogPointer, position);
+                    break;
             }
         }
 
@@ -44,6 +48,67 @@ namespace BlossomTales2
             }
         }
 
+        private static void BlacksmithDialog()
+        {            
+            if (Game1.Globals.MainQuestObjective == Globaler.MainGameObjective.lab_talkToBlacksmith)
+            {
+                Game1.Dialoger.AddLine("Blacksmith: Ah, you're still alive and well! Thanks to my superior quality weapons, no doubt.");
+                Game1.Dialoger.AddLine("Blacksmith: Oooh, what's this? These look to be key pieces! Yes, very old, very powerful.");
+                Game1.Dialoger.AddLine("Blacksmith: I can't help you, lass. You see, that which magic separated must be reforged in like manner.");
+                Game1.Dialoger.AddLine("Blacksmith: Since these relics are part of our past, I'd ask your Grandma. She's our town's very own historian!");
+                Game1.Globals.MainQuestObjective = Globaler.MainGameObjective.lab_talkToGrandma;
+            }
+            else if (Mod_HasNotCompletedMorkla())
+            {
+                if (Game1.Globals.Blacksmith_State == 0)
+                {
+                    Game1.Globals.Blacksmith_State = 1;
+                    Game1.Dialoger.AddLine("Blacksmith: <B>Lily! I've been trying to think of some way I could help you on your quest to rescue your brother.");
+                    Game1.Dialoger.AddLine("Blacksmith: There is a very ancient weapon called a <R>Bow. It shoots pointy things called arrows.");
+                    Game1.Dialoger.AddLine("Blacksmith: I could build one if I had the materials. For some reason I'm not getting shipments from <J>Anchortown.");
+                    Game1.Dialoger.AddLine("Blacksmith: If you're over that way maybe you could check things out.");
+                }
+                else if (Game1.Globals.Blacksmith_State == 1)
+                {
+                    Game1.Globals.Blacksmith_State = 2;
+                    Game1.Dialoger.AddLine("Blacksmith: The <R>Bow I'm going to build you is going to be great!");
+                    Game1.Dialoger.AddLine("Blacksmith: Have you figured out why I stopped getting shipments from <J>Anchortown?");
+                }
+                else if (Game1.Globals.Blacksmith_State == 2)
+                {
+                    Game1.Dialoger.AddLine("Blacksmith: Have you figured out why I stopped getting shipments from <J>Anchortown?");
+                }
+            }
+            else if (Game1.Globals.Blacksmith_State == 0)
+            {
+                Game1.Globals.Blacksmith_State = 1;
+                Game1.Dialoger.AddLine("Blacksmith: <B>Lily! I've been trying to think of some way I could help you on your quest to rescue your brother.");
+                Game1.Dialoger.AddLine("Blacksmith: There is a very ancient weapon called a <R>Bow. It shoots pointy things called arrows.");
+                Game1.Dialoger.AddLine("Blacksmith: I could make you one, but the materials are expensive. It would cost you <Y>200 <Y>gold <Y>coins.");
+                Game1.Dialoger.AddLine("Blacksmith: Should I get started?", "buyBow", new string[2] { "Pay 200 gold", "Not right now" });
+            }
+            else if (Game1.Globals.Blacksmith_State == 1 || Game1.Globals.Blacksmith_State == 2)
+            {
+                Game1.Dialoger.AddLine("Blacksmith: Now that I'm getting shipments from <J>Anchortown again, I can make you a <R>Bow!");
+                Game1.Dialoger.AddLine("Blacksmith: It'll cost you, of course. Blacksmith's gotta make a living.", "buyBow", new string[2] { "Pay 200 gold", "Not right now" });
+            }
+            else if (Game1.Globals.Blacksmith_State == 3)
+            {
+                if (Game1.player.Inventory.Contains(EquipableItem.ItemList.Bow))
+                {
+                    Game1.Dialoger.AddLine("Blacksmith: Take it outside if you want to shoot it.");
+                }
+                else
+                {
+                    Game1.Dialoger.AddLine("Blacksmith: I finished your <R>Bow!", "giveBow");
+                }
+            }
+            else if (Game1.Globals.Blacksmith_State == 4)
+            {
+                Game1.Dialoger.AddLine("Blacksmith: You enjoying that <R>Bow?");
+            }
+        }
+
         private static bool Mod_ShouldFishCrabs()
         {
             if (ModGlobals.OpenWorldState)
@@ -62,6 +127,14 @@ namespace BlossomTales2
             {
                 return Game1.Globals.MainQuestObjective == Globaler.MainGameObjective.jungles_crabsCaughtMorkla;
             }
+        }
+
+        private static bool Mod_HasNotCompletedMorkla()
+        {
+            if (ModGlobals.OpenWorldState)
+                return !Game1Extensions.IsObjectiveCompleted(Globaler.MainGameObjective.jungles_morklaComplete);
+            else
+                return Game1.Globals.MainQuestObjective < Globaler.MainGameObjective.jungles_morklaComplete;
         }
     }
 }
