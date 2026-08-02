@@ -5,6 +5,7 @@ namespace BlossomTales2
     internal class patch_CS_CanyonEntrance : CS_CanyonEntrance
     {
         public extern void orig_Init();
+        public extern void orig_talkToOwlAgain();
         public extern void orig_goOwl();
         public extern void orig_openDoor();
         public extern void orig_enterDungeon();
@@ -16,7 +17,7 @@ namespace BlossomTales2
                 placeDoorDown();
             }
 
-            if (Game1.Globals.MainQuestObjective == Globaler.MainGameObjective.canyons_talkToOwlAgain)
+            if (Mod_IsObjectiveTalkToOwlAgain())
             {
                 Game1.player.EnteringDoor = false;
                 Game1.player.RemovePlayerControls = true;
@@ -36,6 +37,18 @@ namespace BlossomTales2
                     levelObject.Alive = false;
                     levelObject.Collidable = false;
                 }
+            }
+        }
+
+        public void talkToOwlAgain()
+        {
+            Globaler.MainGameObjective mainGameObjective = Game1.Globals.MainQuestObjective;
+            orig_talkToOwlAgain();
+
+            if (ModGlobals.OpenWorldState)
+            {
+                Game1Extensions.MarkObjectiveComplete(Globaler.MainGameObjective.canyons_talkToOwlAgain);
+                Game1.Globals.MainQuestObjective = mainGameObjective;
             }
         }
 
@@ -85,6 +98,14 @@ namespace BlossomTales2
                 return !Game1Extensions.IsObjectiveCompleted(Globaler.MainGameObjective.canyons_enterDungeon);
             else
                 return Game1.Globals.MainQuestObjective == Globaler.MainGameObjective.canyons_enterDungeon;
+        }
+
+        public bool Mod_IsObjectiveTalkToOwlAgain()
+        {
+            if (ModGlobals.OpenWorldState)
+                return Game1Extensions.IsObjectiveCompleted(Globaler.MainGameObjective.canyons_fightGolem) && !Game1Extensions.IsObjectiveCompleted(Globaler.MainGameObjective.canyons_talkToOwlAgain);
+            else
+                return Game1.Globals.MainQuestObjective == Globaler.MainGameObjective.canyons_talkToOwlAgain;
         }
     }
 }
