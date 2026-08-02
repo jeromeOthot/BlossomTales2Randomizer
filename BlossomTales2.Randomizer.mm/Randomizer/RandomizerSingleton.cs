@@ -29,26 +29,32 @@ namespace BlossomTales2.Randomizer.mm
 
         private void InitializeLocations()
         {
-            //damage: épée || bombes
-            //levier: épée || grappin || boomerang || bow
+            //damage: épée || bombes || arc
+            //levier: épée || grappin || boomerang || arc
             //water switch: épée
+            //cart switch: épée || grappin || boomerang || arc
             //accès est: épée 2 || flippers
             //accès ouest: bombes || flippers
             //accès jungle: accès est && bouteille || accès jungle ile
-            //accès morkla: accès jungle && canne pêche && (bombes || flippers) 
+            //accès morkla: accès jungle && canne pêche && (bombes || flippers)
             //accès jungle ile: accès est && flippers || accès canyon && grappin
             //accès jungle NE: accès jungle && flippers
-            //accès canyon: accès ouest && bow
+            //accès canyon: accès ouest && arc
+            //ouvrir portes note: instrument && chanson sesame
+            //accès temple: accès canyon && ouvrir portes note
+            //accès temple 2: accès temple && clé
+            //accès temple 3: accès temple 2 && leviers && clé && damage
+            //accès temple 4: accès temple 3 && grappin
 
             _locations = new Dictionary<LocationId, EquipableItem.ItemList>
             {
                 { new LocationId("anchor-house4.tmx", "Chest_Small", new Vector3(348f, 0f, 436f)), EquipableItem.ItemList.GoldCoin }, //accès jungle
                 { new LocationId("blossom-blacksmith.tmx", "npc21", new Vector3(480f, 0f, 312f)), EquipableItem.ItemList.Bow }, //Flag: MorklaComplete
-                { new LocationId("blossom-house1.tmx", "Chest_Small", new Vector3(672f, 0f, 308f)), EquipableItem.ItemList.GoldCoin }, 
-                { new LocationId("blossom-house2.tmx", "Chest_Small", new Vector3(708f, 0f, 356f)), EquipableItem.ItemList.GoldCoin }, 
-                { new LocationId("blossom-house3.tmx", "Chest_Small", new Vector3(368f, 0f, 148f)), EquipableItem.ItemList.GoldCoin }, 
-                { new LocationId("blossom-house4.tmx", "Chest_Small", new Vector3(696f, 0f, 416f)), EquipableItem.ItemList.GoldCoin }, 
-                { new LocationId("blossom-house4.tmx", "Chest_Small", new Vector3(780f, 0f, 156f)), EquipableItem.ItemList.GoldCoin }, 
+                { new LocationId("blossom-house1.tmx", "Chest_Small", new Vector3(672f, 0f, 308f)), EquipableItem.ItemList.GoldCoin },
+                { new LocationId("blossom-house2.tmx", "Chest_Small", new Vector3(708f, 0f, 356f)), EquipableItem.ItemList.GoldCoin },
+                { new LocationId("blossom-house3.tmx", "Chest_Small", new Vector3(368f, 0f, 148f)), EquipableItem.ItemList.GoldCoin },
+                { new LocationId("blossom-house4.tmx", "Chest_Small", new Vector3(696f, 0f, 416f)), EquipableItem.ItemList.GoldCoin },
+                { new LocationId("blossom-house4.tmx", "Chest_Small", new Vector3(780f, 0f, 156f)), EquipableItem.ItemList.GoldCoin },
                 { new LocationId("blossom-house4.tmx", "Chest_Small", new Vector3(408f, 0f, 340f)), EquipableItem.ItemList.GoldCoin }, //lampe
                 { new LocationId("blossom-house5.tmx", "Chest_Small", new Vector3(480f, 0f, 172f)), EquipableItem.ItemList.GoldCoin }, //accès est && lampe
                 { new LocationId("blossom-house5.tmx", "Chest_Small", new Vector3(660f, 0f, 348f)), EquipableItem.ItemList.GoldCoin }, //accès est && lampe
@@ -133,10 +139,10 @@ namespace BlossomTales2.Randomizer.mm
                 //{ new LocationId("mansion-15-secret.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), EquipableItem.ItemList.GoldCoin }, //unknown
                 //{ new LocationId("mansion-15-secret.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), EquipableItem.ItemList.HeartQ_1 }, //unknown
                 //{ new LocationId("mansion-20.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), EquipableItem.ItemList.GoldCoin }, //unknown
-                { new LocationId("morkla-3.tmx", "Chest_Small", new Vector3(704f, 0f, 1732f)), EquipableItem.ItemList.GoldCoin }, //accès Morkla && water switch && (lanterne && damage || flippers) 
+                { new LocationId("morkla-3.tmx", "Chest_Small", new Vector3(704f, 0f, 1732f)), EquipableItem.ItemList.GoldCoin }, //accès Morkla && water switch && (lanterne && damage || flippers)
                 { new LocationId("morkla-4.tmx", "Chest_Small", new Vector3(1216f, 0f, 384f)), EquipableItem.ItemList.GoldCoin }, //accès Morkla && water switch && flippers && leviers
                 { new LocationId("morkla-4.tmx", "Chest_Small", new Vector3(448f, 0f, 768f)), EquipableItem.ItemList.GoldCoin }, //accès Morkla && water switch && flippers && leviers
-                { new LocationId("morkla-8.tmx", "Chest_Small", new Vector3(736f, 0f, 556f)), EquipableItem.ItemList.Gold_Key }, //accès Morkla && lanterne && water switch && (damage || flippers) 
+                { new LocationId("morkla-8.tmx", "Chest_Small", new Vector3(736f, 0f, 556f)), EquipableItem.ItemList.Gold_Key }, //accès Morkla && lanterne && water switch && (damage || flippers)
                 { new LocationId("morkla-17.tmx", "Chest_Small", new Vector3(1732f, 0f, 384f)), EquipableItem.ItemList.BlueGem }, //accès Morkla && water switch && flippers && leviers
                 { new LocationId("morkla-18.tmx", "Chest_Small", new Vector3(736f, 0f, 288f)), EquipableItem.ItemList.GoldCoin }, //accès Morkla && flippers && (water switch && leviers || lanterne)
                 { new LocationId("morkla-18.tmx", "Chest_Small", new Vector3(928f,0f, 288f)), EquipableItem.ItemList.GoldCoin }, //accès Morkla && flippers && (water switch && leviers || lanterne)
@@ -145,9 +151,9 @@ namespace BlossomTales2.Randomizer.mm
                 { new LocationId("morkla-19.tmx", "Chest_Small", new Vector3(640f, 0f, 312f)), EquipableItem.ItemList.HeartQ_1 }, //accès Morkla && water switch && flippers && bombes
                 { new LocationId("morkla-20.tmx", "Chest_Small", new Vector3(640f, 0f, 384f)), EquipableItem.ItemList.HeartQ_1 }, //accès Morkla && bombes && (lanterne || flippers)
                 { new LocationId("morkla-21.tmx", "Chest_Small", new Vector3(896f, 0f, 776f)), EquipableItem.ItemList.GreenGem }, //accès Morkla && water switch && flippers && leviers
-                { new LocationId("morkla-pirateBoss.tmx", "Chest", new Vector3(768f, 0f, 640f)), EquipableItem.ItemList.Flippers }, //accès Morkla && damage && (lanterne && water switch && clé || flippers)
                 { new LocationId("morkla-octopus.tmx", "BossOctopus", new Vector3(0f, 0f, 0f)), EquipableItem.ItemList.HeartQ_4 }, //accès Morkla && damage && flippers && water switch && blue gem && green gem
                 { new LocationId("morkla-octopus.tmx", "Chest", new Vector3(896f, 0f, 624f)), EquipableItem.ItemList.KeyPiece1 }, //accès Morkla && damage && flippers && water switch && blue gem && green gem
+                { new LocationId("morkla-pirateBoss.tmx", "Chest", new Vector3(768f, 0f, 640f)), EquipableItem.ItemList.Flippers }, //accès Morkla && damage && (lanterne && water switch && clé || flippers)
                 //{ new LocationId("objectPalette.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), EquipableItem.ItemList.GoldCoin }, //pas sur si vraie location, semble etre tool debug
                 { new LocationId("orchid-tomb-3.tmx", "Chest_Small", new Vector3(416f, 0f, 320f)), EquipableItem.ItemList.Gold_Key }, //lampe && levier && damage
                 { new LocationId("orchid-tomb-4.tmx", "orchid_heart", new Vector3(604f, 0f, 304f)), EquipableItem.ItemList.HeartQ_4 }, //lampe && damage && clé
@@ -247,7 +253,7 @@ namespace BlossomTales2.Randomizer.mm
                 //{ new LocationId("overworld-21x18-cave.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), EquipableItem.ItemList.GoldCoin }, //unknown
                 //{ new LocationId("overworld-21x18-cave.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), EquipableItem.ItemList.GoldCoin }, //unknown
                 //{ new LocationId("overworld-21x19.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), EquipableItem.ItemList.HeartQ_1 }, //pelle id=2
-                { new LocationId("overworld-21x20-cave.tmx", "Chest_Small", new Vector3(1192f, 0f, 612f)), EquipableItem.ItemList.GoldCoin }, 
+                { new LocationId("overworld-21x20-cave.tmx", "Chest_Small", new Vector3(1192f, 0f, 612f)), EquipableItem.ItemList.GoldCoin },
                 { new LocationId("overworld-21x20-cave.tmx", "Chest_Small", new Vector3(1268f, 0f, 612f)), EquipableItem.ItemList.GoldCoin },
                 //{ new LocationId("overworld-21x20.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), EquipableItem.ItemList.HeartQ_1 }, //pelle id=6
                 //{ new LocationId("overworld-22x16.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), EquipableItem.ItemList.GoldCoin }, //unknown
@@ -283,19 +289,22 @@ namespace BlossomTales2.Randomizer.mm
                 //{ new LocationId("overworld-25x18-cave.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), EquipableItem.ItemList.GoldCoin }, //unknown
                 //{ new LocationId("overworld-25x18-cave.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), EquipableItem.ItemList.Honeycomb }, //unknown
                 //{ new LocationId("sandCastle.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), EquipableItem.ItemList.Five_Gems }, //unknown
-                //{ new LocationId("temple-1.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), EquipableItem.ItemList.Gold_Key }, //unknown
-                //{ new LocationId("temple-4.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), EquipableItem.ItemList.GoldCoin }, //unknown
-                //{ new LocationId("temple-5.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), EquipableItem.ItemList.Gold_Key }, //unknown
-                //{ new LocationId("temple-5-secret.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), EquipableItem.ItemList.Crystal }, //unknown
-                //{ new LocationId("temple-6.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), EquipableItem.ItemList.GoldCoin }, //unknown
-                //{ new LocationId("temple-8.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), EquipableItem.ItemList.GoldCoin }, //unknown
-                //{ new LocationId("temple-8.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), EquipableItem.ItemList.GoldCoin }, //unknown
-                //{ new LocationId("temple-11.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), EquipableItem.ItemList.GoldCoin }, //unknown
-                //{ new LocationId("temple-11.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), EquipableItem.ItemList.Gold_Key }, //unknown
-                //{ new LocationId("temple-15-secret.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), EquipableItem.ItemList.HeartQ_1 }, //unknown
-                //{ new LocationId("temple-17.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), EquipableItem.ItemList.GoldCoin }, //unknown
-                //{ new LocationId("temple-18.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), EquipableItem.ItemList.GoldCoin }, //unknown
-                //{ new LocationId("temple-18-secret.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), EquipableItem.ItemList.GoldCoin }, //unknown
+                { new LocationId("temple-1.tmx", "Chest_Small", new Vector3(1376f, 0f, 1184f)), EquipableItem.ItemList.Gold_Key }, //accès temple && (arc && leviers || grappin)
+                { new LocationId("temple-4.tmx", "Chest_Small", new Vector3(3232f, 0f, 1392f)), EquipableItem.ItemList.GoldCoin }, //accès temple 2 && leviers
+                { new LocationId("temple-5.tmx", "Chest_Small", new Vector3(624f, 0f, 1728f)), EquipableItem.ItemList.Gold_Key }, //accès temple 2 && (leviers || grappin)
+                { new LocationId("temple-5-secret.tmx", "Chest_Small", new Vector3(640f, 0f, 292f)), EquipableItem.ItemList.Crystal }, //accès temple 2 && leviers && bombes
+                { new LocationId("temple-6.tmx", "Chest_Small", new Vector3(388f, 0f, 756f)), EquipableItem.ItemList.GoldCoin }, //accès temple 2 && leviers && bombes
+                { new LocationId("temple-8.tmx", "Chest_Small", new Vector3(896f, 0f, 1792f)), EquipableItem.ItemList.GoldCoin }, //accès temple 3 && grappin
+                { new LocationId("temple-8.tmx", "Chest_Small", new Vector3(1728f, 0f, 1792f)), EquipableItem.ItemList.GoldCoin }, //accès temple 3 && grappin
+                { new LocationId("temple-11.tmx", "Chest_Small", new Vector3(440f, 0f, 452f)), EquipableItem.ItemList.GoldCoin }, //accès temple 3 && leviers
+                { new LocationId("temple-11.tmx", "Chest_Small", new Vector3(448f, 0f, 1920f)), EquipableItem.ItemList.Gold_Key }, //accès temple 3 && leviers && bombes
+                { new LocationId("temple-15-secret.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), EquipableItem.ItemList.HeartQ_1 }, //accès temple 4 && bombes
+                { new LocationId("temple-17.tmx", "Chest_Small", new Vector3(276f, 0f, 220f)), EquipableItem.ItemList.GoldCoin }, //accès temple 4
+                { new LocationId("temple-18.tmx", "Chest_Small", new Vector3(1152f, 0f, 1724f)), EquipableItem.ItemList.GoldCoin }, //accès temple 4
+                { new LocationId("temple-18-secret.tmx", "Chest_Small", new Vector3(640f, 0f, 284f)), EquipableItem.ItemList.HeartQ_1 }, //accès temple 4 && bombes
+                { new LocationId("temple-genieBoss.tmx", "BossGenie", new Vector3(0f, 0f, 0f)), EquipableItem.ItemList.HeartQ_4 }, //accès temple 4 && lanterne
+                { new LocationId("temple-genieBoss.tmx", "Chest", new Vector3(832f, 0f, 640f)), EquipableItem.ItemList.KeyPiece2 }, //accès temple 4 && lanterne
+                { new LocationId("temple-vultureBoss.tmx", "Chest", new Vector3(768f, 0f, 640f)), EquipableItem.ItemList.GrappleHook }, //accès temple 3 && (clé || grappin) && damage
             };
         }
     }
