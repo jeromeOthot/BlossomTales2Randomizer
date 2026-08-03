@@ -172,6 +172,7 @@ namespace BlossomTales2.Randomizer.mm
                 { new LocationId("overworld-15x19-cave.tmx", "Chest_Small", new Vector3(768f, 0f, 616f)), EquipableItem.ItemList.GoldCoin }, //accès canyon && bombes
                 { new LocationId("overworld-15x19-cave.tmx", "Chest_Small", new Vector3(864f, 0f, 488f)), EquipableItem.ItemList.GoldCoin }, //accès canyon && bombes
                 { new LocationId("overworld-15x19-cave.tmx", "Chest_Small", new Vector3(800f, 0f, 364f)), EquipableItem.ItemList.GoldCoin }, //accès canyon && bombes
+                { new LocationId("overworld-15x20.tmx", "archCanyon", new Vector3(0f, 0f, 0f)), EquipableItem.ItemList.Crystal }, //accès canyon && CanyonBone == 20
                 { new LocationId("overworld-15x21-cave.tmx", "Chest_Small", new Vector3(352f, 0f, 412f)), EquipableItem.ItemList.GoldCoin }, //accès canyon && bombes
                 { new LocationId("overworld-15x21-cave.tmx", "Chest_Small", new Vector3(608f, 0f, 408f)), EquipableItem.ItemList.GoldCoin }, //accès canyon && bombes
                 { new LocationId("overworld-15x21-cave.tmx", "Chest_Small", new Vector3(352f, 0f, 604f)), EquipableItem.ItemList.GoldCoin }, //accès canyon && bombes

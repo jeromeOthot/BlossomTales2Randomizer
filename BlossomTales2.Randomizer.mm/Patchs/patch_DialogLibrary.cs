@@ -34,6 +34,9 @@ namespace BlossomTales2
                 case "giveBow":
                     GiveBowEvent();
                     break;
+                case "archGiveCrystal":
+                    ArchGiveCrystalEvent();
+                    break;
                 case "giveShovel":
                     GiveShovelEvent();
                     break;
@@ -135,6 +138,15 @@ namespace BlossomTales2
             Game1.player.Direction = 3;
             Game1Extensions.AddLevelPermaObject("npc21", Vector3.Zero);
         }
+
+        private static void ArchGiveCrystalEvent()
+        {
+            Game1.player.RemoveItem_NEReflection(EquipableItem.ItemList.CanyonBone, playAnimation: false, 20);
+            EquipableItem.ItemList item = RandomizerSingleton.Instance.GetItemAtLocation(new LocationId(Game1.CurrentLevel.Name, "archCanyon", Vector3.Zero));
+            Game1.player.GiveItemReflection(item);
+            Game1Extensions.AddLevelPermaObject("archCanyon", Vector3.Zero);
+        }
+
         private static void GiveShovelEvent()
         {
             Game1.Globals.ArchJungle_State = 3;
