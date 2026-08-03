@@ -259,12 +259,12 @@ namespace BlossomTales2
                     ++this.Count_TreeSeeds;
                   break;
                 case EquipableItem.ItemList.GreenGem:
-                    Game1.player.Inventory.Add(EquipableItem.ItemList.GreenGem);
+                    Game1.player.Inventory_NE.Add(EquipableItem.ItemList.GreenGem);
                     Game1.Globals.foundBlueGem = true;
                     break;
                 case EquipableItem.ItemList.BlueGem:
-                    Game1.player.Inventory.Add(EquipableItem.ItemList.BlueGem);
-                    Game1.Globals.foundBlueGem = true;
+                    Game1.player.Inventory_NE.Add(EquipableItem.ItemList.BlueGem);
+                    Game1.Globals.foundGreenGem = true;
                     break;
                 case EquipableItem.ItemList.Flippers:
                 case EquipableItem.ItemList.CombatScroll:

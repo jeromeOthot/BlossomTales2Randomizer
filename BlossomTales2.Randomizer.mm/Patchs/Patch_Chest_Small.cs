@@ -19,6 +19,45 @@ namespace BlossomTales2
         [MonoModIgnore]
         [PatchChestSmallUpdate]
         public extern void Update(GameTime gameTime);
+
+        public extern void orig_OpenDoorGates();
+
+        private void OpenDoorGates()
+        {
+            bool flag = false;
+            for (int i = 0; i < Game1.CurrentLevel.LevelObjects.Count; i++)
+            {
+                if (Game1.CurrentLevel.LevelObjects[i] is CameraOverrideObject && Game1.CurrentLevel.LevelObjects[i].IDNumber == IDNumber)
+                {
+                    Game1.CamController.focusCameraOnTarget(new Vector2(Game1.CurrentLevel.LevelObjects[i].Position.X, Game1.CurrentLevel.LevelObjects[i].Position.Z), Game1.CurrentLevel.LevelObjects[i].Velocity.X, Game1.CurrentLevel.LevelObjects[i].Velocity.Y);
+                    Game1.CamController.IDNumber = IDNumber;
+                    Game1.CamController.OpenBoth = true;
+                    flag = true;
+                    break;
+                }
+            }
+
+            //Hack to open locked door in Green Gem chest in Morkla.
+            if (flag && IDNumber != 11)
+            {
+                return;
+            }
+
+            bool flag2 = false;
+            for (int j = 0; j < Game1.CurrentLevel.LevelObjects.Count; j++)
+            {
+                if (Game1.CurrentLevel.LevelObjects[j] is DoorGate)
+                {
+                    Game1.CurrentLevel.LevelObjects[j].Velocity.Y = 0f;
+                    flag2 = true;
+                }
+            }
+
+            if (flag2)
+            {
+                Game1.Camera.Shake(8f, 0.96f);
+            }
+        }
     }
 
     public class ModChestSmall
