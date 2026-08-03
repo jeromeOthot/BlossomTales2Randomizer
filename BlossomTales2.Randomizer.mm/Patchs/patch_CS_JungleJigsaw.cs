@@ -1,4 +1,5 @@
-﻿using BlossomTales2.Randomizer.mm;
+﻿using BlossomTales2.Extensions;
+using BlossomTales2.Randomizer.mm;
 using Microsoft.Xna.Framework;
 
 namespace BlossomTales2
@@ -18,10 +19,10 @@ namespace BlossomTales2
 
         private void Mod_GiveItem()
         {
-            GameLogger.LogInfo(Game1.CurrentLevel.Name);
             //Don't register position.
             EquipableItem.ItemList item = RandomizerSingleton.Instance.GetItemAtLocation(new LocationId(Game1.CurrentLevel.Name, "archJungle", Vector3.Zero));
             Game1.player.GiveItemReflection(item);
+            Game1Extensions.AddLevelPermaObject("archJungle", Vector3.Zero);
         }
     }
 }
