@@ -40,6 +40,9 @@ namespace BlossomTales2
                 case "giveShovel":
                     GiveShovelEvent();
                     break;
+                case "giveTribow":
+                    GiveTribowEvent();
+                    break;
                 default:
                     orig_LineTrigger(Event, choice);
                     break;
@@ -153,6 +156,13 @@ namespace BlossomTales2
             EquipableItem.ItemList item = RandomizerSingleton.Instance.GetItemAtLocation(new LocationId(Game1.CurrentLevel.Name, "archJungle", Vector3.Zero));
             Game1.player.GiveItemReflection(item);
             Game1Extensions.AddLevelPermaObject("archJungle", Vector3.Zero);
+        }
+
+        private static void GiveTribowEvent()
+        {
+            EquipableItem.ItemList item = RandomizerSingleton.Instance.GetItemAtLocation(new LocationId(Game1.CurrentLevel.Name, "hunter", Vector3.Zero));
+            Game1.player.GiveItemReflection(item);
+            Game1Extensions.AddLevelPermaObject("hunter", Vector3.Zero);
         }
 
         private static bool Mod_ShouldFishCrabs()
