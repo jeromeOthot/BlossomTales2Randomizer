@@ -1,4 +1,5 @@
 ﻿using BlossomTales2.Extensions;
+using BlossomTales2.Randomizer.mm;
 using Microsoft.Xna.Framework;
 
 namespace BlossomTales2
@@ -8,6 +9,7 @@ namespace BlossomTales2
         private static string[] randomLines;
 
         public static extern void orig_NPC_RunLine(int number, int dialogPointer, Vector2 position);
+        public static extern void orig_LineTrigger(string Event, int choice);
 
         public static void NPC_RunLine(int number, int dialogPointer, Vector2 position)
         {
@@ -21,6 +23,19 @@ namespace BlossomTales2
                     break;
                 default:
                     orig_NPC_RunLine(number, dialogPointer, position);
+                    break;
+            }
+        }
+
+        public static void LineTrigger(string Event, int choice)
+        {
+            switch (Event)
+            {
+                case "giveBow":
+                    GiveBowEvent();
+                    break;
+                default:
+                    orig_LineTrigger(Event, choice);
                     break;
             }
         }
@@ -49,7 +64,7 @@ namespace BlossomTales2
         }
 
         private static void BlacksmithDialog()
-        {            
+        {
             if (Game1.Globals.MainQuestObjective == Globaler.MainGameObjective.lab_talkToBlacksmith)
             {
                 Game1.Dialoger.AddLine("Blacksmith: Ah, you're still alive and well! Thanks to my superior quality weapons, no doubt.");
@@ -94,7 +109,7 @@ namespace BlossomTales2
             }
             else if (Game1.Globals.Blacksmith_State == 3)
             {
-                if (Game1.player.Inventory.Contains(EquipableItem.ItemList.Bow))
+                if (Mod_HasReceivedBlacksmithItem())
                 {
                     Game1.Dialoger.AddLine("Blacksmith: Take it outside if you want to shoot it.");
                 }
@@ -109,6 +124,13 @@ namespace BlossomTales2
             }
         }
 
+        private static void GiveBowEvent()
+        {
+            Game1.Globals.Blacksmith_State = 4;
+            EquipableItem.ItemList item = RandomizerSingleton.Instance.GetItemAtLocation(new LocationId(Game1.CurrentLevel.Name, "npc21", Vector3.Zero));
+            Game1.player.GiveItemReflection(item);
+            Game1.player.Direction = 3;
+        }
         private static bool Mod_ShouldFishCrabs()
         {
             if (ModGlobals.OpenWorldState)
@@ -135,6 +157,11 @@ namespace BlossomTales2
                 return !Game1Extensions.IsObjectiveCompleted(Globaler.MainGameObjective.jungles_morklaComplete);
             else
                 return Game1.Globals.MainQuestObjective < Globaler.MainGameObjective.jungles_morklaComplete;
+        }
+
+        private static bool Mod_HasReceivedBlacksmithItem()
+        {
+            return Game1Extensions.HasLevelPermaObject("npc21");
         }
     }
 }

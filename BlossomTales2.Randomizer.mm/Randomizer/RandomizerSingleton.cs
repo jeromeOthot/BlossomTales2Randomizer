@@ -49,7 +49,7 @@ namespace BlossomTales2.Randomizer.mm
             _locations = new Dictionary<LocationId, EquipableItem.ItemList>
             {
                 { new LocationId("anchor-house4.tmx", "Chest_Small", new Vector3(348f, 0f, 436f)), EquipableItem.ItemList.GoldCoin }, //accès jungle
-                { new LocationId("blossom-blacksmith.tmx", "npc21", new Vector3(480f, 0f, 312f)), EquipableItem.ItemList.Bow }, //Flag: MorklaComplete
+                { new LocationId("blossom-blacksmith.tmx", "npc21", new Vector3(0f, 0f, 0f)), EquipableItem.ItemList.Bow }, //Flag: MorklaComplete
                 { new LocationId("blossom-house1.tmx", "Chest_Small", new Vector3(672f, 0f, 308f)), EquipableItem.ItemList.GoldCoin },
                 { new LocationId("blossom-house2.tmx", "Chest_Small", new Vector3(708f, 0f, 356f)), EquipableItem.ItemList.GoldCoin },
                 { new LocationId("blossom-house3.tmx", "Chest_Small", new Vector3(368f, 0f, 148f)), EquipableItem.ItemList.GoldCoin },

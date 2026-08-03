@@ -1,4 +1,5 @@
-﻿using BlossomTales2.Randomizer.mm;
+﻿using BlossomTales2.Extensions;
+using BlossomTales2.Randomizer.mm;
 using Microsoft.Xna.Framework;
 
 namespace BlossomTales2
@@ -26,7 +27,8 @@ namespace BlossomTales2
         private void Mod_GiveItem()
         {
             EquipableItem.ItemList item = RandomizerSingleton.Instance.GetItemAtLocation(new LocationId(Game1.CurrentLevel.Name, blacksmith.Name, blacksmith.getPosition()));
-            Game1.player.GiveItemReflection(EquipableItem.ItemList.Bow);
+            Game1.player.GiveItemReflection(item);
+            Game1Extensions.AddLevelPermaObject(blacksmith.Name, blacksmith.getPosition());
         }
     }
 }
