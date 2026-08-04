@@ -55,7 +55,7 @@ namespace BlossomTales2
         {
             GameLogger.LogInfo(Game1.CurrentLevel.Name + " " + fisherman.name + " " + fisherman.getPosition());
             //Fisherman can move, so don't register its position.
-            EquipableItem.ItemList item = RandomizerSingleton.Instance.GetItemAtLocation(new LocationId(Game1.CurrentLevel.Name, fisherman.name, Vector3.Zero));
+            EquipableItem.ItemList item = RandomizerSingleton.Instance.GetItemAtLocation(fisherman.name, Vector3.Zero);
             Game1.player.GiveItemReflection(item);
             Game1Extensions.AddLevelPermaObject(fisherman.name, Vector3.Zero);
         }

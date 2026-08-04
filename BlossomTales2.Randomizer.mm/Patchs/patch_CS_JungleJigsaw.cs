@@ -20,7 +20,7 @@ namespace BlossomTales2
         private void Mod_GiveItem()
         {
             //Don't register position.
-            EquipableItem.ItemList item = RandomizerSingleton.Instance.GetItemAtLocation(new LocationId(Game1.CurrentLevel.Name, "archJungle", Vector3.Zero));
+            EquipableItem.ItemList item = RandomizerSingleton.Instance.GetItemAtLocation("archJungle", Vector3.Zero);
             Game1.player.GiveItemReflection(item);
             Game1Extensions.AddLevelPermaObject("archJungle", Vector3.Zero);
         }

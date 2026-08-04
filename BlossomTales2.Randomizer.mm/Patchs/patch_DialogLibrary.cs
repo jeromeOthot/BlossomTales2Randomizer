@@ -136,7 +136,7 @@ namespace BlossomTales2
         private static void GiveBowEvent()
         {
             Game1.Globals.Blacksmith_State = 4;
-            EquipableItem.ItemList item = RandomizerSingleton.Instance.GetItemAtLocation(new LocationId(Game1.CurrentLevel.Name, "npc21", Vector3.Zero));
+            EquipableItem.ItemList item = RandomizerSingleton.Instance.GetItemAtLocation("npc21", Vector3.Zero);
             Game1.player.GiveItemReflection(item);
             Game1.player.Direction = 3;
             Game1Extensions.AddLevelPermaObject("npc21", Vector3.Zero);
@@ -145,7 +145,7 @@ namespace BlossomTales2
         private static void ArchGiveCrystalEvent()
         {
             Game1.player.RemoveItem_NEReflection(EquipableItem.ItemList.CanyonBone, playAnimation: false, 20);
-            EquipableItem.ItemList item = RandomizerSingleton.Instance.GetItemAtLocation(new LocationId(Game1.CurrentLevel.Name, "archCanyon", Vector3.Zero));
+            EquipableItem.ItemList item = RandomizerSingleton.Instance.GetItemAtLocation("archCanyon", Vector3.Zero);
             Game1.player.GiveItemReflection(item);
             Game1Extensions.AddLevelPermaObject("archCanyon", Vector3.Zero);
         }
@@ -153,14 +153,14 @@ namespace BlossomTales2
         private static void GiveShovelEvent()
         {
             Game1.Globals.ArchJungle_State = 3;
-            EquipableItem.ItemList item = RandomizerSingleton.Instance.GetItemAtLocation(new LocationId(Game1.CurrentLevel.Name, "archJungle", Vector3.Zero));
+            EquipableItem.ItemList item = RandomizerSingleton.Instance.GetItemAtLocation("archJungle", Vector3.Zero);
             Game1.player.GiveItemReflection(item);
             Game1Extensions.AddLevelPermaObject("archJungle", Vector3.Zero);
         }
 
         private static void GiveTribowEvent()
         {
-            EquipableItem.ItemList item = RandomizerSingleton.Instance.GetItemAtLocation(new LocationId(Game1.CurrentLevel.Name, "hunter", Vector3.Zero));
+            EquipableItem.ItemList item = RandomizerSingleton.Instance.GetItemAtLocation("hunter", Vector3.Zero);
             Game1.player.GiveItemReflection(item);
             Game1Extensions.AddLevelPermaObject("hunter", Vector3.Zero);
         }

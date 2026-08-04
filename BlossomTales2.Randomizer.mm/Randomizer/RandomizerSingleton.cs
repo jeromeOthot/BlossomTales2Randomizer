@@ -17,13 +17,15 @@ namespace BlossomTales2.Randomizer.mm
             Instance.InitializeLocations();
         }
 
-        public EquipableItem.ItemList GetItemAtLocation(LocationId location)
+        public EquipableItem.ItemList GetItemAtLocation(string name, Vector3 position)
         {
+            LocationId location = new  LocationId(Game1.CurrentLevel.Name, name, position);
             return _locations[location];
         }
 
-        public bool TryGetItemAtLocation(LocationId location, out EquipableItem.ItemList item)
+        public bool TryGetItemAtLocation(string name, Vector3 position, out EquipableItem.ItemList item)
         {
+            LocationId location = new  LocationId(Game1.CurrentLevel.Name, name, position);
             return _locations.TryGetValue(location, out item);
         }
 

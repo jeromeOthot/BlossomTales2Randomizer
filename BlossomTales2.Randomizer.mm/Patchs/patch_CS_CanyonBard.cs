@@ -103,7 +103,7 @@ namespace BlossomTales2
         private void Mod_GiveItem()
         {
             GameLogger.LogInfo(Game1.CurrentLevel.Name + " " + bard.name + " " + bard.getPosition());
-            EquipableItem.ItemList item = RandomizerSingleton.Instance.GetItemAtLocation(new LocationId(Game1.CurrentLevel.Name, bard.name, bard.getPosition()));
+            EquipableItem.ItemList item = RandomizerSingleton.Instance.GetItemAtLocation(bard.name, bard.getPosition());
             Game1.player.GiveItemReflection(item);
         }
 
