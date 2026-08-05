@@ -48,11 +48,17 @@ namespace BlossomTales2.Randomizer.mm
                 return;
             }
 
-            // if (itemData.TryConvertToIngredientItem(out EquipableItem.IngredientList ingredient))
-            // {
-            //     //Game1.player.GiveIngredientReflection(item);
-            //     return;
-            // }
+            if (itemData.TryConvertToIngredientItem(out EquipableItem.IngredientList ingredient))
+            {
+                //Game1.player.GiveIngredientReflection(item);
+                return;
+            }
+
+            if (itemData.TryConvertToSongItem(out Globaler.Songs song))
+            {
+                Game1.player.LearnSong(song);
+                return;
+            }
         }
 
         private void InitializeLocations()
