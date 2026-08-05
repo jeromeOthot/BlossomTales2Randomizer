@@ -108,11 +108,7 @@ namespace BlossomTales2
 
         private void Mod_GiveSong()
         {
-            if (!Game1.Globals.Learned_Songs.Contains(Globaler.Songs.OpenSesame))
-            {
-                Game1.Gui.AddGuiTicker(EquipableItem.IngredientList.NewSong, 1);
-                Game1.Globals.Learned_Songs.Add(Globaler.Songs.OpenSesame);
-            }
+            RandomizerSingleton.Instance.GiveItemAtLocation(bard.name + "_song", bard.getPosition());
         }
     }
 }

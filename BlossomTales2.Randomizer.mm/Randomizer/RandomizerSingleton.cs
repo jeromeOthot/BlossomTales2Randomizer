@@ -258,7 +258,7 @@ namespace BlossomTales2.Randomizer.mm
                 //{ new LocationId("overworld-19x20-noteCave.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.GoldCoin) }, //unknown
                 //{ new LocationId("overworld-19x20-noteCave.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.GoldCoin) }, //unknown
                 { new LocationId("overworld-19x21.tmx", "Chest_Small", new Vector3(2348f, 0f, 1832f)), new ItemData(ItemType.GoldCoin) }, //accès canyon
-                { new LocationId("overworld-19x22.tmx", "bard", new Vector3(852f, 0f, 1348f)), new ItemData(ItemType.Guitar) }, //accès canyon && damage
+                { new LocationId("overworld-19x22.tmx", "bard", new Vector3(852f, 0f, 1348f)), new ItemData(ItemType.OpenSesame) }, //accès canyon && damage
                 { new LocationId("overworld-19x22-bardCave.tmx", "Chest_Small", new Vector3(416f, 0f, 240f)), new ItemData(ItemType.HeartQ_1) }, //accès canyon && damage (&& ouvrir portes note)
                 { new LocationId("overworld-20x16-combat.tmx", "Chest_Small", new Vector3(416f, 0f, 2084f)), new ItemData(ItemType.CombatScroll) }, //accès nord && leviers
                 { new LocationId("overworld-20x17.tmx", "Chest_Small", new Vector3(376f, 0f, 1480f)), new ItemData(ItemType.GoldCoin) }, //accès nord && bombes
