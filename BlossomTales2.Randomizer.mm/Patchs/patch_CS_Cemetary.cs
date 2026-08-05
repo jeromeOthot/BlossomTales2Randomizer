@@ -119,8 +119,7 @@ namespace BlossomTales2
         private void Mod_GiveLanternItem()
         {
             GameLogger.LogInfo(Game1.CurrentLevel.Name + " " + lanternGuy.name + " " + lanternGuy.getPosition());
-            EquipableItem.ItemList item = RandomizerSingleton.Instance.GetItemAtLocation(lanternGuy.name, lanternGuy.getPosition());
-            Game1.player.GiveItemReflection(item);
+            RandomizerSingleton.Instance.GiveItemAtLocation(lanternGuy.name, lanternGuy.getPosition());
             Game1Extensions.AddLevelPermaObject(lanternGuy.name, lanternGuy.getPosition());
         }
 

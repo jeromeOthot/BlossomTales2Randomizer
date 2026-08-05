@@ -25,8 +25,7 @@ namespace BlossomTales2
     {
         public static void Mod_GiveHeart(BossGenie bossGenie)
         {
-            EquipableItem.ItemList item = RandomizerSingleton.Instance.GetItemAtLocation(bossGenie.Name, Vector3.Zero);
-            Game1.player.GiveItemReflection(item);
+            RandomizerSingleton.Instance.GiveItemAtLocation(bossGenie.Name, Vector3.Zero);
         }
     }
 }

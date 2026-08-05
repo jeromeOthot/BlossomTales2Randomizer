@@ -17,10 +17,20 @@ namespace BlossomTales2.Randomizer.mm
             Instance.InitializeLocations();
         }
 
-        public EquipableItem.ItemList GetItemAtLocation(string name, Vector3 position)
+        public void GiveItemAtLocation(string name, Vector3 position)
         {
-            LocationId location = new  LocationId(Game1.CurrentLevel.Name, name, position);
-            return _locations[location];
+            TryGiveItemAtLocation(name, position);
+        }
+
+        public bool TryGiveItemAtLocation(string name, Vector3 position)
+        {
+            if (TryGetItemAtLocation(name, position, out EquipableItem.ItemList item))
+            {
+                Game1.player.GiveItemReflection(item);
+                return true;
+            }
+
+            return false;
         }
 
         public bool TryGetItemAtLocation(string name, Vector3 position, out EquipableItem.ItemList item)

@@ -76,8 +76,7 @@ namespace BlossomTales2
         private void Mod_GrandmaGiveItem(string locationName)
         {
             GameLogger.LogInfo(Game1.CurrentLevel.Name + " " + grandma.name + " " + grandma.getPosition());
-            EquipableItem.ItemList item = RandomizerSingleton.Instance.GetItemAtLocation(grandma.name + locationName, grandma.getPosition());
-            Game1.player.GiveItemReflection(item);
+            RandomizerSingleton.Instance.GiveItemAtLocation(grandma.name + locationName, grandma.getPosition());
         }
     }
 }
