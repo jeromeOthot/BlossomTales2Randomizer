@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using Microsoft.Xna.Framework;
 
 namespace BlossomTales2.Randomizer.mm
 {
@@ -28,6 +29,14 @@ namespace BlossomTales2.Randomizer.mm
             {
                 Game1.Gui.AddGuiTicker(EquipableItem.IngredientList.NewSong, 1);
                 Game1.Globals.Learned_Songs.Add(newSong);
+
+                int startIndexSong = 56;
+                int itemIndex = (int)newSong;
+                Game1.playSoundCue("newWeapon");
+                Game1.playSoundCue("blank098");
+                GameLogger.LogInfo("Play animation item: " + itemIndex);
+                Game1.Particles.Add((Particle)new P_GetItem(Game1.player.Position + new Vector3(0.0f, 100f, 0.0f), itemIndex + startIndexSong));
+                Game1.Particles.Add((Particle)new GetItemLight(Game1.player.Position));
             }
         }
     }
