@@ -25,10 +25,10 @@ namespace BlossomTales2
             mapHeight = Game1.CurrentLevel.Height * 64;
             mapCenter = new Vector2(Game1.CurrentLevel.Width * 64 / 2, Game1.CurrentLevel.Height * 64 / 2);
             puppetList = new List<Puppet>();
+            killRect = new Rectangle(964, 1140, 760, 356);
 
             if (Mod_IsObjectiveNotHeadToConstruction())
 		    {
-                GameLogger.LogInfo("Mod_IsObjectiveNotHeadToConstruction");
 			    removeBridgeAnimations();
 			    foreach (LevelObject levelObject in Game1.CurrentLevel.LevelObjects)
 			    {
@@ -40,7 +40,6 @@ namespace BlossomTales2
 		    }
 		    else if (Mod_IsSaveBettyNotCompleted())
 		    {
-                GameLogger.LogInfo("Mod_IsSaveBettyNotCompleted");
 			    removeBridgeAnimations();
 			    foreach (LevelObject levelObject2 in Game1.CurrentLevel.LevelObjects)
 			    {
@@ -52,7 +51,6 @@ namespace BlossomTales2
 		    }
 		    else if (Mod_IsSaveBettyCompleted())
 		    {
-                GameLogger.LogInfo("Mod_IsSaveBettyCompleted");
 			    foreach (LevelObject levelObject3 in Game1.CurrentLevel.LevelObjects)
 			    {
 				    if (killRect.Contains((int)levelObject3.Position.X, (int)levelObject3.Position.Z) && levelObject3.IDNumber != 69 && levelObject3.IDNumber != 70 && !(levelObject3 is FortyFiveDegree) && !(levelObject3 is CollisionRect))
@@ -62,7 +60,6 @@ namespace BlossomTales2
 			    }
 			    if (Mod_IsObjectiveCrossBridge())
 			    {
-                    GameLogger.LogInfo("Mod_IsObjectiveCrossBridge");
 				    SpawnDialogRect item = new SpawnDialogRect(new Vector3(960f, 0f, 1212f))
 				    {
 					    Size = new Vector3(212f, 0f, 132f)
@@ -87,20 +84,17 @@ namespace BlossomTales2
 		    }
 		    if (Mod_IsObjectiveBeforeCrossBridge())
 		    {
-                GameLogger.LogInfo("Mod_IsObjectiveBeforeCrossBridge");
 			    return;
 		    }
 		    foreach (LevelObject levelObject4 in Game1.CurrentLevel.LevelObjects)
 		    {
 			    if (killRect.Contains((int)levelObject4.Position.X, (int)levelObject4.Position.Z) && !(levelObject4 is FortyFiveDegree) && !(levelObject4 is CollisionRect) && ((levelObject4.IDNumber != 69 && levelObject4.IDNumber != 70) || Mod_IsCrossBridgeCompleted()))
 			    {
-                    GameLogger.LogInfo("Mod_IsCrossBridgeCompleted 2");
 				    levelObject4.Alive = false;
 			    }
 		    }
 		    if (Mod_IsObjectiveCrossBridge())
 		    {
-                GameLogger.LogInfo("Mod_IsObjectiveCrossBridge 2");
 			    SpawnDialogRect item2 = new SpawnDialogRect(new Vector3(960f, 0f, 1212f))
 			    {
 				    Size = new Vector3(212f, 0f, 132f)
