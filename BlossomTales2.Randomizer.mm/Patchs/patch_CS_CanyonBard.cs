@@ -103,17 +103,12 @@ namespace BlossomTales2
         private void Mod_GiveItem()
         {
             GameLogger.LogInfo(Game1.CurrentLevel.Name + " " + bard.name + " " + bard.getPosition());
-            EquipableItem.ItemList item = RandomizerSingleton.Instance.GetItemAtLocation(new LocationId(Game1.CurrentLevel.Name, bard.name, bard.getPosition()));
-            Game1.player.GiveItemReflection(item);
+            RandomizerSingleton.Instance.GiveItemAtLocation(bard.name, bard.getPosition());
         }
 
         private void Mod_GiveSong()
         {
-            if (!Game1.Globals.Learned_Songs.Contains(Globaler.Songs.OpenSesame))
-            {
-                Game1.Gui.AddGuiTicker(EquipableItem.IngredientList.NewSong, 1);
-                Game1.Globals.Learned_Songs.Add(Globaler.Songs.OpenSesame);
-            }
+            RandomizerSingleton.Instance.GiveItemAtLocation(bard.name + "_song", bard.getPosition());
         }
     }
 }

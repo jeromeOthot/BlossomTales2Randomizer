@@ -66,7 +66,7 @@ namespace BlossomTales2
 
         public void giveHeart()
         {
-            Game1.Gui.HideHud = false;            
+            Game1.Gui.HideHud = false;
             Mod_OrchidGiveItem("_heart");
             if (ModGlobals.SkipCutscenes)
             {
@@ -148,8 +148,7 @@ namespace BlossomTales2
             Vector3 position = orchid.getPosition();
             GameLogger.LogInfo(Game1.CurrentLevel.Name + " " + orchid.name + " " + position);
             position.Y = 0;
-            EquipableItem.ItemList item = RandomizerSingleton.Instance.GetItemAtLocation(new LocationId(Game1.CurrentLevel.Name, orchid.name + locationName, position));
-            Game1.player.GiveItemReflection(item);
+            RandomizerSingleton.Instance.GiveItemAtLocation(orchid.name + locationName, position);
         }
 
         private void Mod_SkipOpenTombCutscene()

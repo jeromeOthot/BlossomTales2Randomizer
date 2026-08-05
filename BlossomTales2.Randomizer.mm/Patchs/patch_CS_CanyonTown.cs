@@ -46,8 +46,7 @@ namespace BlossomTales2
             GameLogger.LogInfo(Game1.CurrentLevel.Name + " " + beggar.name + " " + beggar.getPosition());
             Vector3 positionOffset = beggar.getPosition();
             positionOffset.Y = 0f;
-            EquipableItem.ItemList item = RandomizerSingleton.Instance.GetItemAtLocation(new LocationId(Game1.CurrentLevel.Name, beggar.name, positionOffset));
-            Game1.player.GiveItemReflection(item);
+            RandomizerSingleton.Instance.GiveItemAtLocation(beggar.name, positionOffset);
         }
     }
 }

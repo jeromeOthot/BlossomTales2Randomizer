@@ -11,7 +11,7 @@ namespace BlossomTales2
         public extern void orig_equipShield();
         public extern void orig_equipSword();
         public extern void orig_endCutScene();
-        
+
         public void equipShield()
         {
             //TODO: Move later if we skip cutscene.
@@ -29,7 +29,7 @@ namespace BlossomTales2
         }
 
         public void equipSword()
-        {            
+        {
             lily.play("getItem");
             Game1.playSoundCue("newWeapon");
             Mod_GrandmaGiveItem("_2");
@@ -76,8 +76,7 @@ namespace BlossomTales2
         private void Mod_GrandmaGiveItem(string locationName)
         {
             GameLogger.LogInfo(Game1.CurrentLevel.Name + " " + grandma.name + " " + grandma.getPosition());
-            EquipableItem.ItemList item = RandomizerSingleton.Instance.GetItemAtLocation(new LocationId(Game1.CurrentLevel.Name, grandma.name + locationName, grandma.getPosition()));
-            Game1.player.GiveItemReflection(item);
+            RandomizerSingleton.Instance.GiveItemAtLocation(grandma.name + locationName, grandma.getPosition());
         }
     }
 }

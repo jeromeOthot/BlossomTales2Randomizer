@@ -25,8 +25,7 @@ namespace BlossomTales2
     {
         public static void Mod_GiveHeart(BossOctopus bossOctopus)
         {
-            EquipableItem.ItemList item = RandomizerSingleton.Instance.GetItemAtLocation(new LocationId(Game1.CurrentLevel.Name, bossOctopus.Name, Vector3.Zero));
-            Game1.player.GiveItemReflection(item);
+            RandomizerSingleton.Instance.GiveItemAtLocation(bossOctopus.Name, Vector3.Zero);
         }
     }
 }

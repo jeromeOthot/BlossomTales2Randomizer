@@ -26,8 +26,7 @@ namespace BlossomTales2
 
         private void Mod_GiveItem()
         {
-            EquipableItem.ItemList item = RandomizerSingleton.Instance.GetItemAtLocation(new LocationId(Game1.CurrentLevel.Name, blacksmith.Name, blacksmith.getPosition()));
-            Game1.player.GiveItemReflection(item);
+            RandomizerSingleton.Instance.GiveItemAtLocation(blacksmith.Name, blacksmith.getPosition());
             Game1Extensions.AddLevelPermaObject(blacksmith.Name, blacksmith.getPosition());
         }
     }
