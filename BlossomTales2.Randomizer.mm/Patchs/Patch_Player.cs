@@ -266,6 +266,9 @@ namespace BlossomTales2
                     Game1.Globals.foundGreenGem = true;
                     break;
                 case EquipableItem.ItemList.Flippers:
+                    Game1.player.Inventory_NE.Add(EquipableItem.ItemList.Flippers);
+                    HasFlippers = true;
+                    break;
                 case EquipableItem.ItemList.CombatScroll:
                   ++this.Count_CombatScrolls;
                   break;
