@@ -19,19 +19,16 @@ namespace BlossomTales2.Randomizer.mm
 
         public void GiveItemAtLocation(string name, Vector3 position)
         {
-            TryGiveItemAtLocation(name, position);
+            ItemData item = TryGetItemByNameAndLocation(name, position);
+            if(item != null)
+                GiveItem(item);
         }
 
-        public bool TryGiveItemAtLocation(string name, Vector3 position)
+        public ItemData TryGetItemByNameAndLocation(string name, Vector3 position)
         {
             if (TryGetItemAtLocation(name, position, out ItemData item))
-            {
-                GiveItem(item);
-                //Game1.player.GiveItemReflection(item);
-                return true;
-            }
-
-            return false;
+                return item;
+            return null;
         }
 
         public bool TryGetItemAtLocation(string name, Vector3 position, out ItemData item)
