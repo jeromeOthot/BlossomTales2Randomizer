@@ -341,6 +341,10 @@ namespace BlossomTales2.Randomizer.mm
                 { new LocationId("temple-genieBoss.tmx", "BossGenie", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.HeartQ_4) }, //accès temple 4 && lanterne
                 { new LocationId("temple-genieBoss.tmx", "Chest", new Vector3(832f, 0f, 640f)), new ItemData(ItemType.KeyPiece2) }, //accès temple 4 && lanterne
                 { new LocationId("temple-vultureBoss.tmx", "Chest", new Vector3(768f, 0f, 640f)), new ItemData(ItemType.GrappleHook) }, //accès temple 3 && (clé || grappin) && damage
+
+                //spots a os dans le canyon pour chaque il faut un accès canyon
+                { new LocationId("overworld-15x19.tmx", "PickUpItem", new Vector3(1804f, 0f, 2292f)), new ItemData(ItemType.Bombs) }, //accès canyon
+                { new LocationId("overworld-18x19.tmx", "PickUpItem", new Vector3(256f, 0f, 1168f)), new ItemData(ItemType.Bombs) }, //accès canyon
             };
         }
     }
