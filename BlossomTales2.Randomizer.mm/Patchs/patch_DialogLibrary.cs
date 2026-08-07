@@ -18,6 +18,9 @@ namespace BlossomTales2
                 case 81:
                     MorklaDialog();
                     break;
+                case 95:
+                    BarbDialog();
+                    break;
                 case 102:
                     BlacksmithDialog();
                     break;
@@ -68,6 +71,30 @@ namespace BlossomTales2
             else
             {
                 randomLines = new string[3] { "<P>Morkla: The <N>Sunkiss <N>Canyons to the <R>West are a dangerous place...", "<P>Morkla: We do hope you find your brother.", "<P>Morkla: Good luck on your quest." };
+                Game1.Dialoger.AddLine(randomLines[Game1.RandomNumber.Next(randomLines.Length)]);
+            }
+        }
+
+        private static void BarbDialog()
+        {
+            if (Mod_IsSaveBettyNotCompleted())
+            {
+                Game1.Dialoger.AddLine("Barb: Oh, hey! Sorry, but the bridge is out!");
+                Game1.Dialoger.AddLine("Barb: My co-worker Betty disappeared, and she had all the nails!");
+                Game1.Dialoger.AddLine("Barb: Please, Miss Knight! Find Betty so we can finish the bridge!");
+                if (Mod_IsHeadToConstructionNotCompleted())
+                {
+                    Game1.Dialoger.AddLine("Barb: I saw her last just <R>South of here poking around a cave! Please hurry!", "updateMap");
+                    Mod_CompleteHeadToConstructionObjective();
+                }
+                else
+                {
+                    Game1.Dialoger.AddLine("Barb: I saw her last just <R>South of here poking around a cave! Please hurry!");
+                }
+            }
+            else
+            {
+                randomLines = new string[4] { "Barb: Thank you again, Miss Knight! You truly are a hero!", "Barb: You're going to cross the bridge to the <P>Periwinkle <P>Woods? Be careful!", "Barb: I've heard an owl hoot on the other side of the river late at night!", "Barb: You saved Betty! We would never have finished the bridge without you!" };
                 Game1.Dialoger.AddLine(randomLines[Game1.RandomNumber.Next(randomLines.Length)]);
             }
         }
@@ -192,6 +219,30 @@ namespace BlossomTales2
         private static bool Mod_HasReceivedBlacksmithItem()
         {
             return Game1Extensions.HasLevelPermaObject("npc21");
+        }
+
+        private static bool Mod_IsSaveBettyNotCompleted()
+        {
+            if (ModGlobals.OpenWorldState)
+                return !Game1Extensions.IsObjectiveCompleted(Globaler.MainGameObjective.dark_saveBetty);
+            else
+                return Game1.Globals.MainQuestObjective <= Globaler.MainGameObjective.dark_saveBetty;
+        }
+
+        private static bool Mod_IsHeadToConstructionNotCompleted()
+        {
+            if (ModGlobals.OpenWorldState)
+                return !Game1Extensions.IsObjectiveCompleted(Globaler.MainGameObjective.dark_headToConstruction);
+            else
+                return Game1.Globals.MainQuestObjective < Globaler.MainGameObjective.dark_saveBetty;
+        }
+
+        private static void Mod_CompleteHeadToConstructionObjective()
+        {
+            if (ModGlobals.OpenWorldState)
+                Game1Extensions.MarkObjectiveComplete(Globaler.MainGameObjective.dark_headToConstruction);
+            else
+                Game1.Globals.MainQuestObjective = Globaler.MainGameObjective.dark_saveBetty;
         }
     }
 }
