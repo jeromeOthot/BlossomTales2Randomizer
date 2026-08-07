@@ -132,48 +132,48 @@ namespace BlossomTales2
 
         private bool Mod_IsObjectiveNotHeadToConstruction()
         {
-            // if (ModGlobals.OpenWorldState)
-            //     return false;
-            // else
+            if (ModGlobals.OpenWorldState)
+                return false;
+            else
                 return Game1.Globals.MainQuestObjective < Globaler.MainGameObjective.dark_headToConstruction;
         }
 
         private bool Mod_IsSaveBettyNotCompleted()
         {
-            // if (ModGlobals.OpenWorldState)
-            //     return !Game1Extensions.IsObjectiveCompleted(Globaler.MainGameObjective.dark_saveBetty);
-            // else
+            if (ModGlobals.OpenWorldState)
+                return !Game1Extensions.IsObjectiveCompleted(Globaler.MainGameObjective.dark_saveBetty);
+            else
                 return Game1.Globals.MainQuestObjective <= Globaler.MainGameObjective.dark_saveBetty;
         }
 
         private bool Mod_IsSaveBettyCompleted()
         {
-            // if (ModGlobals.OpenWorldState)
-            //     return Game1Extensions.IsObjectiveCompleted(Globaler.MainGameObjective.dark_saveBetty);
-            // else
+            if (ModGlobals.OpenWorldState)
+                return Game1Extensions.IsObjectiveCompleted(Globaler.MainGameObjective.dark_saveBetty);
+            else
                 return Game1.Globals.MainQuestObjective >= Globaler.MainGameObjective.dark_crossBridge;
         }
 
         private bool Mod_IsObjectiveCrossBridge()
         {
-            // if (ModGlobals.OpenWorldState)
-            //     return Game1Extensions.IsObjectiveCompleted(Globaler.MainGameObjective.dark_saveBetty) && !Game1Extensions.IsObjectiveCompleted(Globaler.MainGameObjective.dark_crossBridge);
-            // else
+            if (ModGlobals.OpenWorldState)
+                return Game1Extensions.IsObjectiveCompleted(Globaler.MainGameObjective.dark_saveBetty) && !Game1Extensions.IsObjectiveCompleted(Globaler.MainGameObjective.dark_crossBridge);
+            else
                 return Game1.Globals.MainQuestObjective == Globaler.MainGameObjective.dark_crossBridge;
         }
 
         private bool Mod_IsObjectiveBeforeCrossBridge()
         {
-            // if (ModGlobals.OpenWorldState)
-            //     return !Game1Extensions.IsObjectiveCompleted(Globaler.MainGameObjective.dark_saveBetty);
+            if (ModGlobals.OpenWorldState)
+                return !Game1Extensions.IsObjectiveCompleted(Globaler.MainGameObjective.dark_saveBetty);
             return Game1.Globals.MainQuestObjective < Globaler.MainGameObjective.dark_crossBridge;
         }
 
         private bool Mod_IsCrossBridgeCompleted()
         {
-            // if (ModGlobals.OpenWorldState)
-            //     return Game1Extensions.IsObjectiveCompleted(Globaler.MainGameObjective.dark_crossBridge);
-            // else
+            if (ModGlobals.OpenWorldState)
+                return Game1Extensions.IsObjectiveCompleted(Globaler.MainGameObjective.dark_crossBridge);
+            else
                 return Game1.Globals.MainQuestObjective > Globaler.MainGameObjective.dark_crossBridge;
         }
     }

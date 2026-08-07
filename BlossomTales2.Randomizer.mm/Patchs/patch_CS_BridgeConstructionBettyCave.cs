@@ -9,7 +9,9 @@ namespace BlossomTales2
     {
         public extern void orig_ctor();
         public extern void orig_speakBetty();
-        public extern void orig_Update(GameTime gameTime);
+
+        private bool hasCompleted;
+        private int minoTimer;
 
         [MonoModConstructor]
         public void ctor()
@@ -58,25 +60,64 @@ namespace BlossomTales2
 
         public override void Update(GameTime gameTime)
         {
-            Globaler.MainGameObjective mainGameObjective = Game1.Globals.MainQuestObjective;
-            if (ModGlobals.OpenWorldState
-                && Game1Extensions.IsObjectiveCompleted(Globaler.MainGameObjective.dark_headToConstruction)
-                && !Game1Extensions.IsObjectiveCompleted(Globaler.MainGameObjective.dark_saveBetty))
-                mainGameObjective = Globaler.MainGameObjective.dark_saveBetty;
-
-            orig_speakBetty();
-
-            if (ModGlobals.OpenWorldState)
-                Game1.Globals.MainQuestObjective = mainGameObjective;
+            if (Mod_IsObjectiveSaveBetty())
+            {
+                if (Game1.CurrentLevel.Enemies.Count > 0)
+                {
+                    if (minoTimer <= 0)
+                    {
+                        Game1.CurrentLevel.Enemies[Game1.RandomNumber.Next(Game1.CurrentLevel.Enemies.Count)].Velocity.Y = 3f;
+                        minoTimer = Game1.RandomNumber.Next(100, 500);
+                    }
+                    else
+                    {
+                        minoTimer -= (int)((float)gameTime.ElapsedGameTime.Milliseconds * Game1.TimeDelta);
+                    }
+                }
+                else if (!hasCompleted)
+                {
+                    hasCompleted = true;
+                    thankYou();
+                }
+            }
+            if (focusCam)
+            {
+                foreach (Wolf enemy in Game1.CurrentLevel.Enemies)
+                {
+                    enemy.Update(gameTime);
+                }
+            }
+            //base.Update()
+            tweener.Update((float)gameTime.ElapsedGameTime.TotalSeconds);
+            if (focusCam)
+            {
+                overrideCamera(CameraPosition, 1f);
+            }
+            for (int i = 0; i < puppets.Count; i++)
+            {
+                puppets[i].Update(gameTime);
+                if (!puppets[i].Alive)
+                {
+                    puppets.RemoveAt(i);
+                    i--;
+                }
+            }
         }
 
         private bool Mod_IsObjectiveNotSaveBetty()
         {
             if (ModGlobals.OpenWorldState)
-                return Game1Extensions.IsObjectiveCompleted(Globaler.MainGameObjective.dark_headToConstruction) &&
-                       !Game1Extensions.IsObjectiveCompleted(Globaler.MainGameObjective.dark_saveBetty);
+                return !(Game1Extensions.IsObjectiveCompleted(Globaler.MainGameObjective.dark_headToConstruction) && !Game1Extensions.IsObjectiveCompleted(Globaler.MainGameObjective.dark_saveBetty));
             else
                 return Game1.Globals.MainQuestObjective != Globaler.MainGameObjective.dark_saveBetty;
+        }
+
+        private bool Mod_IsObjectiveSaveBetty()
+        {
+            if (ModGlobals.OpenWorldState)
+                return Game1Extensions.IsObjectiveCompleted(Globaler.MainGameObjective.dark_headToConstruction) && !Game1Extensions.IsObjectiveCompleted(Globaler.MainGameObjective.dark_saveBetty);
+            else
+                return Game1.Globals.MainQuestObjective == Globaler.MainGameObjective.dark_saveBetty;
         }
     }
 }
