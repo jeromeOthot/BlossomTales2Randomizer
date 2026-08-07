@@ -41,7 +41,7 @@ namespace BlossomTales2
                 {
                     this.Sprite = Game1.masterTileset; //Game1.content.Load<Texture2D>("Sprites/LevelObjects/_patchPickItem");
                     int itemIndex = (int)item.Item;
-                    spriteBatch.Draw(Game1.masterTileset, new Vector2((float) ((int) this.Position.X + 28), (float) ((int) this.Position.Z - 40)), new Rectangle?(new Rectangle(itemIndex * 32 /*0x20*/, 592, 32 /*0x20*/, 32 /*0x20*/)), Color.White, 0.0f, this.Center, 4f, SpriteEffects.None, this.Position.Z + 48f + this.Zdepth);
+                    spriteBatch.Draw(Game1.masterTileset,        new Vector2(this.Position.X -48, this.Position.Z - this.Position.Y-48), new Rectangle?(new Rectangle(itemIndex * 32 /*0x20*/, 592, 32 /*0x20*/, 32 /*0x20*/)), Color.White, 0.0f, this.Center, 4f, SpriteEffects.None, this.Position.Z + 48f + this.Zdepth);
                 }
             }
             else
