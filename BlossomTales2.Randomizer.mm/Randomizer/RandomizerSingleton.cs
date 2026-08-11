@@ -344,8 +344,26 @@ namespace BlossomTales2.Randomizer.mm
                 { new LocationId("temple-vultureBoss.tmx", "Chest", new Vector3(768f, 0f, 640f)), new ItemData(ItemType.GrappleHook) }, //accès temple 3 && (clé || grappin) && damage
 
                 //spots a os dans le canyon pour chaque il faut un accès canyon
-                { new LocationId("overworld-15x19.tmx", "PickUpItem", new Vector3(1804f, 0f, 2292f)), new ItemData(ItemType.Bombs) }, //accès canyon
-                { new LocationId("overworld-18x19.tmx", "PickUpItem", new Vector3(256f, 0f, 1168f)), new ItemData(ItemType.Bombs) }, //accès canyon
+                { new LocationId("overworld-15x19.tmx", "PickUpItem", new Vector3(1804f, 0f, 2292f)), new ItemData(ItemType.CanyonBone) }, //accès canyon
+                { new LocationId("overworld-15x19.tmx", "PickUpItem", new Vector3(820f, 0f, 952f)), new ItemData(ItemType.CanyonBone) }, //accès canyon
+                { new LocationId("overworld-15x20.tmx", "PickUpItem", new Vector3(192f, 0f, 416f)), new ItemData(ItemType.CanyonBone) }, //accès canyon
+                { new LocationId("overworld-15x21.tmx", "PickUpItem", new Vector3(288f, 0f, 1952f)), new ItemData(ItemType.CanyonBone) }, //accès canyon
+                { new LocationId("overworld-15x22.tmx", "PickUpItem", new Vector3(1568f, 0f, 2400f)), new ItemData(ItemType.CanyonBone) }, //accès canyon
+                { new LocationId("overworld-16x19.tmx", "PickUpItem", new Vector3(992f, 0f, 1636f)), new ItemData(ItemType.CanyonBone) }, //accès canyon
+                { new LocationId("overworld-16x19.tmx", "PickUpItem", new Vector3(1616f, 0f, 988f)), new ItemData(ItemType.CanyonBone) }, //accès canyon + yoyo
+                { new LocationId("overworld-16x21.tmx", "PickUpItem", new Vector3(288f, 0f, 296f)), new ItemData(ItemType.CanyonBone) }, //accès canyon
+                { new LocationId("overworld-17x19.tmx", "PickUpItem", new Vector3(796f, 0f, 1076f)), new ItemData(ItemType.CanyonBone) }, //accès canyon + yoyo
+                { new LocationId("overworld-17x19.tmx", "PickUpItem", new Vector3(844f, 0f, 2180f)), new ItemData(ItemType.CanyonBone) }, //accès canyon + yoyo
+                { new LocationId("overworld-17x21.tmx", "PickUpItem", new Vector3(412f, 0f, 2164f)), new ItemData(ItemType.CanyonBone) }, //accès canyon
+                { new LocationId("overworld-17x22.tmx", "PickUpItem", new Vector3(1952f, 0f, 864f)), new ItemData(ItemType.CanyonBone) }, //accès canyon
+                { new LocationId("overworld-18x19.tmx", "PickUpItem", new Vector3(256f, 0f, 1168f)), new ItemData(ItemType.CanyonBone) }, //accès canyon + yoyo
+                { new LocationId("overworld-18x20.tmx", "PickUpItem", new Vector3(304f, 0f, 520f)), new ItemData(ItemType.CanyonBone) }, //accès canyon + yoyo
+                { new LocationId("overworld-18x21.tmx", "PickUpItem", new Vector3(160f, 0f, 736f)), new ItemData(ItemType.CanyonBone) }, //accès canyon + yoyo
+                { new LocationId("overworld-18x22.tmx", "PickUpItem", new Vector3(1864f, 0f, 1940f)), new ItemData(ItemType.CanyonBone) }, //accès canyon
+                { new LocationId("overworld-19x21.tmx", "PickUpItem", new Vector3(536f, 0f, 2072f)), new ItemData(ItemType.CanyonBone) }, //accès canyon
+                { new LocationId("overworld-19x22.tmx", "PickUpItem", new Vector3(1568f, 0f, 928f)), new ItemData(ItemType.CanyonBone) }, //accès canyon
+                { new LocationId("overworld-20x21.tmx", "PickUpItem", new Vector3(800f, 0f, 2208)), new ItemData(ItemType.CanyonBone) }, //accès canyon
+                { new LocationId("overworld-20x22.tmx", "PickUpItem", new Vector3(688f, 0f, 916f)), new ItemData(ItemType.CanyonBone) }, //accès canyon
             };
         }
     }
