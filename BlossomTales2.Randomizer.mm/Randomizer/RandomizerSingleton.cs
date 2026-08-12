@@ -309,6 +309,7 @@ namespace BlossomTales2.Randomizer.mm
                 //{ new LocationId("overworld-23x17-farm.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.GoldCoin) }, //unknown
                 //{ new LocationId("overworld-23x17-noteCave.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.GoldCoin) }, //unknown
                 //{ new LocationId("overworld-23x17-noteCave.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.Five_Gems) }, //unknown
+                { new LocationId("overworld-23x17-farm.tmx", "farmer", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.HeartQ_1) }, //accès dark && damage
                 //{ new LocationId("overworld-24x16-mausoleum.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.HeartQ_1) }, //unknown
                 //{ new LocationId("overworld-24x17.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.Crystal) }, //pelle id=3
                 //{ new LocationId("overworld-24x18-blueTent.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.GoldCoin) }, //unknown

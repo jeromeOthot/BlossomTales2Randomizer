@@ -24,6 +24,9 @@ namespace BlossomTales2
                 case 102:
                     BlacksmithDialog();
                     break;
+                case 109:
+                    FarmerConnyDialog();
+                    break;
                 default:
                     orig_NPC_RunLine(number, dialogPointer, position);
                     break;
@@ -44,7 +47,10 @@ namespace BlossomTales2
                     GiveShovelEvent();
                     break;
                 case "giveTribow":
-                    GiveTribowEvent();
+                    GiveNpcItem("hunter");
+                    break;
+                case "giveFarmerItem":
+                    GiveNpcItem("farmer");
                     break;
                 default:
                     orig_LineTrigger(Event, choice);
@@ -160,32 +166,54 @@ namespace BlossomTales2
             }
         }
 
+        private static void FarmerConnyDialog()
+        {
+            string mod_giveFarmerItemFlag = "giveFarmerItem";
+
+            if (Game1.Globals.SpiderFarmer_State < 2)
+            {
+                Game1.Dialoger.AddLine("Farmer Conny: Those dag nabbit spiders!");
+                Game1.Dialoger.AddLine("Farmer Conny: I had to move all my chickens inside the mill or they'd be eaten!");
+            }
+            else if (Game1.Globals.SpiderFarmer_State == 2)
+            {
+                Game1.Globals.SpiderFarmer_State = 3;
+                Game1.Dialoger.AddLine("Farmer Conny: You did it! Oh, I am so glad!");
+                Game1.Dialoger.AddLine("Farmer Conny: Please, take this as a token of my appreciation.", mod_giveFarmerItemFlag);
+            }
+            else if (Game1.Globals.SpiderFarmer_State == 3)
+            {
+                Game1.Dialoger.AddLine("Farmer Conny: Now if I could only get these chickens outta here!");
+            }
+            else if (Game1.Globals.SpiderFarmer_State == 4)
+            {
+                Game1.Dialoger.AddLine("Farmer Conny: Now I can finally get back to work.");
+            }
+        }
+
+        private static void GiveNpcItem(string npc)
+        {
+            RandomizerSingleton.Instance.GiveItemAtLocation(npc, Vector3.Zero);
+            Game1Extensions.AddLevelPermaObject(npc, Vector3.Zero);
+        }
+
         private static void GiveBowEvent()
         {
             Game1.Globals.Blacksmith_State = 4;
-            RandomizerSingleton.Instance.GiveItemAtLocation("npc21", Vector3.Zero);
             Game1.player.Direction = 3;
-            Game1Extensions.AddLevelPermaObject("npc21", Vector3.Zero);
+            GiveNpcItem("npc21");
         }
 
         private static void ArchGiveCrystalEvent()
         {
             Game1.player.RemoveItem_NEReflection(EquipableItem.ItemList.CanyonBone, playAnimation: false, 20);
-            RandomizerSingleton.Instance.GiveItemAtLocation("archCanyon", Vector3.Zero);
-            Game1Extensions.AddLevelPermaObject("archCanyon", Vector3.Zero);
+            GiveNpcItem("archCanyon");
         }
 
         private static void GiveShovelEvent()
         {
             Game1.Globals.ArchJungle_State = 3;
-            RandomizerSingleton.Instance.GiveItemAtLocation("archJungle", Vector3.Zero);
-            Game1Extensions.AddLevelPermaObject("archJungle", Vector3.Zero);
-        }
-
-        private static void GiveTribowEvent()
-        {
-            RandomizerSingleton.Instance.GiveItemAtLocation("hunter", Vector3.Zero);
-            Game1Extensions.AddLevelPermaObject("hunter", Vector3.Zero);
+            GiveNpcItem("archJungle");
         }
 
         private static bool Mod_ShouldFishCrabs()
