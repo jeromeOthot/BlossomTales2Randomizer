@@ -24,6 +24,12 @@ namespace BlossomTales2
                 case 102:
                     BlacksmithDialog();
                     break;
+                case 103:
+                    GreatOwlDialog();
+                    break;
+                case 106:
+                    GhostGuardDialog();
+                    break;
                 case 109:
                     FarmerConnyDialog();
                     break;
@@ -51,6 +57,9 @@ namespace BlossomTales2
                     break;
                 case "giveFarmerItem":
                     GiveNpcItem("farmer");
+                    break;
+                case "newRecipe_ghost":
+                    LearnGhostRecipe();
                     break;
                 default:
                     orig_LineTrigger(Event, choice);
@@ -166,6 +175,56 @@ namespace BlossomTales2
             }
         }
 
+        private static void GreatOwlDialog()
+        {
+            if (Game1.Globals.MainQuestObjective < Globaler.MainGameObjective.dark_enterDungeon)
+            {
+                randomLines = new string[2] { "Owl: zzzZZZzzzZZZ...", "Owl: hoo ZZZ hooo..." };
+                if (!ModGlobals.OpenWorldState && Game1.Globals.MainQuestObjective < Globaler.MainGameObjective.dark_learnPotion)
+                {
+                    Game1.Globals.MainQuestObjective = Globaler.MainGameObjective.dark_learnPotion;
+                    Game1.Gui.AddGuiTicker(EquipableItem.IngredientList.MapUpdated, 1);
+                }
+                Game1.Dialoger.AddLine(randomLines[Game1.RandomNumber.Next(randomLines.Length)]);
+            }
+            else
+            {
+                Game1.playSoundCue("blank124");
+                randomLines = new string[1] { "Owl: Be careful on your quest." };
+                Game1.Dialoger.AddLine(randomLines[Game1.RandomNumber.Next(randomLines.Length)]);
+            }
+        }
+
+        private static void GhostGuardDialog()
+        {
+            if (Game1.player.ghostTimer > 0 && Mod_HasNeverEnteredTown())
+            {
+                if (Game1.Globals.lastGhoulixerLevelName == Game1.LevelName && Game1.player.ghostTimer > 10000)
+                {
+                    Game1.Dialoger.AddLine("Ghost Guard: Oh my gosh! I just saw you die!!!");
+                    Game1.Dialoger.AddLine("Ghost Guard: That was quite the specter-cle! But don't panic; death is just a part of life — or soul they say.");
+                    Game1.Dialoger.AddLine("Ghost Guard: Please, come in, come in. You boo-long with us now!", "moveGhostGuard");
+                }
+                else
+                {
+                    Game1.Dialoger.AddLine("Ghost Guard: Greetings. Woke up on the wrong side of the grass, did ya?");
+                    Game1.Dialoger.AddLine("Ghost Guard: It's OK because now you're one of us!");
+                    Game1.Dialoger.AddLine("Ghost Guard: You are one of us, right?", "ghostGuard", new string[2] { "BoOoOoOo!", "Ooooohhhh!" });
+                }
+            }
+            else if (Mod_HasNeverEnteredTown())
+            {
+                Game1.Dialoger.AddLine("Ghost Guard: Stop! Who ghost there?");
+                Game1.Dialoger.AddLine("Ghost Guard: Until further notice, we are NOT accepting new mortal visitors at this time.");
+                Game1.Dialoger.AddLine("Ghost Guard: I'm afraid it's a dead-end for you! Hah!");
+                Game1.Dialoger.AddLine("Ghost Guard: Seriously, go away.");
+            }
+            else
+            {
+                Game1.Dialoger.AddLine("Ghost Guard: It's tough being a ghost guard. I need a vacation to the Boo-hamas.");
+            }
+        }
+
         private static void FarmerConnyDialog()
         {
             string mod_giveFarmerItemFlag = "giveFarmerItem";
@@ -214,6 +273,24 @@ namespace BlossomTales2
         {
             Game1.Globals.ArchJungle_State = 3;
             GiveNpcItem("archJungle");
+        }
+
+        private static void LearnGhostRecipe()
+        {
+            Game1.Gui.AddGuiTicker(EquipableItem.IngredientList.NewRecipe, 1);
+            if (!Game1.Globals.Learned_Potions.Contains(EquipableItem.ItemList.Jar_Ghost))
+            {
+                Game1.Globals.Learned_Potions.Add(EquipableItem.ItemList.Jar_Ghost);
+                if (Game1.Globals.Learned_Potions.Count == 10)
+                {
+                    Game1.Achievementer.CheckAchievment(14);
+                }
+            }
+            if (!ModGlobals.OpenWorldState && Game1.Globals.MainQuestObjective < Globaler.MainGameObjective.dark_enterTown)
+            {
+                Game1.Gui.AddGuiTicker(EquipableItem.IngredientList.MapUpdated, 1);
+                Game1.Globals.MainQuestObjective = Globaler.MainGameObjective.dark_enterTown;
+            }
         }
 
         private static bool Mod_ShouldFishCrabs()
@@ -271,6 +348,14 @@ namespace BlossomTales2
                 Game1Extensions.MarkObjectiveComplete(Globaler.MainGameObjective.dark_headToConstruction);
             else
                 Game1.Globals.MainQuestObjective = Globaler.MainGameObjective.dark_saveBetty;
+        }
+
+        private static bool Mod_HasNeverEnteredTown()
+        {
+            if (ModGlobals.OpenWorldState)
+                return !Game1Extensions.IsObjectiveCompleted(Globaler.MainGameObjective.dark_enterTown);
+            else
+                return Game1.Globals.MainQuestObjective < Globaler.MainGameObjective.dark_learnSong;
         }
     }
 }
