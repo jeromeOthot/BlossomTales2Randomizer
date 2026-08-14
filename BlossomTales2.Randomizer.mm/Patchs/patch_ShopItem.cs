@@ -48,7 +48,7 @@ namespace BlossomTales2
         public extern void orig_onCollision();
         public override void onCollision(string xz, Player entity)
         {
-           // Game1.Dialoger.AddLine($"{this.Name}  {this.Position}" );
+            Game1.Dialoger.AddLine($"{this.Name}  {this.Position} -- ROW: {this.Row}" );
             if (!(xz == "z") || this.Row == 0 || this.Row == 24 || Game1.player.Direction != 1 || (double) Game1.player.Position.X + 4.0 <= (double) this.Position.X || (double) Game1.player.Position.X - 4.0 >= (double) this.Position.X + (double) this.Size.Z * 4.0)
                 return;
             Game1.player.ShowDialogButton = true;
