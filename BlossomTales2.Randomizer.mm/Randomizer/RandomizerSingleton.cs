@@ -24,17 +24,33 @@ namespace BlossomTales2.Randomizer.mm
                 GiveItem(item);
         }
 
-        public ItemData TryGetItemByNameAndLocation(string name, Vector3 position)
+        public ItemData TryGetItem(string mapName, string name, Vector3 position)
         {
-            if (TryGetItemAtLocation(name, position, out ItemData item))
+            LocationId location = new  LocationId(mapName, name, position);
+            if (TryGetItemAtLocation(mapName, name, position, out ItemData item))
                 return item;
             return null;
         }
 
-        public bool TryGetItemAtLocation(string name, Vector3 position, out ItemData item)
+        public ItemData TryGetItemByNameAndLocation(string name, Vector3 position)
         {
-            LocationId location = new  LocationId(Game1.CurrentLevel.Name, name, position);
+            if (TryGetItemAtLocation(Game1.CurrentLevel.Name ,name, position, out ItemData item))
+                return item;
+            return null;
+        }
+
+        public bool TryGetItemAtLocation(string mapName, string name, Vector3 position, out ItemData item)
+        {
+            LocationId location = new  LocationId(mapName, name, position);
             return _locations.TryGetValue(location, out item);
+        }
+
+        public ItemData TryGetItemWithMapNameAndName(string mapName, string name)
+        {
+            var itemByName = _locations.Where(x => x.Key.MapName == mapName).Where(x => x.Key.Name == name).FirstOrDefault().Value;
+            if(itemByName  == null)
+                Game1.Dialoger.AddLine($"Item not found on {mapName} {name}");
+            return itemByName;
         }
 
         public void GiveItem(ItemData itemData)
@@ -366,6 +382,11 @@ namespace BlossomTales2.Randomizer.mm
                 { new LocationId("overworld-19x22.tmx", "PickUpItem", new Vector3(1568f, 0f, 928f)), new ItemData(ItemType.CanyonBone) }, //accès canyon
                 { new LocationId("overworld-20x21.tmx", "PickUpItem", new Vector3(800f, 0f, 2208)), new ItemData(ItemType.CanyonBone) }, //accès canyon
                 { new LocationId("overworld-20x22.tmx", "PickUpItem", new Vector3(688f, 0f, 916f)), new ItemData(ItemType.CanyonBone) }, //accès canyon
+
+                //les shops
+                { new LocationId("blossom-shop.tmx", "emptyJar", new Vector3(60f, 0f, 284f)), new ItemData(ItemType.Accordian) },
+                { new LocationId("blossom-shop.tmx", "heart", new Vector3(52f, 0f, 284f)), new ItemData(ItemType.BeeMedallion) },
+                { new LocationId("blossom-shop.tmx", "crystal", new Vector3(44f, 0f, 284f)), new ItemData(ItemType.Boomerang) }
             };
         }
     }

@@ -35,6 +35,12 @@ namespace BlossomTales2
 
         public static void LineTrigger(string Event, int choice)
         {
+            if (Event.Contains("buy_"))
+            {
+                BuyItemEvent(Event,  choice);
+                return;
+            }
+
             switch (Event)
             {
                 case "giveBow":
@@ -271,6 +277,79 @@ namespace BlossomTales2
                 Game1Extensions.MarkObjectiveComplete(Globaler.MainGameObjective.dark_headToConstruction);
             else
                 Game1.Globals.MainQuestObjective = Globaler.MainGameObjective.dark_saveBetty;
+        }
+
+        private static void BuyItemEvent(string Event, int choice)
+        {
+
+            switch (choice)
+            {
+            case 1:
+                ItemData item;
+              int num1 = int.Parse(Event.Substring(4, 3));
+              string str = Event.Substring(8, Event.Length - 8);
+                Vector3 distPlayerItem = new Vector3(301, 0, 48);
+              Game1.Dialoger.AddLine($"Event: {Event} choice: {choice}, num1:{num1} , str {str}");
+              // Game1.Dialoger.AddLine($"Map name: {Game1.CurrentLevel.Name} , num1:{Game1.player.Position + distPlayerItem} ");
+
+
+              if (Game1.player.Gold >= num1)
+              {
+               // Game1.player.ChangeGoldAmount(num1 * -1);
+                switch (str)
+                {
+                  case "emptyJar":
+                      item = RandomizerSingleton.Instance.TryGetItemWithMapNameAndName(Game1.CurrentLevel.Name, "emptyJar");
+                      RandomizerSingleton.Instance.GiveItem(item);
+                    break;
+                  case "doubleDamage":
+                      item = RandomizerSingleton.Instance.TryGetItemWithMapNameAndName(Game1.CurrentLevel.Name, "doubleDamage");
+                      RandomizerSingleton.Instance.GiveItem(item);
+                    break;
+                  case "heartPiece":
+                      item = RandomizerSingleton.Instance.TryGetItemWithMapNameAndName(Game1.CurrentLevel.Name, "heart");
+                      RandomizerSingleton.Instance.GiveItem(item);
+                    break;
+                  case "crystal":
+                      item = RandomizerSingleton.Instance.TryGetItemWithMapNameAndName(Game1.CurrentLevel.Name, "crystal");
+                      RandomizerSingleton.Instance.GiveItem(item);
+                    break;
+                }
+                for (int index = 0; index < Game1.CurrentLevel.LevelObjects.Count; ++index)
+                {
+                  if (Game1.CurrentLevel.LevelObjects[index] is ShopItem && (double) Game1.CurrentLevel.LevelObjects[index].Velocity.X == 1.0)
+                  {
+                    Game1.CurrentLevel.LevelObjects[index].Velocity.X = 0.0f;
+                    Game1.CurrentLevel.LevelObjects[index].Row = 0;
+                    Game1.Globals.ShopItems[Game1.CurrentLevel.LevelObjects[index].IDNumber - 1] = 24;
+                    break;
+                  }
+                }
+                break;
+              }
+              Game1.Dialoger.AddLine("Lily: I don't have enough gold coins.");
+              if (Game1.LevelName == "pirateShip-shop.tmx")
+                Game1.Dialoger.AddLine("Pirate Jimmy: You can always come back when you do!");
+              else
+                Game1.Dialoger.AddLine("Shop Owner: You can always come back when you do!");
+              for (int index = 0; index < Game1.CurrentLevel.LevelObjects.Count; ++index)
+              {
+                if (Game1.CurrentLevel.LevelObjects[index] is ShopItem)
+                  Game1.CurrentLevel.LevelObjects[index].Velocity.X = 0.0f;
+              }
+              break;
+            case 2:
+              if (Game1.LevelName == "pirateShip-shop.tmx")
+                Game1.Dialoger.AddLine("Pirate Jimmy: Please come again!");
+              else
+                Game1.Dialoger.AddLine("Shop Owner: Please come again!");
+              for (int index = 0; index < Game1.CurrentLevel.LevelObjects.Count; ++index)
+              {
+                if (Game1.CurrentLevel.LevelObjects[index] is ShopItem)
+                  Game1.CurrentLevel.LevelObjects[index].Velocity.X = 0.0f;
+              }
+              break;
+            }
         }
     }
 }

@@ -21,6 +21,30 @@ namespace BlossomTales2
         public extern void orig_GiveItem(EquipableItem.ItemList item, bool playAnimation = true);
         public extern void orig_GiveIngredient(EquipableItem.IngredientList ingred, int amount = 1, bool playAnimation = false);
         public extern void orig_RemoveItem_NE(EquipableItem.ItemList item, bool playAnimation = false, int amount = 1);
+        public extern void orig_ChangeGoldAmount(int p);
+
+        public  void ChangeGoldAmount(int p)
+        {
+            this.Gold += p;
+            if (this.Gold < 0)
+                this.Gold = 0;
+            if (p < 0)
+            {
+                Game1.Globals.achieve_totalGoldSpent += p * -1;
+                if (Game1.Globals.achieve_totalGoldSpent > 3000)
+                    Game1.Globals.achieve_totalGoldSpent = 3000;
+                Game1.Achievementer.AchieveStat("STAT_GOLD_SPENT", Game1.Globals.achieve_totalGoldSpent);
+            }
+            if (p > 2 || p < -2)
+            {
+                Game1.playSoundCue("coin");
+                Game1.Gui.SubtractGold = p;
+                Game1.Gui.SubtractGoldAmount = 1;
+                if (Game1.Gui.SubtractGold > 100 || Game1.Gui.SubtractGold < -100)
+                    Game1.Gui.SubtractGoldAmount = 5;
+            }
+            Game1.Gui.AddGuiTicker(EquipableItem.IngredientList.GoldCoin, this.Gold);
+        }
 
         public void GiveItem(EquipableItem.ItemList item, bool playAnimation = true)
         {
@@ -51,10 +75,10 @@ namespace BlossomTales2
                         {
                           this.ShieldLevel = 2;
                           this.Inventory[index] = EquipableItem.ItemList.Shield;
-                         
+
                           if (!this.Inventory.Contains(EquipableItem.ItemList.Shield))
                             this.Inventory.Add(EquipableItem.ItemList.Shield);
-                      
+
                           if (this.Ability[0] is E_Shield || this.Ability[0] is E_Empty && !(this.Ability[1] is E_Shield))
                           {
                             this.Ability[0] = (EquipableItem) new E_Shield();
@@ -67,7 +91,7 @@ namespace BlossomTales2
                           }
                           break;
                         }
-                    
+
                         //On upgrade au shield -> mirror shield
                         if ((object)this.Inventory[index] is EquipableItem.ItemList.Shield)
                         {
@@ -342,7 +366,7 @@ namespace BlossomTales2
             if(itemIndex == 26 || itemIndex == 27 || itemIndex == 40 || itemIndex == 41 || itemIndex == 42 || itemIndex == 100)
                 giveNewItemDescription = itemIndex;
         }
-        
+
         public void GiveIngredient(EquipableItem.IngredientList ingred, int amount = 1, bool playAnimation = false)
         {
           this.idleCount = 0;
