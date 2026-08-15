@@ -97,6 +97,7 @@ namespace BlossomTales2.Randomizer.mm
             //accès temple 4: accès temple 3 && grappin
             //accès dark: accès nord && damage
             //accès monsterton: accès dark && bouteille && canne pêche
+            //accès mansion: accès monsterton && boomerang
 
             _locations = new Dictionary<LocationId, ItemData>
             {
@@ -336,10 +337,10 @@ namespace BlossomTales2.Randomizer.mm
                 { new LocationId("overworld-24x18-blueTent.tmx", "Chest_Small", new Vector3(776f, 0f, 160f)), new ItemData(ItemType.GoldCoin) }, //accès dark
                 { new LocationId("overworld-24x18-greenTent.tmx", "Chest_Small", new Vector3(576f, 0f, 148f)), new ItemData(ItemType.GoldCoin) }, //accès dark
                 { new LocationId("overworld-24x18-greenTent.tmx", "Chest_Small", new Vector3(680f, 0f, 148f)), new ItemData(ItemType.GoldCoin) }, //accès dark
-                //{ new LocationId("overworld-25x16-cave.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.GoldCoin) }, //unknown
-                //{ new LocationId("overworld-25x16-cave.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.GoldCoin) }, //unknown
-                //{ new LocationId("overworld-25x16-cave.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.GoldCoin) }, //unknown
-                //{ new LocationId("overworld-25x16-cave.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.GoldCoin) }, //unknown
+                { new LocationId("overworld-25x16-cave.tmx", "Chest_Small", new Vector3(416f, 0f, 304f)), new ItemData(ItemType.GoldCoin) }, //accès mansion && bombes
+                { new LocationId("overworld-25x16-cave.tmx", "Chest_Small", new Vector3(544f, 0f, 304f)), new ItemData(ItemType.GoldCoin) }, //accès mansion && bombes
+                { new LocationId("overworld-25x16-cave.tmx", "Chest_Small", new Vector3(352f, 0f, 432f)), new ItemData(ItemType.GoldCoin) }, //accès mansion && bombes
+                { new LocationId("overworld-25x16-cave.tmx", "Chest_Small", new Vector3(608f, 0f, 432f)), new ItemData(ItemType.GoldCoin) }, //accès mansion && bombes
                 { new LocationId("overworld-25x17-cave.tmx", "Chest_Small", new Vector3(320f, 0f, 352f)), new ItemData(ItemType.GoldCoin) }, //accès monsterton
                 { new LocationId("overworld-25x17-cave.tmx", "Chest_Small", new Vector3(544f, 0f, 352f)), new ItemData(ItemType.GoldCoin) }, //accès monsterton
                 { new LocationId("overworld-25x17-cave.tmx", "Chest_Small", new Vector3(772f, 0f, 352f)), new ItemData(ItemType.GoldCoin) }, //accès monsterton
