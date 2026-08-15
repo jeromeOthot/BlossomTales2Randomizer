@@ -294,8 +294,7 @@ namespace BlossomTales2
 
               if (Game1.player.Gold >= num1)
               {
-                  //TODO: ME COMPILE PAS A VOIR !!!
-                //Game1.player.ChangeGoldAmount(num1 * -1);
+                Game1.player.ChangeGoldAmountReflection(num1 * -1);
                 switch (str)
                 {
                   case "emptyJar":

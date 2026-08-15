@@ -23,6 +23,12 @@ namespace BlossomTales2.Randomizer.mm
             info.Invoke(Game1.player, new object[] { item, playAnimation, amount });
         }
 
+        public static void ChangeGoldAmountReflection(this Player player, int amount)
+        {
+            MethodInfo info = Game1.player.GetType().GetMethod("ChangeGoldAmount", BindingFlags.NonPublic | BindingFlags.Instance);
+            info.Invoke(Game1.player, new object[] { amount });
+        }
+
         public static void LearnSong(this Player player, Globaler.Songs newSong)
         {
             if (!Game1.Globals.Learned_Songs.Contains(newSong))
