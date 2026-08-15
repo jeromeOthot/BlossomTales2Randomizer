@@ -347,6 +347,7 @@ namespace BlossomTales2.Randomizer.mm
                 //{ new LocationId("overworld-25x18-cave.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.GoldCoin) }, //unknown
                 //{ new LocationId("overworld-25x18-cave.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.GoldCoin) }, //unknown
                 //{ new LocationId("overworld-25x18-cave.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.Honeycomb) }, //unknown
+                { new LocationId("owlMap.tmx", "owl", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.Boomerang) }, //accès dark && instrument && chanson wakeup
                 //{ new LocationId("sandCastle.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.Five_Gems) }, //unknown
                 { new LocationId("temple-1.tmx", "Chest_Small", new Vector3(1376f, 0f, 1184f)), new ItemData(ItemType.Gold_Key) }, //accès temple && (arc && leviers || grappin)
                 { new LocationId("temple-4.tmx", "Chest_Small", new Vector3(3232f, 0f, 1392f)), new ItemData(ItemType.GoldCoin) }, //accès temple 2 && leviers

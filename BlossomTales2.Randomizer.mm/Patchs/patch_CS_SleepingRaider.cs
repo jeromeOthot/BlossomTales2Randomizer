@@ -13,19 +13,9 @@ namespace BlossomTales2
 {
     public class patch_CS_SleepingRaider : CS_SleepingRaider
     {
-        private Puppet sleepingRaider;
         private Puppet bard;
-        private Puppet harp;
-        private Puppet Z;
-        private Puppet Zz;
-        private Puppet Zzz;
         private bool showSheet;
-        private float sheetAlpha;
-        private int lessonState;
-        private int lessonNoteIndex;
-        private Vector3 bardPosition;
         private bool shownotes;
-        private int notesTimer;
 
         [MonoModIgnore]
         [PatchCSSleepingRaiderInit]
