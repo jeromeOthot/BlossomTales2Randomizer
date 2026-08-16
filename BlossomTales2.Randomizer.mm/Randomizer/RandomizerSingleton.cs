@@ -99,6 +99,7 @@ namespace BlossomTales2.Randomizer.mm
             //accès monsterton: accès dark && bouteille && canne pêche
             //accès mansion: accès monsterton && boomerang
             //accès mansion 2: accès mansion && clé && damage
+            //accès mansion 3: accès mansion 2 && teleporter
 
             _locations = new Dictionary<LocationId, ItemData>
             {
@@ -192,11 +193,14 @@ namespace BlossomTales2.Randomizer.mm
                 { new LocationId("mansion-4.tmx", "Chest_Small", new Vector3(640f, 0f, 1280f)), new ItemData(ItemType.Gold_Key) }, //accès mansion && damage
                 { new LocationId("mansion-12.tmx", "Chest_Small", new Vector3(1920f, 0f, 892f)), new ItemData(ItemType.Gold_Key) }, //accès mansion 2 && grappin
                 { new LocationId("mansion-12-secret.tmx", "Chest_Small", new Vector3(640f, 0f, 384f)), new ItemData(ItemType.HeartQ_1) }, //accès mansion 2 && grappin && bombes
-                //{ new LocationId("mansion-15-secret.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.GoldCoin) }, //unknown
-                //{ new LocationId("mansion-15-secret.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.GoldCoin) }, //unknown
-                //{ new LocationId("mansion-15-secret.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.HeartQ_1) }, //unknown
-                //{ new LocationId("mansion-20.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.GoldCoin) }, //unknown
+                { new LocationId("mansion-15-secret.tmx", "Chest_Small", new Vector3(640f, 0f, 384f)), new ItemData(ItemType.HeartQ_1) }, //accès mansion 3 && bombes
+                { new LocationId("mansion-15-secret.tmx", "Chest_Small", new Vector3(512f, 0f, 456f)), new ItemData(ItemType.GoldCoin) }, //accès mansion 3 && bombes
+                { new LocationId("mansion-15-secret.tmx", "Chest_Small", new Vector3(768f, 0f, 456f)), new ItemData(ItemType.GoldCoin) }, //accès mansion 3 && bombes
+                { new LocationId("mansion-16.tmx", "Chest_Small", new Vector3(1832f, 0f, 636f)), new ItemData(ItemType.Gold_Key) }, //accès mansion 3
+                { new LocationId("mansion-20.tmx", "Chest_Small", new Vector3(504f, 0f, 896f)), new ItemData(ItemType.Gold_Key) }, //accès mansion 3 && damage && teleporter
                 { new LocationId("mansion-bossVampire.tmx", "Chest", new Vector3(704f, 0f, 448f)), new ItemData(ItemType.RexTeleporter) }, //accès mansion 2 && clé && damage
+                { new LocationId("mansion-bossScientist.tmx", "BossScientist", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.HeartQ_4) }, //accès mansion 3 && clé x2 && damage && teleporter
+                { new LocationId("mansion-bossScientist.tmx", "Chest", new Vector3(704f, 0f, 448f)), new ItemData(ItemType.KeyPiece3) }, //accès mansion 3 && clé x2 && damage && teleporter
                 { new LocationId("morkla-3.tmx", "Chest_Small", new Vector3(704f, 0f, 1732f)), new ItemData(ItemType.GoldCoin) }, //accès Morkla && water switch && (lanterne && damage || flippers)
                 { new LocationId("morkla-4.tmx", "Chest_Small", new Vector3(1216f, 0f, 384f)), new ItemData(ItemType.GoldCoin) }, //accès Morkla && water switch && flippers && leviers
                 { new LocationId("morkla-4.tmx", "Chest_Small", new Vector3(448f, 0f, 768f)), new ItemData(ItemType.GoldCoin) }, //accès Morkla && water switch && flippers && leviers
