@@ -4,6 +4,7 @@
     {
         public static bool SkipCutscenes = true;
         public static bool SkipFestival = true;
+        public static bool SkipInvasion = true;
         public static bool OpenWorldState = true;
     }
 }

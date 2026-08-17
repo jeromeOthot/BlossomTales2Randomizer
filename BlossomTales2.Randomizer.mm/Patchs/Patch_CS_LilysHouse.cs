@@ -58,6 +58,9 @@ namespace BlossomTales2
             else
                 Game1.Globals.MainQuestObjective = Globaler.MainGameObjective.intro_enterFestival;
 
+            if (ModGlobals.SkipCutscenes)
+                Game1.Globals.blossomInvasionState = 2;
+
             giveControlToPlayer(lily, false, 3);
             Game1.LOPuppets.Clear();
            // this.bedSheetLily.Zdepth = -99.5f;
