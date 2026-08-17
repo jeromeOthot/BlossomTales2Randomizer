@@ -304,7 +304,7 @@ namespace BlossomTales2.Randomizer.mm
                 { new LocationId("overworld-20x21-cave.tmx", "Chest_Small", new Vector3(296f, 0f, 320f)), new ItemData(ItemType.GoldCoin) }, //accès est && bombes
                 //{ new LocationId("overworld-20x22.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.HeartQ_1) }, //unknown (sirène)
                 { new LocationId("overworld-20x22-combat.tmx", "Chest_Small", new Vector3(2176f, 0f, 1828f)), new ItemData(ItemType.CombatScroll) }, //accès canyon && leviers (&& damage)
-                //{ new LocationId("overworld-21x16.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.GoldCoin) }, //unknown (renommé en jungles 22-20)
+                //{ new LocationId("overworld-21x16.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.GoldCoin) }, //unknown
                 { new LocationId("overworld-21x17.tmx", "Chest_Small", new Vector3(1468f, 0f, 972f)), new ItemData(ItemType.GoldCoin) }, //accès nord && bombes
                 { new LocationId("overworld-21x17-cave.tmx", "Chest_Small", new Vector3(384f, 0f, 320f)), new ItemData(ItemType.GoldCoin) }, //accès nord && bombes
                 { new LocationId("overworld-21x17-cave.tmx", "Chest_Small", new Vector3(576f, 0f, 320f)), new ItemData(ItemType.GoldCoin) }, //accès nord && bombes
@@ -321,6 +321,7 @@ namespace BlossomTales2.Randomizer.mm
                 { new LocationId("overworld-21x20-cave.tmx", "Chest_Small", new Vector3(1268f, 0f, 612f)), new ItemData(ItemType.GoldCoin) },
                 //{ new LocationId("overworld-21x20.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.HeartQ_1) }, //pelle id=6
                 { new LocationId("overworld-22x16.tmx", "Chest_Small", new Vector3(824f, 0f, 2452f)), new ItemData(ItemType.GoldCoin) }, //accès nord && pelle
+                { new LocationId("overworld-22x16.tmx", "SwordInStone", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.Sword) }, //accès nord && flippers && health >= 10
                 { new LocationId("overworld-22x16-cave.tmx", "Chest_Small", new Vector3(1408f, 0f, 1536f)), new ItemData(ItemType.GoldCoin) }, //accès nord && flippers && grappin (&& arc?)
                 { new LocationId("overworld-22x16-cave.tmx", "Chest_Small", new Vector3(1600f, 0f, 1536f)), new ItemData(ItemType.GoldCoin) }, //accès nord && flippers && grappin (&& arc?)
                 { new LocationId("overworld-22x16-cave.tmx", "Chest_Small", new Vector3(1408f, 0f, 1664f)), new ItemData(ItemType.GoldCoin) }, //accès nord && flippers && grappin (&& arc?)
@@ -328,7 +329,7 @@ namespace BlossomTales2.Randomizer.mm
                 { new LocationId("overworld-22x17.tmx", "Chest_Small", new Vector3(684f, 0f, 2104f)), new ItemData(ItemType.GoldCoin) }, //accès nord && bombes
                 { new LocationId("overworld-22x19.tmx", "Chest_Small", new Vector3(2240f, 0f, 1752f)), new ItemData(ItemType.GoldCoin) }, //accès jungle
                 { new LocationId("overworld-22x19-cave.tmx", "Chest_Small", new Vector3(992f, 0f, 1648f)), new ItemData(ItemType.HeartQ_1) }, //accès est && ouvrir portes notes
-                //{ new LocationId("overworld-22x20.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.Honeycomb) }, //unknown
+                //{ new LocationId("overworld-22x20.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.Honeycomb) }, //unknown renommée jungles-22x20.tmx ?
                 { new LocationId("overworld-22x20.tmx", "Chest_Small", new Vector3(264f, 0f, 472f)), new ItemData(ItemType.GoldCoin) }, //accès est
                 { new LocationId("overworld-23x16.tmx", "Chest_Small", new Vector3(2272f, 0f, 1364f)), new ItemData(ItemType.Honeycomb) }, //accès dark
                 { new LocationId("overworld-23x16-cave.tmx", "Chest_Small", new Vector3(736f, 0f, 224f)), new ItemData(ItemType.HeartQ_1) }, //accès dark && arc
@@ -352,9 +353,9 @@ namespace BlossomTales2.Randomizer.mm
                 { new LocationId("overworld-25x17-cave.tmx", "Chest_Small", new Vector3(544f, 0f, 352f)), new ItemData(ItemType.GoldCoin) }, //accès monsterton
                 { new LocationId("overworld-25x17-cave.tmx", "Chest_Small", new Vector3(772f, 0f, 352f)), new ItemData(ItemType.GoldCoin) }, //accès monsterton
                 { new LocationId("overworld-25x17-combat.tmx", "Chest_Small", new Vector3(1280f, 0f, 516f)), new ItemData(ItemType.CombatScroll) }, //accès monsterton && (bombes || teleporter)
-                //{ new LocationId("overworld-25x18-cave.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.GoldCoin) }, //unknown
-                //{ new LocationId("overworld-25x18-cave.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.GoldCoin) }, //unknown
-                //{ new LocationId("overworld-25x18-cave.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.Honeycomb) }, //unknown
+                { new LocationId("overworld-25x18-cave.tmx", "Chest_Small", new Vector3(640f, 0f, 256f)), new ItemData(ItemType.GoldCoin) }, //(accès dark || accès monsterton) && flippers && teleporter
+                { new LocationId("overworld-25x18-cave.tmx", "Chest_Small", new Vector3(732f, 0f, 292f)), new ItemData(ItemType.Honeycomb) }, //(accès dark || accès monsterton) && flippers && teleporter
+                { new LocationId("overworld-25x18-cave.tmx", "Chest_Small", new Vector3(832f, 0f, 256f)), new ItemData(ItemType.GoldCoin) }, //(accès dark || accès monsterton) && flippers && teleporter
                 { new LocationId("owlMap.tmx", "owl", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.Boomerang) }, //accès dark && instrument && chanson wakeup
                 //{ new LocationId("sandCastle.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.Five_Gems) }, //unknown
                 { new LocationId("temple-1.tmx", "Chest_Small", new Vector3(1376f, 0f, 1184f)), new ItemData(ItemType.Gold_Key) }, //accès temple && (arc && leviers || grappin)

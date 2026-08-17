@@ -1,7 +1,14 @@
 ﻿using System;
+using BlossomTales2.Extensions;
 using BlossomTales2.Randomizer.mm;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Mono.Cecil;
+using Mono.Cecil.Cil;
+using MonoMod;
+using MonoMod.Cil;
+using MonoMod.InlineRT;
+using MonoMod.Utils;
 
 namespace BlossomTales2
 {
@@ -46,6 +53,7 @@ namespace BlossomTales2
             Game1.Gui.AddGuiTicker(EquipableItem.IngredientList.GoldCoin, this.Gold);
         }
 
+        //TODO: Extract method
         public void GiveItem(EquipableItem.ItemList item, bool playAnimation = true)
         {
             this.idleCount = 0;
@@ -552,6 +560,47 @@ namespace BlossomTales2
             {
                 Game1.Particles.Add(new P_RemoveItem(Position + new Vector3(0f, 100f, 0f), (int)item));
             }
+        }
+
+        [MonoModIgnore]
+        [PatchPlayerUpdate]
+        public extern override void Update(GameTime gameTime);
+    }
+
+    public class ModPlayer
+    {
+        public static void Mod_GiveKingSword()
+        {
+            RandomizerSingleton.Instance.GiveItemAtLocation("SwordInStone", Vector3.Zero);
+            Game1Extensions.AddLevelPermaObject("SwordInStone", Vector3.Zero);
+        }
+    }
+}
+
+namespace MonoMod
+{
+    [MonoModCustomMethodAttribute(nameof(MonoModRules.PatchPlayerUpdate))]
+    class PatchPlayerUpdateAttribute : Attribute { }
+
+    static partial class MonoModRules
+    {
+        public static void PatchPlayerUpdate(ILContext context, CustomAttribute attrib)
+        {
+            TypeDefinition modPatchPlayerType = MonoModRule.Modder.FindType("BlossomTales2.ModPlayer").Resolve();
+            MethodDefinition mod_GiveKingSwordMethod = modPatchPlayerType.FindMethod("Mod_GiveKingSword");
+            ILCursor cursor = new ILCursor(context);
+            //Find
+            //Game1.player.GiveItem(EquipableItem.ItemList.KingSword);
+            cursor.GotoNext(MoveType.Before,
+                instr => instr.MatchLdarg(0),
+                instr => instr.MatchLdcI4(52),
+                instr => instr.MatchLdcI4(1),
+                instr => instr.MatchCallvirt("BlossomTales2.Player", "GiveItem")
+            );
+            //Replace with
+            //ModPlayer.Mod_GiveKingSword()
+            cursor.RemoveRange(4);
+            cursor.Emit(OpCodes.Call, mod_GiveKingSwordMethod);
         }
     }
 }
