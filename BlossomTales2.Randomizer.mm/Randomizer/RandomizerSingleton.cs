@@ -104,6 +104,7 @@ namespace BlossomTales2.Randomizer.mm
             //accès labyrinthe 18x16: accès labyrinthe && grappin && lanterne
             //accès labyrinthe 17x16: accès labyrinthe 18x16 && teleporter && leviers
             //accès labyrinthe 17x18: ...
+            //accès labyrinthe back: mirror shield
 
             _locations = new Dictionary<LocationId, ItemData>
             {
@@ -225,13 +226,14 @@ namespace BlossomTales2.Randomizer.mm
                 { new LocationId("orchid-tomb-4.tmx", "orchid_heart", new Vector3(604f, 0f, 304f)), new ItemData(ItemType.HeartQ_4) }, //lampe && damage && clé
                 { new LocationId("orchid-tomb-4.tmx", "orchid_sword", new Vector3(604f, 0f, 304f)), new ItemData(ItemType.Sword) }, //lampe && damage && clé
                 { new LocationId("orchid-tomb-4.tmx", "orchid_shield", new Vector3(604f, 0f, 304f)), new ItemData(ItemType.Shield) }, //lampe && damage && clé
-                //{ new LocationId("overworld-15x16.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.GoldCoin) }, //unknown
-                //{ new LocationId("overworld-15x17.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.GoldCoin) }, //unknown
-                //{ new LocationId("overworld-15x18.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.GoldCoin) }, //unknown
-                //{ new LocationId("overworld-15x18-cave.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.GoldCoin) }, //unknown
-                //{ new LocationId("overworld-15x18-cave.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.GoldCoin) }, //unknown
-                //{ new LocationId("overworld-15x18-cave.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.GoldCoin) }, //unknown
-                //{ new LocationId("overworld-15x18-cave.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.GoldCoin) }, //unknown
+                { new LocationId("overworld-15x16.tmx", "Chest_Small", new Vector3(1308f, 0f, 2332f)), new ItemData(ItemType.GoldCoin) }, //accès labyrinthe back
+                { new LocationId("overworld-15x17.tmx", "Chest_Small", new Vector3(2392f, 0f, 2348f)), new ItemData(ItemType.GoldCoin) }, //accès labyrinthe back
+                { new LocationId("overworld-15x18.tmx", "Chest_Small", new Vector3(1948f, 0f, 292f)), new ItemData(ItemType.GoldCoin) }, //accès labyrinthe back
+                { new LocationId("overworld-15x18.tmx", "Chest", new Vector3(1856f, 0f, 1408f)), new ItemData(ItemType.Shield) }, //accès labyrinthe
+                { new LocationId("overworld-15x18-cave.tmx", "Chest_Small", new Vector3(384f, 0f, 268f)), new ItemData(ItemType.GoldCoin) }, //accès labyrinthe back && bombes
+                { new LocationId("overworld-15x18-cave.tmx", "Chest_Small", new Vector3(576f, 0f, 268f)), new ItemData(ItemType.GoldCoin) }, //accès labyrinthe back && bombes
+                { new LocationId("overworld-15x18-cave.tmx", "Chest_Small", new Vector3(384f, 0f, 456f)), new ItemData(ItemType.GoldCoin) }, //accès labyrinthe back && bombes
+                { new LocationId("overworld-15x18-cave.tmx", "Chest_Small", new Vector3(572f, 0f, 456f)), new ItemData(ItemType.GoldCoin) }, //accès labyrinthe back && bombes
                 { new LocationId("overworld-15x19-cave.tmx", "Chest_Small", new Vector3(544f, 0f, 368f)), new ItemData(ItemType.GoldCoin) }, //accès canyon && bombes
                 { new LocationId("overworld-15x19-cave.tmx", "Chest_Small", new Vector3(480f, 0f, 492f)), new ItemData(ItemType.GoldCoin) }, //accès canyon && bombes
                 { new LocationId("overworld-15x19-cave.tmx", "Chest_Small", new Vector3(576f, 0f, 616f)), new ItemData(ItemType.GoldCoin) }, //accès canyon && bombes
@@ -247,7 +249,8 @@ namespace BlossomTales2.Randomizer.mm
                 { new LocationId("overworld-15x22-cave.tmx", "Chest_Small", new Vector3(1408f, 0f, 448f)), new ItemData(ItemType.GoldCoin) }, //accès canyon && ouvrir portes note && levier
                 { new LocationId("overworld-15x22-cave.tmx", "Chest_Small", new Vector3(1312f, 0f, 312f)), new ItemData(ItemType.HeartQ_1) }, //accès canyon && ouvrir portes note && levier
                 { new LocationId("overworld-16x17.tmx", "Chest_Small", new Vector3(1576f, 0f, 280f)), new ItemData(ItemType.GoldCoin) }, //accès labyrinthe 17x16
-                //{ new LocationId("overworld-16x18.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.GoldCoin) }, //unknown
+                { new LocationId("overworld-16x17.tmx", "labSlime", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.HeartQ_1) }, //accès labyrinthe
+                { new LocationId("overworld-16x18.tmx", "Chest_Small", new Vector3(176f, 0f, 1452f)), new ItemData(ItemType.GoldCoin) }, //accès labyrinthe
                 { new LocationId("overworld-16x21-cave.tmx", "Chest_Small", new Vector3(544f, 0f, 228f)), new ItemData(ItemType.HeartQ_1) }, //accès canyon && levier
                 { new LocationId("overworld-16x22.tmx", "beggar", new Vector3(980f, 0f, 1616f)), new ItemData(ItemType.HeartQ_1) }, //accès canyon
                 { new LocationId("overworld-17x16.tmx", "Chest_Small", new Vector3(2376f, 0f, 868f)), new ItemData(ItemType.GoldCoin) }, //accès labyrinthe 17x16
