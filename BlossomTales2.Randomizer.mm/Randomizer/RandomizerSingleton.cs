@@ -52,7 +52,7 @@ namespace BlossomTales2.Randomizer.mm
                 Game1.Dialoger.AddLine($"Item not found on {mapName} {name}");
             return itemByName;
         }
-
+        
         public void GiveItem(ItemData itemData)
         {
             if (itemData.TryConvertToEquipableItem(out EquipableItem.ItemList item))
@@ -403,9 +403,9 @@ namespace BlossomTales2.Randomizer.mm
                 { new LocationId("overworld-20x22.tmx", "PickUpItem", new Vector3(688f, 0f, 916f)), new ItemData(ItemType.CanyonBone) }, //accès canyon
 
                 //les shops
-                { new LocationId("blossom-shop.tmx", "emptyJar", new Vector3(60f, 0f, 284f)), new ItemData(ItemType.Accordian) },
-                { new LocationId("blossom-shop.tmx", "heart", new Vector3(52f, 0f, 284f)), new ItemData(ItemType.BeeMedallion) },
-                { new LocationId("blossom-shop.tmx", "crystal", new Vector3(44f, 0f, 284f)), new ItemData(ItemType.Boomerang) }
+                { new LocationId("blossom-shop.tmx", "left", new Vector3(60f, 0f, 284f)), new ItemData(ItemType.Accordian) },
+                { new LocationId("blossom-shop.tmx", "center", new Vector3(52f, 0f, 284f)), new ItemData(ItemType.BeeMedallion) },
+                { new LocationId("blossom-shop.tmx", "right", new Vector3(44f, 0f, 284f)), new ItemData(ItemType.Boomerang) }
             };
         }
     }

@@ -285,32 +285,25 @@ namespace BlossomTales2
             {
             case 1:
                 ItemData item;
-              int num1 = int.Parse(Event.Substring(4, 3));
-              string str = Event.Substring(8, Event.Length - 8);
+                int num1 = int.Parse(Event.Substring(4, 3));
+                string str = Event.Substring(8, Event.Length - 8);
                 Vector3 distPlayerItem = new Vector3(301, 0, 48);
-              Game1.Dialoger.AddLine($"Event: {Event} choice: {choice}, num1:{num1} , str {str}");
-              // Game1.Dialoger.AddLine($"Map name: {Game1.CurrentLevel.Name} , num1:{Game1.player.Position + distPlayerItem} ");
-
 
               if (Game1.player.Gold >= num1)
               {
                 Game1.player.ChangeGoldAmountReflection(num1 * -1);
                 switch (str)
                 {
-                  case "emptyJar":
-                      item = RandomizerSingleton.Instance.TryGetItemWithMapNameAndName(Game1.CurrentLevel.Name, "emptyJar");
+                  case "left":
+                      item = RandomizerSingleton.Instance.TryGetItemWithMapNameAndName(Game1.CurrentLevel.Name, "left");
                       RandomizerSingleton.Instance.GiveItem(item);
                     break;
-                  case "doubleDamage":
-                      item = RandomizerSingleton.Instance.TryGetItemWithMapNameAndName(Game1.CurrentLevel.Name, "doubleDamage");
+                  case "center":
+                      item = RandomizerSingleton.Instance.TryGetItemWithMapNameAndName(Game1.CurrentLevel.Name, "center");
                       RandomizerSingleton.Instance.GiveItem(item);
                     break;
-                  case "heartPiece":
-                      item = RandomizerSingleton.Instance.TryGetItemWithMapNameAndName(Game1.CurrentLevel.Name, "heart");
-                      RandomizerSingleton.Instance.GiveItem(item);
-                    break;
-                  case "crystal":
-                      item = RandomizerSingleton.Instance.TryGetItemWithMapNameAndName(Game1.CurrentLevel.Name, "crystal");
+                  case "right":
+                      item = RandomizerSingleton.Instance.TryGetItemWithMapNameAndName(Game1.CurrentLevel.Name, "right");
                       RandomizerSingleton.Instance.GiveItem(item);
                     break;
                 }
