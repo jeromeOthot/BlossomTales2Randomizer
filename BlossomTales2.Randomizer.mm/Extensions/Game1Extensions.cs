@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using BlossomTales2.Randomizer.mm;
+using Microsoft.Xna.Framework;
 using System.Linq;
 
 namespace BlossomTales2.Extensions
@@ -20,13 +21,13 @@ namespace BlossomTales2.Extensions
             return Game1.Perma_Objects.FirstOrDefault(obj => obj.Name == objectiveName) != null;
         }
 
-        public static bool HasLevelPermaObject(string name)
+        public static bool HasLevelPermaObject(string name, bool ignoreLevel = false)
         {
             return Game1.Perma_Objects.FirstOrDefault(predicate) != null;
 
             bool predicate(PermaListItem item)
             {
-                return item.LevelName == Game1.CurrentLevel.Name && item.Name == name;
+                return (ignoreLevel || item.LevelName == Game1.CurrentLevel.Name) && item.Name == name;
             }
         }
 
