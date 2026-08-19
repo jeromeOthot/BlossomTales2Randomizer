@@ -416,9 +416,30 @@ namespace BlossomTales2.Randomizer.mm
                 { new LocationId("overworld-20x22.tmx", "PickUpItem", new Vector3(688f, 0f, 916f)), new ItemData(ItemType.CanyonBone) }, //accès canyon
 
                 //les shops
-                { new LocationId("blossom-shop.tmx", "left", new Vector3(60f, 0f, 284f)), new ItemData(ItemType.Accordian) },
-                { new LocationId("blossom-shop.tmx", "center", new Vector3(52f, 0f, 284f)), new ItemData(ItemType.BeeMedallion) },
-                { new LocationId("blossom-shop.tmx", "right", new Vector3(44f, 0f, 284f)), new ItemData(ItemType.Boomerang) }
+                //Blossom
+                { new LocationId("blossom-shop.tmx", "left", new Vector3(60f, 0f, 284f)), new ItemData(ItemType.Jar_Empty) },
+                { new LocationId("blossom-shop.tmx", "center", new Vector3(52f, 0f, 284f)), new ItemData(ItemType.Crystal) },
+                { new LocationId("blossom-shop.tmx", "right", new Vector3(44f, 0f, 284f)), new ItemData(ItemType.HeartQ_1) },
+                //Fishing village
+                { new LocationId("anchor-shop.tmx", "left", new Vector3(336f, 0f, 324f)), new ItemData(ItemType.Jar_Empty) },
+                { new LocationId("anchor-shop.tmx", "center", new Vector3(536f, 0f, 324f)), new ItemData(ItemType.Crystal) },
+                { new LocationId("anchor-shop.tmx", "right", new Vector3(636f, 0f, 324f)), new ItemData(ItemType.HeartQ_1) },
+                //Canyon village
+                { new LocationId("canyon-shop.tmx", "left", new Vector3(520f, 0f, 356f)), new ItemData(ItemType.Jar_Empty) },
+                { new LocationId("canyon-shop.tmx", "center", new Vector3(620f, 0f, 356f)), new ItemData(ItemType.Crystal) },
+                { new LocationId("canyon-shop.tmx", "right", new Vector3(716f, 0f, 356f)), new ItemData(ItemType.HeartQ_1) },
+                //Darklands village
+                { new LocationId("darklands-house2-shop.tmx", "left", new Vector3(576f, 0f, 356f)), new ItemData(ItemType.Jar_Empty) },
+                { new LocationId("darklands-house2-shop.tmx", "center", new Vector3(664f, 0f, 356f)), new ItemData(ItemType.Crystal) },
+                { new LocationId("darklands-house2-shop.tmx", "right", new Vector3(772f, 0f, 356f)), new ItemData(ItemType.HeartQ_1) },
+                //pirate Ship
+                { new LocationId("pirateShip-shop.tmx", "left", new Vector3(572f, 0f, 136f)), new ItemData(ItemType.Jar_Empty) },
+                { new LocationId("pirateShip-shop.tmx", "center", new Vector3(672f, 0f, 136f)), new ItemData(ItemType.Crystal) },
+                { new LocationId("pirateShip-shop.tmx", "right", new Vector3(772f, 0f, 136f)), new ItemData(ItemType.HeartQ_1) },
+                //Castle
+                { new LocationId("labHouse-shop.tmx", "left", new Vector3(360f, 0f, 348f)), new ItemData(ItemType.Jar_Empty) },
+                { new LocationId("labHouse-shop.tmx", "center", new Vector3(452f, 0f, 348f)), new ItemData(ItemType.Crystal) },
+                { new LocationId("labHouse-shop.tmx", "right", new Vector3(544f, 0f, 348f)), new ItemData(ItemType.HeartQ_1) }
             };
         }
     }

@@ -24,25 +24,24 @@ namespace BlossomTales2
 
             Game1.Globals.ShopItems = new List<int>((IEnumerable<int>) new int[18]
             {
-                //{ new LocationId("blossom-shop.tmx", "emptyJar", new Vector3(60f, 0f, 284f)), new ItemData(ItemType.CanyonBone) },
                 (int)RandomizerSingleton.Instance.TryGetItem("blossom-shop.tmx", "left", new Vector3(60f, 0f, 284f)).Item,
                 (int)RandomizerSingleton.Instance.TryGetItem("blossom-shop.tmx", "center", new Vector3(52f, 0f, 284f)).Item,
                 (int)RandomizerSingleton.Instance.TryGetItem("blossom-shop.tmx", "right", new Vector3(44f, 0f, 284f)).Item,
-                4,
-                5,
-                6,
-                7,
-                8,
-                9,
-                10,
-                11,
-                12,
-                13,
-                14,
-                15,
-                16,
-                17,
-                18
+                (int)RandomizerSingleton.Instance.TryGetItem("anchor-shop.tmx", "left", new Vector3(336f, 0f, 324f)).Item,
+                (int)RandomizerSingleton.Instance.TryGetItem("anchor-shop.tmx", "center", new Vector3(536f, 0f, 324f)).Item,
+                (int)RandomizerSingleton.Instance.TryGetItem("anchor-shop.tmx", "right", new Vector3(636f, 0f, 324f)).Item,
+                (int)RandomizerSingleton.Instance.TryGetItem("canyon-shop.tmx", "left", new Vector3(520f, 0f, 356f)).Item,
+                (int)RandomizerSingleton.Instance.TryGetItem("canyon-shop.tmx", "center", new Vector3(620f, 0f, 356f)).Item,
+                (int)RandomizerSingleton.Instance.TryGetItem("canyon-shop.tmx", "right", new Vector3(716f, 0f, 356f)).Item,
+                (int)RandomizerSingleton.Instance.TryGetItem("darklands-house2-shop.tmx", "left", new Vector3(576f, 0f, 356f)).Item,
+                (int)RandomizerSingleton.Instance.TryGetItem("darklands-house2-shop.tmx", "center", new Vector3(664f, 0f, 356f)).Item,
+                (int)RandomizerSingleton.Instance.TryGetItem("darklands-house2-shop.tmx", "right", new Vector3(772f, 0f, 356f)).Item,
+                (int)RandomizerSingleton.Instance.TryGetItem("pirateShip-shop.tmx", "left", new Vector3(572f, 0f, 136f)).Item,
+                (int)RandomizerSingleton.Instance.TryGetItem("pirateShip-shop.tmx", "center", new Vector3(672f, 0f, 136f)).Item,
+                (int)RandomizerSingleton.Instance.TryGetItem("pirateShip-shop.tmx", "right", new Vector3(772f, 0f, 136f)).Item,
+                (int)RandomizerSingleton.Instance.TryGetItem("labHouse-shop.tmx", "left", new Vector3(360f, 0f, 348f)).Item,
+                (int)RandomizerSingleton.Instance.TryGetItem("labHouse-shop.tmx", "center", new Vector3(452f, 0f, 348f)).Item,
+                (int)RandomizerSingleton.Instance.TryGetItem("labHouse-shop.tmx", "right", new Vector3(544f, 0f, 348f)).Item,
             });
         }
 
