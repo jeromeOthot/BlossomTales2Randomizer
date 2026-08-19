@@ -43,6 +43,9 @@ namespace BlossomTales2
 
             switch (Event)
             {
+                case "giveFishingHeart":
+                    GiveFishingHeartEvent();
+                    break;
                 case "giveFlowerHeart":
                     GiveFlowerHeartEvent();
                     break;
@@ -207,6 +210,12 @@ namespace BlossomTales2
         {
             RandomizerSingleton.Instance.GiveItemAtLocation(npc, Vector3.Zero);
             Game1Extensions.AddLevelPermaObject(npc, Vector3.Zero);
+        }
+
+        private static void GiveFishingHeartEvent()
+        {
+            Game1.Globals.FishShop_State = 11;
+            GiveNpcItem("fisherman");
         }
 
         private static void GiveFlowerHeartEvent()
