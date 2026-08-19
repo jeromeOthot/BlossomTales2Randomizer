@@ -373,7 +373,7 @@ namespace BlossomTales2.Randomizer.mm
                 { new LocationId("overworld-25x18-cave.tmx", "Chest_Small", new Vector3(732f, 0f, 292f)), new ItemData(ItemType.Honeycomb) }, //(accès dark || accès monsterton) && flippers && teleporter
                 { new LocationId("overworld-25x18-cave.tmx", "Chest_Small", new Vector3(832f, 0f, 256f)), new ItemData(ItemType.GoldCoin) }, //(accès dark || accès monsterton) && flippers && teleporter
                 { new LocationId("owlMap.tmx", "owl", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.Boomerang) }, //accès dark && instrument && chanson wakeup
-                //{ new LocationId("sandCastle.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.Five_Gems) }, //unknown
+                { new LocationId("sandCastle.tmx", "Chest", new Vector3(384f, 0f, 256f)), new ItemData(ItemType.HeartQ_1) }, //accès jungle
                 { new LocationId("temple-1.tmx", "Chest_Small", new Vector3(1376f, 0f, 1184f)), new ItemData(ItemType.Gold_Key) }, //accès temple && (arc && leviers || grappin)
                 { new LocationId("temple-4.tmx", "Chest_Small", new Vector3(3232f, 0f, 1392f)), new ItemData(ItemType.GoldCoin) }, //accès temple 2 && leviers
                 { new LocationId("temple-5.tmx", "Chest_Small", new Vector3(624f, 0f, 1728f)), new ItemData(ItemType.Gold_Key) }, //accès temple 2 && (leviers || grappin)
