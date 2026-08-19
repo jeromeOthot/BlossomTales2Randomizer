@@ -55,6 +55,9 @@ namespace BlossomTales2
                 case "giveTribow":
                     GiveNpcItem("hunter");
                     break;
+                case "giveBeePendant":
+                    GiveBeePendantEvent();
+                    break;
                 case "giveFarmerItem":
                     GiveNpcItem("farmer");
                     break;
@@ -220,6 +223,15 @@ namespace BlossomTales2
         {
             Game1.Globals.ArchJungle_State = 3;
             GiveNpcItem("archJungle");
+        }
+
+        private static void GiveBeePendantEvent()
+        {
+            Game1.Globals.QueenBee_State = 2;
+            Game1.player.Inventory_NE.Remove(EquipableItem.ItemList.Honeycomb);
+            Game1.player.Count_Honeycombs = 0;
+            GiveNpcItem("queenBee");
+            Game1.player.Direction = 3;
         }
 
         private static bool Mod_ShouldFishCrabs()
