@@ -60,7 +60,7 @@ namespace BlossomTales2
             if (ModGlobals.OpenWorldState)
             {
                 Game1Extensions.MarkObjectiveComplete(Globaler.MainGameObjective.dark_fightScientist);
-                //Game1.Globals.MainQuestObjective = mainGameObjective;
+                Game1.Globals.MainQuestObjective = mainGameObjective;
             }
         }
 

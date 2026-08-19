@@ -52,7 +52,7 @@ namespace BlossomTales2.Randomizer.mm
                 Game1.Dialoger.AddLine($"Item not found on {mapName} {name}");
             return itemByName;
         }
-        
+
         public void GiveItem(ItemData itemData)
         {
             if (itemData.TryConvertToEquipableItem(out EquipableItem.ItemList item))
@@ -105,6 +105,12 @@ namespace BlossomTales2.Randomizer.mm
             //accès labyrinthe 17x16: accès labyrinthe 18x16 && teleporter && leviers
             //accès labyrinthe 17x18: ...
             //accès labyrinthe back: mirror shield
+            //accès chateau = accès labyrinthe back
+            //accès chateau 2 = accès château && teleporter && grappin && leviers && arc
+            //accès chateau 3 = accès chateau && clé
+            //accès château 4 = accès château 3 && clé
+            //accès château 5 = accès château 4 && grappin && teleporter && lanterne && leviers && (mirror shield || damage)
+            //accès minotaure: accès château 5 && mirror shield && (arc || boomerang || grappin || bombes || (teleporter && épée) || épée 4)
 
             _locations = new Dictionary<LocationId, ItemData>
             {
@@ -129,10 +135,11 @@ namespace BlossomTales2.Randomizer.mm
                 { new LocationId("canyon-house1.tmx", "Chest_Small", new Vector3(576f, 0f, 208f)), new ItemData(ItemType.GoldCoin) }, //accès canyon
                 { new LocationId("canyon-house3.tmx", "Chest_Small", new Vector3(772f, 0f, 580f)), new ItemData(ItemType.GoldCoin) }, //accès canyon
                 { new LocationId("canyon-house3.tmx", "Chest_Small", new Vector3(344f, 0f, 496f)), new ItemData(ItemType.GoldCoin) }, //accès canyon
-                //{ new LocationId("castle-4.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.Gold_Key) }, //unknown
-                //{ new LocationId("castle-6.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.GoldCoin) }, //unknown
-                //{ new LocationId("castle-9.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.GoldCoin) }, //unknown
-                //{ new LocationId("castle-12.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.GoldCoin) }, //unknown
+                { new LocationId("castle-4.tmx", "Chest_Small", new Vector3(832f, 0f, 1204f)), new ItemData(ItemType.Gold_Key) }, //accès château 2
+                { new LocationId("castle-6.tmx", "Chest_Small", new Vector3(420f, 0f, 1260f)), new ItemData(ItemType.GoldCoin) }, //accès château 3
+                { new LocationId("castle-7.tmx", "Chest_Small", new Vector3(544f, 0f, 472f)), new ItemData(ItemType.Gold_Key) }, //accès château 3 && mirror shield
+                { new LocationId("castle-9.tmx", "Chest_Small", new Vector3(2436f, 0f, 856f)), new ItemData(ItemType.GoldCoin) }, //accès château 4 && (grappin || teleporter)
+                { new LocationId("castle-12.tmx", "Chest_Small", new Vector3(1728f, 0f, 1120f)), new ItemData(ItemType.GoldCoin) }, //accès château 5
                 { new LocationId("darklands-house2-floor2.tmx", "bard_song", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.WakeUp) }, //accès monsterton
                 { new LocationId("darklands-house2-floor2.tmx", "Chest_Small", new Vector3(284f, 0f, 496f)), new ItemData(ItemType.GoldCoin) }, //accès monsterton
                 { new LocationId("darklands-house6.tmx", "Chest_Small", new Vector3(264f, 0f, 428f)), new ItemData(ItemType.GoldCoin) }, //accès monsterton
