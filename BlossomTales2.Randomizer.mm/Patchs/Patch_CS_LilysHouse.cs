@@ -74,6 +74,9 @@ namespace BlossomTales2
             npc.linePointer = 199;
             Game1.CurrentLevel.LevelObjects.Add(npc);
             Running = false;
+
+            //Mettre cette ligne si on veut commencer une game avec tout pour debbuger
+            //patch_Game1.UnlockAllForDebug();
         }
 
         private void Mod_GrandmaGiveItem(string locationName)
