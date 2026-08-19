@@ -115,6 +115,7 @@ namespace BlossomTales2.Randomizer.mm
             _locations = new Dictionary<LocationId, ItemData>
             {
                 { new LocationId("anchor-house4.tmx", "Chest_Small", new Vector3(348f, 0f, 436f)), new ItemData(ItemType.GoldCoin) }, //accès jungle
+                { new LocationId("anchor-shop.tmx", "fisherman", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.HeartQ_1) }, //canne pêche && (accès est || accès ouest || accès nord) && accès jungle && accès canyon && accès dark && accès labyrinthe
                 { new LocationId("blossom-blacksmith.tmx", "npc21", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.Bow) }, //Flag: MorklaComplete
                 { new LocationId("blossom-house1.tmx", "Chest_Small", new Vector3(672f, 0f, 308f)), new ItemData(ItemType.GoldCoin) },
                 { new LocationId("blossom-house2.tmx", "Chest_Small", new Vector3(708f, 0f, 356f)), new ItemData(ItemType.GoldCoin) },
