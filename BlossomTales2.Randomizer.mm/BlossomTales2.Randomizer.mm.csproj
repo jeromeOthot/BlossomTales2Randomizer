@@ -33,6 +33,7 @@
 
     <ItemGroup>
       <PackageReference Include="MonoMod" Version="22.7.31.1" />
+      <PackageReference Include="Newtonsoft.Json" Version="13.0.5-beta1" />
     </ItemGroup>
 
 </Project>

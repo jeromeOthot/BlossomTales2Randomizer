@@ -9,11 +9,16 @@ namespace BlossomTales2.Randomizer.mm
     public class RandomizerSingleton
     {
         public static RandomizerSingleton Instance { get; private set; }
-        private Dictionary<LocationId, ItemData> _locations;
+        private Dictionary<LocationId, ItemData> _locationsVanilla;
+        private Dictionary<LocationId, ItemData> _randomizedLocations;
+
+        private Random _random;
 
         public static void Initialize()
         {
             Instance = new RandomizerSingleton();
+            int seed = 0;
+            Instance._random = new Random(seed);
             Instance.InitializeLocations();
         }
 
@@ -42,12 +47,12 @@ namespace BlossomTales2.Randomizer.mm
         public bool TryGetItemAtLocation(string mapName, string name, Vector3 position, out ItemData item)
         {
             LocationId location = new  LocationId(mapName, name, position);
-            return _locations.TryGetValue(location, out item);
+            return _randomizedLocations.TryGetValue(location, out item);
         }
 
         public ItemData TryGetItemWithMapNameAndName(string mapName, string name)
         {
-            var itemByName = _locations.Where(x => x.Key.MapName == mapName).Where(x => x.Key.Name == name).FirstOrDefault().Value;
+            var itemByName = _randomizedLocations.Where(x => x.Key.MapName == mapName).Where(x => x.Key.Name == name).FirstOrDefault().Value;
             if(itemByName  == null)
                 Game1.Dialoger.AddLine($"Item not found on {mapName} {name}");
             return itemByName;
@@ -112,7 +117,10 @@ namespace BlossomTales2.Randomizer.mm
             //accès château 5 = accès château 4 && grappin && teleporter && lanterne && leviers && (mirror shield || damage)
             //accès minotaure: accès château 5 && mirror shield && (arc || boomerang || grappin || bombes || (teleporter && épée) || épée 4)
 
-            _locations = new Dictionary<LocationId, ItemData>
+
+            //TODO: Split locations into separate dictionary based on item pools
+            // Then, merge all into one big location list based on item settings
+            _locationsVanilla = new Dictionary<LocationId, ItemData>
             {
                 { new LocationId("anchor-house4.tmx", "Chest_Small", new Vector3(348f, 0f, 436f)), new ItemData(ItemType.GoldCoin) }, //accès jungle
                 { new LocationId("anchor-shop.tmx", "fisherman", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.HeartQ_1) }, //canne pêche && (accès est || accès ouest || accès nord) && accès jungle && accès canyon && accès dark && accès labyrinthe
@@ -127,6 +135,7 @@ namespace BlossomTales2.Randomizer.mm
                 { new LocationId("blossom-house5.tmx", "Chest_Small", new Vector3(660f, 0f, 348f)), new ItemData(ItemType.GoldCoin) }, //accès est && lampe
                 { new LocationId("blossom-lilyHouse.tmx", "npc7_1", new Vector3(480f, 0f, 328f)), new ItemData(ItemType.Shield) },
                 { new LocationId("blossom-lilyHouse.tmx", "npc7_2", new Vector3(480f, 0f, 328f)), new ItemData(ItemType.Sword) },
+                { new LocationId("blossom-tavern.tmx", "bard_song", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.GrandpaHint) }, //instrument
                 //Blossom tavern  Chest
                 { new LocationId("blossom-tavern-basement.tmx", "Chest_Small", new Vector3(256f, 0f, 272f)), new ItemData(ItemType.GoldCoin) }, //bombes
                 { new LocationId("blossom-tavern-basement.tmx", "Chest_Small", new Vector3(256f, 0f, 464f)), new ItemData(ItemType.GoldCoin) },  //bombes
@@ -181,6 +190,7 @@ namespace BlossomTales2.Randomizer.mm
                 { new LocationId("jungles-23x20-cave.tmx", "Chest_Small", new Vector3(640f, 0f, 492f)), new ItemData(ItemType.GoldCoin) }, //accès jungle && bombes
                 { new LocationId("jungles-23x21.tmx", "fisherman", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.FishingRod) }, //accès jungle
                 { new LocationId("jungles-23x22.tmx", "Chest_Small", new Vector3(740f, 0f, 1252f)), new ItemData(ItemType.GoldCoin) }, //accès jungle
+                { new LocationId("jungles-23x22.tmx", "bard_song", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.CallHorse) }, //accès jungle && grappin
                 { new LocationId("jungles-24x19.tmx", "Chest_Small", new Vector3(1548f, 0f, 1272f)), new ItemData(ItemType.Honeycomb) }, //accès jungle && (flippers || bombes)
                 { new LocationId("jungles-24x19.tmx", "Chest_Small", new Vector3(2468f, 0f, 2308f)), new ItemData(ItemType.GoldCoin) }, //accès jungle NE
                 { new LocationId("jungles-24x19-cave.tmx", "Chest_Small", new Vector3(288f, 0f, 272f)), new ItemData(ItemType.GoldCoin) }, //accès dark && bombes
@@ -298,7 +308,7 @@ namespace BlossomTales2.Randomizer.mm
                 { new LocationId("overworld-19x17.tmx", "queenBee", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.BeeMedallion) }, //accès nord && honeycomb == 10
                 { new LocationId("overworld-19x18.tmx", "Chest_Small", new Vector3(184f, 0f, 296f)), new ItemData(ItemType.Honeycomb) }, //accès ouest
                 { new LocationId("overworld-19x18-flowerShop.tmx", "flowerShop", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.HeartQ_1) }, //accès nord && accès jungle && accès canyon && accès dark && accès labyrinthe
-                //{ new LocationId("overworld-19x19.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.HeartQ_1) }, //pelle id=2
+                { new LocationId("overworld-19x19.tmx", "Chest_Small", new Vector3(2084f, 0f, 1996f)), new ItemData(ItemType.HeartQ_1) }, //pelle id=2
                 { new LocationId("overworld-19x19-cave.tmx", "Chest_Small", new Vector3(608f, 0f, 224f)), new ItemData(ItemType.HeartQ_1) }, //accès ouest && arc
                 //{ new LocationId("overworld-19x20-noteCave.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.GoldCoin) }, //unknown
                 //{ new LocationId("overworld-19x20-noteCave.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.GoldCoin) }, //unknown
@@ -333,10 +343,10 @@ namespace BlossomTales2.Randomizer.mm
                 { new LocationId("overworld-21x18-cave.tmx", "Chest_Small", new Vector3(480f, 0f, 324f)), new ItemData(ItemType.GoldCoin) }, //accès nord && bombes
                 { new LocationId("overworld-21x18-cave.tmx", "Chest_Small", new Vector3(384f, 0f, 480f)), new ItemData(ItemType.GoldCoin) }, //accès nord && bombes
                 { new LocationId("overworld-21x18-cave.tmx", "Chest_Small", new Vector3(576f, 0f, 480f)), new ItemData(ItemType.GoldCoin) }, //accès nord && bombes
-                //{ new LocationId("overworld-21x19.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.HeartQ_1) }, //pelle id=2
+                { new LocationId("overworld-21x19.tmx", "Chest_Small", new Vector3(340f, 0f, 792f)), new ItemData(ItemType.HeartQ_1) }, //pelle id=2
                 { new LocationId("overworld-21x20-cave.tmx", "Chest_Small", new Vector3(1192f, 0f, 612f)), new ItemData(ItemType.GoldCoin) },
                 { new LocationId("overworld-21x20-cave.tmx", "Chest_Small", new Vector3(1268f, 0f, 612f)), new ItemData(ItemType.GoldCoin) },
-                //{ new LocationId("overworld-21x20.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.HeartQ_1) }, //pelle id=6
+                { new LocationId("overworld-21x20.tmx", "Chest_Small", new Vector3(2096f, 0f, 2324f)), new ItemData(ItemType.HeartQ_1) }, //accès jungle ile && canne pêche && pelle
                 { new LocationId("overworld-22x16.tmx", "Chest_Small", new Vector3(824f, 0f, 2452f)), new ItemData(ItemType.GoldCoin) }, //accès nord && pelle
                 { new LocationId("overworld-22x16.tmx", "SwordInStone", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.Sword) }, //accès nord && flippers && health >= 10
                 { new LocationId("overworld-22x16-cave.tmx", "Chest_Small", new Vector3(1408f, 0f, 1536f)), new ItemData(ItemType.GoldCoin) }, //accès nord && flippers && grappin (&& arc?)
@@ -441,6 +451,25 @@ namespace BlossomTales2.Randomizer.mm
                 { new LocationId("labHouse-shop.tmx", "center", new Vector3(452f, 0f, 348f)), new ItemData(ItemType.Crystal) },
                 { new LocationId("labHouse-shop.tmx", "right", new Vector3(544f, 0f, 348f)), new ItemData(ItemType.HeartQ_1) }
             };
+
+            List<ItemData> itemPool = _locationsVanilla.Values.ToList();
+            //ShuffleList(itemPool);
+
+            GameLogger.LogInfo("Spoiler log begin:");
+
+            _randomizedLocations = new Dictionary<LocationId, ItemData>();
+            List<LocationId> keyList = _locationsVanilla.Keys.ToList();
+            for (int i = 0; i < keyList.Count; i++)
+            {
+                _randomizedLocations.Add(keyList[i], itemPool[i]);
+                GameLogger.LogInfo(keyList[i] + " " + itemPool[i]);
+            }
+            GameLogger.LogInfo("Spoiler log end");
+        }
+
+        private void ShuffleList(List<ItemData> list)
+        {
+            list.Sort((x, y) => _random.Next(-1, 2));
         }
     }
 }

@@ -28,5 +28,10 @@ namespace BlossomTales2.Randomizer.mm
             song = default;
             return Enum.TryParse(Item.ToString(), out song);
         }
+
+        public override string ToString()
+        {
+            return Item.ToString();
+        }
     }
 }

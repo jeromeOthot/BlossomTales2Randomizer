@@ -1,15 +1,27 @@
 ﻿using BlossomTales2.Randomizer.mm;
+using MonoMod;
 
 namespace BlossomTales2
 {
     class patch_Game1 : Game1
     {
         public extern void orig_Initialize();
+        public static extern void orig_LoadStuff();
+
         protected override void Initialize()
         {
-            RandomizerSingleton.Initialize();
-            GameLogger.LogInfo("Hello world");
             orig_Initialize();
+        }
+
+        public static void LoadStuff()
+        {
+            orig_LoadStuff();
+            GameLogger.LogInfo("Is save successful " + !DidntCompleteLoad);
+            if (!DidntCompleteLoad)
+            {
+                //TODO: Loader la liste de locations depuis la save
+                RandomizerSingleton.Initialize();
+            }
         }
 
         //TODO: Trouver une façon de caller la vraie fonction. Game1.RandomFloat
