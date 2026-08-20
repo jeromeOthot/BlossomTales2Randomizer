@@ -90,6 +90,11 @@ namespace BlossomTales2
                 {
                     RandomizerSingleton.Instance.GiveItem(item);
                 }
+                else
+                {
+                    GameLogger.LogInfo("Localisation pickItem NOT FOUND: " + new LocationId(Game1.CurrentLevel.Name, this.Name, this.Position).ToString());
+                    RandomizerSingleton.Instance.GiveItem(new ItemData(ItemType.Tomahawk));
+                }
             }
             else if (this.IDNumber == 38)
             {
