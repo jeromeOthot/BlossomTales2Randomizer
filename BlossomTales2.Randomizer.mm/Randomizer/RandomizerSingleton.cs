@@ -9,11 +9,16 @@ namespace BlossomTales2.Randomizer.mm
     public class RandomizerSingleton
     {
         public static RandomizerSingleton Instance { get; private set; }
-        private Dictionary<LocationId, ItemData> _locations;
+        private Dictionary<LocationId, ItemData> _locationsVanilla;
+        private Dictionary<LocationId, ItemData> _randomizedLocations;
+
+        private Random _random;
 
         public static void Initialize()
         {
             Instance = new RandomizerSingleton();
+            int seed = 0;
+            Instance._random = new Random(seed);
             Instance.InitializeLocations();
         }
 
@@ -42,12 +47,12 @@ namespace BlossomTales2.Randomizer.mm
         public bool TryGetItemAtLocation(string mapName, string name, Vector3 position, out ItemData item)
         {
             LocationId location = new  LocationId(mapName, name, position);
-            return _locations.TryGetValue(location, out item);
+            return _randomizedLocations.TryGetValue(location, out item);
         }
 
         public ItemData TryGetItemWithMapNameAndName(string mapName, string name)
         {
-            var itemByName = _locations.Where(x => x.Key.MapName == mapName).Where(x => x.Key.Name == name).FirstOrDefault().Value;
+            var itemByName = _randomizedLocations.Where(x => x.Key.MapName == mapName).Where(x => x.Key.Name == name).FirstOrDefault().Value;
             if(itemByName  == null)
                 Game1.Dialoger.AddLine($"Item not found on {mapName} {name}");
             return itemByName;
@@ -112,9 +117,10 @@ namespace BlossomTales2.Randomizer.mm
             //accès château 5 = accès château 4 && grappin && teleporter && lanterne && leviers && (mirror shield || damage)
             //accès minotaure: accès château 5 && mirror shield && (arc || boomerang || grappin || bombes || (teleporter && épée) || épée 4)
 
+
             //TODO: Split locations into separate dictionary based on item pools
             // Then, merge all into one big location list based on item settings
-            _locations = new Dictionary<LocationId, ItemData>
+            _locationsVanilla = new Dictionary<LocationId, ItemData>
             {
                 { new LocationId("anchor-house4.tmx", "Chest_Small", new Vector3(348f, 0f, 436f)), new ItemData(ItemType.GoldCoin) }, //accès jungle
                 { new LocationId("anchor-shop.tmx", "fisherman", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.HeartQ_1) }, //canne pêche && (accès est || accès ouest || accès nord) && accès jungle && accès canyon && accès dark && accès labyrinthe
@@ -445,6 +451,25 @@ namespace BlossomTales2.Randomizer.mm
                 { new LocationId("labHouse-shop.tmx", "center", new Vector3(452f, 0f, 348f)), new ItemData(ItemType.Crystal) },
                 { new LocationId("labHouse-shop.tmx", "right", new Vector3(544f, 0f, 348f)), new ItemData(ItemType.HeartQ_1) }
             };
+
+            List<ItemData> itemPool = _locationsVanilla.Values.ToList();
+            //ShuffleList(itemPool);
+
+            GameLogger.LogInfo("Spoiler log begin:");
+
+            _randomizedLocations = new Dictionary<LocationId, ItemData>();
+            List<LocationId> keyList = _locationsVanilla.Keys.ToList();
+            for (int i = 0; i < keyList.Count; i++)
+            {
+                _randomizedLocations.Add(keyList[i], itemPool[i]);
+                GameLogger.LogInfo(keyList[i] + " " + itemPool[i]);
+            }
+            GameLogger.LogInfo("Spoiler log end");
+        }
+
+        private void ShuffleList(List<ItemData> list)
+        {
+            list.Sort((x, y) => _random.Next(-1, 2));
         }
     }
 }
