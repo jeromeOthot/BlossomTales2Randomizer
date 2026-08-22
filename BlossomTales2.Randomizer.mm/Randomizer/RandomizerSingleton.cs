@@ -453,18 +453,23 @@ namespace BlossomTales2.Randomizer.mm
                 { new LocationId("labHouse-shop.tmx", "right", new Vector3(544f, 0f, 348f)), new ItemData(ItemType.HeartQ_1) },
 
                 //Colleseum
-                { new LocationId("colosseum.tmx", "price1", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.GoldCoin) },
-                { new LocationId("colosseum.tmx", "price2", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.GoldCoin) },
-                { new LocationId("colosseum.tmx", "price3", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.GoldCoin) },
-                { new LocationId("colosseum.tmx", "price4", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.GoldCoin) },
-                { new LocationId("colosseum.tmx", "price5", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.GoldCoin) },
-                { new LocationId("colosseum.tmx", "price6", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.GoldCoin) },
-                { new LocationId("colosseum.tmx", "price7", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.GoldCoin) },
-                { new LocationId("colosseum.tmx", "price8", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.GoldCoin) },
-                { new LocationId("colosseum.tmx", "price9", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.GoldCoin) },
-                { new LocationId("colosseum.tmx", "price10", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.HeartQ_1) },
-                { new LocationId("colosseum.tmx", "price11", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.Crystal) },
+                { new LocationId("colosseum.tmx", "price_heart", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.HeartQ_1) },
+                { new LocationId("colosseum.tmx", "price_crystal", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.Crystal) },
             };
+
+            if (ModGlobals.RandomizeColiseumCoins)
+            {
+                _locationsVanilla.Add(new LocationId("colosseum.tmx", "price1", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.GoldCoin));
+                _locationsVanilla.Add(new LocationId("colosseum.tmx", "price2", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.GoldCoin));
+                _locationsVanilla.Add(new LocationId("colosseum.tmx", "price3", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.GoldCoin));
+                _locationsVanilla.Add(new LocationId("colosseum.tmx", "price4", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.GoldCoin));
+                _locationsVanilla.Add(new LocationId("colosseum.tmx", "price5", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.GoldCoin));
+                _locationsVanilla.Add(new LocationId("colosseum.tmx", "price6", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.GoldCoin));
+                _locationsVanilla.Add(new LocationId("colosseum.tmx", "price7", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.GoldCoin));
+                _locationsVanilla.Add(new LocationId("colosseum.tmx", "price8", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.GoldCoin));
+                _locationsVanilla.Add(new LocationId("colosseum.tmx", "price9", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.GoldCoin));
+            }
+
 
             List<ItemData> itemPool = _locationsVanilla.Values.ToList();
             //ShuffleList(itemPool);

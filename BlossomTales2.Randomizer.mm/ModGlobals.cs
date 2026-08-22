@@ -6,5 +6,6 @@
         public static bool SkipFestival = true;
         public static bool SkipInvasion = true;
         public static bool OpenWorldState = true;
+        public static bool RandomizeColiseumCoins = false;
     }
 }
