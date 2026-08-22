@@ -36,7 +36,7 @@ namespace BlossomTales2
             if(this.IDNumber == 37)
             {
                 GameLogger.LogInfo(new LocationId(Game1.CurrentLevel.Name, this.Name, this.Position).ToString());
-                ItemData item = RandomizerSingleton.Instance.TryGetItemByNameAndLocation(this.Name, this.Position);
+                ItemData item = RandomizerSingleton.Instance.GetItemByNameAndLocation(this.Name, this.Position);
                 if (item != null)
                 {
                     this.Sprite = Game1.masterTileset; //Game1.content.Load<Texture2D>("Sprites/LevelObjects/_patchPickItem");
@@ -85,7 +85,7 @@ namespace BlossomTales2
                 Game1.player.GiveIngredientReflection(EquipableItem.IngredientList.Mushroom);
             else if (this.IDNumber == 37)
             {
-                ItemData item = RandomizerSingleton.Instance.TryGetItemByNameAndLocation(this.Name, this.Position);
+                ItemData item = RandomizerSingleton.Instance.GetItemByNameAndLocation(this.Name, this.Position);
                 if (item != null)
                 {
                     RandomizerSingleton.Instance.GiveItem(item);

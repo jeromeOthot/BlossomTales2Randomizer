@@ -1,6 +1,3 @@
-// Licensed to the .NET Foundation under one or more agreements.
-// The .NET Foundation licenses this file to you under the MIT license.
-
 using System.Collections.Generic;
 using BlossomTales2.Randomizer.mm;
 using Microsoft.Xna.Framework;
@@ -9,86 +6,132 @@ namespace BlossomTales2
 {
     public class patch_ShopItem : ShopItem
     {
-        private int itemPosition = 0;
+        private int itemPosition;
+
         public patch_ShopItem(Vector3 position) : base(position)
         {
         }
 
-        public extern void orig_Init();
         public override void Init()
         {
-            this.itemPosition = this.IDNumber % 3;
-            if (this.IDNumber <= 0 || this.IDNumber >= 19)
+            itemPosition = IDNumber % 3;
+            if (IDNumber <= 0 || IDNumber >= 19)
                 return;
-            this.Row = Game1.Globals.ShopItems[this.IDNumber - 1];
+            Row = Game1.Globals.ShopItems[IDNumber - 1];
 
-            Game1.Globals.ShopItems = new List<int>((IEnumerable<int>) new int[18]
+            RandomizerSingleton singleton = RandomizerSingleton.Instance;
+            Game1.Globals.ShopItems = new List<int>(new[]
             {
-                (int)RandomizerSingleton.Instance.TryGetItem("blossom-shop.tmx", "left", new Vector3(60f, 0f, 284f)).Item,
-                (int)RandomizerSingleton.Instance.TryGetItem("blossom-shop.tmx", "center", new Vector3(52f, 0f, 284f)).Item,
-                (int)RandomizerSingleton.Instance.TryGetItem("blossom-shop.tmx", "right", new Vector3(44f, 0f, 284f)).Item,
-                (int)RandomizerSingleton.Instance.TryGetItem("anchor-shop.tmx", "left", new Vector3(336f, 0f, 324f)).Item,
-                (int)RandomizerSingleton.Instance.TryGetItem("anchor-shop.tmx", "center", new Vector3(536f, 0f, 324f)).Item,
-                (int)RandomizerSingleton.Instance.TryGetItem("anchor-shop.tmx", "right", new Vector3(636f, 0f, 324f)).Item,
-                (int)RandomizerSingleton.Instance.TryGetItem("canyon-shop.tmx", "left", new Vector3(520f, 0f, 356f)).Item,
-                (int)RandomizerSingleton.Instance.TryGetItem("canyon-shop.tmx", "center", new Vector3(620f, 0f, 356f)).Item,
-                (int)RandomizerSingleton.Instance.TryGetItem("canyon-shop.tmx", "right", new Vector3(716f, 0f, 356f)).Item,
-                (int)RandomizerSingleton.Instance.TryGetItem("darklands-house2-shop.tmx", "left", new Vector3(576f, 0f, 356f)).Item,
-                (int)RandomizerSingleton.Instance.TryGetItem("darklands-house2-shop.tmx", "center", new Vector3(664f, 0f, 356f)).Item,
-                (int)RandomizerSingleton.Instance.TryGetItem("darklands-house2-shop.tmx", "right", new Vector3(772f, 0f, 356f)).Item,
-                (int)RandomizerSingleton.Instance.TryGetItem("pirateShip-shop.tmx", "left", new Vector3(572f, 0f, 136f)).Item,
-                (int)RandomizerSingleton.Instance.TryGetItem("pirateShip-shop.tmx", "center", new Vector3(672f, 0f, 136f)).Item,
-                (int)RandomizerSingleton.Instance.TryGetItem("pirateShip-shop.tmx", "right", new Vector3(772f, 0f, 136f)).Item,
-                (int)RandomizerSingleton.Instance.TryGetItem("labHouse-shop.tmx", "left", new Vector3(360f, 0f, 348f)).Item,
-                (int)RandomizerSingleton.Instance.TryGetItem("labHouse-shop.tmx", "center", new Vector3(452f, 0f, 348f)).Item,
-                (int)RandomizerSingleton.Instance.TryGetItem("labHouse-shop.tmx", "right", new Vector3(544f, 0f, 348f)).Item,
+                (int)singleton.GetItemAtLocation("blossom-shop.tmx", "left", Vector3.Zero).Item,
+                (int)singleton.GetItemAtLocation("blossom-shop.tmx", "center", Vector3.Zero).Item,
+                (int)singleton.GetItemAtLocation("blossom-shop.tmx", "right", Vector3.Zero).Item,
+                (int)singleton.GetItemAtLocation("anchor-shop.tmx", "left", Vector3.Zero).Item,
+                (int)singleton.GetItemAtLocation("anchor-shop.tmx", "center", Vector3.Zero).Item,
+                (int)singleton.GetItemAtLocation("anchor-shop.tmx", "right", Vector3.Zero).Item,
+                (int)singleton.GetItemAtLocation("canyon-shop.tmx", "left", Vector3.Zero).Item,
+                (int)singleton.GetItemAtLocation("canyon-shop.tmx", "center", Vector3.Zero).Item,
+                (int)singleton.GetItemAtLocation("canyon-shop.tmx", "right", Vector3.Zero).Item,
+                (int)singleton.GetItemAtLocation("darklands-house2-shop.tmx", "left", Vector3.Zero).Item,
+                (int)singleton.GetItemAtLocation("darklands-house2-shop.tmx", "center", Vector3.Zero).Item,
+                (int)singleton.GetItemAtLocation("darklands-house2-shop.tmx", "right", Vector3.Zero).Item,
+                (int)singleton.GetItemAtLocation("pirateShip-shop.tmx", "left", Vector3.Zero).Item,
+                (int)singleton.GetItemAtLocation("pirateShip-shop.tmx", "center", Vector3.Zero).Item,
+                (int)singleton.GetItemAtLocation("pirateShip-shop.tmx", "right", Vector3.Zero).Item,
+                (int)singleton.GetItemAtLocation("labHouse-shop.tmx", "left", Vector3.Zero).Item,
+                (int)singleton.GetItemAtLocation("labHouse-shop.tmx", "center", Vector3.Zero).Item,
+                (int)singleton.GetItemAtLocation("labHouse-shop.tmx", "right", Vector3.Zero).Item,
             });
         }
 
-        public extern void orig_onCollision();
-
         public override void onCollision(string xz, Player entity)
         {
-            //Game1.Dialoger.AddLine($"row: {this.Row} IDNumber: {this.IDNumber} -- ROW: {this.Row}");
-            if (!(xz == "z") || this.Row == 0 || this.Row == 24 || Game1.player.Direction != 1 ||
-                (double)Game1.player.Position.X + 4.0 <= (double)this.Position.X ||
-                (double)Game1.player.Position.X - 4.0 >= (double)this.Position.X + (double)this.Size.Z * 4.0)
+            if (!(xz == "z") || Row == 0 || Row == 24 || Game1.player.Direction != 1 || !(Game1.player.Position.X + 4f > Position.X) || !(Game1.player.Position.X - 4f < Position.X + Size.Z * 4f))
                 return;
+
             Game1.player.ShowDialogButton = true;
             if (!Input.A_Button_Pressed() || Game1.player.killInteractButton)
                 return;
-            this.Velocity.X = 1f;
 
-            int CostItem = 10;
+            Velocity.X = 1f;
+            Mod_AskPurchaseItem();
+        }
 
-            //left
-            if (this.itemPosition == 1)
-            {
-                Game1.Dialoger.AddLine($"Shop Owner: Would you like to buy that <B>Item <B> for <Y>150 <Y>gold?", $"buy_150_left", new string[2]
-                {
-                    "Yes",
-                    "No"
-                });
-            }
-            //center
-            if (this.itemPosition == 2)
-            {
-                Game1.Dialoger.AddLine($"Shop Owner: Would you like to buy that <B>Item <B> for <Y>250 <Y>gold?", $"buy_250_center", new string[2]
-                {
-                    "Yes",
-                    "No"
-                });
-            }
-            //right
-            if (this.itemPosition == 0)
-            {
-                Game1.Dialoger.AddLine($"Shop Owner: Would you like to buy that <B>Item <B> for <Y>250 <Y>gold?", $"buy_250_right", new string[2]
-                {
-                    "Yes",
-                    "No"
-                });
-            }
+        private void Mod_AskPurchaseItem()
+        {
+            if (Game1.LevelName == "darklands-house2-shop.tmx")
+                ProcessGhostStore();
+            else if (Game1.LevelName == "pirateShip-shop.tmx")
+                ProcessPirateStore();
+            else
+                ProcessRegularStore();
+        }
 
+        private void ProcessGhostStore()
+        {
+            if (Game1.player.ghostTimer > 0)
+            {
+                switch (itemPosition)
+                {
+                    case 1: //left
+                        Game1.Dialoger.AddLine("Shop Owner: Would you like to buy that <B>Item for the low price of <Y>100 <Y>gold?", "buy_100_left", new [] { "Yes", "No" });
+                        break;
+                    case 2: //center
+                        Game1.Dialoger.AddLine("Shop Owner: That's a very popular item, an <G>Item. Very expensive.");
+                        Game1.Dialoger.AddLine("Shop Owner: But I like you! I'll give you a friend discount. How about <Y>150 <Y>gold?", "buy_150_center", new [] { "Yes", "No" });
+                        break;
+                    case 0: //right
+                        Game1.Dialoger.AddLine("Shop Owner: I don't know if that <R>Item will do you any good... in your condition.");
+                        Game1.Dialoger.AddLine("Shop Owner: Not many around here need it though, I'll let it go for <Y>150 <Y>gold?", "buy_150_right", new [] { "Yes", "No" });
+                        break;
+                }
+            }
+            else
+            {
+                switch (itemPosition)
+                {
+                    case 1: //left
+                        Game1.Dialoger.AddLine("Shop Owner: Would you like to buy that <B>Item for <Y>200 <Y>gold?", "buy_200_left", new [] { "Yes", "No" });
+                        break;
+                    case 2: //center
+                        Game1.Dialoger.AddLine("Shop Owner: That <G>Item is very rare. It will cost you <Y>350 <Y>gold?", "buy_350_center", new [] { "Yes", "No" });
+                        break;
+                    case 0: //right
+                        Game1.Dialoger.AddLine("Shop Owner: That's a very special item. A small <R>Item. Would you like to buy it for <Y>350 <Y>gold?", "buy_350_right", new [] { "Yes", "No" });
+                        break;
+                }
+            }
+        }
+
+        private void ProcessPirateStore()
+        {
+            switch (itemPosition)
+            {
+                case 1: //left
+                    Game1.Dialoger.AddLine("Pirate Jimmy: Would ya like to buy that there <Y>Item that I found for <Y>200 <Y>gold?", "buy_200_left", new [] { "Yes", "No" });
+                    break;
+                case 2: //center
+                    Game1.Dialoger.AddLine("Pirate Jimmy: That's a very special item. A small <G>Item. Would ye like to buy it for <Y>250 <Y>gold?", "buy_250_center", new [] { "Yes", "No" });
+                    break;
+                case 0: //right
+                    Game1.Dialoger.AddLine("Pirate Jimmy: That <R>Item for <Y>250 <Y>gold be a good deal I tell ya. Savvy?", "buy_250_right", new [] { "Yes", "No" });
+                    break;
+            }
+        }
+
+        private void ProcessRegularStore()
+        {
+            switch (itemPosition)
+            {
+                case 1: //left
+                    Game1.Dialoger.AddLine("Shop Owner: Would you like to buy that <B>Item for <Y>150 <Y>gold?", "buy_150_left", new [] { "Yes", "No" });
+                    break;
+                case 2: //center
+                    Game1.Dialoger.AddLine("Shop Owner: Would you like to buy that <G>Item for <Y>250 <Y>gold?", "buy_250_center", new [] { "Yes", "No" });
+                    break;
+                case 0: //right
+                    Game1.Dialoger.AddLine("Shop Owner: Would you like to buy that <R>Item for <Y>250 <Y>gold?", "buy_250_right", new [] { "Yes", "No" });
+                    break;
+            }
         }
     }
 }

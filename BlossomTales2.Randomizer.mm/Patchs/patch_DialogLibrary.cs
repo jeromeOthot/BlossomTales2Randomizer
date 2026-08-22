@@ -206,6 +206,69 @@ namespace BlossomTales2
             }
         }
 
+        private static void BuyItemEvent(string Event, int choice)
+        {
+            switch (choice)
+			{
+				case 1:
+				{
+					int num3 = int.Parse(Event.Substring(4, 3));
+					string text = Event.Substring(8, Event.Length - 8);
+					if (Game1.player.Gold >= num3)
+					{
+						Mod_PurchaseItem(text, num3);
+						for (int j = 0; j < Game1.CurrentLevel.LevelObjects.Count; j++)
+						{
+							if (Game1.CurrentLevel.LevelObjects[j] is ShopItem && Game1.CurrentLevel.LevelObjects[j].Velocity.X == 1f)
+							{
+								Game1.CurrentLevel.LevelObjects[j].Velocity.X = 0f;
+								Game1.CurrentLevel.LevelObjects[j].Row = 0;
+								Game1.Globals.ShopItems[Game1.CurrentLevel.LevelObjects[j].IDNumber - 1] = 24;
+								break;
+							}
+						}
+						break;
+					}
+					Game1.Dialoger.AddLine("Lily: I don't have enough gold coins.");
+					if (Game1.LevelName == "pirateShip-shop.tmx")
+					{
+						Game1.Dialoger.AddLine("Pirate Jimmy: You can always come back when you do!");
+					}
+					else
+					{
+						Game1.Dialoger.AddLine("Shop Owner: You can always come back when you do!");
+					}
+					for (int k = 0; k < Game1.CurrentLevel.LevelObjects.Count; k++)
+					{
+						if (Game1.CurrentLevel.LevelObjects[k] is ShopItem)
+						{
+							Game1.CurrentLevel.LevelObjects[k].Velocity.X = 0f;
+						}
+					}
+					break;
+				}
+				case 2:
+				{
+					if (Game1.LevelName == "pirateShip-shop.tmx")
+					{
+						Game1.Dialoger.AddLine("Pirate Jimmy: Please come again!");
+					}
+					else
+					{
+						Game1.Dialoger.AddLine("Shop Owner: Please come again!");
+					}
+					for (int i = 0; i < Game1.CurrentLevel.LevelObjects.Count; i++)
+					{
+						if (Game1.CurrentLevel.LevelObjects[i] is ShopItem)
+						{
+							Game1.CurrentLevel.LevelObjects[i].Velocity.X = 0f;
+						}
+					}
+					break;
+				}
+			}
+        }
+
         private static void GiveNpcItem(string npc)
         {
             RandomizerSingleton.Instance.GiveItemAtLocation(npc, Vector3.Zero);
@@ -309,69 +372,10 @@ namespace BlossomTales2
                 Game1.Globals.MainQuestObjective = Globaler.MainGameObjective.dark_saveBetty;
         }
 
-         private static void BuyItemEvent(string Event, int choice)
+        private static void Mod_PurchaseItem(string itemName, int price)
         {
-            switch (choice)
-            {
-            case 1:
-                ItemData item;
-                int num1 = int.Parse(Event.Substring(4, 3));
-                string str = Event.Substring(8, Event.Length - 8);
-                Vector3 distPlayerItem = new Vector3(301, 0, 48);
-
-              if (Game1.player.Gold >= num1)
-              {
-                Game1.player.ChangeGoldAmountReflection(num1 * -1);
-                switch (str)
-                {
-                  case "left":
-                      item = RandomizerSingleton.Instance.TryGetItemWithMapNameAndName(Game1.CurrentLevel.Name, "left");
-                      RandomizerSingleton.Instance.GiveItem(item);
-                    break;
-                  case "center":
-                      item = RandomizerSingleton.Instance.TryGetItemWithMapNameAndName(Game1.CurrentLevel.Name, "center");
-                      RandomizerSingleton.Instance.GiveItem(item);
-                    break;
-                  case "right":
-                      item = RandomizerSingleton.Instance.TryGetItemWithMapNameAndName(Game1.CurrentLevel.Name, "right");
-                      RandomizerSingleton.Instance.GiveItem(item);
-                    break;
-                }
-                for (int index = 0; index < Game1.CurrentLevel.LevelObjects.Count; ++index)
-                {
-                  if (Game1.CurrentLevel.LevelObjects[index] is ShopItem && (double) Game1.CurrentLevel.LevelObjects[index].Velocity.X == 1.0)
-                  {
-                    Game1.CurrentLevel.LevelObjects[index].Velocity.X = 0.0f;
-                    Game1.CurrentLevel.LevelObjects[index].Row = 0;
-                    Game1.Globals.ShopItems[Game1.CurrentLevel.LevelObjects[index].IDNumber - 1] = 24;
-                    break;
-                  }
-                }
-                break;
-              }
-              Game1.Dialoger.AddLine("Lily: I don't have enough gold coins.");
-              if (Game1.LevelName == "pirateShip-shop.tmx")
-                Game1.Dialoger.AddLine("Pirate Jimmy: You can always come back when you do!");
-              else
-                Game1.Dialoger.AddLine("Shop Owner: You can always come back when you do!");
-              for (int index = 0; index < Game1.CurrentLevel.LevelObjects.Count; ++index)
-              {
-                if (Game1.CurrentLevel.LevelObjects[index] is ShopItem)
-                  Game1.CurrentLevel.LevelObjects[index].Velocity.X = 0.0f;
-              }
-              break;
-            case 2:
-              if (Game1.LevelName == "pirateShip-shop.tmx")
-                Game1.Dialoger.AddLine("Pirate Jimmy: Please come again!");
-              else
-                Game1.Dialoger.AddLine("Shop Owner: Please come again!");
-              for (int index = 0; index < Game1.CurrentLevel.LevelObjects.Count; ++index)
-              {
-                if (Game1.CurrentLevel.LevelObjects[index] is ShopItem)
-                  Game1.CurrentLevel.LevelObjects[index].Velocity.X = 0.0f;
-              }
-              break;
-            }
+            Game1.player.ChangeGoldAmountReflection(price * -1);
+            RandomizerSingleton.Instance.GiveItemAtLocation(itemName, Vector3.Zero);
         }
     }
 }

@@ -24,20 +24,17 @@ namespace BlossomTales2.Randomizer.mm
 
         public void GiveItemAtLocation(string name, Vector3 position)
         {
-            ItemData item = TryGetItemByNameAndLocation(name, position);
+            ItemData item = GetItemByNameAndLocation(name, position);
             if(item != null)
                 GiveItem(item);
         }
 
-        public ItemData TryGetItem(string mapName, string name, Vector3 position)
+        public ItemData GetItemAtLocation(string mapName, string name, Vector3 position)
         {
-            LocationId location = new  LocationId(mapName, name, position);
-            if (TryGetItemAtLocation(mapName, name, position, out ItemData item))
-                return item;
-            return null;
+            return TryGetItemAtLocation(mapName, name, position, out ItemData item) ? item : null;
         }
 
-        public ItemData TryGetItemByNameAndLocation(string name, Vector3 position)
+        public ItemData GetItemByNameAndLocation(string name, Vector3 position)
         {
             if (TryGetItemAtLocation(Game1.CurrentLevel.Name ,name, position, out ItemData item))
                 return item;
@@ -428,33 +425,33 @@ namespace BlossomTales2.Randomizer.mm
 
                 //les shops
                 //Blossom
-                { new LocationId("blossom-shop.tmx", "left", new Vector3(60f, 0f, 284f)), new ItemData(ItemType.Jar_Empty) },
-                { new LocationId("blossom-shop.tmx", "center", new Vector3(52f, 0f, 284f)), new ItemData(ItemType.Crystal) },
-                { new LocationId("blossom-shop.tmx", "right", new Vector3(44f, 0f, 284f)), new ItemData(ItemType.HeartQ_1) },
+                { new LocationId("blossom-shop.tmx", "left", Vector3.Zero), new ItemData(ItemType.Jar_Empty) },
+                { new LocationId("blossom-shop.tmx", "center", Vector3.Zero), new ItemData(ItemType.Crystal) },
+                { new LocationId("blossom-shop.tmx", "right", Vector3.Zero), new ItemData(ItemType.HeartQ_1) },
                 //Fishing village
-                { new LocationId("anchor-shop.tmx", "left", new Vector3(336f, 0f, 324f)), new ItemData(ItemType.Jar_Empty) },
-                { new LocationId("anchor-shop.tmx", "center", new Vector3(536f, 0f, 324f)), new ItemData(ItemType.Crystal) },
-                { new LocationId("anchor-shop.tmx", "right", new Vector3(636f, 0f, 324f)), new ItemData(ItemType.HeartQ_1) },
+                { new LocationId("anchor-shop.tmx", "left", Vector3.Zero), new ItemData(ItemType.Jar_Empty) },
+                { new LocationId("anchor-shop.tmx", "center", Vector3.Zero), new ItemData(ItemType.Crystal) },
+                { new LocationId("anchor-shop.tmx", "right", Vector3.Zero), new ItemData(ItemType.HeartQ_1) },
                 //Canyon village
-                { new LocationId("canyon-shop.tmx", "left", new Vector3(520f, 0f, 356f)), new ItemData(ItemType.Jar_Empty) },
-                { new LocationId("canyon-shop.tmx", "center", new Vector3(620f, 0f, 356f)), new ItemData(ItemType.Crystal) },
-                { new LocationId("canyon-shop.tmx", "right", new Vector3(716f, 0f, 356f)), new ItemData(ItemType.HeartQ_1) },
+                { new LocationId("canyon-shop.tmx", "left", Vector3.Zero), new ItemData(ItemType.Jar_Empty) },
+                { new LocationId("canyon-shop.tmx", "center", Vector3.Zero), new ItemData(ItemType.Crystal) },
+                { new LocationId("canyon-shop.tmx", "right", Vector3.Zero), new ItemData(ItemType.HeartQ_1) },
                 //Darklands village
-                { new LocationId("darklands-house2-shop.tmx", "left", new Vector3(576f, 0f, 356f)), new ItemData(ItemType.Jar_Empty) },
-                { new LocationId("darklands-house2-shop.tmx", "center", new Vector3(664f, 0f, 356f)), new ItemData(ItemType.Crystal) },
-                { new LocationId("darklands-house2-shop.tmx", "right", new Vector3(772f, 0f, 356f)), new ItemData(ItemType.HeartQ_1) },
+                { new LocationId("darklands-house2-shop.tmx", "left", Vector3.Zero), new ItemData(ItemType.Jar_Empty) },
+                { new LocationId("darklands-house2-shop.tmx", "center", Vector3.Zero), new ItemData(ItemType.Crystal) },
+                { new LocationId("darklands-house2-shop.tmx", "right", Vector3.Zero), new ItemData(ItemType.HeartQ_1) },
                 //pirate Ship
-                { new LocationId("pirateShip-shop.tmx", "left", new Vector3(572f, 0f, 136f)), new ItemData(ItemType.Jar_Empty) },
-                { new LocationId("pirateShip-shop.tmx", "center", new Vector3(672f, 0f, 136f)), new ItemData(ItemType.Crystal) },
-                { new LocationId("pirateShip-shop.tmx", "right", new Vector3(772f, 0f, 136f)), new ItemData(ItemType.HeartQ_1) },
+                { new LocationId("pirateShip-shop.tmx", "left", Vector3.Zero), new ItemData(ItemType.Jar_DoubleDamage) },
+                { new LocationId("pirateShip-shop.tmx", "center", Vector3.Zero), new ItemData(ItemType.Crystal) },
+                { new LocationId("pirateShip-shop.tmx", "right", Vector3.Zero), new ItemData(ItemType.HeartQ_1) },
                 //Castle
-                { new LocationId("labHouse-shop.tmx", "left", new Vector3(360f, 0f, 348f)), new ItemData(ItemType.Jar_Empty) },
-                { new LocationId("labHouse-shop.tmx", "center", new Vector3(452f, 0f, 348f)), new ItemData(ItemType.Crystal) },
-                { new LocationId("labHouse-shop.tmx", "right", new Vector3(544f, 0f, 348f)), new ItemData(ItemType.HeartQ_1) },
+                { new LocationId("labHouse-shop.tmx", "left", Vector3.Zero), new ItemData(ItemType.Jar_Empty) },
+                { new LocationId("labHouse-shop.tmx", "center", Vector3.Zero), new ItemData(ItemType.Crystal) },
+                { new LocationId("labHouse-shop.tmx", "right", Vector3.Zero), new ItemData(ItemType.HeartQ_1) },
 
                 //Colleseum
-                { new LocationId("colosseum.tmx", "price_heart", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.HeartQ_1) },
-                { new LocationId("colosseum.tmx", "price_crystal", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.Crystal) },
+                { new LocationId("colosseum.tmx", "price_heart", Vector3.Zero), new ItemData(ItemType.HeartQ_1) },
+                { new LocationId("colosseum.tmx", "price_crystal", Vector3.Zero), new ItemData(ItemType.Crystal) },
             };
 
             if (ModGlobals.RandomizeColiseumCoins)

@@ -66,7 +66,7 @@ namespace BlossomTales2
         {
             GameLogger.LogInfo(new LocationId(Game1.CurrentLevel.Name, chest.Name, chest.Position).ToString() + " IDNumber = " + chest.IDNumber);
 
-            ItemData item = RandomizerSingleton.Instance.TryGetItemByNameAndLocation(chest.Name, chest.Position);
+            ItemData item = RandomizerSingleton.Instance.GetItemByNameAndLocation(chest.Name, chest.Position);
             if (item != null)
             {
                 RandomizerSingleton.Instance.GiveItem(item);
