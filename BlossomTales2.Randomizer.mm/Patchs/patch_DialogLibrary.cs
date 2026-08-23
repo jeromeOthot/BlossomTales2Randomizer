@@ -67,6 +67,9 @@ namespace BlossomTales2
                 case "giveFarmerItem":
                     GiveNpcItem("farmer");
                     break;
+                case "removeGgiveC":
+                    RemoveGemsGiveCrystalEvent();
+                    break;
                 default:
                     orig_LineTrigger(Event, choice);
                     break;
@@ -313,6 +316,13 @@ namespace BlossomTales2
             Game1.player.Count_Honeycombs = 0;
             GiveNpcItem("queenBee");
             Game1.player.Direction = 3;
+        }
+
+        private static void RemoveGemsGiveCrystalEvent()
+        {
+            Game1.player.RemoveItem_NEReflection(EquipableItem.ItemList.Ingred_Gem, playAnimation: false, 10);
+            GiveNpcItem("ghostCanyon");
+            Game1.Globals.Benjamin_State = 10;
         }
 
         private static bool Mod_ShouldFishCrabs()
