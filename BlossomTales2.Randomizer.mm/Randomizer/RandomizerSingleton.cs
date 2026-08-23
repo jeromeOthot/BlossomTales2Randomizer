@@ -149,6 +149,7 @@ namespace BlossomTales2.Randomizer.mm
                 { new LocationId("castle-12.tmx", "Chest_Small", new Vector3(1728f, 0f, 1120f)), new ItemData(ItemType.GoldCoin) }, //accès château 5
                 { new LocationId("darklands-house2-floor2.tmx", "bard_song", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.WakeUp) }, //accès monsterton
                 { new LocationId("darklands-house2-floor2.tmx", "Chest_Small", new Vector3(284f, 0f, 496f)), new ItemData(ItemType.GoldCoin) }, //accès monsterton
+                { new LocationId("darklands-house4.tmx", "sickZombie", new Vector3(352f, 0f, 268f)), new ItemData(ItemType.HeartQ_1) }, //accès monsterton && bouteille && accès canyon
                 { new LocationId("darklands-house6.tmx", "Chest_Small", new Vector3(264f, 0f, 428f)), new ItemData(ItemType.GoldCoin) }, //accès monsterton
                 { new LocationId("darklands-house7.tmx", "Chest_Small", new Vector3(320f, 0f, 380f)), new ItemData(ItemType.GoldCoin) }, //accès monsterton
                 { new LocationId("forestMaze-end.tmx", "Chest_Small", new Vector3(560f, 0f, 308f)), new ItemData(ItemType.HeartQ_1) }, //accès nord
