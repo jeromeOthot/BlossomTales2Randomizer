@@ -259,20 +259,22 @@ namespace BlossomTales2
                     Game1.player.Inventory.Add(EquipableItem.ItemList.Shovel);
                     break;
                 case EquipableItem.ItemList.Ingred_Gem:
-                  Count_Gems++;
-                  Game1.Gui.AddGuiTicker(EquipableItem.IngredientList.Gem, Game1.player.Count_Gems);
-                  this.GiveIngredient(EquipableItem.IngredientList.Gem);
+                    if (!this.Inventory_NE.Contains(EquipableItem.ItemList.Ingred_Gem))
+                        this.Inventory_NE.Add(EquipableItem.ItemList.Ingred_Gem);
+                    this.Count_Gems++;
                   break;
                 case EquipableItem.ItemList.Five_Gems:
-                  Count_Gems +=5;
-                  Game1.Gui.AddGuiTicker(EquipableItem.IngredientList.Gem, 5);
-                  this.GiveIngredient(EquipableItem.IngredientList.Gem, 5);
+                  if (!this.Inventory_NE.Contains(EquipableItem.ItemList.Ingred_Gem))
+                    this.Inventory_NE.Add(EquipableItem.ItemList.Ingred_Gem);
+                  this.Count_Gems += 5;
                   break;
                 case EquipableItem.ItemList.Letter:
                 case EquipableItem.ItemList.Honeycomb:
-                  Count_Honeycombs++;
-                  Game1.Gui.AddGuiTicker(EquipableItem.IngredientList.HoneycombOLD, Game1.player.Count_Honeycombs);
-                  this.GiveIngredient(EquipableItem.IngredientList.HoneycombOLD);
+                    if (!Inventory_NE.Contains(item))
+                    {
+                        Inventory_NE.Add(item);
+                    }
+                    Count_Honeycombs++;
                   break;
                 case EquipableItem.ItemList.CanyonBone:
                   Count_CanyonBones++;
@@ -309,14 +311,7 @@ namespace BlossomTales2
                     this.Inventory_NE.Add(item);
                   if (item == EquipableItem.ItemList.MinotaurCoin)
                     ++this.Count_MinotaurCoins;
-
                   break;
-                /*
-                case EquipableItem.ItemList.Five_Gems:
-                  if (!this.Inventory_NE.Contains(EquipableItem.ItemList.Ingred_Gem))
-                    this.Inventory_NE.Add(EquipableItem.ItemList.Ingred_Gem);
-                  this.Count_Gems += 5;
-                  break; */
                 case EquipableItem.ItemList.KeyPiece1:
                   Game1.player.KeyPiece1 = true;
                   break;

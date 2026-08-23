@@ -282,6 +282,7 @@ namespace BlossomTales2.Randomizer.mm
                 { new LocationId("overworld-17x20.tmx", "Chest_Small", new Vector3(476f, 0f, 208f)), new ItemData(ItemType.Honeycomb) }, //accès canyon plateau
                 { new LocationId("overworld-17x20-cave.tmx", "Chest_Small", new Vector3(736f, 0f, 224f)), new ItemData(ItemType.HeartQ_1) }, //accès canyon plateau && grappin
                 { new LocationId("overworld-17x21-cave.tmx", "Chest_Small", new Vector3(416f, 0f, 480f)), new ItemData(ItemType.HeartQ_1) }, //accès canyon steppe && leviers
+                { new LocationId("overworld-17x22.tmx", "ghostCanyon", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.Crystal) }, //accès canyon && bouteille && accès dark && (blue gem > 10 || pelle)
                 { new LocationId("overworld-18x17-cave.tmx", "Chest_Small", new Vector3(384f, 0f, 268f)), new ItemData(ItemType.GoldCoin) }, //accès labyrinthe && bombes
                 { new LocationId("overworld-18x17-cave.tmx", "Chest_Small", new Vector3(480f, 0f, 268f)), new ItemData(ItemType.GoldCoin) }, //accès labyrinthe && bombes
                 { new LocationId("overworld-18x17-cave.tmx", "Chest_Small", new Vector3(576f, 0f, 268f)), new ItemData(ItemType.GoldCoin) }, //accès labyrinthe && bombes

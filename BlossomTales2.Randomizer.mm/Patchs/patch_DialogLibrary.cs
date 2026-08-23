@@ -67,6 +67,9 @@ namespace BlossomTales2
                 case "giveFarmerItem":
                     GiveNpcItem("farmer");
                     break;
+                case "removeGgiveC":
+                    RemoveGemsGiveCrystalEvent();
+                    break;
                 case "treeLord_giveSeeds":
                     GiveAcorns();
                     break;
@@ -323,6 +326,13 @@ namespace BlossomTales2
             Game1.Globals.TreeLord_State = 1;
             GiveNpcItem("treeLordGiftAcorns");
             RandomizerSingleton.Instance.GiveItemAtLocation("treeLordGiftAcorns", Vector3.Zero);
+        }
+
+        private static void RemoveGemsGiveCrystalEvent()
+        {
+            Game1.player.RemoveItem_NEReflection(EquipableItem.ItemList.Ingred_Gem, playAnimation: false, 10);
+            GiveNpcItem("ghostCanyon");
+            Game1.Globals.Benjamin_State = 10;
         }
 
         private static bool Mod_ShouldFishCrabs()
