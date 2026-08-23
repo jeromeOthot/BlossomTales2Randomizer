@@ -296,6 +296,9 @@ namespace BlossomTales2.Randomizer.mm
                 { new LocationId("overworld-18x22.tmx", "Chest_Small", new Vector3(448f, 0f, 448f)), new ItemData(ItemType.GoldCoin) }, //accès canyon && flippers && bombes
                 { new LocationId("overworld-18x22.tmx", "Chest_Small", new Vector3(640f, 0f, 448f)), new ItemData(ItemType.GoldCoin) }, //accès canyon && flippers && bombes
                 { new LocationId("overworld-18x22.tmx", "Chest_Small", new Vector3(544f, 0f, 344f)), new ItemData(ItemType.GoldCoin) }, //accès canyon && flippers && bombes
+                //Tree lord
+                { new LocationId("overworld-19x16.tmx", "treeLordGiftAcorns", Vector3.Zero), new ItemData(ItemType.TreeSeed) },
+                { new LocationId("overworld-19x16.tmx", "treeLordReward", Vector3.Zero), new ItemData(ItemType.HeartQ_1) },
                 { new LocationId("overworld-19x16-noteCave.tmx", "Chest_Small", new Vector3(384f, 0f, 208f)), new ItemData(ItemType.GoldCoin) }, //accès nord && leviers (&& bombes?)
                 { new LocationId("overworld-19x16-noteCave.tmx", "Chest_Small", new Vector3(512f, 0f, 208f)), new ItemData(ItemType.GoldCoin) }, //accès nord && leviers (&& bombes?)
                 { new LocationId("overworld-19x16-noteCave.tmx", "Chest_Small", new Vector3(640f, 0f, 208f)), new ItemData(ItemType.GoldCoin) }, //accès nord && leviers (&& bombes?)

@@ -67,6 +67,9 @@ namespace BlossomTales2
                 case "giveFarmerItem":
                     GiveNpcItem("farmer");
                     break;
+                case "treeLord_giveSeeds":
+                    GiveAcorns();
+                    break;
                 default:
                     orig_LineTrigger(Event, choice);
                     break;
@@ -313,6 +316,13 @@ namespace BlossomTales2
             Game1.player.Count_Honeycombs = 0;
             GiveNpcItem("queenBee");
             Game1.player.Direction = 3;
+        }
+
+        private static void GiveAcorns()
+        {
+            Game1.Globals.TreeLord_State = 1;
+            GiveNpcItem("treeLordGiftAcorns");
+            RandomizerSingleton.Instance.GiveItemAtLocation("treeLordGiftAcorns", Vector3.Zero);
         }
 
         private static bool Mod_ShouldFishCrabs()
