@@ -270,9 +270,11 @@ namespace BlossomTales2
                   break;
                 case EquipableItem.ItemList.Letter:
                 case EquipableItem.ItemList.Honeycomb:
-                  Count_Honeycombs++;
-                  Game1.Gui.AddGuiTicker(EquipableItem.IngredientList.HoneycombOLD, Game1.player.Count_Honeycombs);
-                  this.GiveIngredient(EquipableItem.IngredientList.HoneycombOLD);
+                    if (!Inventory_NE.Contains(item))
+                    {
+                        Inventory_NE.Add(item);
+                    }
+                    Count_Honeycombs++;
                   break;
                 case EquipableItem.ItemList.CanyonBone:
                   Count_CanyonBones++;
