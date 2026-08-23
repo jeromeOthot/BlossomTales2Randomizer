@@ -366,7 +366,7 @@ namespace BlossomTales2.Randomizer.mm
                 { new LocationId("overworld-23x17-noteCave.tmx", "Chest_Small", new Vector3(768f, 0f, 260f)), new ItemData(ItemType.Five_Gems) }, //accès dark && ouvrir portes notes && (bombes && épée)
                 { new LocationId("overworld-23x18.tmx", "Chest_Small", new Vector3(932f, 0f, 752f)), new ItemData(ItemType.HeartQ_1) }, //accès dark && leviers
                 { new LocationId("overworld-24x16-mausoleum.tmx", "Chest_Small", new Vector3(736f, 0f, 200f)), new ItemData(ItemType.HeartQ_1) }, //accès monsterton
-                //{ new LocationId("overworld-24x17.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.Crystal) }, //pelle id=3
+                { new LocationId("overworld-24x17.tmx", "Chest_Small", new Vector3(352f, 0f, 244f)), new ItemData(ItemType.Crystal) }, //accès monsterton && bouteille && pelle  pelle id=3
                 { new LocationId("overworld-24x18.tmx", "campCups", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.Crystal) }, //accès dark
                 { new LocationId("overworld-24x18-blueTent.tmx", "Chest_Small", new Vector3(776f, 0f, 160f)), new ItemData(ItemType.GoldCoin) }, //accès dark
                 { new LocationId("overworld-24x18-greenTent.tmx", "Chest_Small", new Vector3(576f, 0f, 148f)), new ItemData(ItemType.GoldCoin) }, //accès dark
