@@ -7,8 +7,9 @@ namespace BlossomTales2
 {
     internal class patch_CS_Cemetery : CS_Cemetery
     {
-        private Puppet lanternGuy = new Puppet ("Stub Lantern", new Vector3(0f, 0f, 0f));
-        private Puppet doorPuppet = new Puppet ("Stub tombDoor", new Vector3(0f, 0f, 0f));
+        private Puppet lanternGuy;
+        private Puppet doorPuppet;
+        private Puppet ghostDrink;
 
         public extern void orig_Init();
         public extern void orig_wakeUpLanternGuy();
@@ -152,6 +153,19 @@ namespace BlossomTales2
                     Game1.CurrentLevel.Lights.RemoveAt(j);
                 }
             }
+        }
+
+        public void giveEnergyPiece()
+        {
+            Game1.player.RemovePlayerControls = false;
+            Game1.Globals.ghostRejuvPotionState = 2;
+            Mod_GiveGhostItem();
+        }
+
+        private void Mod_GiveGhostItem()
+        {
+
+            RandomizerSingleton.Instance.GiveItemAtLocation(ghostDrink.name, Vector3.Zero);
         }
     }
 }
