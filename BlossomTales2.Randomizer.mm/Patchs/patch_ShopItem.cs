@@ -17,7 +17,6 @@ namespace BlossomTales2
             itemPosition = IDNumber % 3;
             if (IDNumber <= 0 || IDNumber >= 19)
                 return;
-            Row = Game1.Globals.ShopItems[IDNumber - 1];
 
             RandomizerSingleton singleton = RandomizerSingleton.Instance;
             Game1.Globals.ShopItems = new List<int>(new[]
@@ -41,11 +40,15 @@ namespace BlossomTales2
                 (int)singleton.GetItemAtLocation("labHouse-shop.tmx", "center", Vector3.Zero).Item,
                 (int)singleton.GetItemAtLocation("labHouse-shop.tmx", "right", Vector3.Zero).Item,
             });
+
+            Row = Game1.Globals.ShopItems[IDNumber - 1];
         }
 
         public override void onCollision(string xz, Player entity)
         {
-            if (!(xz == "z") || Row == 0 || Row == 24 || Game1.player.Direction != 1 || !(Game1.player.Position.X + 4f > Position.X) || !(Game1.player.Position.X - 4f < Position.X + Size.Z * 4f))
+            if (!(xz == "z") || Row == 0 || Row == 24 || Game1.player.Direction != 1 ||
+                !(Game1.player.Position.X + 4f > Position.X) ||
+                !(Game1.player.Position.X - 4f < Position.X + Size.Z * 4f))
                 return;
 
             Game1.player.ShowDialogButton = true;
@@ -73,15 +76,22 @@ namespace BlossomTales2
                 switch (itemPosition)
                 {
                     case 1: //left
-                        Game1.Dialoger.AddLine("Shop Owner: Would you like to buy that <B>Item for the low price of <Y>100 <Y>gold?", "buy_100_left", new [] { "Yes", "No" });
+                        Game1.Dialoger.AddLine(
+                            "Shop Owner: Would you like to buy that <B>Item for the low price of <Y>100 <Y>gold?",
+                            "buy_100_left", new[] { "Yes", "No" });
                         break;
                     case 2: //center
                         Game1.Dialoger.AddLine("Shop Owner: That's a very popular item, an <G>Item. Very expensive.");
-                        Game1.Dialoger.AddLine("Shop Owner: But I like you! I'll give you a friend discount. How about <Y>150 <Y>gold?", "buy_150_center", new [] { "Yes", "No" });
+                        Game1.Dialoger.AddLine(
+                            "Shop Owner: But I like you! I'll give you a friend discount. How about <Y>150 <Y>gold?",
+                            "buy_150_center", new[] { "Yes", "No" });
                         break;
                     case 0: //right
-                        Game1.Dialoger.AddLine("Shop Owner: I don't know if that <R>Item will do you any good... in your condition.");
-                        Game1.Dialoger.AddLine("Shop Owner: Not many around here need it though, I'll let it go for <Y>150 <Y>gold?", "buy_150_right", new [] { "Yes", "No" });
+                        Game1.Dialoger.AddLine(
+                            "Shop Owner: I don't know if that <R>Item will do you any good... in your condition.");
+                        Game1.Dialoger.AddLine(
+                            "Shop Owner: Not many around here need it though, I'll let it go for <Y>150 <Y>gold?",
+                            "buy_150_right", new[] { "Yes", "No" });
                         break;
                 }
             }
@@ -90,13 +100,18 @@ namespace BlossomTales2
                 switch (itemPosition)
                 {
                     case 1: //left
-                        Game1.Dialoger.AddLine("Shop Owner: Would you like to buy that <B>Item for <Y>200 <Y>gold?", "buy_200_left", new [] { "Yes", "No" });
+                        Game1.Dialoger.AddLine("Shop Owner: Would you like to buy that <B>Item for <Y>200 <Y>gold?",
+                            "buy_200_left", new[] { "Yes", "No" });
                         break;
                     case 2: //center
-                        Game1.Dialoger.AddLine("Shop Owner: That <G>Item is very rare. It will cost you <Y>350 <Y>gold?", "buy_350_center", new [] { "Yes", "No" });
+                        Game1.Dialoger.AddLine(
+                            "Shop Owner: That <G>Item is very rare. It will cost you <Y>350 <Y>gold?", "buy_350_center",
+                            new[] { "Yes", "No" });
                         break;
                     case 0: //right
-                        Game1.Dialoger.AddLine("Shop Owner: That's a very special item. A small <R>Item. Would you like to buy it for <Y>350 <Y>gold?", "buy_350_right", new [] { "Yes", "No" });
+                        Game1.Dialoger.AddLine(
+                            "Shop Owner: That's a very special item. A small <R>Item. Would you like to buy it for <Y>350 <Y>gold?",
+                            "buy_350_right", new[] { "Yes", "No" });
                         break;
                 }
             }
@@ -107,13 +122,19 @@ namespace BlossomTales2
             switch (itemPosition)
             {
                 case 1: //left
-                    Game1.Dialoger.AddLine("Pirate Jimmy: Would ya like to buy that there <Y>Item that I found for <Y>200 <Y>gold?", "buy_200_left", new [] { "Yes", "No" });
+                    Game1.Dialoger.AddLine(
+                        "Pirate Jimmy: Would ya like to buy that there <Y>Item that I found for <Y>200 <Y>gold?",
+                        "buy_200_left", new[] { "Yes", "No" });
                     break;
                 case 2: //center
-                    Game1.Dialoger.AddLine("Pirate Jimmy: That's a very special item. A small <G>Item. Would ye like to buy it for <Y>250 <Y>gold?", "buy_250_center", new [] { "Yes", "No" });
+                    Game1.Dialoger.AddLine(
+                        "Pirate Jimmy: That's a very special item. A small <G>Item. Would ye like to buy it for <Y>250 <Y>gold?",
+                        "buy_250_center", new[] { "Yes", "No" });
                     break;
                 case 0: //right
-                    Game1.Dialoger.AddLine("Pirate Jimmy: That <R>Item for <Y>250 <Y>gold be a good deal I tell ya. Savvy?", "buy_250_right", new [] { "Yes", "No" });
+                    Game1.Dialoger.AddLine(
+                        "Pirate Jimmy: That <R>Item for <Y>250 <Y>gold be a good deal I tell ya. Savvy?",
+                        "buy_250_right", new[] { "Yes", "No" });
                     break;
             }
         }
@@ -123,13 +144,16 @@ namespace BlossomTales2
             switch (itemPosition)
             {
                 case 1: //left
-                    Game1.Dialoger.AddLine("Shop Owner: Would you like to buy that <B>Item for <Y>150 <Y>gold?", "buy_150_left", new [] { "Yes", "No" });
+                    Game1.Dialoger.AddLine("Shop Owner: Would you like to buy that <B>Item for <Y>150 <Y>gold?",
+                        "buy_150_left", new[] { "Yes", "No" });
                     break;
                 case 2: //center
-                    Game1.Dialoger.AddLine("Shop Owner: Would you like to buy that <G>Item for <Y>250 <Y>gold?", "buy_250_center", new [] { "Yes", "No" });
+                    Game1.Dialoger.AddLine("Shop Owner: Would you like to buy that <G>Item for <Y>250 <Y>gold?",
+                        "buy_250_center", new[] { "Yes", "No" });
                     break;
                 case 0: //right
-                    Game1.Dialoger.AddLine("Shop Owner: Would you like to buy that <R>Item for <Y>250 <Y>gold?", "buy_250_right", new [] { "Yes", "No" });
+                    Game1.Dialoger.AddLine("Shop Owner: Would you like to buy that <R>Item for <Y>250 <Y>gold?",
+                        "buy_250_right", new[] { "Yes", "No" });
                     break;
             }
         }
