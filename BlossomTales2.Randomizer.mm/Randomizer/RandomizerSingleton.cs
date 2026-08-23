@@ -322,6 +322,7 @@ namespace BlossomTales2.Randomizer.mm
                 { new LocationId("overworld-20x17.tmx", "Chest_Small", new Vector3(2348f, 0f, 168f)), new ItemData(ItemType.Honeycomb) }, //accès nord
                 { new LocationId("overworld-20x17-cave.tmx", "Chest_Small", new Vector3(608f, 0f, 232f)), new ItemData(ItemType.HeartQ_1) }, //accès nord
                 { new LocationId("overworld-20x18.tmx", "lanternGuy", new Vector3(1036f, 0f, 660f)), new ItemData(ItemType.Torch) },
+                { new LocationId("overworld-20x18.tmx", "ghostDrink", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.Crystal) }, //accès nord && bouteille && accès dark && accès jungle
                 { new LocationId("overworld-20x18-cave1.tmx", "Chest_Small", new Vector3(1184f, 0f, 2208f)), new ItemData(ItemType.HeartQ_1) }, //épée 2 && lanterne
                 { new LocationId("overworld-20x20.tmx", "Chest_Small", new Vector3(2352f, 0f, 2212f)), new ItemData(ItemType.GoldCoin) }, //bombes
                 { new LocationId("overworld-20x21-cave.tmx", "Chest_Small", new Vector3(296f, 0f, 224f)), new ItemData(ItemType.GoldCoin) }, //accès est && bombes
