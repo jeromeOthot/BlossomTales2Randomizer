@@ -170,6 +170,7 @@ namespace BlossomTales2.Randomizer.mm
                 { new LocationId("jungles-21x22-island.tmx", "Chest_Small", new Vector3(924f, 0f, 788f)), new ItemData(ItemType.GoldCoin) }, //accès jungle ile && flippers && pelle
                 { new LocationId("jungles-21x22-island.tmx", "Chest_Small", new Vector3(864f, 0f, 684f)), new ItemData(ItemType.GoldCoin) }, //accès jungle ile && flippers && pelle
                 { new LocationId("jungles-22x20.tmx", "Chest_Small", new Vector3(1764f, 0f, 1896f)), new ItemData(ItemType.Honeycomb) }, //accès jungle ile && flippers || accès jungle && bombes
+                { new LocationId("jungles-22x21.tmx", "ghostJungle", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.HeartQ_1) }, //accès jungle && bouteille && accès dark && heart necklace
                 { new LocationId("jungles-22x21-cave.tmx", "Chest_Small", new Vector3(288f, 0f, 360f)), new ItemData(ItemType.HeartQ_1) }, //accès jungle ile && flippers
                 { new LocationId("jungles-22x21-noteCave.tmx", "Chest_Small", new Vector3(480f, 0f, 224f)), new ItemData(ItemType.GoldCoin) }, //accès jungle ile && ouvrir portes notes
                 { new LocationId("jungles-22x21-noteCave.tmx", "Chest_Small", new Vector3(608f, 0f, 224f)), new ItemData(ItemType.GoldCoin) }, //accès jungle ile && ouvrir portes notes
@@ -177,6 +178,7 @@ namespace BlossomTales2.Randomizer.mm
                 { new LocationId("jungles-22x21-noteCave.tmx", "Chest_Small", new Vector3(608f, 0f, 352f)), new ItemData(ItemType.GoldCoin) }, //accès jungle ile && ouvrir portes notes
                 { new LocationId("jungles-22x22.tmx", "Chest_Small", new Vector3(1440f, 0f, 2016f)), new ItemData(ItemType.GoldCoin) }, //accès jungle ile
                 { new LocationId("jungles-22x22.tmx", "Chest_Small", new Vector3(1668f, 0f, 512f)), new ItemData(ItemType.GoldCoin) }, //accès jungle
+                { new LocationId("jungles-22x22.tmx", "necklaceFish", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.HeartNecklace) }, //accès jungle && canne pêche && bouteille && accès dark
                 { new LocationId("jungles-22x22-lighthouse.tmx", "Chest_Small", new Vector3(556f, 0f, 144f)), new ItemData(ItemType.GoldCoin) }, //accès jungle ile
                 { new LocationId("jungles-23x19-cave.tmx", "Chest_Small", new Vector3(416f, 0f, 896f)), new ItemData(ItemType.Crystal) }, //accès dark && ouvrir portes notes && leviers
                 { new LocationId("jungles-23x19.tmx", "archJungle", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.Shovel) }, //accès jungle

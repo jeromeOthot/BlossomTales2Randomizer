@@ -569,6 +569,26 @@ namespace BlossomTales2
             RandomizerSingleton.Instance.GiveItemAtLocation("SwordInStone", Vector3.Zero);
             Game1Extensions.AddLevelPermaObject("SwordInStone", Vector3.Zero);
         }
+
+        public static bool Mod_CanFishNecklace()
+        {
+            bool vanillaCondition = Game1.LevelName == "jungles-22x22.tmx" && Game1.Globals.Rose_State == 1 && Game1.player.Position.Z > 1472.0 && Game1.player.Position.X > 1600.0;
+            bool modCondition = !Game1Extensions.HasLevelPermaObject("necklaceFish");
+            return vanillaCondition && modCondition;
+        }
+
+        public static void Mod_GiveFishingItem(Player player)
+        {
+            if (player.fishingIngredient == EquipableItem.IngredientList.Necklace)
+            {
+                RandomizerSingleton.Instance.GiveItemAtLocation("necklaceFish", Vector3.Zero);
+                Game1Extensions.AddLevelPermaObject("necklaceFish", Vector3.Zero);
+            }
+            else
+            {
+                player.GiveIngredientReflection(player.fishingIngredient, playAnimation: true);
+            }
+        }
     }
 }
 
@@ -582,9 +602,53 @@ namespace MonoMod
         public static void PatchPlayerUpdate(ILContext context, CustomAttribute attrib)
         {
             TypeDefinition modPatchPlayerType = MonoModRule.Modder.FindType("BlossomTales2.ModPlayer").Resolve();
-            MethodDefinition mod_GiveKingSwordMethod = modPatchPlayerType.FindMethod("Mod_GiveKingSword");
             ILCursor cursor = new ILCursor(context);
-            //Find
+
+            //Find L.1607
+            //this.GiveIngredient(this.fishingIngredient, playAnimation: true);
+            cursor.GotoNext(MoveType.Before,
+                instr => instr.MatchLdarg(0),
+                instr => instr.MatchLdarg(0),
+                instr => instr.MatchLdfld("BlossomTales2.Player", "fishingIngredient"),
+                instr => instr.MatchLdcI4(1),
+                instr => instr.MatchLdcI4(1),
+                instr => instr.MatchCallvirt("BlossomTales2.Player", "GiveIngredient")
+            );
+
+            //Replace with
+            //ModPlayer.Mod_GiveFishingItem()
+            MethodDefinition mod_GiveFishingItem = modPatchPlayerType.FindMethod("Mod_GiveFishingItem");
+            cursor.RemoveRange(6);
+            cursor.Emit(OpCodes.Ldarg_0);
+            cursor.Emit(OpCodes.Call, mod_GiveFishingItem);
+
+            //Find L.1787 to retrieve the branch label.
+            // if (Game1.LevelName == "jungles-24x20.tmx")
+            ILLabel branch24x20 = null; //This label branch to the next if
+
+            cursor.GotoNext(MoveType.After,
+                instr => instr.MatchLdsfld("BlossomTales2.Game1", "LevelName"),
+                instr => instr.MatchLdstr("jungles-24x20.tmx"),
+                instr => instr.MatchCall("System.String", "op_Equality"),
+                instr => instr.MatchBrfalse(out branch24x20)
+            );
+
+            cursor.Index += 3;
+            cursor.RemoveRange(23);
+            cursor.MarkLabel(branch24x20);
+
+            ILLabel branch22x22 = cursor.DefineLabel();
+
+            //Replace by
+            //ModPlayer.Mod_CanFishNecklace()
+            MethodDefinition mod_CanFishNecklace = modPatchPlayerType.FindMethod("Mod_CanFishNecklace");
+            cursor.Emit(OpCodes.Call, mod_CanFishNecklace);
+            cursor.Emit(OpCodes.Brfalse, branch22x22);
+
+            cursor.Index += 3;
+            cursor.MarkLabel(branch22x22);
+
+            //Find L.1985
             //Game1.player.GiveItem(EquipableItem.ItemList.KingSword);
             cursor.GotoNext(MoveType.Before,
                 instr => instr.MatchLdarg(0),
@@ -592,8 +656,10 @@ namespace MonoMod
                 instr => instr.MatchLdcI4(1),
                 instr => instr.MatchCallvirt("BlossomTales2.Player", "GiveItem")
             );
+
             //Replace with
             //ModPlayer.Mod_GiveKingSword()
+            MethodDefinition mod_GiveKingSwordMethod = modPatchPlayerType.FindMethod("Mod_GiveKingSword");
             cursor.RemoveRange(4);
             cursor.Emit(OpCodes.Call, mod_GiveKingSwordMethod);
         }

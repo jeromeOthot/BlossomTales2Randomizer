@@ -70,6 +70,9 @@ namespace BlossomTales2
                 case "removeGgiveC":
                     RemoveGemsGiveCrystalEvent();
                     break;
+                case "removeNgiveH":
+                    RemoveNecklaceGiveHeartEvent();
+                    break;
                 default:
                     orig_LineTrigger(Event, choice);
                     break;
@@ -323,6 +326,13 @@ namespace BlossomTales2
             Game1.player.RemoveItem_NEReflection(EquipableItem.ItemList.Ingred_Gem, playAnimation: false, 10);
             GiveNpcItem("ghostCanyon");
             Game1.Globals.Benjamin_State = 10;
+        }
+
+        private static void RemoveNecklaceGiveHeartEvent()
+        {
+            Game1.player.RemoveItem_NEReflection(EquipableItem.ItemList.HeartNecklace);
+            GiveNpcItem("ghostJungle");
+            Game1.Globals.Rose_State = 10;
         }
 
         private static bool Mod_ShouldFishCrabs()
