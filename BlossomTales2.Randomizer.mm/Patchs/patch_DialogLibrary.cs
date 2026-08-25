@@ -75,6 +75,9 @@ namespace BlossomTales2
                     break;
                 case "removeNgiveH":
                     RemoveNecklaceGiveHeartEvent();
+			        break;
+                case "treeLord_giveSeeds":
+                    GiveAcorns();
                     break;
                 default:
                     orig_LineTrigger(Event, choice);
@@ -328,6 +331,12 @@ namespace BlossomTales2
         {
             Game1.Globals.ArrowGame_State = 9;
             GiveNpcItem("arrowGame");
+        }
+
+        private static void GiveAcorns()
+        {
+            Game1.Globals.TreeLord_State = 1;
+            GiveNpcItem("treeLordGiftAcorns");
         }
 
         private static void RemoveGemsGiveCrystalEvent()
