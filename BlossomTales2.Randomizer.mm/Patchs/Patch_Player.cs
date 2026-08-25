@@ -54,7 +54,7 @@ namespace BlossomTales2
         }
 
         //TODO: Extract method
-        public void GiveItem(EquipableItem.ItemList item, bool playAnimation = true)
+        internal void GiveItem(EquipableItem.ItemList item, bool playAnimation = true)
         {
             this.idleCount = 0;
             this.idleFrame = 0;
@@ -224,6 +224,7 @@ namespace BlossomTales2
                     if (!this.Inventory_NE.Contains(EquipableItem.ItemList.Ingred_Gem))
                         this.Inventory_NE.Add(EquipableItem.ItemList.Ingred_Gem);
                     this.Count_Gems++;
+                    playAnimation = false;
                   break;
                 case EquipableItem.ItemList.Five_Gems:
                   if (!this.Inventory_NE.Contains(EquipableItem.ItemList.Ingred_Gem))
@@ -231,6 +232,8 @@ namespace BlossomTales2
                   this.Count_Gems += 5;
                   break;
                 case EquipableItem.ItemList.Letter:
+                    //TODO
+                    break;
                 case EquipableItem.ItemList.Honeycomb:
                     if (!Inventory_NE.Contains(item))
                     {
