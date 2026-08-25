@@ -251,10 +251,9 @@ namespace BlossomTales2
                   this.GiveIngredient(EquipableItem.IngredientList.Bones);
                   break;
                 case EquipableItem.ItemList.TreeSeed:
-                  if (!this.Inventory_NE.Contains(item))
-                    this.Inventory_NE.Add(item);
-                  if (item == EquipableItem.ItemList.TreeSeed)
-                    ++this.Count_TreeSeeds;
+                  if (!Inventory_NE.Contains(item))
+                    Inventory_NE.Add(item);
+                  Count_TreeSeeds = 5;
                   break;
                 case EquipableItem.ItemList.GreenGem:
                     Game1.player.Inventory_NE.Add(EquipableItem.ItemList.GreenGem);
