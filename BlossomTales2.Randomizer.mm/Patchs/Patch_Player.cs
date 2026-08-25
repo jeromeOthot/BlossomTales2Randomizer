@@ -215,45 +215,7 @@ namespace BlossomTales2
                   }
                   break;
                 case  EquipableItem.ItemList.ResurrectionFlower:
-                  //TODO: Code qui crash au niveau du tween a corrigé
-                  /*
-                  Game1.player.RemovePlayerControls = true;
-                  Game1.player.CanResurrectState = 1;
-                  int num1 = (int) ((double) Game1.player.Position.X - (double) Game1.Camera.Center.X);
-                  int num2 = (int) ((double) Game1.player.Position.Z - (double) Game1.Camera.Center.Y);
-                  this.resFlowerX = (float) (Game1.ScreenWidth / 2 + num1);
-                  this.resFlowerY = (float) (Game1.ScreenHeight / 2 + num2 - 30);
-                  this.resFlowerAlpha = 0.0f;
-                  this.resFlowerScale = 0.0f;
-                  this.resFlowerRotation = 0.0f;
-                  this.tweener.Tween((object) this, (object) new
-                  {
-                    resFlowerAlpha = 1
-                  }, 0.5f).Ease(new Func<float, float>(Ease.SineInOut));
-                  this.tweener.Tween((object) this, (object) new
-                  {
-                    resFlowerScale = 4
-                  }, 0.5f).Ease(new Func<float, float>(Ease.SineInOut));
-                  this.tweener.Tween((object) this, (object) new
-                  {
-                    resFlowerRotation = 6.2831855f
-                  }, 0.5f).Ease(new Func<float, float>(Ease.SineInOut));
-                  this.tweener.Tween((object) this, (object) new
-                  {
-                    resFlowerY = ((int) this.resFlowerY - 50)
-                  }, 0.5f).Ease(new Func<float, float>(Ease.SineInOut)).OnComplete((Action) (() =>
-                  {
-                    Game1.player.RemovePlayerControls = false;
-                    int num3 = 164;
-                    if (Game1.player.MaxHealth > 20)
-                      num3 += 44;
-                    this.tweener.Tween((object) this, (object) new
-                    {
-                      resFlowerX = 80 /*0x50*,
-                      resFlowerY = num3
-                    }, 2f, 0.5f).Ease(new Func<float, float>(Ease.SineInOut)).OnComplete((Action) (() => Game1.player.CanResurrectState = 2));
-                  }));
-                  */
+                  //Unused
                   break;
                 case EquipableItem.ItemList.Shovel:
                     Game1.player.Inventory.Add(EquipableItem.ItemList.Shovel);
