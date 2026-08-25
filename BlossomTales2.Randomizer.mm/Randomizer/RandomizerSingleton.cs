@@ -404,6 +404,7 @@ namespace BlossomTales2.Randomizer.mm
                 { new LocationId("temple-genieBoss.tmx", "BossGenie", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.HeartQ_4) }, //accès temple 4 && lanterne
                 { new LocationId("temple-genieBoss.tmx", "Chest", new Vector3(832f, 0f, 640f)), new ItemData(ItemType.KeyPiece2) }, //accès temple 4 && lanterne
                 { new LocationId("temple-vultureBoss.tmx", "Chest", new Vector3(768f, 0f, 640f)), new ItemData(ItemType.GrappleHook) }, //accès temple 3 && (clé || grappin) && damage
+                { new LocationId("tent-arrow.tmx", "arrowGame", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.HeartQ_1) }, //bow
                 { new LocationId("ufo.tmx", "aliens", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.Crystal) }, //accès dark
 
                 //spots a os dans le canyon pour chaque il faut un accès canyon

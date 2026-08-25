@@ -67,6 +67,9 @@ namespace BlossomTales2
                 case "giveFarmerItem":
                     GiveNpcItem("farmer");
                     break;
+                case "arrow_goldcoin":
+                    GiveArrowGameRewardEvent();
+                    break;
                 case "removeGgiveC":
                     RemoveGemsGiveCrystalEvent();
                     break;
@@ -319,6 +322,12 @@ namespace BlossomTales2
             Game1.player.Count_Honeycombs = 0;
             GiveNpcItem("queenBee");
             Game1.player.Direction = 3;
+        }
+
+        private static void GiveArrowGameRewardEvent()
+        {
+            Game1.Globals.ArrowGame_State = 9;
+            GiveNpcItem("arrowGame");
         }
 
         private static void RemoveGemsGiveCrystalEvent()
