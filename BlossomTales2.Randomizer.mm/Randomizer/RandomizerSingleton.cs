@@ -29,17 +29,17 @@ namespace BlossomTales2.Randomizer.mm
                 GiveItem(item);
         }
 
+        public ItemData GetItemAtLocation(string mapName, string name, Vector3 position)
+        {
+            return TryGetItemAtLocation(mapName, name, position, out ItemData item) ? item : null;
+        }
+
         public void GiveSideQuestReward(string sideQuestName)
         {
             Game1.Dialoger.AddLine("GiveSideQuestReward: " + sideQuestName);
             ItemData item = GetItemAtLocation(string.Empty, sideQuestName, Vector3.Zero);
             if(item != null)
                 GiveItem(item);
-        }
-
-        public ItemData GetItemAtLocation(string mapName, string name, Vector3 position)
-        {
-            return TryGetItemAtLocation(mapName, name, position, out ItemData item) ? item : null;
         }
 
         public ItemData GetItemByNameAndLocation(string name, Vector3 position)
@@ -221,6 +221,7 @@ namespace BlossomTales2.Randomizer.mm
                 { new LocationId("jungles-25x22-cave.tmx", "Chest_Small", new Vector3(544f, 0f, 488f)), new ItemData(ItemType.GoldCoin) }, //accès jungle && bombes
                 { new LocationId("jungles-firstPrimate.tmx", "Chest", new Vector3(480f, 0f, 256f)), new ItemData(ItemType.Bombs) }, //accès jungle
                 //{ new LocationId("lighthouse.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.GoldCoin) }, //unknown (probablement renommée en jungles-22x22)
+                { new LocationId("labyrinth-forge.tmx", "golemHead", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.Sword) }, //accès labyrinthe && blue gem == 50
                 { new LocationId("mansion-4.tmx", "Chest_Small", new Vector3(640f, 0f, 1280f)), new ItemData(ItemType.Gold_Key) }, //accès mansion && damage
                 { new LocationId("mansion-12.tmx", "Chest_Small", new Vector3(1920f, 0f, 892f)), new ItemData(ItemType.Gold_Key) }, //accès mansion 2 && grappin
                 { new LocationId("mansion-12-secret.tmx", "Chest_Small", new Vector3(640f, 0f, 384f)), new ItemData(ItemType.HeartQ_1) }, //accès mansion 2 && grappin && bombes
@@ -320,11 +321,12 @@ namespace BlossomTales2.Randomizer.mm
                 { new LocationId("overworld-19x18.tmx", "Chest_Small", new Vector3(184f, 0f, 296f)), new ItemData(ItemType.Honeycomb) }, //accès ouest
                 { new LocationId("overworld-19x18-flowerShop.tmx", "flowerShop", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.HeartQ_1) }, //accès nord && accès jungle && accès canyon && accès dark && accès labyrinthe
                 { new LocationId("overworld-19x19.tmx", "Chest_Small", new Vector3(2084f, 0f, 1996f)), new ItemData(ItemType.HeartQ_1) }, //pelle id=2 ne pas randomizer car duplicate.
+                { new LocationId("overworld-19x19.tmx", "raceGame", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.Crystal) }, //accès ouest
                 { new LocationId("overworld-19x19-cave.tmx", "Chest_Small", new Vector3(608f, 0f, 224f)), new ItemData(ItemType.HeartQ_1) }, //accès ouest && arc
-                //{ new LocationId("overworld-19x20-noteCave.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.GoldCoin) }, //unknown
-                //{ new LocationId("overworld-19x20-noteCave.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.GoldCoin) }, //unknown
-                //{ new LocationId("overworld-19x20-noteCave.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.GoldCoin) }, //unknown
-                //{ new LocationId("overworld-19x20-noteCave.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.GoldCoin) }, //unknown
+                { new LocationId("overworld-19x20-noteCave.tmx", "Chest_Small", new Vector3(576f, 0f, 212f)), new ItemData(ItemType.GoldCoin) }, //flippers && ouvrir portes notes && bouteille && (tribow)
+                { new LocationId("overworld-19x20-noteCave.tmx", "Chest_Small", new Vector3(768f, 0f, 212f)), new ItemData(ItemType.GoldCoin) }, //flippers && ouvrir portes notes && bouteille && (tribow)
+                { new LocationId("overworld-19x20-noteCave.tmx", "Chest_Small", new Vector3(576f, 0f, 340f)), new ItemData(ItemType.GoldCoin) }, //flippers && ouvrir portes notes && bouteille && (tribow)
+                { new LocationId("overworld-19x20-noteCave.tmx", "Chest_Small", new Vector3(768f, 0f, 340f)), new ItemData(ItemType.GoldCoin) }, //flippers && ouvrir portes notes && bouteille && (tribow)
                 { new LocationId("overworld-19x21.tmx", "Chest_Small", new Vector3(2348f, 0f, 1832f)), new ItemData(ItemType.GoldCoin) }, //accès canyon
                 { new LocationId("overworld-19x22.tmx", "bard", new Vector3(852f, 0f, 1348f)), new ItemData(ItemType.Guitar) }, //accès canyon && damage
                 { new LocationId("overworld-19x22.tmx", "bard_song", new Vector3(852f, 0f, 1348f)), new ItemData(ItemType.OpenSesame) }, //accès canyon && damage
@@ -474,6 +476,22 @@ namespace BlossomTales2.Randomizer.mm
                 { new LocationId(String.Empty, "bunny_statue_award", Vector3.Zero), new ItemData(ItemType.HeartQ_1) }, //accès canyon + yoyo
                 { new LocationId(String.Empty, "chipmunk_statue_award", Vector3.Zero), new ItemData(ItemType.HeartQ_1) }, //accès est && accès nord && accès ouest && bombes && flipper
                 { new LocationId(String.Empty, "lizard_statue_award", Vector3.Zero), new ItemData(ItemType.HeartQ_1) }, //accès dark
+
+                //Traders
+                { new LocationId(string.Empty, "traderStan0", Vector3.Zero), new ItemData(ItemType.HeartQ_1) },
+                { new LocationId(string.Empty, "traderStan1", Vector3.Zero), new ItemData(ItemType.Jar_ArmorOrbs) },
+                { new LocationId(string.Empty, "traderStan2", Vector3.Zero), new ItemData(ItemType.Crystal) },
+                { new LocationId(string.Empty, "traderStan3", Vector3.Zero), new ItemData(ItemType.Five_Gems) },
+                { new LocationId(string.Empty, "traderStan4", Vector3.Zero), new ItemData(ItemType.Crystal) },
+                { new LocationId(string.Empty, "traderStan5", Vector3.Zero), new ItemData(ItemType.Five_Gems) },
+                { new LocationId(string.Empty, "traderStan6", Vector3.Zero), new ItemData(ItemType.HeartQ_1) },
+                { new LocationId(string.Empty, "traderStan7", Vector3.Zero), new ItemData(ItemType.Five_Gems) },
+                { new LocationId(string.Empty, "traderFish20", Vector3.Zero), new ItemData(ItemType.Jar_SlowTime) },
+                { new LocationId(string.Empty, "traderFish21", Vector3.Zero), new ItemData(ItemType.Five_Gems) },
+                { new LocationId(string.Empty, "traderFish22", Vector3.Zero), new ItemData(ItemType.HeartQ_1) },
+                { new LocationId(string.Empty, "traderFish23", Vector3.Zero), new ItemData(ItemType.Five_Gems) },
+                { new LocationId(string.Empty, "traderFish24", Vector3.Zero), new ItemData(ItemType.Crystal) },
+                { new LocationId(string.Empty, "traderFish25", Vector3.Zero), new ItemData(ItemType.Five_Gems) },
             };
 
             if (ModGlobals.RandomizeColiseumCoins)

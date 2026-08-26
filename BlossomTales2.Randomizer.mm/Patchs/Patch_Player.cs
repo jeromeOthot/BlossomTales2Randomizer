@@ -251,10 +251,9 @@ namespace BlossomTales2
                   this.GiveIngredient(EquipableItem.IngredientList.Bones);
                   break;
                 case EquipableItem.ItemList.TreeSeed:
-                  if (!this.Inventory_NE.Contains(item))
-                    this.Inventory_NE.Add(item);
-                  if (item == EquipableItem.ItemList.TreeSeed)
-                    ++this.Count_TreeSeeds;
+                  if (!Inventory_NE.Contains(item))
+                    Inventory_NE.Add(item);
+                  Count_TreeSeeds = 5;
                   break;
                 case EquipableItem.ItemList.GreenGem:
                     Game1.player.Inventory_NE.Add(EquipableItem.ItemList.GreenGem);
@@ -459,68 +458,6 @@ namespace BlossomTales2
           this.CurrentAnimation = Player.Animations.GetItem;
           Game1.Particles.Add((Particle) new P_GetItem(this.Position + new Vector3(0.0f, 100f, 0.0f), (int) ingred, 1));
           Game1.Particles.Add((Particle) new GetItemLight(this.Position));
-        }
-
-        public void RemoveItem_NE(EquipableItem.ItemList item, bool playAnimation = false, int amount = 1)
-        {
-            switch (item)
-            {
-                case EquipableItem.ItemList.Honeycomb:
-                    Count_Honeycombs -= amount;
-                    if (Count_Honeycombs < 1)
-                    {
-                        Count_Honeycombs = 0;
-                        Inventory_NE.Remove(item);
-                    }
-                    break;
-                case EquipableItem.ItemList.CanyonBone:
-                    Count_CanyonBones -= amount;
-                    if (Count_CanyonBones < 1)
-                    {
-                        Count_CanyonBones = 0;
-                        Ingredients.Remove(EquipableItem.IngredientList.Bones);
-                    }
-                    break;
-                case EquipableItem.ItemList.CombatScroll:
-                    Count_CombatScrolls -= amount;
-                    if (Count_CombatScrolls < 1)
-                    {
-                        Count_CombatScrolls = 0;
-                        Inventory_NE.Remove(item);
-                    }
-                    break;
-                case EquipableItem.ItemList.MinotaurCoin:
-                    Count_MinotaurCoins -= amount;
-                    if (Count_MinotaurCoins < 1)
-                    {
-                        Count_MinotaurCoins = 0;
-                        Inventory_NE.Remove(item);
-                    }
-                    break;
-                case EquipableItem.ItemList.TreeSeed:
-                    Count_TreeSeeds -= amount;
-                    if (Count_TreeSeeds < 1)
-                    {
-                        Count_TreeSeeds = 0;
-                        Inventory_NE.Remove(item);
-                    }
-                    break;
-                case EquipableItem.ItemList.Ingred_Gem:
-                    Count_Gems -= amount;
-                    if (Count_Gems < 1)
-                    {
-                        Count_Gems = 0;
-                        Inventory_NE.Remove(item);
-                    }
-                    break;
-                default:
-                    Inventory_NE.Remove(item);
-                    break;
-            }
-            if (playAnimation)
-            {
-                Game1.Particles.Add(new P_RemoveItem(Position + new Vector3(0f, 100f, 0f), (int)item));
-            }
         }
 
         [MonoModIgnore]
