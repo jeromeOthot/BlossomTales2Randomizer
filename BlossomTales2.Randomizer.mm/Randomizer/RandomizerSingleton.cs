@@ -29,6 +29,14 @@ namespace BlossomTales2.Randomizer.mm
                 GiveItem(item);
         }
 
+        public void GiveSideQuestReward(string sideQuestName)
+        {
+            Game1.Dialoger.AddLine("GiveSideQuestReward: " + sideQuestName);
+            ItemData item = GetItemAtLocation(string.Empty, sideQuestName, Vector3.Zero);
+            if(item != null)
+                GiveItem(item);
+        }
+
         public ItemData GetItemAtLocation(string mapName, string name, Vector3 position)
         {
             return TryGetItemAtLocation(mapName, name, position, out ItemData item) ? item : null;
@@ -460,6 +468,12 @@ namespace BlossomTales2.Randomizer.mm
                 //Colleseum
                 { new LocationId("colosseum.tmx", "price_heart", Vector3.Zero), new ItemData(ItemType.HeartQ_1) },
                 { new LocationId("colosseum.tmx", "price_crystal", Vector3.Zero), new ItemData(ItemType.Crystal) },
+
+                //Statues awards
+                { new LocationId(String.Empty, "frog_statue_award", Vector3.Zero), new ItemData(ItemType.HeartQ_1) }, //accès jungle && bomb && flipper
+                { new LocationId(String.Empty, "bunny_statue_award", Vector3.Zero), new ItemData(ItemType.HeartQ_1) }, //accès canyon + yoyo
+                { new LocationId(String.Empty, "chipmunk_statue_award", Vector3.Zero), new ItemData(ItemType.HeartQ_1) }, //accès est && accès nord && accès ouest && bombes && flipper
+                { new LocationId(String.Empty, "lizard_statue_award", Vector3.Zero), new ItemData(ItemType.HeartQ_1) }, //accès dark
             };
 
             if (ModGlobals.RandomizeColiseumCoins)

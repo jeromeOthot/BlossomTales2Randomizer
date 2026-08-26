@@ -17,7 +17,7 @@ namespace BlossomTales2.Randomizer.mm
             info.Invoke(Game1.player, new object[] { ingred, amount, playAnimation });
         }
 
-        public static void RemoveIngredientReflection(this Player player, EquipableItem.ItemList item, int amount = 1)
+        public static void RemoveIngredientReflection(this Player player, EquipableItem.IngredientList item, int amount = 1)
         {
             MethodInfo info = Game1.player.GetType().GetMethod("RemoveIngredient", BindingFlags.NonPublic | BindingFlags.Instance);
             info.Invoke(Game1.player, new object[] { item, amount });
