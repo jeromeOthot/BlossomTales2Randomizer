@@ -213,6 +213,7 @@ namespace BlossomTales2.Randomizer.mm
                 { new LocationId("jungles-25x22-cave.tmx", "Chest_Small", new Vector3(544f, 0f, 488f)), new ItemData(ItemType.GoldCoin) }, //accès jungle && bombes
                 { new LocationId("jungles-firstPrimate.tmx", "Chest", new Vector3(480f, 0f, 256f)), new ItemData(ItemType.Bombs) }, //accès jungle
                 //{ new LocationId("lighthouse.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.GoldCoin) }, //unknown (probablement renommée en jungles-22x22)
+                { new LocationId("labyrinth-forge.tmx", "golemHead", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.Sword) }, //accès labyrinthe && blue gem == 50
                 { new LocationId("mansion-4.tmx", "Chest_Small", new Vector3(640f, 0f, 1280f)), new ItemData(ItemType.Gold_Key) }, //accès mansion && damage
                 { new LocationId("mansion-12.tmx", "Chest_Small", new Vector3(1920f, 0f, 892f)), new ItemData(ItemType.Gold_Key) }, //accès mansion 2 && grappin
                 { new LocationId("mansion-12-secret.tmx", "Chest_Small", new Vector3(640f, 0f, 384f)), new ItemData(ItemType.HeartQ_1) }, //accès mansion 2 && grappin && bombes
