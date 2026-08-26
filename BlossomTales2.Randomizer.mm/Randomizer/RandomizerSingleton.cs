@@ -461,6 +461,22 @@ namespace BlossomTales2.Randomizer.mm
                 //Colleseum
                 { new LocationId("colosseum.tmx", "price_heart", Vector3.Zero), new ItemData(ItemType.HeartQ_1) },
                 { new LocationId("colosseum.tmx", "price_crystal", Vector3.Zero), new ItemData(ItemType.Crystal) },
+
+                //Traders
+                { new LocationId(string.Empty, "traderStan0", Vector3.Zero), new ItemData(ItemType.HeartQ_1) },
+                { new LocationId(string.Empty, "traderStan1", Vector3.Zero), new ItemData(ItemType.Jar_ArmorOrbs) },
+                { new LocationId(string.Empty, "traderStan2", Vector3.Zero), new ItemData(ItemType.Crystal) },
+                { new LocationId(string.Empty, "traderStan3", Vector3.Zero), new ItemData(ItemType.Five_Gems) },
+                { new LocationId(string.Empty, "traderStan4", Vector3.Zero), new ItemData(ItemType.Crystal) },
+                { new LocationId(string.Empty, "traderStan5", Vector3.Zero), new ItemData(ItemType.Five_Gems) },
+                { new LocationId(string.Empty, "traderStan6", Vector3.Zero), new ItemData(ItemType.HeartQ_1) },
+                { new LocationId(string.Empty, "traderStan7", Vector3.Zero), new ItemData(ItemType.Five_Gems) },
+                { new LocationId(string.Empty, "traderFish20", Vector3.Zero), new ItemData(ItemType.Jar_SlowTime) },
+                { new LocationId(string.Empty, "traderFish21", Vector3.Zero), new ItemData(ItemType.Five_Gems) },
+                { new LocationId(string.Empty, "traderFish22", Vector3.Zero), new ItemData(ItemType.HeartQ_1) },
+                { new LocationId(string.Empty, "traderFish23", Vector3.Zero), new ItemData(ItemType.Five_Gems) },
+                { new LocationId(string.Empty, "traderFish24", Vector3.Zero), new ItemData(ItemType.Crystal) },
+                { new LocationId(string.Empty, "traderFish25", Vector3.Zero), new ItemData(ItemType.Five_Gems) },
             };
 
             if (ModGlobals.RandomizeColiseumCoins)
