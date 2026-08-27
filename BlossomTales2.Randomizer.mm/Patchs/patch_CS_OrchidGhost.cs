@@ -109,7 +109,7 @@ namespace BlossomTales2
             tweener.Timer(1f).OnComplete(delegate
             {
                 Game1.Camera.Shake(16f, 0.96f);
-                orchidTomb.play("open");
+                orchidTomb.play("empty");
                 Game1.playSoundCue("unlock_4");
                 Game1.SControl.playSounds(new List<string> { "blank103", "blank103" }, new List<int> { 200, 200 });
                 Game1.Particles.Add(new Shockwave(orchid.getPosition(), 0f, 12));
@@ -124,7 +124,6 @@ namespace BlossomTales2
         public void takeSword()
         {
             Game1.Achievementer.CheckAchievment(1);
-            orchidTomb.play("noSword");
             Mod_OrchidGiveItem("_sword");
             tweener.Timer(3f).OnComplete(delegate
             {
