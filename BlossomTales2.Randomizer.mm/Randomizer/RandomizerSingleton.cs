@@ -363,6 +363,9 @@ namespace BlossomTales2.Randomizer.mm
                 { new LocationId("overworld-21x20-cave.tmx", "Chest_Small", new Vector3(1192f, 0f, 612f)), new ItemData(ItemType.GoldCoin) },
                 { new LocationId("overworld-21x20-cave.tmx", "Chest_Small", new Vector3(1268f, 0f, 612f)), new ItemData(ItemType.GoldCoin) },
                 { new LocationId("overworld-21x20.tmx", "Chest_Small", new Vector3(2096f, 0f, 2324f)), new ItemData(ItemType.HeartQ_1) }, //accès jungle ile && canne pêche && pelle
+                { new LocationId("overworld-21x20-gabby.tmx", "Chest_price_1", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.Bow) }, //accès est
+                { new LocationId("overworld-21x20-gabby.tmx", "Chest_price_2", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.GrappleHook) }, //accès est
+                { new LocationId("overworld-21x20-gabby.tmx", "Chest_price_3", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.Accordian) }, //accès est
                 { new LocationId("overworld-22x16.tmx", "Chest_Small", new Vector3(824f, 0f, 2452f)), new ItemData(ItemType.GoldCoin) }, //accès nord && pelle
                 { new LocationId("overworld-22x16.tmx", "SwordInStone", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.Sword) }, //accès nord && flippers && health >= 10
                 { new LocationId("overworld-22x16-cave.tmx", "Chest_Small", new Vector3(1408f, 0f, 1536f)), new ItemData(ItemType.GoldCoin) }, //accès nord && flippers && grappin (&& arc?)
