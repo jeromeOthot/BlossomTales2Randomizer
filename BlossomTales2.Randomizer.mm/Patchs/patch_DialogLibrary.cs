@@ -27,6 +27,9 @@ namespace BlossomTales2
                 case 109:
                     FarmerConnyDialog();
                     break;
+                case 175:
+                    ChipmunkKingDialog();
+                    break;
                 default:
                     orig_NPC_RunLine(number, dialogPointer, position);
                     break;
@@ -66,6 +69,9 @@ namespace BlossomTales2
                     break;
                 case "giveFarmerItem":
                     GiveNpcItem("farmer");
+                    break;
+                case "giveChipmunkItem":
+                    GiveNpcItem("chipmunk");
                     break;
                 case "arrow_goldcoin":
                     GiveArrowGameRewardEvent();
@@ -198,7 +204,7 @@ namespace BlossomTales2
 
         private static void FarmerConnyDialog()
         {
-            string mod_giveFarmerItemFlag = "giveFarmerItem";
+            const string mod_giveFarmerItemFlag = "giveFarmerItem";
 
             if (Game1.Globals.SpiderFarmer_State < 2)
             {
@@ -219,6 +225,42 @@ namespace BlossomTales2
             {
                 Game1.Dialoger.AddLine("Farmer Conny: Now I can finally get back to work.");
             }
+        }
+
+        private static void ChipmunkKingDialog()
+        {
+            const string mod_giveChipmunkItemEvent = "giveChipmunkItem";
+
+            if (Game1.Globals.Chipmunk_State == 0)
+			{
+				Game1.Globals.Chipmunk_State = 1;
+				Game1.Dialoger.AddLine("Chipmunk King: Welcome to the realm of the mighty Chipmunks!");
+				Game1.Dialoger.AddLine("Chipmunk King: Stand fast! Are thou friend or foe?!");
+				Game1.Dialoger.AddLine("Chipmunk King: Friend, you say?! I challenge you to prove your allegiance!");
+				Game1.Dialoger.AddLine("Chipmunk King: Bring me <R>100 <R>Apples from across our land. Only then shall you be considered Chipmunk Friend!");
+			}
+			else if (Game1.Globals.Chipmunk_State == 1)
+			{
+				Game1.Dialoger.AddLine("Chipmunk King: Does thou have the <R>100 <R>Apples to prove your undying allegiance to the Chipmunk Realm?!");
+				if (Game1.player.Items_Count[8] >= 100)
+				{
+					Game1.Globals.Chipmunk_State = 2;
+					Game1.Dialoger.AddLine("Chipmunk King: A brave knight you are! Behold chipmunks! The tall one has brought <R>100 <R>Apples!");
+					Game1.Dialoger.AddLine("Chipmunk King: Truly you are friend to the Chipmunks! Forever shall our friendship endure.");
+					Game1.Dialoger.AddLine("Chipmunk King: Take this as a token of our appreciation.", mod_giveChipmunkItemEvent);
+					Game1.player.RemoveIngredientReflection(EquipableItem.IngredientList.Apple, 100);
+				}
+				else
+				{
+					Game1.Dialoger.AddLine("Chipmunk King: Nay! The tall one has failed our royal request for <R>100 <R>Apples!");
+					Game1.Dialoger.AddLine("Chipmunk King: Begone, I say! Begone and do not return until your task is complete!");
+				}
+			}
+			else if (Game1.Globals.Chipmunk_State == 2)
+			{
+				randomLines = new string[4] { "Chipmunk King: Behold a true friend of the Chipmunk Realm! The tall one known as <B>Lily!", "Chipmunk King: Tall and stronger than a thousand chipmunks this one is, sworn to protect the weak and defenseless!", "Chipmunk King: Behold! <B>Lily! True friend to the Chipmunk Realm!", "Chipmunk King: The realm of the Chipmunks has been restored by your donation of <R>100 <R>Apples!" };
+				Game1.Dialoger.AddLine(randomLines[Game1.RandomNumber.Next(randomLines.Length)]);
+			}
         }
 
         private static void BuyItemEvent(string Event, int choice)
