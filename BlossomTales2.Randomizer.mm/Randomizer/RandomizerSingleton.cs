@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Newtonsoft.Json;
 
 namespace BlossomTales2.Randomizer.mm
 {
@@ -17,9 +18,30 @@ namespace BlossomTales2.Randomizer.mm
         public static void Initialize()
         {
             Instance = new RandomizerSingleton();
-            int seed = 0;
-            Instance._random = new Random(seed);
             Instance.InitializeLocations();
+        }
+
+        public void RandomizeLocations()
+        {
+            //seed = 0: jeu vanille
+            _random = new Random();
+            RandomizeItems();
+        }
+
+        public string SaveRandomizedLocations()
+        {
+            return JsonConvert.SerializeObject(_randomizedLocations);
+        }
+
+        public void LoadRandomizedLocations(string json)
+        {
+            if(json == null)
+            {
+                _randomizedLocations = _locationsVanilla;
+                return;
+            }
+
+            _randomizedLocations = JsonConvert.DeserializeObject<Dictionary<LocationId, ItemData>>(json);
         }
 
         public void GiveItemAtLocation(string name, Vector3 position)
@@ -127,8 +149,6 @@ namespace BlossomTales2.Randomizer.mm
             // Then, merge all into one big location list based on item settings
             _locationsVanilla = new Dictionary<LocationId, ItemData>
             {
-
-
                 //donjons
                 { new LocationId("orchid-tomb-3.tmx", "Chest_Small", new Vector3(416f, 0f, 320f)), new ItemData(ItemType.Gold_Key) }, //lampe && levier && damage
                 { new LocationId("orchid-tomb-4.tmx", "orchid_heart", new Vector3(604f, 0f, 304f)), new ItemData(ItemType.HeartQ_4) }, //lampe && damage && clé
@@ -564,6 +584,11 @@ namespace BlossomTales2.Randomizer.mm
             }
 
 
+
+        }
+
+        private void RandomizeItems()
+        {
             List<ItemData> itemPool = _locationsVanilla.Values.ToList();
             //ShuffleList(itemPool);
 

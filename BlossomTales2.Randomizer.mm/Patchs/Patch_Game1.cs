@@ -1,4 +1,5 @@
-﻿using BlossomTales2.Randomizer.mm;
+﻿using System.Linq;
+using BlossomTales2.Randomizer.mm;
 using MonoMod;
 
 namespace BlossomTales2
@@ -11,6 +12,7 @@ namespace BlossomTales2
         protected override void Initialize()
         {
             orig_Initialize();
+            RandomizerSingleton.Initialize();
         }
 
         public static void LoadStuff()
@@ -19,8 +21,10 @@ namespace BlossomTales2
             GameLogger.LogInfo("Is save successful " + !DidntCompleteLoad);
             if (!DidntCompleteLoad)
             {
-                //TODO: Loader la liste de locations depuis la save
-                RandomizerSingleton.Initialize();
+                //TODO: Loader la liste de locations depuis la save<
+                PermaListItem permaItem = Game1.Perma_Objects.FirstOrDefault(o => o.Name == "RandomizedLocations");
+
+                RandomizerSingleton.Instance.LoadRandomizedLocations(permaItem?.LevelName);
             }
         }
 

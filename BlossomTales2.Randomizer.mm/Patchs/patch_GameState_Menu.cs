@@ -1,6 +1,7 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
+using BlossomTales2.Extensions;
 using BlossomTales2.Randomizer.mm;
 using Microsoft.Xna.Framework;
 
@@ -25,7 +26,9 @@ namespace BlossomTales2
             if (Game1.DidntCompleteLoad)
             {
                 //TODO: Générer la seed et sauvegarder les locations dans la save.
-                RandomizerSingleton.Initialize();
+                RandomizerSingleton.Instance.RandomizeLocations();
+                string json = RandomizerSingleton.Instance.SaveRandomizedLocations();
+                Game1.Perma_Objects.Add(new PermaListItem(json, "RandomizedLocations", Vector3.Zero));
             }
         }
     }
