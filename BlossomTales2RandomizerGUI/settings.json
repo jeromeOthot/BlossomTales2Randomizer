@@ -1,0 +1,22 @@
+{
+  "ItemLocalisation": {
+    "Dongeons": true,
+    "Caves": true,
+    "NoteCaves": false,
+    "NPC": false,
+    "ShortSideQuest": false,
+    "LongSideQuest": false,
+    "MiniGames": false,
+    "Shops": false,
+    "Bards": false,
+    "Traders": false,
+    "Mausoleum": false
+  },
+  "Other": {
+    "SkipCutscenes": true,
+    "SkipFestival": true,
+    "SkipInvasion": false,
+    "OpenWorldState": false,
+    "RandomizeColiseumCoins": false
+  }
+}

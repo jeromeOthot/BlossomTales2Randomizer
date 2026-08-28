@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net9.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>Blossom Tales 2 Randomizer</AssemblyName>
+    <Product>Blossom Tales 2 Randomizer</Product>
+    <AssemblyTitle>Blossom Tales 2 Randomizer</AssemblyTitle>
+  </PropertyGroup>
+
+</Project>
