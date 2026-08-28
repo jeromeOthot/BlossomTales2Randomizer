@@ -606,7 +606,14 @@ namespace BlossomTales2.Randomizer.mm
 
         private void ShuffleList(List<ItemData> list)
         {
-            list.Sort((x, y) => _random.Next(-1, 2));
+            //Fisher-yates shuffle
+            for (int i = list.Count - 1; i > 0; i--)
+            {
+                int j = _random.Next(0, i+1);
+                ItemData temp = list[i];
+                list[i] = list[j];
+                list[j] = temp;
+            }
         }
     }
 }
