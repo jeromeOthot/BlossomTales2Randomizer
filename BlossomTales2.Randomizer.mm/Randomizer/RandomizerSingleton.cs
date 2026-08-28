@@ -1,8 +1,9 @@
-﻿using Microsoft.Xna.Framework;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework;
 using Newtonsoft.Json;
 
 namespace BlossomTales2.Randomizer.mm
@@ -12,13 +13,14 @@ namespace BlossomTales2.Randomizer.mm
         public static RandomizerSingleton Instance { get; private set; }
         private Dictionary<LocationId, ItemData> _locationsVanilla;
         private Dictionary<LocationId, ItemData> _randomizedLocations;
-
         private Random _random;
 
         public static void Initialize()
         {
             Instance = new RandomizerSingleton();
+            Instance.InitializeSetting();
             Instance.InitializeLocations();
+
         }
 
         public void RandomizeLocations()
@@ -106,6 +108,16 @@ namespace BlossomTales2.Randomizer.mm
             }
         }
 
+        private void InitializeSetting()
+        {
+            RamdomizerSettings.Load("settings.json");
+            //Exemple
+            bool skip = RamdomizerSettings.Other.SkipInvasion;
+            GameLogger.LogInfo("Check value SkipInvasion: " + RamdomizerSettings.Other.SkipInvasion);
+            GameLogger.LogInfo("Check value: Dongeons" + RamdomizerSettings.ItemLocalisation.Dongeons);
+        }
+
+        //public static Dictionary<string, bool> Load
         private void InitializeLocations()
         {
             //damage: épée || bombes || arc
@@ -400,6 +412,8 @@ namespace BlossomTales2.Randomizer.mm
                 { new LocationId("labHouse-shop.tmx", "left", Vector3.Zero), new ItemData(ItemType.Jar_Empty) },
                 { new LocationId("labHouse-shop.tmx", "center", Vector3.Zero), new ItemData(ItemType.Crystal) },
                 { new LocationId("labHouse-shop.tmx", "right", Vector3.Zero), new ItemData(ItemType.HeartQ_1) },
+
+
                 //labyrinthe
                 { new LocationId("castle-4.tmx", "Chest_Small", new Vector3(832f, 0f, 1204f)), new ItemData(ItemType.Gold_Key) }, //accès château 2
                 { new LocationId("castle-6.tmx", "Chest_Small", new Vector3(420f, 0f, 1260f)), new ItemData(ItemType.GoldCoin) }, //accès château 3
@@ -582,15 +596,18 @@ namespace BlossomTales2.Randomizer.mm
                 _locationsVanilla.Add(new LocationId("colosseum.tmx", "price8", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.GoldCoin));
                 _locationsVanilla.Add(new LocationId("colosseum.tmx", "price9", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.GoldCoin));
             }
-
-
-
         }
 
         private void RandomizeItems()
         {
             List<ItemData> itemPool = _locationsVanilla.Values.ToList();
+            //TODO: Place items with logic
             //ShuffleList(itemPool);
+
+            //ValidateSeed(itemPool);
+
+            //if seed is not valid
+            //regenerate
 
             GameLogger.LogInfo("Spoiler log begin:");
 
