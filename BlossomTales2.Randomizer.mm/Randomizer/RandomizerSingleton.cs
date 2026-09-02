@@ -60,7 +60,6 @@ namespace BlossomTales2.Randomizer.mm
 
         public void GiveSideQuestReward(string sideQuestName)
         {
-            Game1.Dialoger.AddLine("GiveSideQuestReward: " + sideQuestName);
             ItemData item = GetItemAtLocation(string.Empty, sideQuestName, Vector3.Zero);
             if(item != null)
                 GiveItem(item);

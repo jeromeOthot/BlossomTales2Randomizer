@@ -44,6 +44,12 @@ namespace BlossomTales2
                 return;
             }
 
+            if (Event.StartsWith("giveStatueItem_"))
+            {
+                GiveStatueItemEvent(Event);
+                return;
+            }
+
             switch (Event)
             {
                 case "giveFishingHeart":
@@ -385,6 +391,26 @@ namespace BlossomTales2
 
                         break;
                     }
+            }
+        }
+
+        private static void GiveStatueItemEvent(string Event)
+        {
+            char id = Event[Event.Length - 1];
+            switch (id)
+            {
+                case '0':
+                    RandomizerSingleton.Instance.GiveSideQuestReward("frog_statue_award");
+                    break;
+                case '1':
+                    RandomizerSingleton.Instance.GiveSideQuestReward("bunny_statue_award");
+                    break;
+                case '2':
+                    RandomizerSingleton.Instance.GiveSideQuestReward("chipmunk_statue_award");
+                    break;
+                case '3':
+                    RandomizerSingleton.Instance.GiveSideQuestReward("lizard_statue_award");
+                    break;
             }
         }
 
