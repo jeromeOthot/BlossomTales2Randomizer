@@ -242,8 +242,8 @@ namespace BlossomTales2
                   break;
                 case EquipableItem.ItemList.CanyonBone:
                   Count_CanyonBones++;
-                  Game1.Gui.AddGuiTicker(EquipableItem.IngredientList.Bones, Game1.player.Count_CanyonBones);
-                  this.GiveIngredient(EquipableItem.IngredientList.Bones);
+                  if (!Inventory_NE.Contains(item))
+                      Inventory_NE.Add(item);
                   break;
                 case EquipableItem.ItemList.Package:
                     if (!Inventory_NE.Contains(item))
