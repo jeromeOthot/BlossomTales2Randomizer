@@ -380,7 +380,7 @@ namespace BlossomTales2.Randomizer.mm
                 { new LocationId("overworld-19x19.tmx", "raceGame", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.Crystal) }, //accès ouest
                 { new LocationId("overworld-21x20-gabby.tmx", "Chest_price_1", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.HeartQ_1) }, //accès est
                 { new LocationId("overworld-21x20-gabby.tmx", "Chest_price_2", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.Crystal) }, //accès est
-                { new LocationId("overworld-21x20-gabby.tmx", "Chest_price_3", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.GoldCoin) }, //accès est
+                { new LocationId("overworld-21x20-gabby.tmx", "Chest_price_3", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.Five_Gems) }, //accès est
                 { new LocationId("overworld-24x18.tmx", "campCups", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.Crystal) }, //accès dark
                 { new LocationId("tent-arrow.tmx", "arrowGame", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.HeartQ_1) }, //bow
 
