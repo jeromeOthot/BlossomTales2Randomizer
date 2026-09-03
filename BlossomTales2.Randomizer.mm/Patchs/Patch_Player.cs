@@ -232,13 +232,12 @@ namespace BlossomTales2
                   this.Count_Gems += 5;
                   break;
                 case EquipableItem.ItemList.Letter:
-                    //TODO
+                    if (!Inventory_NE.Contains(item))
+                        Inventory_NE.Add(item);
                     break;
                 case EquipableItem.ItemList.Honeycomb:
                     if (!Inventory_NE.Contains(item))
-                    {
                         Inventory_NE.Add(item);
-                    }
                     Count_Honeycombs++;
                   break;
                 case EquipableItem.ItemList.CanyonBone:
@@ -247,8 +246,8 @@ namespace BlossomTales2
                   this.GiveIngredient(EquipableItem.IngredientList.Bones);
                   break;
                 case EquipableItem.ItemList.Package:
-                  Game1.Gui.AddGuiTicker(EquipableItem.IngredientList.NewSong, Game1.player.Count_CanyonBones);
-                  this.GiveIngredient(EquipableItem.IngredientList.Bones);
+                    if (!Inventory_NE.Contains(item))
+                        Inventory_NE.Add(item);
                   break;
                 case EquipableItem.ItemList.TreeSeed:
                   if (!Inventory_NE.Contains(item))

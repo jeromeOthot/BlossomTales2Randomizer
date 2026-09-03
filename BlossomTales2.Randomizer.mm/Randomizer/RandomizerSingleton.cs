@@ -385,6 +385,8 @@ namespace BlossomTales2.Randomizer.mm
                 { new LocationId("tent-arrow.tmx", "arrowGame", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.HeartQ_1) }, //bow
 
                 //mail
+                { new LocationId("blossom-postOffice.tmx", "postal_heart", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.HeartQ_1) }, //accès partout
+                { new LocationId("blossom-postOffice.tmx", "postal_falcon", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.Falcon) },  //accès partout
 
                 //shops
                 //Blossom
