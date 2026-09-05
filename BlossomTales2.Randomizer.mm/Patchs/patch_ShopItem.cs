@@ -19,27 +19,30 @@ namespace BlossomTales2
                 return;
 
             RandomizerSingleton singleton = RandomizerSingleton.Instance;
-            Game1.Globals.ShopItems = new List<int>(new[]
-            {
-                (int)singleton.GetItemAtLocation("blossom-shop.tmx", "left", Vector3.Zero).Item,
-                (int)singleton.GetItemAtLocation("blossom-shop.tmx", "center", Vector3.Zero).Item,
-                (int)singleton.GetItemAtLocation("blossom-shop.tmx", "right", Vector3.Zero).Item,
-                (int)singleton.GetItemAtLocation("anchor-shop.tmx", "left", Vector3.Zero).Item,
-                (int)singleton.GetItemAtLocation("anchor-shop.tmx", "center", Vector3.Zero).Item,
-                (int)singleton.GetItemAtLocation("anchor-shop.tmx", "right", Vector3.Zero).Item,
-                (int)singleton.GetItemAtLocation("canyon-shop.tmx", "left", Vector3.Zero).Item,
-                (int)singleton.GetItemAtLocation("canyon-shop.tmx", "center", Vector3.Zero).Item,
-                (int)singleton.GetItemAtLocation("canyon-shop.tmx", "right", Vector3.Zero).Item,
-                (int)singleton.GetItemAtLocation("darklands-house2-shop.tmx", "left", Vector3.Zero).Item,
-                (int)singleton.GetItemAtLocation("darklands-house2-shop.tmx", "center", Vector3.Zero).Item,
-                (int)singleton.GetItemAtLocation("darklands-house2-shop.tmx", "right", Vector3.Zero).Item,
-                (int)singleton.GetItemAtLocation("pirateShip-shop.tmx", "left", Vector3.Zero).Item,
-                (int)singleton.GetItemAtLocation("pirateShip-shop.tmx", "center", Vector3.Zero).Item,
-                (int)singleton.GetItemAtLocation("pirateShip-shop.tmx", "right", Vector3.Zero).Item,
-                (int)singleton.GetItemAtLocation("labHouse-shop.tmx", "left", Vector3.Zero).Item,
-                (int)singleton.GetItemAtLocation("labHouse-shop.tmx", "center", Vector3.Zero).Item,
-                (int)singleton.GetItemAtLocation("labHouse-shop.tmx", "right", Vector3.Zero).Item,
-            });
+
+            Game1.Globals.ShopItems[0] = Game1.Globals.ShopItems[0] == 24 ? 24 : (int)singleton.GetItemAtLocation("blossom-shop.tmx", "left", Vector3.Zero).Item;
+            Game1.Globals.ShopItems[1] = Game1.Globals.ShopItems[1] == 24 ? 24 : (int)singleton.GetItemAtLocation("blossom-shop.tmx", "center", Vector3.Zero).Item;
+            Game1.Globals.ShopItems[2] = Game1.Globals.ShopItems[2] == 24 ? 24 : (int)singleton.GetItemAtLocation("blossom-shop.tmx", "right", Vector3.Zero).Item;
+
+            Game1.Globals.ShopItems[3] = Game1.Globals.ShopItems[3] == 24 ? 24 : (int)singleton.GetItemAtLocation("anchor-shop.tmx", "left", Vector3.Zero).Item;
+            Game1.Globals.ShopItems[4] = Game1.Globals.ShopItems[4] == 24 ? 24 : (int)singleton.GetItemAtLocation("anchor-shop.tmx", "center", Vector3.Zero).Item;
+            Game1.Globals.ShopItems[5] = Game1.Globals.ShopItems[5] == 24 ? 24 : (int)singleton.GetItemAtLocation("anchor-shop.tmx", "right", Vector3.Zero).Item;
+
+            Game1.Globals.ShopItems[6] = Game1.Globals.ShopItems[6] == 24 ? 24 : (int)singleton.GetItemAtLocation("canyon-shop.tmx", "left", Vector3.Zero).Item;
+            Game1.Globals.ShopItems[7] = Game1.Globals.ShopItems[7] == 24 ? 24 : (int)singleton.GetItemAtLocation("canyon-shop.tmx", "center", Vector3.Zero).Item;
+            Game1.Globals.ShopItems[8] = Game1.Globals.ShopItems[8] == 24 ? 24 : (int)singleton.GetItemAtLocation("canyon-shop.tmx", "right", Vector3.Zero).Item;
+
+            Game1.Globals.ShopItems[9] = Game1.Globals.ShopItems[9] == 24 ? 24 : (int)singleton.GetItemAtLocation("darklands-house2-shop.tmx", "left", Vector3.Zero).Item;
+            Game1.Globals.ShopItems[10] = Game1.Globals.ShopItems[10] == 24 ? 24 : (int)singleton.GetItemAtLocation("darklands-house2-shop.tmx", "center", Vector3.Zero).Item;
+            Game1.Globals.ShopItems[11] = Game1.Globals.ShopItems[11] == 24 ? 24 : (int)singleton.GetItemAtLocation("darklands-house2-shop.tmx", "right", Vector3.Zero).Item;
+
+            Game1.Globals.ShopItems[12] = Game1.Globals.ShopItems[12] == 24 ? 24 : (int)singleton.GetItemAtLocation("pirateShip-shop.tmx", "left", Vector3.Zero).Item;
+            Game1.Globals.ShopItems[13] = Game1.Globals.ShopItems[13] == 24 ? 24 : (int)singleton.GetItemAtLocation("pirateShip-shop.tmx", "center", Vector3.Zero).Item;
+            Game1.Globals.ShopItems[14] = Game1.Globals.ShopItems[14] == 24 ? 24 : (int)singleton.GetItemAtLocation("pirateShip-shop.tmx", "right", Vector3.Zero).Item;
+
+            Game1.Globals.ShopItems[15] = Game1.Globals.ShopItems[15] == 24 ? 24 : (int)singleton.GetItemAtLocation("labHouse-shop.tmx", "left", Vector3.Zero).Item;
+            Game1.Globals.ShopItems[16] = Game1.Globals.ShopItems[16] == 24 ? 24 : (int)singleton.GetItemAtLocation("labHouse-shop.tmx", "center", Vector3.Zero).Item;
+            Game1.Globals.ShopItems[17] = Game1.Globals.ShopItems[17] == 24 ? 24 : (int)singleton.GetItemAtLocation("labHouse-shop.tmx", "right", Vector3.Zero).Item;
 
             Row = Game1.Globals.ShopItems[IDNumber - 1];
         }
