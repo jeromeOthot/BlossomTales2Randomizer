@@ -70,11 +70,8 @@ namespace BlossomTales2
                         else if (this.IDNumber == 3)
                         {
                             RandomizerSingleton.Instance.GiveItemAtLocation("Chest_price_3", Vector3.Zero);
-                            ++Game1.Globals.RandomRoll_Interaction;
-                        }
-
-                        if (Game1.Globals.RandomRoll_Interaction > 3)
                             Game1.Globals.RandomRoll_Interaction = 99;
+                        }
                         this.killOthersTimer = 1;
                     }
                 }
@@ -98,20 +95,17 @@ namespace BlossomTales2
                     {
                         Game1.CurrentLevel.LevelObjects[index].Frame = 3;
                         int frame = 0;
-                        if (Game1.CurrentLevel.LevelObjects[index].IDNumber == 3)
-                            frame = 37;
-                        else if (Game1.CurrentLevel.LevelObjects[index].IDNumber == 4)
+
+                         if (Game1.CurrentLevel.LevelObjects[index].IDNumber == 4)
                             frame = 26;
                         else if (Game1.CurrentLevel.LevelObjects[index].IDNumber == 5)
                             frame = 28;
                         else if (Game1.CurrentLevel.LevelObjects[index].IDNumber == 6)
                             frame = 0;
-                        if (frame != 0)
-                            Game1.Particles.Add(
-                                (Particle)new P_RemoveItem_2(Game1.CurrentLevel.LevelObjects[index].Position, frame));
                     }
                 }
             }
+
 
             if ((double)this.Position.Y > 0.0)
             {
