@@ -1,8 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Globalization;
 using Microsoft.Xna.Framework;
+using Newtonsoft.Json;
 
 namespace BlossomTales2.Randomizer.mm
 {
+    [TypeConverter(typeof(LocationIdConverter))]
+    [Serializable]
     public struct LocationId : IEquatable<LocationId>
     {
         public string MapName { get; private set; }
@@ -18,7 +24,7 @@ namespace BlossomTales2.Randomizer.mm
 
         public override string ToString()
         {
-            return "Map: [" + MapName + "] Object: [" + Name + "] Position: " + Position;
+            return JsonConvert.SerializeObject(this);
         }
 
         public override bool Equals(object obj)
@@ -44,6 +50,24 @@ namespace BlossomTales2.Randomizer.mm
         public bool Equals(LocationId other)
         {
             return other.MapName == MapName && other.Name == Name && other.Position == Position;
+        }
+    }
+
+    public class LocationIdConverter : TypeConverter
+    {
+        public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
+        {
+            return sourceType == typeof(string) || base.CanConvertFrom(context, sourceType);
+        }
+
+        public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
+        {
+            if (!(value is string str))
+                return base.ConvertFrom(context, culture, value);
+
+            Dictionary<string, string> json =  JsonConvert.DeserializeObject<Dictionary<string, string>>(str);
+            Vector3 pos = (Vector3)TypeDescriptor.GetConverter(typeof(Vector3)).ConvertFrom(context, culture, json["Position"]);
+            return new LocationId(json["MapName"], json["Name"], pos);
         }
     }
 }
