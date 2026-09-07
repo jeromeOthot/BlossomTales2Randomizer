@@ -15,6 +15,7 @@ namespace BlossomTales2
         public extern void orig_wakeUpLanternGuy();
         public extern void orig_giveLantern();
         public extern void orig_openDoor();
+        public extern void orig_runOff();
 
         public override void Init()
         {
@@ -93,6 +94,7 @@ namespace BlossomTales2
 
         public void giveLantern()
         {
+            Game1.player.RemovePlayerControls = true;
             lanternGuy.play("stand");
             Mod_GiveLanternItem();
             for (int i = 0; i < Game1.CurrentLevel.Lights.Count; i++)
@@ -115,6 +117,12 @@ namespace BlossomTales2
                     Game1.Dialoger.AddLine("Traveler: I'm getting out of here before you wake up something truly terrifying!", runOff);
                 });
             }
+        }
+
+        public void runOff()
+        {
+            orig_runOff();
+            Game1.player.RemovePlayerControls = false;
         }
 
         private void Mod_GiveLanternItem()
