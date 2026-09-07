@@ -61,6 +61,8 @@ namespace BlossomTales2
             if (ModGlobals.SkipCutscenes)
                 Game1.Globals.blossomInvasionState = 2;
 
+            Game1.Globals.Engineer_State = 1;
+
             giveControlToPlayer(lily, false, 3);
             Game1.LOPuppets.Clear();
            // this.bedSheetLily.Zdepth = -99.5f;
