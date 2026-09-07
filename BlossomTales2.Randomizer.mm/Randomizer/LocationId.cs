@@ -11,8 +11,11 @@ namespace BlossomTales2.Randomizer.mm
     [Serializable]
     public struct LocationId : IEquatable<LocationId>
     {
+        [JsonProperty]
         public string MapName { get; private set; }
+        [JsonProperty]
         public string Name { get; private set; }
+        [JsonProperty]
         public Vector3 Position { get; private set; }
 
         public LocationId(string mapName, string name, Vector3 position)
@@ -66,8 +69,25 @@ namespace BlossomTales2.Randomizer.mm
                 return base.ConvertFrom(context, culture, value);
 
             Dictionary<string, string> json =  JsonConvert.DeserializeObject<Dictionary<string, string>>(str);
-            Vector3 pos = (Vector3)TypeDescriptor.GetConverter(typeof(Vector3)).ConvertFrom(context, culture, json["Position"]);
+            Vector3 pos = JsonConvert.DeserializeObject<Vector3>(json["Position"]);
             return new LocationId(json["MapName"], json["Name"], pos);
+        }
+
+        public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
+        {
+            return destinationType == typeof(string) ||base.CanConvertTo(context, destinationType);
+        }
+
+        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
+        {
+            if (destinationType != typeof(string) || !(value is LocationId locationId))
+                return base.ConvertTo(context, culture, value, destinationType);
+
+            Dictionary<string, string> json =  new Dictionary<string, string>
+            {
+                { "MapName", locationId.MapName }, { "Name", locationId.Name }, { "Position", JsonConvert.SerializeObject(locationId.Position) }
+            };
+            return JsonConvert.SerializeObject(json);
         }
     }
 }
