@@ -223,7 +223,6 @@ namespace MonoMod
     {
         public static void PatchGame1LoadThreadStuff(ILContext context, CustomAttribute attrib)
         {
-            TypeDefinition modPatchGame1Type = MonoModRule.Modder.FindType("BlossomTales2.ModGame1").Resolve();
             ILCursor cursor = new ILCursor(context);
             PatchCanyonBardCutscene(cursor);
         }
