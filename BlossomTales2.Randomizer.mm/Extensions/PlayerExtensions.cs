@@ -37,19 +37,28 @@ namespace BlossomTales2.Randomizer.mm
 
         public static void LearnSong(this Player player, Globaler.Songs newSong)
         {
-            if (!Game1.Globals.Learned_Songs.Contains(newSong))
-            {
-                Game1.Gui.AddGuiTicker(EquipableItem.IngredientList.NewSong, 1);
-                Game1.Globals.Learned_Songs.Add(newSong);
+            if (Game1.Globals.Learned_Songs.Contains(newSong))
+                return;
 
-                int startIndexSong = 56;
-                int itemIndex = (int)newSong;
-                Game1.playSoundCue("newWeapon");
-                Game1.playSoundCue("blank098");
-                GameLogger.LogInfo("Play animation item: " + itemIndex);
-                Game1.Particles.Add((Particle)new P_GetItem(Game1.player.Position + new Vector3(0.0f, 100f, 0.0f), itemIndex + startIndexSong));
-                Game1.Particles.Add((Particle)new GetItemLight(Game1.player.Position));
+            Game1.Gui.AddGuiTicker(EquipableItem.IngredientList.NewSong, 1);
+            Game1.Globals.Learned_Songs.Add(newSong);
+
+            if (player.ghostTimer < 1)
+            {
+                player.ClearPlayer();
+                player.CurrentAnimation = Player.Animations.GetItem;
             }
+            else
+            {
+                Game1.playSoundCue("newWeapon");
+            }
+
+            const int startIndexSong = 56;
+            int itemIndex = (int)newSong;
+            Game1.playSoundCue("blank098");
+            GameLogger.LogInfo("Play animation item: " + itemIndex);
+            Game1.Particles.Add(new P_GetItem(Game1.player.Position + new Vector3(0.0f, 100f, 0.0f), itemIndex + startIndexSong));
+            Game1.Particles.Add(new GetItemLight(Game1.player.Position));
         }
     }
 }
