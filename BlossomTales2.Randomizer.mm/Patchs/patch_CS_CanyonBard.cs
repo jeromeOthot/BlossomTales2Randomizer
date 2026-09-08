@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using BlossomTales2.Extensions;
 using BlossomTales2.Randomizer.mm;
 using Microsoft.Xna.Framework;
@@ -12,6 +13,9 @@ namespace BlossomTales2
         private bool showSheet;
         private bool shownotes;
 
+        public extern void orig_talkBard();
+        public extern void orig_talkMayor();
+        public extern void orig_bardTalk1();
         public extern void orig_lessonPre();
         public extern void orig_bardTalkAgain();
         public extern void orig_goPlayer();
@@ -39,6 +43,35 @@ namespace BlossomTales2
                 {
                     levelObject.Size.Y = 0f;
                 }
+            }
+        }
+
+        public void talkBard()
+        {
+            if(ModGlobals.SkipCutscenes)
+                raiseWalls();
+            else
+                orig_talkBard();
+        }
+
+        public void talkMayor()
+        {
+            if(ModGlobals.SkipCutscenes)
+                startFight();
+            else
+                orig_talkMayor();
+        }
+
+        public void bardTalk1()
+        {
+            if (ModGlobals.SkipCutscenes)
+            {
+                bard.play("idle");
+                giveGuitar();
+            }
+            else
+            {
+                orig_bardTalk1();
             }
         }
 
@@ -95,10 +128,11 @@ namespace BlossomTales2
 
         public void focusMusicDoor2()
         {
-            //Increase animation time for item animation.
-            tweener.Timer(2f).OnComplete(turnPlayer);
-            //Skip opening door.
-            tweener.Timer(1.5f).OnComplete(bardTalkAgain);
+            const float Mod_GetItemAnimationDuration = 2f;
+            Action Mod_SkipOpeningDoor = bardTalkAgain;
+
+            tweener.Timer(Mod_GetItemAnimationDuration).OnComplete(turnPlayer);
+            tweener.Timer(1.5f).OnComplete(Mod_SkipOpeningDoor);
         }
 
         public void bardTalkAgain()
@@ -131,7 +165,6 @@ namespace BlossomTales2
 
         private void Mod_GiveItem()
         {
-            GameLogger.LogInfo(Game1.CurrentLevel.Name + " " + bard.name + " " + bard.getPosition());
             RandomizerSingleton.Instance.GiveItemAtLocation(bard.name, bard.getPosition());
         }
 
