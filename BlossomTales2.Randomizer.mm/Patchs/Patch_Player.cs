@@ -506,6 +506,13 @@ namespace MonoMod
             TypeDefinition modPatchPlayerType = MonoModRule.Modder.FindType("BlossomTales2.ModPlayer").Resolve();
             ILCursor cursor = new ILCursor(context);
 
+            PatchGiveFishingItem(cursor, modPatchPlayerType);
+            PatchFishNecklace(cursor, modPatchPlayerType);
+            PatchGiveKingSword(cursor, modPatchPlayerType);
+        }
+
+        private static void PatchGiveFishingItem(ILCursor cursor, TypeDefinition modPatchPlayerType)
+        {
             //Find L.1607
             //this.GiveIngredient(this.fishingIngredient, playAnimation: true);
             cursor.GotoNext(MoveType.Before,
@@ -523,7 +530,11 @@ namespace MonoMod
             cursor.RemoveRange(6);
             cursor.Emit(OpCodes.Ldarg_0);
             cursor.Emit(OpCodes.Call, mod_GiveFishingItem);
+        }
 
+
+        private static void PatchFishNecklace(ILCursor cursor, TypeDefinition modPatchPlayerType)
+        {
             //Find L.1787 to retrieve the branch label.
             // if (Game1.LevelName == "jungles-24x20.tmx")
             ILLabel branch24x20 = null; //This label branch to the next if
@@ -549,7 +560,11 @@ namespace MonoMod
 
             cursor.Index += 3;
             cursor.MarkLabel(branch22x22);
+        }
 
+
+        private static void PatchGiveKingSword(ILCursor cursor, TypeDefinition modPatchPlayerType)
+        {
             //Find L.1985
             //Game1.player.GiveItem(EquipableItem.ItemList.KingSword);
             cursor.GotoNext(MoveType.Before,
