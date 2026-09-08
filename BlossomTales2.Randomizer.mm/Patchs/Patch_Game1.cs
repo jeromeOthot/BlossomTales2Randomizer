@@ -1,6 +1,11 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+using BlossomTales2;
 using BlossomTales2.Randomizer.mm;
+using Mono.Cecil;
 using MonoMod;
+using MonoMod.Cil;
+using MonoMod.InlineRT;
 
 namespace BlossomTales2
 {
@@ -27,6 +32,10 @@ namespace BlossomTales2
                 RandomizerSingleton.Instance.LoadRandomizedLocations(permaItem?.LevelName);
             }
         }
+
+        [MonoModIgnore]
+        [PatchGame1LoadThreadStuff]
+        public extern void LoadThreadStuff();
 
         //TODO: Trouver une façon de caller la vraie fonction. Game1.RandomFloat
         public static float RandomFloat(int a, int b, float divisor)
@@ -201,6 +210,35 @@ namespace BlossomTales2
           Game1.Globals.FoundLevels.Add("castle-minotaurThrone.tmx");
           //this.LoadLastLevelName();
           //this.ChangeLevel(0, Game1.FadeNewLevelName);
+        }
+    }
+}
+
+namespace MonoMod
+{
+    [MonoModCustomMethodAttribute(nameof(MonoModRules.PatchGame1LoadThreadStuff))]
+    class PatchGame1LoadThreadStuffAttribute : Attribute { }
+
+    static partial class MonoModRules
+    {
+        public static void PatchGame1LoadThreadStuff(ILContext context, CustomAttribute attrib)
+        {
+            TypeDefinition modPatchGame1Type = MonoModRule.Modder.FindType("BlossomTales2.ModGame1").Resolve();
+            ILCursor cursor = new ILCursor(context);
+            PatchCanyonBardCutscene(cursor);
+        }
+
+        private static void PatchCanyonBardCutscene(ILCursor cursor)
+        {
+            //Find L.2094
+            //CutSceneController = new CS_CanyonBard();
+            cursor.GotoNext(MoveType.Before,
+                instr => instr.MatchNewobj<CS_CanyonBard>()
+            );
+
+            //Remove Globals.MainQuestObjective <= Globaler.MainGameObjective.canyons_headToBard
+            cursor.Index -= 4;
+            cursor.RemoveRange(4);
         }
     }
 }
