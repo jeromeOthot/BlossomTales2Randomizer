@@ -5,8 +5,7 @@ using Microsoft.Xna.Framework;
 
 namespace BlossomTales2
 {
-
-    internal class patch_CS_CanyonBard : CS_CanyonBard
+    public class patch_CS_CanyonBard : CS_CanyonBard
     {
         private Puppet cage;
         private Puppet bard;
@@ -16,6 +15,7 @@ namespace BlossomTales2
         public extern void orig_Init();
         public extern void orig_giveGuitar();
         public extern void orig_giveAccordion();
+        public extern void orig_lessonPre();
         public extern void orig_startTheSong();
         public extern void orig_goPlayer();
 
@@ -57,6 +57,14 @@ namespace BlossomTales2
             Mod_GiveItem();
         }
 
+        public void lessonPre()
+        {
+            if (ModGlobals.OpenWorldState)
+                startTheSong();
+            else
+                orig_lessonPre();
+        }
+
         public void startTheSong()
         {
             Mod_GiveSong();
@@ -64,20 +72,28 @@ namespace BlossomTales2
             showSheet = false;
             Game1.player.StopUpdating = false;
             Game1.player.RemovePlayerControls = true;
-            Game1.player.MusicSuccessful = 1;
-            Game1.player.SongTimer = 10000;
-            Game1.player.SongStartWait = 500;
-            tweener.Timer(0.5f).OnComplete(delegate
+
+            if (ModGlobals.SkipCutscenes)
             {
-                bard.play("playHarpForever");
-                shownotes = true;
-            });
-            tweener.Timer(9f).OnComplete(delegate
+                focusMusicDoor2();
+            }
+            else
             {
-                bard.play("holdHarp");
-                shownotes = false;
-            });
-            tweener.Timer(10f).OnComplete(focusMusicDoor2);
+                Game1.player.MusicSuccessful = 1;
+                Game1.player.SongTimer = 10000;
+                Game1.player.SongStartWait = 500;
+                tweener.Timer(0.5f).OnComplete(delegate
+                {
+                    bard.play("playHarpForever");
+                    shownotes = true;
+                });
+                tweener.Timer(9f).OnComplete(delegate
+                {
+                    bard.play("holdHarp");
+                    shownotes = false;
+                });
+                tweener.Timer(10f).OnComplete(focusMusicDoor2);
+            }
         }
 
         public void goPlayer()
