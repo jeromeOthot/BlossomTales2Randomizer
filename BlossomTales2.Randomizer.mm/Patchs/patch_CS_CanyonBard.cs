@@ -12,11 +12,8 @@ namespace BlossomTales2
         private bool showSheet;
         private bool shownotes;
 
-        public extern void orig_Init();
-        public extern void orig_giveGuitar();
-        public extern void orig_giveAccordion();
         public extern void orig_lessonPre();
-        public extern void orig_startTheSong();
+        public extern void orig_bardTalkAgain();
         public extern void orig_goPlayer();
 
         public override void Init()
@@ -94,6 +91,22 @@ namespace BlossomTales2
                 });
                 tweener.Timer(10f).OnComplete(focusMusicDoor2);
             }
+        }
+
+        public void focusMusicDoor2()
+        {
+            //Increase animation time for item animation.
+            tweener.Timer(2f).OnComplete(turnPlayer);
+            //Skip opening door.
+            tweener.Timer(1.5f).OnComplete(bardTalkAgain);
+        }
+
+        public void bardTalkAgain()
+        {
+            if(ModGlobals.SkipCutscenes)
+                goPlayer();
+            else
+                orig_bardTalkAgain();
         }
 
         public void goPlayer()
