@@ -10,26 +10,44 @@ namespace BlossomTales2
         private bool showSheet;
         private bool shownotes;
 
+        public extern void orig_startLesson();
+
+        public void startLesson()
+        {
+            if(ModGlobals.SkipCutscenes)
+                learntLesson();
+            else
+                orig_startLesson();
+        }
+
         public void learntLesson()
         {
             Mod_GiveSong();
             showSheet = false;
             Game1.player.StopUpdating = false;
             Game1.player.RemovePlayerControls = true;
-            Game1.player.MusicSuccessful = 5;
-            Game1.player.SongTimer = 10000;
-            Game1.player.SongStartWait = 500;
-            tweener.Timer(0.5f).OnComplete(delegate
+
+            if (ModGlobals.SkipCutscenes)
             {
-                bard.play("playHarpForever");
-                shownotes = true;
-            });
-            tweener.Timer(6f).OnComplete(delegate
+                tweener.Timer(2f).OnComplete(finishBardDialog);
+            }
+            else
             {
-                bard.play("holdHarp");
-                shownotes = false;
-            });
-            tweener.Timer(7f).OnComplete(finishBardDialog);
+                Game1.player.MusicSuccessful = 5;
+                Game1.player.SongTimer = 10000;
+                Game1.player.SongStartWait = 500;
+                tweener.Timer(0.5f).OnComplete(delegate
+                {
+                    bard.play("playHarpForever");
+                    shownotes = true;
+                });
+                tweener.Timer(6f).OnComplete(delegate
+                {
+                    bard.play("holdHarp");
+                    shownotes = false;
+                });
+                tweener.Timer(7f).OnComplete(finishBardDialog);
+            }
         }
 
         private void Mod_GiveSong()
