@@ -1,7 +1,8 @@
 {
+  "SeedNumber": 123,
   "ItemLocalisation": {
     "Dongeons": true,
-    "Caves": true,
+    "Caves": false,
     "NoteCaves": false,
     "NPC": false,
     "ShortSideQuest": false,
@@ -15,8 +16,8 @@
   "Other": {
     "SkipCutscenes": true,
     "SkipFestival": true,
-    "SkipInvasion": false,
-    "OpenWorldState": false,
+    "SkipInvasion": true,
+    "OpenWorldState": true,
     "RandomizeColiseumCoins": false
   }
 }

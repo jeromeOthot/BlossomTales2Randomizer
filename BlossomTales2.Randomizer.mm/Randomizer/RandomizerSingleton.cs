@@ -112,6 +112,7 @@ namespace BlossomTales2.Randomizer.mm
             RamdomizerSettings.Load("settings.json");
             //Exemple
             bool skip = RamdomizerSettings.Other.SkipInvasion;
+            GameLogger.LogInfo("Seed number: " + RamdomizerSettings.SeedNumber);
             GameLogger.LogInfo("Check value SkipInvasion: " + RamdomizerSettings.Other.SkipInvasion);
             GameLogger.LogInfo("Check value: Dongeons" + RamdomizerSettings.ItemLocalisation.Dongeons);
         }
@@ -610,16 +611,32 @@ namespace BlossomTales2.Randomizer.mm
             //if seed is not valid
             //regenerate
 
-            GameLogger.LogInfo("Spoiler log begin:");
-
-            _randomizedLocations = new Dictionary<LocationId, ItemData>();
-            List<LocationId> keyList = _locationsVanilla.Keys.ToList();
-            for (int i = 0; i < keyList.Count; i++)
+            //Si on n'as pas de seed number
+            if(RamdomizerSettings.SeedNumber == null)
             {
-                _randomizedLocations.Add(keyList[i], itemPool[i]);
-                GameLogger.LogInfo(keyList[i] + " " + itemPool[i]);
+                GameLogger.LogInfo("Spoiler log begin:");
+
+                _randomizedLocations = new Dictionary<LocationId, ItemData>();
+                List<LocationId> keyList = _locationsVanilla.Keys.ToList();
+                for (int i = 0; i < keyList.Count; i++)
+                {
+                    _randomizedLocations.Add(keyList[i], itemPool[i]);
+                    GameLogger.LogInfo(keyList[i] + " " + itemPool[i]);
+                }
+                GameLogger.LogInfo("Spoiler log end");
             }
-            GameLogger.LogInfo("Spoiler log end");
+            //Si on as un seed number == 0
+            else if(RamdomizerSettings.SeedNumber == 0)
+            {
+                GameLogger.LogInfo("_locationsVanilla");
+                _randomizedLocations = _locationsVanilla;
+            }
+            //Si on as un seed number quelconque on l'utilise pour la seed du random
+            else
+            {
+                //TODO: Randomizer avec le numéro de seed.
+                GameLogger.LogInfo("Randomizer with seed");
+            }
         }
 
         private void ShuffleList(List<ItemData> list)

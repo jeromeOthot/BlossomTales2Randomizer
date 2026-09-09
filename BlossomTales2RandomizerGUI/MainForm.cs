@@ -12,6 +12,7 @@ public sealed class MainForm : Form
     private readonly Dictionary<string, CheckBox> _checkboxes = new();
     private readonly Dictionary<string, (Label Header, List<SettingDefinition> Items)> _groupHeaders = new();
     private readonly Label _statusLabel;
+    private TextBox _seedTextBox = new();
 
     public MainForm()
     {
@@ -67,12 +68,16 @@ public sealed class MainForm : Form
         host.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
 
         var categories = _catalog.Select(d => d.Category).Distinct().ToList();
-        host.RowCount = categories.Count * 3;
+        host.RowCount = categories.Count * 3 + 1;
+
+        host.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+        host.Controls.Add(BuildSeedRow(), 0, 0);
 
         for (var g = 0; g < categories.Count; g++)
         {
             var category = categories[g];
             var items = _catalog.Where(d => d.Category == category).ToList();
+            var row = g * 3 + 1;
 
             var headerLabel = new Label
             {
@@ -98,12 +103,47 @@ public sealed class MainForm : Form
             host.RowStyles.Add(new RowStyle(SizeType.AutoSize));
             host.RowStyles.Add(new RowStyle(SizeType.AutoSize));
 
-            host.Controls.Add(headerLabel, 0, g * 3);
-            host.Controls.Add(ruleLine, 0, g * 3 + 1);
-            host.Controls.Add(grid, 0, g * 3 + 2);
+            host.Controls.Add(headerLabel, 0, row);
+            host.Controls.Add(ruleLine, 0, row + 1);
+            host.Controls.Add(grid, 0, row + 2);
         }
 
         return host;
+    }
+
+    private Control BuildSeedRow()
+    {
+        var row = new TableLayoutPanel
+        {
+            ColumnCount = 2,
+            RowCount = 1,
+            AutoSize = true,
+            AutoSizeMode = AutoSizeMode.GrowAndShrink,
+            Margin = new Padding(0, 0, 0, 10),
+        };
+        row.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize));
+        row.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize));
+
+        var label = new Label
+        {
+            Text = "Seed Number:",
+            AutoSize = true,
+            Anchor = AnchorStyles.Left,
+            Margin = new Padding(0, 6, 6, 0),
+        };
+
+        _seedTextBox = new TextBox
+        {
+            Width = 150,
+            Anchor = AnchorStyles.Left,
+            Margin = new Padding(0, 3, 0, 0),
+            Text = SettingsStore.LoadSeedNumber(),
+        };
+
+        row.Controls.Add(label, 0, 0);
+        row.Controls.Add(_seedTextBox, 1, 0);
+
+        return row;
     }
 
     private TableLayoutPanel BuildCheckboxGrid(string category, List<SettingDefinition> items)
@@ -228,6 +268,7 @@ public sealed class MainForm : Form
         try
         {
             SettingsStore.Save(_values);
+            SettingsStore.SaveSeedNumber(_seedTextBox.Text);
             SetStatus($"Saved to {SettingsStore.GetSettingsPath()}");
         }
         catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)

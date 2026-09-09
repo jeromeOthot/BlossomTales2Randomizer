@@ -7,6 +7,7 @@ namespace BlossomTales2.Randomizer.mm
 {
     public static class RamdomizerSettings
     {
+        public static int? SeedNumber = null;
         public static OtherSetting Other = new OtherSetting();
         public static ItemLocalisationSetting ItemLocalisation = new ItemLocalisationSetting();
 
@@ -42,6 +43,7 @@ namespace BlossomTales2.Randomizer.mm
 
             if (loaded != null)
             {
+                SeedNumber = loaded.SeedNumber;
                 if (loaded.Other != null)
                     Other = loaded.Other;
 
@@ -52,6 +54,7 @@ namespace BlossomTales2.Randomizer.mm
 
         private class RamdomizerSettingsFile
         {
+            public int? SeedNumber { get; set; }
             public OtherSetting Other { get; set; }
             public ItemLocalisationSetting ItemLocalisation { get; set; }
         }
