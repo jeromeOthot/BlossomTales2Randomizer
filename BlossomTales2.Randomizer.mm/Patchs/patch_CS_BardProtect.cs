@@ -10,6 +10,8 @@ namespace BlossomTales2
         private bool showSheet;
         private bool shownotes;
 
+        public extern void orig_startLesson();
+
         public override void Init()
         {
             if (!Mod_HasItem())
@@ -36,6 +38,14 @@ namespace BlossomTales2
             }
         }
 
+        public void startLesson()
+        {
+            if(ModGlobals.SkipCutscenes)
+                learntLesson();
+            else
+                orig_startLesson();
+        }
+
         public void learntLesson()
         {
             Mod_GiveSong();
@@ -44,30 +54,50 @@ namespace BlossomTales2
             Game1.player.StopUpdating = false;
             Game1.player.RemovePlayerControls = true;
             FORBARD = true;
-            Game1.player.MusicSuccessful = 2;
-            Game1.player.SongTimer = 12500;
-            Game1.player.SongStartWait = 500;
-            tweener.Timer(0.5f).OnComplete(delegate
+
+            if (ModGlobals.SkipCutscenes)
             {
-                bard.play("playHarpForever");
-                shownotes = true;
-            });
-            tweener.Timer(11.5f).OnComplete(delegate
-            {
-                bard.play("holdHarp");
-            });
-            tweener.Timer(12f).OnComplete(delegate
-            {
-                bard.play("putHarpAway");
-                shownotes = false;
-                BalloonStand balloonStand = new BalloonStand(bard.getPosition() + new Vector3(0f, 0f, 0f))
+                //Duplicated delegate
+                tweener.Timer(2f).OnComplete(delegate
                 {
-                    SaveToMap = false,
-                    hideStand = true
-                };
-                Game1.CurrentLevel.LevelObjects.Add(balloonStand);
-                balloonStand.CallBalloonForBard();
-            });
+                    bard.play("putHarpAway");
+                    shownotes = false;
+                    BalloonStand balloonStand = new BalloonStand(bard.getPosition() + new Vector3(0f, 0f, 0f))
+                    {
+                        SaveToMap = false,
+                        hideStand = true
+                    };
+                    Game1.CurrentLevel.LevelObjects.Add(balloonStand);
+                    balloonStand.CallBalloonForBard();
+                });
+            }
+            else
+            {
+                Game1.player.MusicSuccessful = 2;
+                Game1.player.SongTimer = 12500;
+                Game1.player.SongStartWait = 500;
+                tweener.Timer(0.5f).OnComplete(delegate
+                {
+                    bard.play("playHarpForever");
+                    shownotes = true;
+                });
+                tweener.Timer(11.5f).OnComplete(delegate
+                {
+                    bard.play("holdHarp");
+                });
+                tweener.Timer(12f).OnComplete(delegate
+                {
+                    bard.play("putHarpAway");
+                    shownotes = false;
+                    BalloonStand balloonStand = new BalloonStand(bard.getPosition() + new Vector3(0f, 0f, 0f))
+                    {
+                        SaveToMap = false,
+                        hideStand = true
+                    };
+                    Game1.CurrentLevel.LevelObjects.Add(balloonStand);
+                    balloonStand.CallBalloonForBard();
+                });
+            }
         }
 
         private bool Mod_HasItem()
