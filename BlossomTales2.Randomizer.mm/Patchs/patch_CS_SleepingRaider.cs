@@ -17,9 +17,20 @@ namespace BlossomTales2
         private bool showSheet;
         private bool shownotes;
 
+        public extern void orig_startLesson();
+        public extern void orig_bardTalkAgain();
+
         [MonoModIgnore]
         [PatchCSSleepingRaiderInit]
         public extern override void Init();
+
+        public void startLesson()
+        {
+            if(ModGlobals.SkipCutscenes)
+                startTheSong();
+            else
+                orig_startLesson();
+        }
 
         public void startTheSong()
         {
@@ -27,18 +38,34 @@ namespace BlossomTales2
             showSheet = false;
             Game1.player.StopUpdating = false;
             Game1.player.RemovePlayerControls = false;
-            Game1.player.MusicSuccessful = 3;
-            Game1.player.SongTimer = 10000;
-            Game1.player.SongStartWait = 500;
-            tweener.Timer(0.5f).OnComplete(delegate
+
+            if (ModGlobals.SkipCutscenes)
             {
-                shownotes = true;
-            });
-            tweener.Timer(9f).OnComplete(delegate
+                tweener.Timer(2f).OnComplete(turnPlayer);
+            }
+            else
             {
-                shownotes = false;
-            });
-            tweener.Timer(10f).OnComplete(turnPlayer);
+                Game1.player.MusicSuccessful = 3;
+                Game1.player.SongTimer = 10000;
+                Game1.player.SongStartWait = 500;
+                tweener.Timer(0.5f).OnComplete(delegate
+                {
+                    shownotes = true;
+                });
+                tweener.Timer(9f).OnComplete(delegate
+                {
+                    shownotes = false;
+                });
+                tweener.Timer(10f).OnComplete(turnPlayer);
+            }
+        }
+
+        public void bardTalkAgain()
+        {
+            if (ModGlobals.SkipCutscenes)
+                jumpOff();
+            else
+                orig_bardTalkAgain();
         }
 
         public void goPlayer()
