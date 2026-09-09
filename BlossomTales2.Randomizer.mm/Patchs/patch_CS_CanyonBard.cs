@@ -19,6 +19,7 @@ namespace BlossomTales2
         public extern void orig_lessonPre();
         public extern void orig_bardTalkAgain();
         public extern void orig_goPlayer();
+        public extern void orig_Update(GameTime gameTime);
 
         public override void Init()
         {
@@ -153,6 +154,12 @@ namespace BlossomTales2
                 Game1Extensions.MarkObjectiveComplete(Globaler.MainGameObjective.canyons_headToBard);
                 Game1.Globals.MainQuestObjective = mainGameObjective;
             }
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+            if(Mod_HasNotSavedBard())
+                orig_Update(gameTime);
         }
 
         private bool Mod_HasNotSavedBard()
