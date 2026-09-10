@@ -65,15 +65,27 @@ namespace BlossomTales2
             switch (item)
             {
                 case EquipableItem.ItemList.Sword:
-                  if (SwordLevel >= 3)
-                    HasSwordBeams = true;
-                  else
-                  {
-                    if (SwordLevel >= 2)
-                      HasChargeSword = true;
-                    SwordLevel++;
-                  }
-                  break;
+                    switch (SwordLevel)
+                    {
+                        case 0:
+                            item = EquipableItem.ItemList.WoodSword;
+                            break;
+                        case 1:
+                            item = EquipableItem.ItemList.Sword;
+                            break;
+                        case 2:
+                            item = EquipableItem.ItemList.KingSword;
+                            HasChargeSword = true;
+                            break;
+                        case 3:
+                            item = EquipableItem.ItemList.KingSword;
+                            HasSwordBeams = true;
+                            break;
+                    }
+
+                    if(SwordLevel < 3)
+                        SwordLevel++;
+                    break;
                 case EquipableItem.ItemList.Shield:
                     this.ShieldLevel = 1;
                     for (int index = 0; index < this.Inventory.Count; ++index)
