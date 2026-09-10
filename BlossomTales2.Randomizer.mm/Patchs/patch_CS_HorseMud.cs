@@ -13,6 +13,8 @@ namespace BlossomTales2
         private bool shownotes;
         private bool hasSong;
 
+        public extern void orig_startLesson();
+
         public override void Init()
         {
             if (Game1.Globals.Learned_Songs.Contains(Globaler.Songs.CallHorse))
@@ -44,52 +46,68 @@ namespace BlossomTales2
             bard = new Puppet("bard", new Vector3(724f, 0f, 1260f));
         }
 
+        public void startLesson()
+        {
+            if(ModGlobals.SkipCutscenes)
+                learntLesson();
+            else
+                orig_startLesson();
+        }
+
         public void learntLesson()
         {
             Mod_GiveSong();
             showSheet = false;
             Game1.player.StopUpdating = false;
             Game1.player.RemovePlayerControls = true;
-            Game1.player.MusicSuccessful = 4;
-            Game1.player.SongTimer = 7000;
-            Game1.player.SongStartWait = 500;
-            tweener.Timer(0.5f).OnComplete(delegate
+
+            if (ModGlobals.SkipCutscenes)
             {
-                bard.play("playHarpForever");
-                shownotes = true;
-            });
-            tweener.Timer(6f).OnComplete(delegate
+                tweener.Timer(2f).OnComplete(finishBardDialog);
+            }
+            else
             {
-                bard.play("holdHarp");
-                shownotes = false;
-                bool flag = false;
-                foreach (LevelObject levelObject in Game1.CurrentLevel.LevelObjects)
+                Game1.player.MusicSuccessful = 4;
+                Game1.player.SongTimer = 7000;
+                Game1.player.SongStartWait = 500;
+                tweener.Timer(0.5f).OnComplete(delegate
                 {
-                    if (levelObject is PlayerHorse)
+                    bard.play("playHarpForever");
+                    shownotes = true;
+                });
+                tweener.Timer(6f).OnComplete(delegate
+                {
+                    bard.play("holdHarp");
+                    shownotes = false;
+                    bool flag = false;
+                    foreach (LevelObject levelObject in Game1.CurrentLevel.LevelObjects)
                     {
-                        flag = true;
-                        if (!Game1.CamRect.Contains((int)levelObject.Position.X, (int)levelObject.Position.Z))
+                        if (levelObject is PlayerHorse)
                         {
-                            levelObject.Position.Z = Game1.player.Position.Z - 32f;
-                            if (levelObject.Position.X > Game1.Camera.Center.X)
+                            flag = true;
+                            if (!Game1.CamRect.Contains((int)levelObject.Position.X, (int)levelObject.Position.Z))
                             {
-                                levelObject.Position.X = Game1.Camera.Center.X + 700f;
+                                levelObject.Position.Z = Game1.player.Position.Z - 32f;
+                                if (levelObject.Position.X > Game1.Camera.Center.X)
+                                {
+                                    levelObject.Position.X = Game1.Camera.Center.X + 700f;
+                                }
+                                else
+                                {
+                                    levelObject.Position.X = Game1.Camera.Center.X - 700f;
+                                }
                             }
-                            else
-                            {
-                                levelObject.Position.X = Game1.Camera.Center.X - 700f;
-                            }
+                            ((PlayerHorse)levelObject).MoveToPlayer();
+                            break;
                         }
-                        ((PlayerHorse)levelObject).MoveToPlayer();
-                        break;
                     }
-                }
-                if (!flag)
-                {
-                    Game1.CurrentLevel.LevelObjects.Add(new PlayerHorse(new Vector3(Game1.Camera.Center.X - 700f, 0f, Game1.player.Position.Z - 32f)));
-                }
-            });
-            tweener.Timer(7f).OnComplete(finishBardDialog);
+                    if (!flag)
+                    {
+                        Game1.CurrentLevel.LevelObjects.Add(new PlayerHorse(new Vector3(Game1.Camera.Center.X - 700f, 0f, Game1.player.Position.Z - 32f)));
+                    }
+                });
+                tweener.Timer(7f).OnComplete(finishBardDialog);
+            }
         }
 
         private bool Mod_HasItem()
