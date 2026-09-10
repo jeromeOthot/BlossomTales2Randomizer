@@ -46,6 +46,40 @@ namespace BlossomTales2
             bard = new Puppet("bard", new Vector3(724f, 0f, 1260f));
         }
 
+        public void addRealHorse()
+        {
+            //TODO: Don't spawn the horse if we don't have the song.
+            Game1.Globals.HorseInMud_State = 2;
+            horseP.play("hide");
+            Game1.CurrentLevel.LevelObjects.Add(new PlayerHorse(horseP.getPosition(), gettingoff: true));
+            foreach (LevelObject levelObject in Game1.CurrentLevel.LevelObjects)
+            {
+                if (levelObject is NPC_2 && levelObject.IDNumber == 48)
+                {
+                    levelObject.Alive = false;
+                    bard = new Puppet("bard", levelObject.Position);
+                    bard.showShadow = 1;
+                    bard.isNPC = true;
+                    bard.DialogNum = 148;
+                    bard.collide = true;
+                    bard.Size = new Vector2(12f, 8f);
+                    puppets.Add(bard);
+                    bard.play("idle");
+                }
+                else if (levelObject is PlayerHorse)
+                {
+                    ((PlayerHorse)levelObject).forceRun = 1;
+                }
+            }
+            tweener.Timer(1f).OnComplete(delegate
+            {
+                if (ModGlobals.SkipCutscenes)
+                    preLesson();
+                else
+                    Game1.Dialoger.AddLine("Bard: You did it! The horse is free, and yours now-", kidsInterupt);
+            });
+        }
+
         public void startLesson()
         {
             if(ModGlobals.SkipCutscenes)
