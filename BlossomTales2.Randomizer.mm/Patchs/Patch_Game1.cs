@@ -225,6 +225,7 @@ namespace MonoMod
         {
             ILCursor cursor = new ILCursor(context);
             PatchCanyonBardCutscene(cursor);
+            PatchFalconCutscene(cursor);
         }
 
         private static void PatchCanyonBardCutscene(ILCursor cursor)
@@ -238,6 +239,19 @@ namespace MonoMod
             //Remove Globals.MainQuestObjective <= Globaler.MainGameObjective.canyons_headToBard
             cursor.Index -= 4;
             cursor.RemoveRange(4);
+        }
+
+        private static void PatchFalconCutscene(ILCursor cursor)
+        {
+            //Find L.2189
+            //CutSceneController = new CS_Falcon();
+            cursor.GotoNext(MoveType.Before,
+                instr => instr.MatchNewobj<CS_Falcon>()
+            );
+
+            //Remove !Game1.player.Inventory.Contains(EquipableItem.ItemList.Falcon)
+            cursor.Index -= 5;
+            cursor.RemoveRange(5);
         }
     }
 }
