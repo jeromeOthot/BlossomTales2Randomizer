@@ -606,7 +606,7 @@ namespace BlossomTales2.Randomizer.mm
             //TODO: Place items with logic
             //ShuffleList(itemPool);
 
-            //ValidateSeed(itemPool);
+            //Validator.ValidateSeed(itemPool);
 
             //if seed is not valid
             //regenerate
