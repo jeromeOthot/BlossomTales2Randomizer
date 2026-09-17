@@ -4,8 +4,11 @@ namespace BlossomTales2.Randomizer.mm
 {
     public class Inventory
     {
-        public Dictionary<ItemType, int> Items { get; set; }
-        public bool HasBeatenMinotaurKing { get; set; }
+        public Dictionary<ItemType, int> Items { get; set; } =  new Dictionary<ItemType, int>();
+        public bool HasBeatenMinotaurKing => Items.ContainsKey(ItemType.HeartQ_1);
+
+        public bool HasBombs => Items.ContainsKey(ItemType.Bombs);
+
 
         public void AddItem(ItemType itemType, int amount)
         {

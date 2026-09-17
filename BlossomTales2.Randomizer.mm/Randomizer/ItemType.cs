@@ -5,6 +5,7 @@ namespace BlossomTales2.Randomizer.mm
 {
     public enum ItemType
     {
+        None = -1,
         Sword,
         Shield,
         Bow,

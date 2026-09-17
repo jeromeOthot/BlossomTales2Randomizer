@@ -9,5 +9,13 @@ namespace BlossomTales2.Randomizer.mm
         public Predicate<Inventory> CanAccess { get; set; }
         public ItemType Item { get; set; }
         public bool HasCollectedItem { get; set; }
+
+        public Location(LocationId id, string name,  Predicate<Inventory> canAccess, ItemType vanillaItem)
+        {
+            Id = id;
+            Name = name;
+            CanAccess = canAccess;
+            Item = vanillaItem;
+        }
     }
 }

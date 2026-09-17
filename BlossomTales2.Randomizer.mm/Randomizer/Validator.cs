@@ -9,7 +9,7 @@ namespace BlossomTales2.Randomizer.mm
     {
         public static bool ValidateSeed(List<ItemData> itemPool)
         {
-            World world = WorldFactory.Create();
+            World world = new World();//WorldFactory.Create();
             Inventory inventory = new Inventory();
 
             bool hasCollectedItem = false;
