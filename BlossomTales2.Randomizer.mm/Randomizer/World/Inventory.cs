@@ -8,6 +8,25 @@ namespace BlossomTales2.Randomizer.mm
         public bool HasBeatenMinotaurKing => Items.ContainsKey(ItemType.HeartQ_1);
 
         public bool HasBombs => Items.ContainsKey(ItemType.Bombs);
+        public bool HasFlipper => Items.ContainsKey(ItemType.Flippers);
+
+        public bool CanAccesCanyon()
+        {
+            //TODO
+            return true;
+        }
+
+        public bool CanAccesCanyonSteppe()
+        {
+            //TODO
+            return true;
+        }
+
+        public bool CanDoDommage()
+        {
+            //TODO
+            return true;
+        }
 
 
         public void AddItem(ItemType itemType, int amount)
