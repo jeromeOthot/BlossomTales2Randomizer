@@ -356,7 +356,6 @@ namespace BlossomTales2.Randomizer.mm
                 { new LocationId("jungles-22x21.tmx", "ghostJungle", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.HeartQ_1) }, //accès jungle && bouteille && accès dark && heart necklace
                 { new LocationId("jungles-23x19.tmx", "archJungle", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.Shovel) }, //accès jungle
                 { new LocationId("jungles-firstPrimate.tmx", "Chest", new Vector3(480f, 0f, 256f)), new ItemData(ItemType.Bombs) }, //accès jungle
-                { new LocationId("overworld-17x22.tmx", "ghostCanyon", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.Crystal) }, //accès canyon && bouteille && accès dark && (blue gem > 10 || pelle)
                 { new LocationId("overworld-20x18.tmx", "ghostDrink", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.Crystal) }, //accès nord && bouteille && accès dark && accès jungle
                 { new LocationId("overworld-23x17-farm.tmx", "farmer", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.HeartQ_1) }, //accès dark && damage
                 { new LocationId("ufo.tmx", "aliens", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.Crystal) }, //accès dark
@@ -478,12 +477,9 @@ namespace BlossomTales2.Randomizer.mm
                 { new LocationId("overworld-16x21.tmx", "PickUpItem", new Vector3(288f, 0f, 296f)), new ItemData(ItemType.CanyonBone) }, //accès canyon
                 { new LocationId("overworld-17x19.tmx", "PickUpItem", new Vector3(796f, 0f, 1076f)), new ItemData(ItemType.CanyonBone) }, //accès canyon plateau
                 { new LocationId("overworld-17x19.tmx", "PickUpItem", new Vector3(844f, 0f, 2180f)), new ItemData(ItemType.CanyonBone) }, //accès canyon plateau
-                { new LocationId("overworld-17x21.tmx", "PickUpItem", new Vector3(412f, 0f, 2164f)), new ItemData(ItemType.CanyonBone) }, //accès canyon
-                { new LocationId("overworld-17x22.tmx", "PickUpItem", new Vector3(1952f, 0f, 864f)), new ItemData(ItemType.CanyonBone) }, //accès canyon
                 { new LocationId("overworld-18x19.tmx", "PickUpItem", new Vector3(256f, 0f, 1168f)), new ItemData(ItemType.CanyonBone) }, //accès canyon plateau
                 { new LocationId("overworld-18x20.tmx", "PickUpItem", new Vector3(304f, 0f, 520f)), new ItemData(ItemType.CanyonBone) }, //accès canyon plateau
                 { new LocationId("overworld-18x21.tmx", "PickUpItem", new Vector3(160f, 0f, 736f)),  new ItemData(ItemType.CanyonBone) }, //accès canyon steppe
-                { new LocationId("overworld-18x22.tmx", "PickUpItem", new Vector3(1864f, 0f, 1940f)), new ItemData(ItemType.CanyonBone) }, //accès canyon
 
                 //mausoleum
                 { new LocationId("jungles-25x19-combat.tmx", "Chest_Small", new Vector3(2176f, 0f, 1792f)), new ItemData(ItemType.CombatScroll) }, //accès jungle NE && lanterne && arc

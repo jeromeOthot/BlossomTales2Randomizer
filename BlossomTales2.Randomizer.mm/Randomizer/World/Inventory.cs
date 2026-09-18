@@ -9,6 +9,9 @@ namespace BlossomTales2.Randomizer.mm
 
         public bool HasBombs => Items.ContainsKey(ItemType.Bombs);
         public bool HasFlipper => Items.ContainsKey(ItemType.Flippers);
+        public bool  HasGhostPotion() => Items.ContainsKey(ItemType.Jar_Ghost);
+        //todo
+        public int  NbBlueGem() => 0;
 
         public bool CanAccesCanyon()
         {
@@ -17,6 +20,12 @@ namespace BlossomTales2.Randomizer.mm
         }
 
         public bool CanAccesCanyonSteppe()
+        {
+            //TODO
+            return true;
+        }
+
+        public bool CanAccesDarkForest()
         {
             //TODO
             return true;
