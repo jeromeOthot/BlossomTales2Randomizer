@@ -192,7 +192,7 @@ namespace BlossomTales2.Randomizer.mm
                 { new LocationId("temple-8.tmx", "Chest_Small", new Vector3(1728f, 0f, 1792f)), new ItemData(ItemType.GoldCoin) }, //accès temple 3 && grappin
                 { new LocationId("temple-11.tmx", "Chest_Small", new Vector3(440f, 0f, 452f)), new ItemData(ItemType.GoldCoin) }, //accès temple 3 && leviers
                 { new LocationId("temple-11.tmx", "Chest_Small", new Vector3(448f, 0f, 1920f)), new ItemData(ItemType.Gold_Key) }, //accès temple 3 && leviers && bombes
-                { new LocationId("temple-15-secret.tmx", "Chest_Small", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.HeartQ_1) }, //accès temple 4 && bombes
+                { new LocationId("temple-15-secret.tmx", "Chest_Small",new Vector3(640f, 0f, 292f)), new ItemData(ItemType.HeartQ_1) }, //accès temple 4 && bombes
                 { new LocationId("temple-17.tmx", "Chest_Small", new Vector3(276f, 0f, 220f)), new ItemData(ItemType.GoldCoin) }, //accès temple 4
                 { new LocationId("temple-18.tmx", "Chest_Small", new Vector3(1152f, 0f, 1724f)), new ItemData(ItemType.GoldCoin) }, //accès temple 4
                 { new LocationId("temple-18-secret.tmx", "Chest_Small", new Vector3(640f, 0f, 284f)), new ItemData(ItemType.HeartQ_1) }, //accès temple 4 && bombes
