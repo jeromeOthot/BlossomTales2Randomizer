@@ -1,14 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.Xna.Framework;
 
 namespace BlossomTales2.Randomizer.mm
 {
     public class Region
     {
-        public string Name { get; set; }
-        public List<Region> Regions { get; set; }
-        public List<Location> Locations { get; set; }
+        public string Name { get; private set; }
+        public List<Region> Regions { get; private set; } = new List<Region>();
+        public List<Location> Locations { get; set; } = new List<Location>();
         public Predicate<Inventory> CanAccess { get; set; }
+
+        public Region(string name)
+        {
+            Name = name;
+        }
 
         public bool TryCollectItems(Inventory inventory)
         {
@@ -32,7 +38,7 @@ namespace BlossomTales2.Randomizer.mm
                 inventory.AddItem(location.Item, 1);
                 location.HasCollectedItem = true;
             }
-            
+
             return hasCollectedItem;
         }
 
@@ -45,5 +51,17 @@ namespace BlossomTales2.Randomizer.mm
             }
             locations.AddRange(Locations);
         }
+    }
+
+    public class Blossomdale : Region
+    {
+        public Blossomdale() : base("Blossomdale")
+        {
+            TavernTopLeft = new Location(
+                new LocationId("blossom-tavern-basement.tmx", "Chest_Small", new Vector3(256f, 0f, 272f)),
+                "Tavern Top Left", (inventory) => inventory.HasBombs, ItemType.GoldCoin);
+        }
+
+        public Location TavernTopLeft { get; private set; }
     }
 }

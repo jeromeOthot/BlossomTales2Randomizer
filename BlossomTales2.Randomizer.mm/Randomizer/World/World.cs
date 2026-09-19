@@ -4,8 +4,15 @@ namespace BlossomTales2.Randomizer.mm
 {
     public class World
     {
-        public List<Region> Regions { get; set; }
+        public List<Region> Regions { get; set; } = new List<Region>();
         public Inventory Inventory { get; set; }
+
+        public Blossomdale Blossomdale { get;private set; }
+
+        public World()
+        {
+            Blossomdale = new Blossomdale();
+        }
 
         public bool TryCollectItems(Inventory inventory)
         {
@@ -18,6 +25,11 @@ namespace BlossomTales2.Randomizer.mm
                     hasCollectedItem = hasItem;
             }
             return hasCollectedItem;
+        }
+
+        public void AddRegion(Region region)
+        {
+            Regions.Add(region);
         }
 
         public List<Location> CollectLocations()
