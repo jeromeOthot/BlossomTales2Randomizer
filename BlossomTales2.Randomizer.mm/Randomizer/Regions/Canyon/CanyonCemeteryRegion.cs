@@ -1,6 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
-// The .NET Foundation licenses this file to you under the MIT license.
-
+using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 
@@ -8,18 +6,18 @@ namespace BlossomTales2.Randomizer.mm.Canyon
 {
     public class CanyonCemeteryRegion : Region
     {
-        public List<Location>  Locations { get; private set; }
+        public override Predicate<Inventory> CanAccess => inventory => inventory.CanAccesCanyon();
 
         public CanyonCemeteryRegion() : base("CanyonIsland")
         {
             Locations = new List<Location>
             {
                 //0S
-                { new Location(new LocationId("overworld-19x21.tmx", "PickUpItem", new Vector3(536f, 0f, 2072f)), "Canyon Island Bone North East",(inventory) => inventory.CanAccesCanyon(), ItemType.CanyonBone) }, //accès canyon
+                { new Location(new LocationId("overworld-19x21.tmx", "PickUpItem", new Vector3(536f, 0f, 2072f)), "Canyon Island Bone North East",_ => true, ItemType.CanyonBone) }, //accès canyon
 
-                { new Location(new LocationId("overworld-17x21.tmx", "PickUpItem", new Vector3(412f, 0f, 2164f)),"Canyon Cemetery Bone North",(inventory) => inventory.CanAccesCanyon(), ItemType.CanyonBone) }, //accès canyon
-                { new Location(new LocationId("overworld-17x22.tmx", "PickUpItem", new Vector3(1952f, 0f, 864f)), "Canyon Cemetery Bone",(inventory) => inventory.CanAccesCanyon(), ItemType.CanyonBone) }, //accès canyon
-                { new Location(new LocationId("overworld-18x22.tmx", "PickUpItem", new Vector3(1864f, 0f, 1940f)), "Canyon Cemetery Bone East",(inventory) => inventory.CanAccesCanyon(), ItemType.CanyonBone) }, //accès canyon
+                { new Location(new LocationId("overworld-17x21.tmx", "PickUpItem", new Vector3(412f, 0f, 2164f)),"Canyon Cemetery Bone North",_ => true, ItemType.CanyonBone) }, //accès canyon
+                { new Location(new LocationId("overworld-17x22.tmx", "PickUpItem", new Vector3(1952f, 0f, 864f)), "Canyon Cemetery Bone",_ => true, ItemType.CanyonBone) }, //accès canyon
+                { new Location(new LocationId("overworld-18x22.tmx", "PickUpItem", new Vector3(1864f, 0f, 1940f)), "Canyon Cemetery Bone East",_ => true, ItemType.CanyonBone) }, //accès canyon
 
 
                 //Chest

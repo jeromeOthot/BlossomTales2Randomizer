@@ -38,7 +38,7 @@ namespace BlossomTales2.Randomizer.mm
             return true;
         }
 
-        public bool CanDoDommage()
+        public bool CanDoDamage()
         {
             //TODO
             return true;
