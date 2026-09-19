@@ -12,6 +12,7 @@ namespace BlossomTales2.Randomizer.mm
         public World()
         {
             Blossomdale = new Blossomdale();
+            Regions = new List<Region>() { Blossomdale };
         }
 
         public bool TryCollectItems(Inventory inventory)

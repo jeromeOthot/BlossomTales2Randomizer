@@ -67,5 +67,8 @@ namespace BlossomTales2.Randomizer.mm
         SummonBalloon,
         CallHorse,
         GrandpaHint,
+        //Logic flags
+        MorklaBoss
+        //end flags
     }
 }
