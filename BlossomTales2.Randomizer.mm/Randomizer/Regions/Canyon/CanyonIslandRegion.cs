@@ -9,21 +9,21 @@ namespace BlossomTales2.Randomizer.mm.Canyon
 {
     public class CanyonIslandRegion : Region
     {
-        public override Predicate<Inventory> CanAccess => inventory => inventory.CanAccesCanyon();
+        public override Predicate<Inventory> CanAccess => inventory => inventory.CanAccesCanyon;
 
         public CanyonIslandRegion() : base("CanyonIsland")
         {
             Locations = new List<Location>
             {
                 //mausoleum
-                {  new Location(new LocationId("overworld-20x22-combat.tmx", "Chest_Small", new Vector3(2176f, 0f, 1828f)),"Canyon Mausoleum", (inventory) => inventory.CanDoDamage(), ItemType.CombatScroll) }, //accès canyon && leviers (&& damage)
+                {  new Location(new LocationId("overworld-20x22-combat.tmx", "Chest_Small", new Vector3(2176f, 0f, 1828f)),"Canyon Mausoleum", (inventory) => inventory.CanDoDamage, ItemType.CombatScroll) }, //accès canyon && leviers (&& damage)
 
                 //Cave
-                { new Location(new LocationId("overworld-19x22-bardCave.tmx", "Chest_Small", new Vector3(416f, 0f, 240f)), "Canyon Bard Cave", (inventory) => inventory.CanDoDamage(), ItemType.HeartQ_1)}, //accès canyon && damage (&& ouvrir portes note)
+                { new Location(new LocationId("overworld-19x22-bardCave.tmx", "Chest_Small", new Vector3(416f, 0f, 240f)), "Canyon Bard Cave", (inventory) => inventory.CanDoDamage, ItemType.HeartQ_1)}, //accès canyon && damage (&& ouvrir portes note)
 
                 // NPC Bard
-                { new Location(new LocationId("overworld-19x22.tmx", "bard", new Vector3(852f, 0f, 1348f)), "Canyon Bard",(inventory) => inventory.CanDoDamage(), ItemType.Guitar) }, //accès canyon && damage
-                { new Location(new LocationId("overworld-19x22.tmx", "bard_song", new Vector3(852f, 0f, 1348f)), "Canyon Bard Song", (inventory) => inventory.CanDoDamage(), ItemType.OpenSesame) }, //accès canyon && damage
+                { new Location(new LocationId("overworld-19x22.tmx", "bard", new Vector3(852f, 0f, 1348f)), "Canyon Bard",(inventory) => inventory.CanDoDamage, ItemType.Guitar) }, //accès canyon && damage
+                { new Location(new LocationId("overworld-19x22.tmx", "bard_song", new Vector3(852f, 0f, 1348f)), "Canyon Bard Song", (inventory) => inventory.CanDoDamage, ItemType.OpenSesame) }, //accès canyon && damage
 
                 //0S
                 { new Location(new LocationId("overworld-19x21.tmx", "PickUpItem", new Vector3(536f, 0f, 2072f)), "Canyon Island Bone North East",_ => true, ItemType.CanyonBone) }, //accès canyon

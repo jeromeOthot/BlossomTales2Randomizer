@@ -4,11 +4,11 @@ using Microsoft.Xna.Framework;
 
 namespace BlossomTales2.Randomizer.mm.Canyon
 {
-    public class CanyonCemeteryRegion : Region
+    public class CanyonSouthEastRegion : Region
     {
-        public override Predicate<Inventory> CanAccess => inventory => inventory.CanAccesCanyon();
+        public override Predicate<Inventory> CanAccess => inventory => inventory.CanAccesCanyon;
 
-        public CanyonCemeteryRegion() : base("CanyonCemetery")
+        public CanyonSouthEastRegion() : base("Canyon South East Region")
         {
             Locations = new List<Location>
             {
@@ -21,7 +21,7 @@ namespace BlossomTales2.Randomizer.mm.Canyon
 
 
                 //Chest
-                { new Location(new LocationId("overworld-17x22.tmx", "ghostCanyon", new Vector3(0f, 0f, 0f)), "Ghost Canyon",(inventory) => inventory.CanAccesCanyon() && inventory.HasGhostPotion() && inventory.CanAccesDarkForest() && inventory.NbBlueGem() > 10, ItemType.Crystal) }, //accès canyon && bouteille && accès dark && (blue gem > 10 || pelle)
+                { new Location(new LocationId("overworld-17x22.tmx", "ghostCanyon", new Vector3(0f, 0f, 0f)), "Ghost Canyon",(inventory) => inventory.CanAccesCanyon && inventory.HasGhostPotion && inventory.CanAccesDarkForest && inventory.NbBlueGem > 10, ItemType.Crystal) }, //accès canyon && bouteille && accès dark && (blue gem > 10 || pelle)
 
             };
 

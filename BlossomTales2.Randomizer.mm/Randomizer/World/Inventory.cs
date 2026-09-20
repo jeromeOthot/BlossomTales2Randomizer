@@ -15,35 +15,22 @@ namespace BlossomTales2.Randomizer.mm
         public bool HasInstrument => Items.ContainsKey(ItemType.Accordian) || Items.ContainsKey(ItemType.Guitar);
         public bool HasBow => Items.ContainsKey(ItemType.Bow);
         public bool HasBeatenMorklaBoss => Items.ContainsKey(ItemType.MorklaBoss);
-
-        public bool  HasGhostPotion() => Items.ContainsKey(ItemType.Jar_Ghost);
+        public bool CanOpenDoorNote => true;
+        public bool CanActivateBlueSwitch => true;
+        public bool  HasGhostPotion => Items.ContainsKey(ItemType.Jar_Ghost);
         //todo
-        public int  NbBlueGem() => 0;
+        public int  NbBlueGem => 0;
 
-        public bool CanAccesCanyon()
-        {
-            //TODO
-            return true;
-        }
+        //TODO
+        public bool CanAccesCanyon => true;
+        //TODO
+        public bool CanAccesCanyonSteppe => true;
 
-        public bool CanAccesCanyonSteppe()
-        {
-            //TODO
-            return true;
-        }
+        //TODO
+        public bool CanAccesDarkForest => true;
 
-        public bool CanAccesDarkForest()
-        {
-            //TODO
-            return true;
-        }
-
-        public bool CanDoDamage()
-        {
-            //TODO
-            return true;
-        }
-
+        //TODO
+        public bool CanDoDamage => true;
 
         public void AddItem(ItemType itemType, int amount)
         {
