@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -275,6 +275,16 @@ namespace BlossomTales2.Randomizer.mm
                 { new LocationId("overworld-15x19-cave.tmx", "Chest_Small", new Vector3(864f, 0f, 488f)), new ItemData(ItemType.GoldCoin) }, //accès canyon && bombes
                 { new LocationId("overworld-15x19-cave.tmx", "Chest_Small", new Vector3(800f, 0f, 364f)), new ItemData(ItemType.GoldCoin) }, //accès canyon && bombes
 
+                { new LocationId("overworld-15x21-cave.tmx", "Chest_Small", new Vector3(352f, 0f, 412f)), new ItemData(ItemType.GoldCoin) }, //accès canyon && bombes
+                { new LocationId("overworld-15x21-cave.tmx", "Chest_Small", new Vector3(608f, 0f, 408f)), new ItemData(ItemType.GoldCoin) }, //accès canyon && bombes
+                { new LocationId("overworld-15x21-cave.tmx", "Chest_Small", new Vector3(352f, 0f, 604f)), new ItemData(ItemType.GoldCoin) }, //accès canyon && bombes
+                { new LocationId("overworld-15x21-cave.tmx", "Chest_Small", new Vector3(608f, 0f, 604f)), new ItemData(ItemType.GoldCoin) }, //accès canyon && bombes
+
+                { new LocationId("overworld-15x22-cave.tmx", "Chest_Small", new Vector3(1216f, 0f, 448f)), new ItemData(ItemType.GoldCoin) }, //accès canyon && ouvrir portes note && levier
+                { new LocationId("overworld-15x22-cave.tmx", "Chest_Small", new Vector3(1408f, 0f, 448f)), new ItemData(ItemType.GoldCoin) }, //accès canyon && ouvrir portes note && levier
+                { new LocationId("overworld-15x22-cave.tmx", "Chest_Small", new Vector3(1312f, 0f, 312f)), new ItemData(ItemType.HeartQ_1) }, //accès canyon && ouvrir portes note && levier
+
+                { new LocationId("overworld-16x21-cave.tmx", "Chest_Small", new Vector3(544f, 0f, 228f)), new ItemData(ItemType.HeartQ_1) }, //accès canyon && levier
 
                 { new LocationId("overworld-17x20-cave.tmx", "Chest_Small", new Vector3(736f, 0f, 224f)), new ItemData(ItemType.HeartQ_1) }, //accès canyon plateau && grappin
 
@@ -340,7 +350,9 @@ namespace BlossomTales2.Randomizer.mm
                 { new LocationId("overworld-20x18.tmx", "lanternGuy", new Vector3(1036f, 0f, 660f)), new ItemData(ItemType.Torch) },
                 { new LocationId("owlMap.tmx", "owl", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.Boomerang) }, //accès dark && instrument && chanson wakeup
 
-
+                //short sidequests
+                { new LocationId("colosseum.tmx", "price_heart", Vector3.Zero), new ItemData(ItemType.HeartQ_1) },
+                { new LocationId("colosseum.tmx", "price_crystal", Vector3.Zero), new ItemData(ItemType.Crystal) },
                 { new LocationId("darklands-house4.tmx", "sickZombie", new Vector3(352f, 0f, 268f)), new ItemData(ItemType.HeartQ_1) }, //accès monsterton && bouteille && accès canyon
                 { new LocationId("jungles-21x22.tmx", "hunter", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.Bow) }, //accès jungle ile && grappin && arc
                 { new LocationId("jungles-22x21.tmx", "ghostJungle", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.HeartQ_1) }, //accès jungle && bouteille && accès dark && heart necklace
@@ -462,8 +474,11 @@ namespace BlossomTales2.Randomizer.mm
                 { new LocationId("overworld-15x19.tmx", "PickUpItem", new Vector3(1804f, 0f, 2292f)), new ItemData(ItemType.CanyonBone) }, //accès canyon
                 { new LocationId("overworld-15x19.tmx", "PickUpItem", new Vector3(820f, 0f, 952f)), new ItemData(ItemType.CanyonBone) }, //accès canyon
                 { new LocationId("overworld-15x20.tmx", "PickUpItem", new Vector3(192f, 0f, 416f)), new ItemData(ItemType.CanyonBone) }, //accès canyon
+                { new LocationId("overworld-15x21.tmx", "PickUpItem", new Vector3(288f, 0f, 1952f)), new ItemData(ItemType.CanyonBone) }, //accès canyon
+                { new LocationId("overworld-15x22.tmx", "PickUpItem", new Vector3(1568f, 0f, 2400f)), new ItemData(ItemType.CanyonBone) }, //accès canyon
                 { new LocationId("overworld-16x19.tmx", "PickUpItem", new Vector3(992f, 0f, 1636f)), new ItemData(ItemType.CanyonBone) }, //accès canyon
                 { new LocationId("overworld-16x19.tmx", "PickUpItem", new Vector3(1616f, 0f, 988f)), new ItemData(ItemType.CanyonBone) }, //accès canyon plateau
+                { new LocationId("overworld-16x21.tmx", "PickUpItem", new Vector3(288f, 0f, 296f)), new ItemData(ItemType.CanyonBone) }, //accès canyon
                 { new LocationId("overworld-17x19.tmx", "PickUpItem", new Vector3(796f, 0f, 1076f)), new ItemData(ItemType.CanyonBone) }, //accès canyon plateau
                 { new LocationId("overworld-17x19.tmx", "PickUpItem", new Vector3(844f, 0f, 2180f)), new ItemData(ItemType.CanyonBone) }, //accès canyon plateau
                 { new LocationId("overworld-17x21.tmx", "PickUpItem", new Vector3(412f, 0f, 2164f)), new ItemData(ItemType.CanyonBone) }, //accès canyon
