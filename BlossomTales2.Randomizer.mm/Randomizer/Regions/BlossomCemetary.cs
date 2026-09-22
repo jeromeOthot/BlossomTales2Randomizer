@@ -8,7 +8,7 @@ namespace BlossomTales2.Randomizer.mm
     {
         public override Predicate<Inventory> CanAccess => _ => true;
 
-        public BlossomCemetary() : base("BlossomCemetary")
+        public BlossomCemetary(World world) : base("BlossomCemetary", world)
         {
             Locations = new List<Location>()
             {

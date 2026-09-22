@@ -13,9 +13,9 @@ namespace BlossomTales2.Randomizer.mm
 
         public World()
         {
-            Blossomdale = new Blossomdale();
-            BlossomdaleCemetary = new BlossomCemetary();
-            OrchidTomb = new OrchidTomb();
+            Blossomdale = new Blossomdale(this);
+            BlossomdaleCemetary = new BlossomCemetary(this);
+            OrchidTomb = new OrchidTomb(this);
 
             Regions = new List<Region>
             {

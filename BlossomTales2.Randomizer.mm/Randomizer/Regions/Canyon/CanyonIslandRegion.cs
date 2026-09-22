@@ -11,7 +11,7 @@ namespace BlossomTales2.Randomizer.mm.Canyon
     {
         public override Predicate<Inventory> CanAccess => inventory => inventory.CanAccessCanyon;
 
-        public CanyonIslandRegion() : base("CanyonIsland")
+        public CanyonIslandRegion(World world) : base("CanyonIsland", world)
         {
             Locations = new List<Location>
             {

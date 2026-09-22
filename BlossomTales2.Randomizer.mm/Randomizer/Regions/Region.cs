@@ -10,9 +10,12 @@ namespace BlossomTales2.Randomizer.mm
         public List<Location> Locations { get; set; } = new List<Location>();
         public abstract Predicate<Inventory> CanAccess { get; }
 
-        public Region(string name)
+        protected World World { get ; private set; }
+
+        public Region(string name, World world)
         {
             Name = name;
+            World = world;
         }
 
         public bool TryCollectItems(Inventory inventory)

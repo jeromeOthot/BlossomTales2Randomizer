@@ -8,7 +8,7 @@ namespace BlossomTales2.Randomizer.mm
     {
         public override Predicate<Inventory> CanAccess => inventory => inventory.HasTorch;
 
-        public OrchidTomb() : base("King Orchid's Tomb")
+        public OrchidTomb(World world) : base("King Orchid's Tomb", world)
         {
             Locations = new List<Location>()
             {
