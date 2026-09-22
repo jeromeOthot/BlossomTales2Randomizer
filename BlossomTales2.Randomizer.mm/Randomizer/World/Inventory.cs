@@ -22,12 +22,15 @@ namespace BlossomTales2.Randomizer.mm
         public int  NbBlueGem => 0;
 
         //TODO
-        public bool CanAccesCanyon => true;
         //TODO
-        public bool CanAccesCanyonSteppe => true;
 
         //TODO
-        public bool CanAccesDarkForest => true;
+        public bool CanAccessCanyon => true;
+        //TODO
+        public bool CanAccessCanyonSteppe => true;
+
+        //TODO
+        public bool CanAccessDarkForest => true;
 
         //TODO
         public bool CanDoDamage => true;
