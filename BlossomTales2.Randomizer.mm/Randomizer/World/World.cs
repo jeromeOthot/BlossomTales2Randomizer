@@ -7,12 +7,18 @@ namespace BlossomTales2.Randomizer.mm
         public List<Region> Regions { get; set; } = new List<Region>();
         public Inventory Inventory { get; set; }
 
-        public Blossomdale Blossomdale { get;private set; }
+        public Blossomdale Blossomdale { get; private set; }
+        public BlossomCemetary BlossomdaleCemetary { get; private set; }
 
         public World()
         {
             Blossomdale = new Blossomdale();
-            Regions = new List<Region>() { Blossomdale };
+            BlossomdaleCemetary = new BlossomCemetary();
+            Regions = new List<Region>()
+            {
+                Blossomdale,
+                BlossomdaleCemetary,
+            };
         }
 
         public bool TryCollectItems(Inventory inventory)

@@ -22,7 +22,9 @@ namespace BlossomTales2.Randomizer.mm
         public int  NbBlueGem => 0;
 
         //TODO
+        public bool CanCraftGhostPotion => Items.ContainsKey(ItemType.Jar_Empty);
         //TODO
+        public bool CanCraftResurrectionPotion => Items.ContainsKey(ItemType.Jar_Empty);
 
         //TODO
         public bool CanAccessCanyon => true;
@@ -34,6 +36,8 @@ namespace BlossomTales2.Randomizer.mm
 
         //TODO
         public bool CanDoDamage => true;
+
+        public bool CanCutPegs => Items.TryGetValue(ItemType.Sword, out int swordLevel) && swordLevel >= 2;
 
         public void AddItem(ItemType itemType, int amount)
         {
