@@ -9,12 +9,16 @@ namespace BlossomTales2.Randomizer.mm
         //TODO: Real endgame flag.
         public bool HasBeatenMinotaurKing => Items.ContainsKey(ItemType.BeeMedallion);
 
+        public bool HasSword => Items.ContainsKey(ItemType.Sword);
         public bool HasTorch => Items.ContainsKey(ItemType.Torch);
         public bool HasBombs => Items.ContainsKey(ItemType.Bombs);
         public bool HasFlipper => Items.ContainsKey(ItemType.Flippers);
         public bool HasInstrument => Items.ContainsKey(ItemType.Accordian) || Items.ContainsKey(ItemType.Guitar);
         public bool HasBow => Items.ContainsKey(ItemType.Bow);
+        public bool HasGrappleHook  => Items.ContainsKey(ItemType.GrappleHook);
+        public bool HasBoomerang => Items.ContainsKey(ItemType.Boomerang);
         public bool HasBeatenMorklaBoss => Items.ContainsKey(ItemType.MorklaBoss);
+        public bool HasKeys => Items.ContainsKey(ItemType.Gold_Key);
         public bool CanOpenDoorNote => true;
         public bool CanActivateBlueSwitch => true;
         public bool  HasGhostPotion => Items.ContainsKey(ItemType.Jar_Ghost);
@@ -35,9 +39,11 @@ namespace BlossomTales2.Randomizer.mm
         public bool CanAccessDarkForest => true;
 
         //TODO
-        public bool CanDoDamage => true;
+        public bool CanDoDamage => HasSword || HasBombs || HasBow;
 
         public bool CanCutPegs => Items.TryGetValue(ItemType.Sword, out int swordLevel) && swordLevel >= 2;
+
+        public bool CanSwitchLevers => HasSword || HasGrappleHook || HasBoomerang || HasBow;
 
         public void AddItem(ItemType itemType, int amount)
         {

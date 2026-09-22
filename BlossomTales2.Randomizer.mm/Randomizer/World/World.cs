@@ -4,20 +4,24 @@ namespace BlossomTales2.Randomizer.mm
 {
     public class World
     {
-        public List<Region> Regions { get; set; } = new List<Region>();
+        public List<Region> Regions { get; }
         public Inventory Inventory { get; set; }
 
-        public Blossomdale Blossomdale { get; private set; }
-        public BlossomCemetary BlossomdaleCemetary { get; private set; }
+        public Blossomdale Blossomdale { get; }
+        public BlossomCemetary BlossomdaleCemetary { get; }
+        public OrchidTomb OrchidTomb { get; }
 
         public World()
         {
             Blossomdale = new Blossomdale();
             BlossomdaleCemetary = new BlossomCemetary();
-            Regions = new List<Region>()
+            OrchidTomb = new OrchidTomb();
+
+            Regions = new List<Region>
             {
                 Blossomdale,
                 BlossomdaleCemetary,
+                OrchidTomb
             };
         }
 
