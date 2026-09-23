@@ -13,15 +13,15 @@ namespace BlossomTales2.Randomizer.mm
             Locations = new List<Location>()
             {
                 new Location(new LocationId("overworld-20x18-cave1.tmx", "Chest_Small", new Vector3(1184f, 0f, 2208f)),
-                    "Cemetary Cave Chest",
+                    "Cave Chest",
                     inventory => inventory.CanCutPegs && inventory.HasTorch,
                     ItemType.HeartQ_1),
                 new Location(new LocationId("overworld-20x18.tmx", "lanternGuy", new Vector3(1036f, 0f, 660f)),
-                    "Cemetary Lantern Guy",
+                    "Lantern Guy",
                     _ => true,
                     ItemType.Torch),
                 new Location(new LocationId("overworld-20x18.tmx", "ghostDrink", Vector3.Zero),
-                    "Cemetary Ghost",
+                    "Ghost",
                     inventory => inventory.CanCraftGhostPotion && inventory.CanCraftResurrectionPotion,
                     ItemType.Crystal)
             };
