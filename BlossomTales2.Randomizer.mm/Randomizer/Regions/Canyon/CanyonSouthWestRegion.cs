@@ -50,19 +50,19 @@ namespace BlossomTales2.Randomizer.mm.Canyon
                     new Location(
                         new LocationId("overworld-15x22-cave.tmx", "Chest_Small", new Vector3(1216f, 0f, 448f)),
                         "Canyon village  west cave chest #1",
-                        (inventory) => inventory.CanOpenDoorNote && inventory.CanActivateBlueSwitch, ItemType.GoldCoin)
+                        (inventory) => inventory.CanOpenNoteDoor && inventory.CanActivateBlueSwitch, ItemType.GoldCoin)
                 }, //accès canyon && ouvrir portes note && levier
                 {
                     new Location(
                         new LocationId("overworld-15x22-cave.tmx", "Chest_Small", new Vector3(1408f, 0f, 448f)),
                         "Canyon village  west cave chest #2",
-                        (inventory) => inventory.CanOpenDoorNote && inventory.CanActivateBlueSwitch, ItemType.GoldCoin)
+                        (inventory) => inventory.CanOpenNoteDoor && inventory.CanActivateBlueSwitch, ItemType.GoldCoin)
                 }, //accès canyon && ouvrir portes note && levier
                 {
                     new Location(
                         new LocationId("overworld-15x22-cave.tmx", "Chest_Small", new Vector3(1312f, 0f, 312f)),
                         "Canyon village  west cave chest #3",
-                        (inventory) => inventory.CanOpenDoorNote && inventory.CanActivateBlueSwitch, ItemType.GoldCoin)
+                        (inventory) => inventory.CanOpenNoteDoor && inventory.CanActivateBlueSwitch, ItemType.GoldCoin)
                 }, //accès canyon && ouvrir portes note && levier
 
                 {

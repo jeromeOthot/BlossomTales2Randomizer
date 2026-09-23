@@ -10,18 +10,21 @@ namespace BlossomTales2.Randomizer.mm
         public Blossomdale Blossomdale { get; }
         public BlossomCemetary BlossomdaleCemetary { get; }
         public OrchidTomb OrchidTomb { get; }
+        public OverworldEast OverworldEast { get; }
 
         public World()
         {
             Blossomdale = new Blossomdale(this);
             BlossomdaleCemetary = new BlossomCemetary(this);
             OrchidTomb = new OrchidTomb(this);
+            OverworldEast = new OverworldEast(this);
 
             Regions = new List<Region>
             {
                 Blossomdale,
                 BlossomdaleCemetary,
-                OrchidTomb
+                OrchidTomb,
+                OverworldEast
             };
         }
 

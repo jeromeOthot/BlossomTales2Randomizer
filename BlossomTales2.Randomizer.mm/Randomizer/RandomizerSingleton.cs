@@ -365,7 +365,7 @@ namespace BlossomTales2.Randomizer.mm
 
                 //long side quests
                 { new LocationId("anchor-shop.tmx", "fisherman", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.HeartQ_1) }, //canne pêche && (accès est || accès ouest || accès nord) && accès jungle && accès canyon && accès dark && accès labyrinthe
-                { new LocationId("chipmunkKing.tmx", "chipmunk", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.HeartQ_1) }, //flippers || accès est && bombes
+                { new LocationId("chipmunkKing.tmx", "chipmunk", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.HeartQ_1) }, //flippers || accès est && (bombes || boomerang)
                 { new LocationId("overworld-15x20.tmx", "archCanyon", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.Crystal) }, //accès canyon && CanyonBone == 20
                 { new LocationId("overworld-16x22.tmx", "beggar", new Vector3(980f, 0f, 1616f)), new ItemData(ItemType.HeartQ_1) }, //accès canyon
                 { new LocationId("overworld-19x16.tmx", "treeLordReward", Vector3.Zero), new ItemData(ItemType.HeartQ_1) }, //accès nord && accès ouest && accès est

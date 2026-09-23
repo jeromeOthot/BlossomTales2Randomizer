@@ -19,7 +19,8 @@ namespace BlossomTales2.Randomizer.mm
         public bool HasBoomerang => Items.ContainsKey(ItemType.Boomerang);
         public bool HasBeatenMorklaBoss => Items.ContainsKey(ItemType.MorklaBoss);
         public bool HasKeys => Items.ContainsKey(ItemType.Gold_Key);
-        public bool CanOpenDoorNote => true;
+        public bool HasTreeSeeds => Items.ContainsKey(ItemType.TreeSeed);
+        public bool CanOpenNoteDoor => HasInstrument && Items.ContainsKey(ItemType.OpenSesame);
         public bool CanActivateBlueSwitch => true;
         public bool  HasGhostPotion => Items.ContainsKey(ItemType.Jar_Ghost);
         //todo
@@ -44,6 +45,15 @@ namespace BlossomTales2.Randomizer.mm
         public bool CanCutPegs => Items.TryGetValue(ItemType.Sword, out int swordLevel) && swordLevel >= 2;
 
         public bool CanSwitchLevers => HasSword || HasGrappleHook || HasBoomerang || HasBow;
+
+        public bool CanCollectIngredient(EquipableItem.IngredientList ingredient)
+        {
+            switch (ingredient)
+            {
+                case EquipableItem.IngredientList.Apple: return true;
+                default: return true;
+            }
+        }
 
         public void AddItem(ItemType itemType, int amount)
         {
