@@ -12,6 +12,7 @@ namespace BlossomTales2.Randomizer.mm
         public OrchidTomb OrchidTomb { get; }
         public OverworldEast OverworldEast { get; }
         public OverworldWest OverworldWest { get; }
+        public OverworldNorth OverworldNorth { get; }
 
         public World()
         {
@@ -20,6 +21,7 @@ namespace BlossomTales2.Randomizer.mm
             OrchidTomb = new OrchidTomb(this);
             OverworldEast = new OverworldEast(this);
             OverworldWest = new OverworldWest(this);
+            OverworldNorth = new OverworldNorth(this);
 
             Regions = new List<Region>
             {
@@ -27,7 +29,8 @@ namespace BlossomTales2.Randomizer.mm
                 BlossomdaleCemetary,
                 OrchidTomb,
                 OverworldEast,
-                OverworldWest
+                OverworldWest,
+                OverworldNorth
             };
         }
 

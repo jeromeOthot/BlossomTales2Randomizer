@@ -124,9 +124,9 @@ namespace BlossomTales2.Randomizer.mm
             //levier: épée || grappin || boomerang || arc
             //water switch: épée
             //cart switch: épée || grappin || boomerang || arc
-            //accès est: épée 2 || flippers || boomerang
-            //accès ouest: bombes || flippers
-            //accès nord: accès ouest && grappin
+            //accès est: épée 2 || flippers || boomerang || accès nord && grappin
+            //accès ouest: bombes || flippers || boomerang || accès nord && grappin
+            //accès nord: accès ouest && grappin || accès est && (boomerang || grappin)
             //accès jungle: accès est && bouteille || accès jungle ile || accès dark
             //accès jungle ile: accès est && flippers || accès canyon && grappin
             //accès jungle NE: accès jungle && flippers
