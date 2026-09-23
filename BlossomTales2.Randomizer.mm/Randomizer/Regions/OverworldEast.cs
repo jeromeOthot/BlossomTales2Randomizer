@@ -1,7 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
-// The .NET Foundation licenses this file to you under the MIT license.
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 
@@ -9,7 +6,7 @@ namespace BlossomTales2.Randomizer.mm
 {
     public class OverworldEast : Region
     {
-        public override Predicate<Inventory> CanAccess => inventory => inventory.CanCutPegs; //TODO: Access rules
+        public override Predicate<Inventory> CanAccess => inventory => inventory.CanCutPegs || inventory.HasBoomerang || inventory.HasFlipper; //TODO: Access rules
 
         public OverworldEast(World world) : base("Eastern Overworld", world)
         {

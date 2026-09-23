@@ -22,7 +22,7 @@ namespace BlossomTales2.Randomizer.mm
                     ItemType.Torch),
                 new Location(new LocationId("overworld-20x18.tmx", "ghostDrink", Vector3.Zero),
                     "Ghost",
-                    inventory => inventory.CanCraftGhostPotion && inventory.CanCraftResurrectionPotion,
+                    inventory => inventory.CanCraftPotion(ItemType.Jar_Ghost) && inventory.CanCraftPotion(ItemType.Jar_Resurrection),
                     ItemType.Crystal)
             };
         }

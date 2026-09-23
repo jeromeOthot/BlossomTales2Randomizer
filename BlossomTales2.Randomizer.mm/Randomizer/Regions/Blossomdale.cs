@@ -21,7 +21,23 @@ namespace BlossomTales2.Randomizer.mm
                     "Outskirts Cave Right Chest",
                     _ => true,
                     ItemType.GoldCoin),
-
+                //note cave
+                new Location(new LocationId("overworld-19x20-noteCave.tmx", "Chest_Small", new Vector3(576f, 0f, 212f)),
+                    "Outskirts Note Cave Top Left Chest",
+                    inventory => inventory.HasFlipper && inventory.CanOpenNoteDoor && inventory.CanCraftPotion(ItemType.Jar_SlowTime) && inventory.HasTriBow,
+                    ItemType.GoldCoin),
+                new Location(new LocationId("overworld-19x20-noteCave.tmx", "Chest_Small", new Vector3(768f, 0f, 212f)),
+                    "Outskirts Note Cave Top Right Chest",
+                    inventory => inventory.HasFlipper && inventory.CanOpenNoteDoor && inventory.CanCraftPotion(ItemType.Jar_SlowTime) && inventory.HasTriBow,
+                    ItemType.GoldCoin),
+                new Location(new LocationId("overworld-19x20-noteCave.tmx", "Chest_Small", new Vector3(576f, 0f, 340f)),
+                    "Outskirts Note Cave Lower Left Chest",
+                    inventory => inventory.HasFlipper && inventory.CanOpenNoteDoor && inventory.CanCraftPotion(ItemType.Jar_SlowTime) && inventory.HasTriBow,
+                    ItemType.GoldCoin),
+                new Location(new LocationId("overworld-19x20-noteCave.tmx", "Chest_Small", new Vector3(768f, 0f, 340f)),
+                    "Outskirts Note Cave Lower Right Chest",
+                    inventory => inventory.HasFlipper && inventory.CanOpenNoteDoor && inventory.CanCraftPotion(ItemType.Jar_SlowTime) && inventory.HasTriBow,
+                    ItemType.GoldCoin),
                 //items npc
                 new Location(new LocationId("blossom-blacksmith.tmx", "npc21", Vector3.Zero),
                     "Blacksmith",
@@ -116,6 +132,10 @@ namespace BlossomTales2.Randomizer.mm
                 new Location(new LocationId("overworld-20x20.tmx", "Chest_Small", new Vector3(2352f, 0f, 2212f)),
                     "Bomb Rock Chest",
                     inventory => inventory.HasBombs,
+                    ItemType.GoldCoin),
+                new Location(new LocationId("overworld-21x19.tmx", "Chest_Small", new Vector3(340f, 0f, 792f)),
+                    "Buried Treasure Chest",
+                    inventory => inventory.CanWakeUpPeople && inventory.HasShovel,
                     ItemType.GoldCoin)
             };
         }

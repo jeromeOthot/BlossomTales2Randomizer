@@ -124,7 +124,7 @@ namespace BlossomTales2.Randomizer.mm
             //levier: épée || grappin || boomerang || arc
             //water switch: épée
             //cart switch: épée || grappin || boomerang || arc
-            //accès est: épée 2 || flippers
+            //accès est: épée 2 || flippers || boomerang
             //accès ouest: bombes || flippers
             //accès nord: accès ouest && grappin
             //accès jungle: accès est && bouteille || accès jungle ile || accès dark
@@ -370,7 +370,7 @@ namespace BlossomTales2.Randomizer.mm
                 { new LocationId("overworld-16x22.tmx", "beggar", new Vector3(980f, 0f, 1616f)), new ItemData(ItemType.HeartQ_1) }, //accès canyon
                 { new LocationId("overworld-19x16.tmx", "treeLordReward", Vector3.Zero), new ItemData(ItemType.HeartQ_1) }, //accès nord && accès ouest && accès est
                 { new LocationId("overworld-19x17.tmx", "queenBee", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.BeeMedallion) }, //accès nord && honeycomb == 10
-                { new LocationId("overworld-19x18-flowerShop.tmx", "flowerShop", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.HeartQ_1) }, //accès nord && accès jungle && accès canyon && accès dark && accès labyrinthe
+                { new LocationId("overworld-19x18-flowerShop.tmx", "flowerShop", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.HeartQ_1) }, //accès ouest && accès jungle && accès canyon && accès dark && accès labyrinthe
                 { new LocationId(string.Empty, "frog_statue_award", Vector3.Zero), new ItemData(ItemType.HeartQ_1) }, //accès jungle && bomb && flipper
                 { new LocationId(string.Empty, "bunny_statue_award", Vector3.Zero), new ItemData(ItemType.HeartQ_1) }, //accès canyon + yoyo
                 { new LocationId(string.Empty, "chipmunk_statue_award", Vector3.Zero), new ItemData(ItemType.HeartQ_1) }, //accès est && accès nord && accès ouest && bombes && flipper
