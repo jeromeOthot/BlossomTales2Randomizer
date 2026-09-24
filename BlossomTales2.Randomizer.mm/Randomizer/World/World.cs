@@ -19,6 +19,7 @@ namespace BlossomTales2.Randomizer.mm
         public CanyonSouthEastRegion CanyonSouthEast { get; }
         public CanyonVillageRegion CanyonVillage { get; }
         public CanyonIslandRegion CanyonIsland { get; }
+        public CanyonSteppesNorthRegion CanyonSteppesNorth { get; }
 
         public World()
         {
@@ -33,6 +34,7 @@ namespace BlossomTales2.Randomizer.mm
             CanyonSouthEast = new CanyonSouthEastRegion(this);
             CanyonIsland = new CanyonIslandRegion(this);
             CanyonVillage = new CanyonVillageRegion(this);
+            CanyonSteppesNorth = new CanyonSteppesNorthRegion(this);
 
             Regions = new List<Region>
             {
@@ -47,6 +49,7 @@ namespace BlossomTales2.Randomizer.mm
                 CanyonSouthEast,
                 CanyonIsland,
                 CanyonVillage,
+                CanyonSteppesNorth,
             };
         }
 
