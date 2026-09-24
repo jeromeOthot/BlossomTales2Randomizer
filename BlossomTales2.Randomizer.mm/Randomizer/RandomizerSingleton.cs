@@ -25,8 +25,8 @@ namespace BlossomTales2.Randomizer.mm
 
         public void RandomizeLocations()
         {
-            //seed = 0: jeu vanille
             _random = new Random();
+            //seed = 0: jeu vanille
             RandomizeItems();
         }
 
@@ -601,30 +601,11 @@ namespace BlossomTales2.Randomizer.mm
 
         private void RandomizeItems()
         {
-            List<ItemData> itemPool = _locationsVanilla.Values.ToList();
-            //TODO: Place items with logic
-            //ShuffleList(itemPool);
-
-            bool isValid = Validator.ValidateSeed(itemPool);
-            GameLogger.LogInfo($"Is Valid {isValid}");
-            //if seed is not valid
-            //regenerate
-
             //Si on n'as pas de seed number
-            if(RamdomizerSettings.SeedNumber == null)
+            if (RamdomizerSettings.SeedNumber == null)
             {
-                GameLogger.LogInfo("Spoiler log begin:");
 
-                _randomizedLocations = new Dictionary<LocationId, ItemData>();
-                List<LocationId> keyList = _locationsVanilla.Keys.ToList();
-                for (int i = 0; i < keyList.Count; i++)
-                {
-                    _randomizedLocations.Add(keyList[i], itemPool[i]);
-                    GameLogger.LogInfo(keyList[i] + " " + itemPool[i]);
-                }
-                GameLogger.LogInfo("Spoiler log end");
             }
-            //Si on as un seed number == 0
             else if(RamdomizerSettings.SeedNumber == 0)
             {
                 GameLogger.LogInfo("_locationsVanilla");
@@ -633,8 +614,48 @@ namespace BlossomTales2.Randomizer.mm
             //Si on as un seed number quelconque on l'utilise pour la seed du random
             else
             {
-                //TODO: Randomizer avec le numéro de seed.
-                GameLogger.LogInfo("Randomizer with seed");
+                PlaceItems();
+            }
+        }
+
+        private void PlaceItems()
+        {
+            List<ItemData> itemPool = _locationsVanilla.Values.ToList();
+            //TODO: Place items with logic
+            //TODO: Randomizer avec le numéro de seed.
+            bool isValid;
+            int tries = 0;
+            do
+            {
+                ShuffleList(itemPool);
+                _randomizedLocations = new Dictionary<LocationId, ItemData>();
+                List<LocationId> keyList = _locationsVanilla.Keys.ToList();
+                for (int i = 0; i < keyList.Count; i++)
+                {
+                    _randomizedLocations.Add(keyList[i], itemPool[i]);
+                }
+
+                isValid = Validator.ValidateSeed(_randomizedLocations);
+                tries++;
+            } while (!isValid && tries < 10000);
+
+
+
+
+            if (isValid)
+            {
+                GameLogger.LogInfo($"Total tries {tries}");
+                GameLogger.LogInfo("Spoiler log begin:");
+                foreach (KeyValuePair<LocationId, ItemData> kvp in _randomizedLocations)
+                {
+                    GameLogger.LogInfo($"{kvp.Key}: {kvp.Value}");
+                }
+                GameLogger.LogInfo("Spoiler log end");
+            }
+            else
+            {
+                GameLogger.LogInfo("Too many tries. Setting game as vanilla.");
+                _randomizedLocations = _locationsVanilla;
             }
         }
 

@@ -7,7 +7,8 @@ namespace BlossomTales2.Randomizer.mm
         public Dictionary<ItemType, int> Items { get; set; } =  new Dictionary<ItemType, int>();
 
         //TODO: Real endgame flag.
-        public bool HasBeatenMinotaurKing => Items.ContainsKey(ItemType.BeeMedallion);
+        public bool HasBeatenMinotaurKing => HasBombs && HasSword && HasFlipper && HasTorch && HasGrappleHook &&
+                                             HasBoomerang && HasBow && CanWakeUpPeople;
 
         public bool HasSword => Items.ContainsKey(ItemType.Sword);
         public bool HasTorch => Items.ContainsKey(ItemType.Torch);

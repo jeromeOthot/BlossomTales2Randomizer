@@ -7,6 +7,7 @@ namespace BlossomTales2.Randomizer.mm
         public LocationId Id { get; set; }
         public string Name { get; set; }
         public Predicate<Inventory> CanAccess { get; set; }
+        public ItemType VanillaItem { get; set; }
         public ItemType Item { get; set; }
         public bool HasCollectedItem { get; set; }
 
@@ -15,7 +16,7 @@ namespace BlossomTales2.Randomizer.mm
             Id = id;
             Name = name;
             CanAccess = canAccess;
-            Item = vanillaItem;
+            VanillaItem = vanillaItem;
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using BlossomTales2.Randomizer.mm.Canyon;
 
 namespace BlossomTales2.Randomizer.mm
 {
@@ -13,6 +14,11 @@ namespace BlossomTales2.Randomizer.mm
         public OverworldEast OverworldEast { get; }
         public OverworldWest OverworldWest { get; }
         public OverworldNorth OverworldNorth { get; }
+        public CanyonNorthWestRegion CanyonNorthWest { get; }
+        public CanyonSouthWestRegion CanyonSouthWest { get; }
+        public CanyonSouthEastRegion CanyonSouthEast { get; }
+        public CanyonVillageRegion CanyonVillage { get; }
+        public CanyonIslandRegion CanyonIsland { get; }
 
         public World()
         {
@@ -22,6 +28,11 @@ namespace BlossomTales2.Randomizer.mm
             OverworldEast = new OverworldEast(this);
             OverworldWest = new OverworldWest(this);
             OverworldNorth = new OverworldNorth(this);
+            CanyonNorthWest = new CanyonNorthWestRegion(this);
+            CanyonSouthWest = new CanyonSouthWestRegion(this);
+            CanyonSouthEast = new CanyonSouthEastRegion(this);
+            CanyonIsland = new CanyonIslandRegion(this);
+            CanyonVillage = new CanyonVillageRegion(this);
 
             Regions = new List<Region>
             {
@@ -30,7 +41,12 @@ namespace BlossomTales2.Randomizer.mm
                 OrchidTomb,
                 OverworldEast,
                 OverworldWest,
-                OverworldNorth
+                OverworldNorth,
+                CanyonNorthWest,
+                CanyonSouthWest,
+                CanyonSouthEast,
+                CanyonIsland,
+                CanyonVillage,
             };
         }
 
