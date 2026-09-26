@@ -318,10 +318,10 @@ namespace BlossomTales2.Randomizer.mm
                 { new LocationId("overworld-21x20-cave.tmx", "Chest_Small", new Vector3(1192f, 0f, 612f)), new ItemData(ItemType.GoldCoin) },
                 { new LocationId("overworld-21x20-cave.tmx", "Chest_Small", new Vector3(1268f, 0f, 612f)), new ItemData(ItemType.GoldCoin) },
 
-                { new LocationId("overworld-22x16-cave.tmx", "Chest_Small", new Vector3(1408f, 0f, 1536f)), new ItemData(ItemType.GoldCoin) }, //accès nord && flippers && grappin (&& arc?)
-                { new LocationId("overworld-22x16-cave.tmx", "Chest_Small", new Vector3(1600f, 0f, 1536f)), new ItemData(ItemType.GoldCoin) }, //accès nord && flippers && grappin (&& arc?)
-                { new LocationId("overworld-22x16-cave.tmx", "Chest_Small", new Vector3(1408f, 0f, 1664f)), new ItemData(ItemType.GoldCoin) }, //accès nord && flippers && grappin (&& arc?)
-                { new LocationId("overworld-22x16-cave.tmx", "Chest_Small", new Vector3(1600f, 0f, 1664f)), new ItemData(ItemType.GoldCoin) }, //accès nord && flippers && grappin (&& arc?)
+                { new LocationId("overworld-22x16-cave.tmx", "Chest_Small", new Vector3(1408f, 0f, 1536f)), new ItemData(ItemType.GoldCoin) }, //accès nord && flippers && grappin && (arc || boomerang || épée 4)
+                { new LocationId("overworld-22x16-cave.tmx", "Chest_Small", new Vector3(1600f, 0f, 1536f)), new ItemData(ItemType.GoldCoin) }, //accès nord && flippers && grappin && (arc || boomerang || épée 4)
+                { new LocationId("overworld-22x16-cave.tmx", "Chest_Small", new Vector3(1408f, 0f, 1664f)), new ItemData(ItemType.GoldCoin) }, //accès nord && flippers && grappin && (arc || boomerang || épée 4)
+                { new LocationId("overworld-22x16-cave.tmx", "Chest_Small", new Vector3(1600f, 0f, 1664f)), new ItemData(ItemType.GoldCoin) }, //accès nord && flippers && grappin && (arc || boomerang || épée 4)
 
                 { new LocationId("overworld-22x19-cave.tmx", "Chest_Small", new Vector3(992f, 0f, 1648f)), new ItemData(ItemType.HeartQ_1) }, //accès est && ouvrir portes notes
 
