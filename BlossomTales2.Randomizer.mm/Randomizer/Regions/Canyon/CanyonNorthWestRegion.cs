@@ -8,7 +8,8 @@ namespace BlossomTales2.Randomizer.mm.Canyon
 {
     public class CanyonNorthWestRegion: Region
     {
-        public override Predicate<Inventory> CanAccess => inventory => inventory.CanAccessCanyon;
+        public override Predicate<Inventory> CanAccess =>
+            inventory => (inventory.HasGrappleHook || inventory.HasBow) && (World.CanyonSouthWest.CanAccess(inventory) || World.CanyonSteppesNorth.CanAccess(inventory) || World.CanyonSteppesSouth.CanAccess(inventory) );
 
         public CanyonNorthWestRegion(World world) : base("Canyon North West Region", world)
         {
