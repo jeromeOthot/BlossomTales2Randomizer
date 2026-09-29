@@ -14,6 +14,12 @@ namespace BlossomTales2.Randomizer.mm
         public OverworldEast OverworldEast { get; }
         public OverworldWest OverworldWest { get; }
         public OverworldNorth OverworldNorth { get; }
+        public JungleFront JungleFront { get; }
+        public Anchortown Anchortown { get; }
+        public JungleBack JungleBack { get; }
+        public JungleNorthEast JungleNorthEast { get; }
+        public JungleIsland JungleIsland { get; }
+        public MorklaDungeon MorklaDungeon { get; }
         public CanyonNorthWestRegion CanyonNorthWest { get; }
         public CanyonSouthWestRegion CanyonSouthWest { get; }
         public CanyonSouthEastRegion CanyonSouthEast { get; }
@@ -21,6 +27,14 @@ namespace BlossomTales2.Randomizer.mm
         public CanyonIslandRegion CanyonIsland { get; }
         public CanyonSteppesNorthRegion CanyonSteppesNorth { get; }
         public CanyonSteppesSouthRegion CanyonSteppesSouth { get; }
+        public DarkWoodsFront DarkWoodsFront { get; }
+        public Monsterton Monsterton { get; }
+        public DarkWoodsBack DarkWoodsBack { get; }
+        public MansionDungeon MansionDungeon { get; }
+        public LabyrinthFront LabyrinthFront { get; }
+        public Blockburg Blockburg { get; }
+        public LabyrinthBack LabyrinthBack { get; }
+        public MinotaurCastle MinotaurCastle { get; }
 
         public World()
         {
@@ -30,6 +44,12 @@ namespace BlossomTales2.Randomizer.mm
             OverworldEast = new OverworldEast(this);
             OverworldWest = new OverworldWest(this);
             OverworldNorth = new OverworldNorth(this);
+            JungleFront = new JungleFront(this);
+            Anchortown = new Anchortown(this);
+            JungleBack = new JungleBack(this);
+            JungleNorthEast = new JungleNorthEast(this);
+            JungleIsland = new JungleIsland(this);
+            MorklaDungeon = new MorklaDungeon(this);
             CanyonNorthWest = new CanyonNorthWestRegion(this);
             CanyonSouthWest = new CanyonSouthWestRegion(this);
             CanyonSouthEast = new CanyonSouthEastRegion(this);
@@ -37,6 +57,14 @@ namespace BlossomTales2.Randomizer.mm
             CanyonVillage = new CanyonVillageRegion(this);
             CanyonSteppesNorth = new CanyonSteppesNorthRegion(this);
             CanyonSteppesSouth = new CanyonSteppesSouthRegion(this);
+            DarkWoodsFront = new DarkWoodsFront(this);
+            Monsterton = new Monsterton(this);
+            DarkWoodsBack = new DarkWoodsBack(this);
+            MansionDungeon = new MansionDungeon(this);
+            LabyrinthFront = new LabyrinthFront(this);
+            Blockburg = new Blockburg(this);
+            LabyrinthBack = new LabyrinthBack(this);
+            MinotaurCastle = new MinotaurCastle(this);
 
             Regions = new List<Region>
             {
@@ -46,12 +74,26 @@ namespace BlossomTales2.Randomizer.mm
                 OverworldEast,
                 OverworldWest,
                 OverworldNorth,
+                JungleFront,
+                Anchortown,
+                JungleBack,
+                JungleNorthEast,
+                JungleIsland,
+                MorklaDungeon,
                 CanyonNorthWest,
                 CanyonSouthWest,
                 CanyonSouthEast,
                 CanyonIsland,
                 CanyonVillage,
                 CanyonSteppesNorth,
+                DarkWoodsFront,
+                Monsterton,
+                DarkWoodsBack,
+                MansionDungeon,
+                LabyrinthFront,
+                Blockburg,
+                LabyrinthBack,
+                MinotaurCastle,
             };
         }
 
