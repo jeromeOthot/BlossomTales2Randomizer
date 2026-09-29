@@ -23,7 +23,10 @@ namespace BlossomTales2.Randomizer.mm.Canyon
                 }, //accès canyon steppe
 
                 //Honeycomb
-                //TODO: Manque le chest du Honeycomb a la carte 18x21
+                {
+                    new Location(new LocationId("overworld-18x21.tmx", "PickUpItem", new Vector3(224f, 0f, 592f)),
+                        "chest honeycomb", _ => true, ItemType.Honeycomb)
+                },
 
                 //Chest
                 {
@@ -36,7 +39,7 @@ namespace BlossomTales2.Randomizer.mm.Canyon
                 }, //accès canyon
                 {
                     new Location(new LocationId("overworld-17x21-cave.tmx", "Chest_Small", new Vector3(416f, 0f, 480f)),
-                        "cave chest", inventory => inventory.CanSwitchLevers, ItemType.HeartQ_1)
+                        "cave chest", inventory => inventory.CanSwitchLevers && inventory.CanOpenNoteDoor, ItemType.HeartQ_1)
                 } //accès canyon steppe && leviers
             };
         }
