@@ -6,12 +6,12 @@ using Microsoft.Xna.Framework;
 
 namespace BlossomTales2.Randomizer.mm.Canyon
 {
-    public class CanyonNorthWestRegion: Region
+    public class CanyonNorthRegion: Region
     {
         public override Predicate<Inventory> CanAccess =>
-            inventory => (inventory.HasGrappleHook || inventory.HasBow) && (World.CanyonSouthWest.CanAccess(inventory) || World.CanyonSteppesNorth.CanAccess(inventory) || World.CanyonSteppesSouth.CanAccess(inventory) );
+            inventory => World.OverworldWest.CanAccess(inventory) && (inventory.HasBow || inventory.HasGrappleHook);
 
-        public CanyonNorthWestRegion(World world) : base("Canyon North West Region", world)
+        public CanyonNorthRegion(World world) : base("Canyon North Region", world)
         {
             Locations = new List<Location>
             {

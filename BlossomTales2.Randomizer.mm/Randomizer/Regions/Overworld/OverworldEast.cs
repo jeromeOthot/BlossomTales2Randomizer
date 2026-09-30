@@ -6,8 +6,9 @@ namespace BlossomTales2.Randomizer.mm
 {
     public class OverworldEast : Region
     {
-        public override Predicate<Inventory> CanAccess => inventory => inventory.CanCutPegs || inventory.HasBoomerang || inventory.HasFlipper;/* ||
-                                                                       World.OverworldNorth.CanAccess(inventory) && inventory.HasGrappleHook;*/
+        public override Predicate<Inventory> CanAccess => inventory =>
+            inventory.CanCutPegs || inventory.HasBoomerang || inventory.HasFlipper
+            || inventory.HasBombs && inventory.HasGrappleHook;
 
         public OverworldEast(World world) : base("Eastern Overworld", world)
         {

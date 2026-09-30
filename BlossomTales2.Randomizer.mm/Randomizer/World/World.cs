@@ -20,7 +20,7 @@ namespace BlossomTales2.Randomizer.mm
         public JungleNorthEast JungleNorthEast { get; }
         public JungleIsland JungleIsland { get; }
         public MorklaDungeon MorklaDungeon { get; }
-        public CanyonNorthWestRegion CanyonNorthWest { get; }
+        public CanyonNorthRegion CanyonNorth { get; }
         public CanyonSouthWestRegion CanyonSouthWest { get; }
         public CanyonSouthEastRegion CanyonSouthEast { get; }
         public CanyonVillageRegion CanyonVillage { get; }
@@ -50,7 +50,7 @@ namespace BlossomTales2.Randomizer.mm
             JungleNorthEast = new JungleNorthEast(this);
             JungleIsland = new JungleIsland(this);
             MorklaDungeon = new MorklaDungeon(this);
-            CanyonNorthWest = new CanyonNorthWestRegion(this);
+            CanyonNorth = new CanyonNorthRegion(this);
             CanyonSouthWest = new CanyonSouthWestRegion(this);
             CanyonSouthEast = new CanyonSouthEastRegion(this);
             CanyonIsland = new CanyonIslandRegion(this);
@@ -80,7 +80,7 @@ namespace BlossomTales2.Randomizer.mm
                 JungleNorthEast,
                 JungleIsland,
                 MorklaDungeon,
-                CanyonNorthWest,
+                CanyonNorth,
                 CanyonSouthWest,
                 CanyonSouthEast,
                 CanyonIsland,

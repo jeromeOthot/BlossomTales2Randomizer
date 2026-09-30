@@ -124,23 +124,23 @@ namespace BlossomTales2.Randomizer.mm
             //levier: épée || grappin || boomerang || arc
             //water switch: épée
             //cart switch: épée || grappin || boomerang || arc
-            //accès est: épée 2 || flippers || boomerang || accès nord && grappin
-            //accès ouest: bombes || flippers || boomerang || accès nord && grappin
-            //accès nord: accès ouest && grappin || accès est && (boomerang || grappin)
-            //accès jungle: accès est && bouteille || accès jungle ile || accès dark
+            //accès est: épée 2 || flippers || boomerang || bombes && grappin
+            //accès ouest: bombes || flippers || boomerang || épée 2 && grappin
+            //accès nord: boomerang || grappin && (bombes || flippers || épée 2)
+            //accès jungle: (accès est && (bouteille || flippers)) || (accès dark && grappin)
             //accès jungle ile: accès est && flippers || accès canyon && grappin
             //accès jungle NE: accès jungle && flippers
             //accès morkla: accès jungle && canne pêche && (bombes || flippers)
-            //accès canyon: accès ouest && arc
-            //accès canyon plateau: (accès canyon || accès ouest) && grappin
-            //accès canyon steppe: accès canyon && grappin
+            //accès canyon: accès ouest && (arc || grappin)
+            //accès canyon steppe nord: accès ouest && (arc && boomerang || grappin)
+            //accès canyon steppe sud: accès canyon && (grappin || boomerang)
             //ouvrir portes note: instrument && chanson sesame
             //accès temple: accès canyon && ouvrir portes note
             //accès temple 2: accès temple && clé
             //accès temple 3: accès temple 2 && leviers && clé && damage
             //accès temple 4: accès temple 3 && grappin
             //accès dark: accès nord && damage
-            //accès monsterton: accès dark && bouteille && canne pêche
+            //accès monsterton: accès dark && (bouteille && canne pêche || boomerang)
             //accès mansion: accès monsterton && boomerang
             //accès mansion 2: accès mansion && clé && damage
             //accès mansion 3: accès mansion 2 && teleporter
