@@ -28,6 +28,7 @@ namespace BlossomTales2.Randomizer.mm
         public bool CanOpenNoteDoor => HasInstrument && Items.ContainsKey(ItemType.OpenSesame);
         public bool CanWakeUpPeople => HasInstrument && Items.ContainsKey(ItemType.WakeUp);
         public bool CanActivateBlueSwitch => true;
+        public bool  HasBottle => Items.ContainsKey(ItemType.Jar_Empty);
         public bool  HasGhostPotion => Items.ContainsKey(ItemType.Jar_Ghost);
 
         public bool HasPlantedAllSeeds => Items.TryGetValue(ItemType.PlantedTrees, out int count) && count >= 5;
