@@ -87,6 +87,27 @@ namespace BlossomTales2.Randomizer.mm
                     "Bridge Chest",
                     _ => true,
                     ItemType.GoldCoin),
+                new Location(new LocationId("jungles-24x20.tmx", "Chest_Small", new Vector3(2088f, 0f, 2200f)),
+                    "Morkla Bomb Chest",
+                    inventory => inventory.HasBombs,
+                    ItemType.GoldCoin),
+                new Location(new LocationId("jungles-24x22.tmx", "Chest_Small", new Vector3(2336f, 0f, 496f)),
+                    "Ledge Chest",
+                    _ => true,
+                    ItemType.GoldCoin),
+                new Location(new LocationId("jungles-25x21.tmx", "Chest_Small", new Vector3(232f, 0f, 272f)),
+                    "Morkla Trees Chest",
+                    inventory => inventory.HasBombs,
+                    ItemType.GoldCoin),
+                new Location(new LocationId("jungles-25x22.tmx", "Chest_Small", new Vector3(160f, 0f, 836f)),
+                    "Tree Trunk Chest",
+                    _ => true,
+                    ItemType.GoldCoin),
+                new Location(new LocationId("jungles-25x22.tmx", "Chest_Small", new Vector3(1760f, 0f, 728f)),
+                    "Pirate Camp Chest",
+                    inventory => inventory.HasBombs,
+                    ItemType.GoldCoin),
+
             };
         }
     }

@@ -538,10 +538,10 @@ namespace BlossomTales2.Randomizer.mm
                 { new LocationId("jungles-22x22-lighthouse.tmx", "Chest_Small", new Vector3(556f, 0f, 144f)), new ItemData(ItemType.GoldCoin) }, //accès jungle ile
                 { new LocationId("jungles-23x20.tmx", "Chest_Small", new Vector3(2264f, 0f, 1928f)), new ItemData(ItemType.GoldCoin) }, //accès jungle
                 { new LocationId("jungles-23x22.tmx", "Chest_Small", new Vector3(740f, 0f, 1252f)), new ItemData(ItemType.GoldCoin) }, //accès jungle
-                { new LocationId("jungles-24x19.tmx", "Chest_Small", new Vector3(1548f, 0f, 1272f)), new ItemData(ItemType.Honeycomb) }, //accès jungle && (flippers || bombes) <-- Rendu ici
+                { new LocationId("jungles-24x19.tmx", "Chest_Small", new Vector3(1548f, 0f, 1272f)), new ItemData(ItemType.Honeycomb) }, //accès jungle && (flippers || bombes)
                 { new LocationId("jungles-24x19.tmx", "Chest_Small", new Vector3(2468f, 0f, 2308f)), new ItemData(ItemType.GoldCoin) }, //accès jungle NE
                 { new LocationId("jungles-24x20.tmx", "Chest_Small", new Vector3(2088f, 0f, 2200f)), new ItemData(ItemType.GoldCoin) }, //accès jungle && bombes
-                { new LocationId("jungles-24x22.tmx", "Chest_Small", new Vector3(2336f, 0f, 0496f)), new ItemData(ItemType.GoldCoin) }, //accès jungle
+                { new LocationId("jungles-24x22.tmx", "Chest_Small", new Vector3(2336f, 0f, 496f)), new ItemData(ItemType.GoldCoin) }, //accès jungle
                 { new LocationId("jungles-25x19.tmx", "Chest_Small", new Vector3(276f, 0f, 1876f)), new ItemData(ItemType.GoldCoin) }, //accès jungle NE && bombes
                 { new LocationId("jungles-25x21.tmx", "Chest_Small", new Vector3(232f, 0f, 272f)), new ItemData(ItemType.GoldCoin) }, //accès jungle && bombes
                 { new LocationId("jungles-25x22.tmx", "Chest_Small", new Vector3(160f, 0f, 836f)), new ItemData(ItemType.GoldCoin) }, //accès jungle

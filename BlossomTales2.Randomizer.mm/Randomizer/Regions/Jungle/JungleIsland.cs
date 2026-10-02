@@ -30,32 +30,17 @@ namespace BlossomTales2.Randomizer.mm
                     "Note Cave Bottom Right Chest",
                     inventory => inventory.CanOpenNoteDoor,
                     ItemType.GoldCoin),
-                //Caves
-                new Location(new LocationId("jungles-23x20-cave.tmx", "Chest_Small", new Vector3(448f, 0f, 492f)),
-                    "Bomb Cave Bottom Left Chest",
-                    inventory => inventory.HasBombs,
-                    ItemType.GoldCoin),
-                new Location(new LocationId("jungles-23x20-cave.tmx", "Chest_Small", new Vector3(352f, 0f, 368f)),
-                    "Bomb Cave Left Chest",
-                    inventory => inventory.HasBombs,
-                    ItemType.GoldCoin),
-                new Location(new LocationId("jungles-23x20-cave.tmx", "Chest_Small", new Vector3(544f, 0f, 288f)),
-                    "Bomb Cave Top Chest",
-                    inventory => inventory.HasBombs,
-                    ItemType.GoldCoin),
-                new Location(new LocationId("jungles-23x20-cave.tmx", "Chest_Small", new Vector3(736f, 0f, 368f)),
-                    "Bomb Cave Right Chest",
-                    inventory => inventory.HasBombs,
-                    ItemType.GoldCoin),
-                new Location(new LocationId("jungles-23x20-cave.tmx", "Chest_Small", new Vector3(640f, 0f, 492f)),
-                    "Bomb Cave Bottom Right Chest",
-                    inventory => inventory.HasBombs,
-                    ItemType.GoldCoin),
+
                 //short sidequests
                 new Location(new LocationId("jungles-21x22.tmx", "hunter", Vector3.Zero),
                     "Troll Hunter",
                     inventory => inventory.HasGrappleHook && inventory.HasBow,
                     ItemType.Bow),
+                //Traders
+                new Location(new LocationId("overworld-21x20.tmx", "Chest_Small", new Vector3(2096f, 0f, 2324f)),
+                    "Lighthouse Trader Buried Chest",
+                    inventory => inventory.HasShovel, //TODO: Fishes
+                    ItemType.HeartQ_1),
                 //Chests
                 new Location(new LocationId("jungles-21x22.tmx", "Chest_Small", new Vector3(852f, 0f, 684f)),
                     "Hunter Camp Chest",
@@ -97,6 +82,10 @@ namespace BlossomTales2.Randomizer.mm
                     "Lighthouse Chest",
                     _ => true,
                     ItemType.GoldCoin),
+                new Location(new LocationId("overworld-20x22.tmx", "Chest_Small", new Vector3(2016f, 0f, 2144f)),
+                    "Mermaid Chest",
+                    inventory => inventory.CanWakeUpPeople,
+                    ItemType.HeartQ_1),
             };
         }
     }
