@@ -22,9 +22,15 @@ namespace BlossomTales2.Randomizer.mm
         public bool HasBoomerang => Items.ContainsKey(ItemType.Boomerang);
         public bool HasShovel => Items.ContainsKey(ItemType.Shovel);
         public bool HasFishingRod => Items.ContainsKey(ItemType.FishingRod);
+        public bool HasJar => Items.ContainsKey(ItemType.Jar_Empty) || Items.ContainsKey(ItemType.Jar_Health) || Items.ContainsKey(ItemType.Jar_ReduceCost)
+                              || Items.ContainsKey(ItemType.Jar_DoubleDamage) || Items.ContainsKey(ItemType.Jar_SlowTime) || Items.ContainsKey(ItemType.Jar_BubbleShield)
+                              || Items.ContainsKey(ItemType.Jar_ArmorOrbs) || Items.ContainsKey(ItemType.Jar_Resurrection) || Items.ContainsKey(ItemType.Jar_Ghost)
+                              || Items.ContainsKey(ItemType.Jar_Fire) || Items.ContainsKey(ItemType.Jar_Speedster);
         public bool HasBeatenMorklaBoss => Items.ContainsKey(ItemType.MorklaBoss);
         public bool HasKeys => Items.ContainsKey(ItemType.Gold_Key);
         public bool HasTreeSeeds => Items.ContainsKey(ItemType.TreeSeed);
+        public bool HasHeartNecklace => Items.ContainsKey(ItemType.HeartNecklace);
+
         public bool CanOpenNoteDoor => HasInstrument && Items.ContainsKey(ItemType.OpenSesame);
         public bool CanWakeUpPeople => HasInstrument && Items.ContainsKey(ItemType.WakeUp);
         public bool CanActivateBlueSwitch => true;
@@ -52,6 +58,8 @@ namespace BlossomTales2.Randomizer.mm
 
         public bool CanSwitchLevers => HasSword || HasGrappleHook || HasBoomerang || HasBow;
 
+        public bool CanCollectAllFishes => true;
+
         public bool CanCollectIngredient(EquipableItem.IngredientList ingredient)
         {
             switch (ingredient)
@@ -63,7 +71,7 @@ namespace BlossomTales2.Randomizer.mm
 
         public bool CanCraftPotion(ItemType potionType)
         {
-            if (!Items.ContainsKey(ItemType.Jar_Empty))
+            if (!HasJar)
                 return false;
 
             switch(potionType)

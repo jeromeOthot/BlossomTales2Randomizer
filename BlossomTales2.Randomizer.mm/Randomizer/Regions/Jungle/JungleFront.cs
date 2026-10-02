@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using Microsoft.Xna.Framework;
 
 namespace BlossomTales2.Randomizer.mm
 {
@@ -10,7 +12,14 @@ namespace BlossomTales2.Randomizer.mm
 
         public JungleFront(World world) : base("Jungle Front", world)
         {
-
+            Locations = new List<Location>()
+            {
+                //Short sidequests
+                new Location(new LocationId("jungles-23x19.tmx", "archJungle", Vector3.Zero),
+                    "Archeologist",
+                    _ => true,
+                    ItemType.HeartQ_1),
+            };
         }
     }
 }

@@ -116,6 +116,31 @@ namespace BlossomTales2.Randomizer.mm
                     "Forest Bard",
                     inventory => inventory.CanDoDamage,
                     ItemType.SummonBalloon),
+                //Traders
+                new Location(new LocationId(string.Empty, "traderFish20", Vector3.Zero),
+                    "Fish Trade 1",
+                    inventory => true, //Fish access
+                    ItemType.Jar_SlowTime),
+                new Location(new LocationId(string.Empty, "traderFish21", Vector3.Zero),
+                    "Fish Trade 2",
+                    inventory => true, //Fish access
+                    ItemType.Five_Gems),
+                new Location(new LocationId(string.Empty, "traderFish22", Vector3.Zero),
+                    "Fish Trade 3",
+                    inventory => true, //Fish access
+                    ItemType.HeartQ_1),
+                new Location(new LocationId(string.Empty, "traderFish23", Vector3.Zero),
+                    "Fish Trade 4",
+                    inventory => true, //Fish access
+                    ItemType.Five_Gems),
+                new Location(new LocationId(string.Empty, "traderFish24", Vector3.Zero),
+                    "Fish Trade 5",
+                    inventory => true, //Fish access
+                    ItemType.Crystal),
+                new Location(new LocationId(string.Empty, "traderFish25", Vector3.Zero),
+                    "Fish Trade 6",
+                    inventory => true, //Fish access
+                    ItemType.Five_Gems),
                 //mausoleum
                 new Location(new LocationId("overworld-20x16-combat.tmx", "Chest_Small", new Vector3(416f, 0f, 2084f)),
                     "Forest Combat Mausoleum",
