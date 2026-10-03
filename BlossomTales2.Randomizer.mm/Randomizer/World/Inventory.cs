@@ -21,6 +21,7 @@ namespace BlossomTales2.Randomizer.mm
         public bool HasGrappleHook  => Items.ContainsKey(ItemType.GrappleHook);
         public bool HasBoomerang => Items.ContainsKey(ItemType.Boomerang);
         public bool HasShovel => Items.ContainsKey(ItemType.Shovel);
+        public bool HasRexTeleporter => Items.ContainsKey(ItemType.RexTeleporter);
         public bool HasFishingRod => Items.ContainsKey(ItemType.FishingRod);
         public bool HasJar => Items.ContainsKey(ItemType.Jar_Empty) || Items.ContainsKey(ItemType.Jar_Health) || Items.ContainsKey(ItemType.Jar_ReduceCost)
                               || Items.ContainsKey(ItemType.Jar_DoubleDamage) || Items.ContainsKey(ItemType.Jar_SlowTime) || Items.ContainsKey(ItemType.Jar_BubbleShield)
