@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace BlossomTales2.Randomizer.mm
 {
@@ -8,6 +9,10 @@ namespace BlossomTales2.Randomizer.mm
 
         public DarkWoodsBack(World world) : base("Periwinkle Woods Back", world)
         {
+            Locations = new List<Location>
+            {
+                
+            };
         }
     }
 }
