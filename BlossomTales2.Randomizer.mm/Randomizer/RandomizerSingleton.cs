@@ -174,8 +174,8 @@ namespace BlossomTales2.Randomizer.mm
                 { new LocationId("morkla-17.tmx", "Chest_Small", new Vector3(1732f, 0f, 384f)), new ItemData(ItemType.BlueGem) }, //accès Morkla && water switch && flippers && leviers
                 { new LocationId("morkla-18.tmx", "Chest_Small", new Vector3(736f, 0f, 288f)), new ItemData(ItemType.GoldCoin) }, //accès Morkla && flippers && (water switch && leviers || lanterne)
                 { new LocationId("morkla-18.tmx", "Chest_Small", new Vector3(928f,0f, 288f)), new ItemData(ItemType.GoldCoin) }, //accès Morkla && flippers && (water switch && leviers || lanterne)
-                { new LocationId("morkla-18.tmx", "Chest_Small", new Vector3(928f, 0f, 608f)), new ItemData(ItemType.GoldCoin) }, //accès Morkla && flippers && (water switch && leviers || lanterne)
                 { new LocationId("morkla-18.tmx", "Chest_Small", new Vector3(736f, 0f, 608f)), new ItemData(ItemType.GoldCoin) }, //accès Morkla && flippers && (water switch && leviers || lanterne)
+                { new LocationId("morkla-18.tmx", "Chest_Small", new Vector3(928f, 0f, 608f)), new ItemData(ItemType.GoldCoin) }, //accès Morkla && flippers && (water switch && leviers || lanterne)
                 { new LocationId("morkla-19.tmx", "Chest_Small", new Vector3(640f, 0f, 312f)), new ItemData(ItemType.HeartQ_1) }, //accès Morkla && water switch && flippers && bombes
                 { new LocationId("morkla-20.tmx", "Chest_Small", new Vector3(640f, 0f, 384f)), new ItemData(ItemType.HeartQ_1) }, //accès Morkla && bombes && (lanterne || flippers)
                 { new LocationId("morkla-21.tmx", "Chest_Small", new Vector3(896f, 0f, 776f)), new ItemData(ItemType.GreenGem) }, //accès Morkla && water switch && flippers && leviers
