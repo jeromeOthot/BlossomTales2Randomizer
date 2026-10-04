@@ -31,6 +31,7 @@ namespace BlossomTales2.Randomizer.mm
         public bool HasKeys => Items.ContainsKey(ItemType.Gold_Key);
         public bool HasTreeSeeds => Items.ContainsKey(ItemType.TreeSeed);
         public bool HasHeartNecklace => Items.ContainsKey(ItemType.HeartNecklace);
+        public bool Has3DongeonKeys => Items.ContainsKey(ItemType.KeyPiece1) && Items.ContainsKey(ItemType.KeyPiece2) && Items.ContainsKey(ItemType.KeyPiece3);
 
         public bool CanOpenNoteDoor => HasInstrument && Items.ContainsKey(ItemType.OpenSesame);
         public bool CanWakeUpPeople => HasInstrument && Items.ContainsKey(ItemType.WakeUp);
