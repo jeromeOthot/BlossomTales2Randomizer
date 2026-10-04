@@ -31,6 +31,8 @@ namespace BlossomTales2.Randomizer.mm
         public bool HasKeys => Items.ContainsKey(ItemType.Gold_Key);
         public bool HasTreeSeeds => Items.ContainsKey(ItemType.TreeSeed);
         public bool HasHeartNecklace => Items.ContainsKey(ItemType.HeartNecklace);
+        public bool HasBlueGem =>  Items.ContainsKey(ItemType.BlueGem);
+        public bool HasGreenGem => Items.ContainsKey(ItemType.GreenGem);
         public bool Has3DongeonKeys => Items.ContainsKey(ItemType.KeyPiece1) && Items.ContainsKey(ItemType.KeyPiece2) && Items.ContainsKey(ItemType.KeyPiece3);
 
         public bool CanOpenNoteDoor => HasInstrument && Items.ContainsKey(ItemType.OpenSesame);
@@ -59,6 +61,7 @@ namespace BlossomTales2.Randomizer.mm
         public bool CanCutPegs => Items.TryGetValue(ItemType.Sword, out int swordLevel) && swordLevel >= 2;
 
         public bool CanSwitchLevers => HasSword || HasGrappleHook || HasBoomerang || HasBow;
+        public bool CanHitWaterLevers => HasSword;
 
         public bool CanCollectAllFishes => true;
 
