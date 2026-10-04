@@ -10,6 +10,8 @@ namespace BlossomTales2.Randomizer.mm
                                                                        && inventory.HasFishingRod
                                                                        && (inventory.HasBombs || inventory.HasFlipper);
 
+        private Predicate<Inventory> CanAccessMorklaBoss =>  inventory => inventory.CanDoDamage && inventory.HasFlipper && inventory.CanHitWaterLevers && inventory.HasBlueGem &&  inventory.HasGreenGem;
+
         public MorklaDungeon(World world) : base("Morkla", world)
         {
             Locations = new List<Location>()
@@ -68,11 +70,11 @@ namespace BlossomTales2.Randomizer.mm
                     ItemType.KeyPiece1),
                 new Location(new LocationId("morkla-octopus.tmx", "BossOctopus", Vector3.Zero),
                     "Octopus Boss Reward",
-                    inventory => inventory.CanDoDamage && inventory.HasFlipper && inventory.CanHitWaterLevers && inventory.HasBlueGem &&  inventory.HasGreenGem,
+                    inventory => CanAccessMorklaBoss(inventory),
                     ItemType.HeartQ_4),
                 new Location(new LocationId("morkla-octopus.tmx", "Chest", new Vector3(896f, 0f, 624f)),
                     "Octopus Boss Chest",
-                    inventory => inventory.CanDoDamage && inventory.HasFlipper && inventory.CanHitWaterLevers && inventory.HasBlueGem &&  inventory.HasGreenGem,
+                    inventory => CanAccessMorklaBoss(inventory),
                     ItemType.KeyPiece1),
             };
         }
