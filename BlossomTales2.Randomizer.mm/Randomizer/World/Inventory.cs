@@ -42,7 +42,6 @@ namespace BlossomTales2.Randomizer.mm
         public bool  HasBottle => Items.ContainsKey(ItemType.Jar_Empty);
         public bool  HasGhostPotion => Items.ContainsKey(ItemType.Jar_Ghost);
 
-        public bool HasPlantedAllSeeds => Items.TryGetValue(ItemType.PlantedTrees, out int count) && count >= 5;
         public bool HasCollectedAllHoneycombs => Items.TryGetValue(ItemType.Honeycomb, out int count) && count >= 10;
         public bool CanLiftMasterSword => Items.TryGetValue(ItemType.HeartQ_4, out int fullHeartCount) && Items.TryGetValue(ItemType.HeartQ_1, out int quarterHeartCount) && fullHeartCount + quarterHeartCount/4 >= 7;
         //todo

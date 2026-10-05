@@ -372,9 +372,9 @@ namespace BlossomTales2.Randomizer.mm
                 { new LocationId("overworld-19x17.tmx", "queenBee", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.BeeMedallion) }, //accès nord && honeycomb == 10
                 { new LocationId("overworld-19x18-flowerShop.tmx", "flowerShop", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.HeartQ_1) }, //accès ouest && accès jungle && accès canyon && accès dark && accès labyrinthe
                 { new LocationId(string.Empty, "frog_statue_award", Vector3.Zero), new ItemData(ItemType.HeartQ_1) }, //accès jungle && bomb && flipper
-                { new LocationId(string.Empty, "bunny_statue_award", Vector3.Zero), new ItemData(ItemType.HeartQ_1) }, //accès canyon + yoyo
+                { new LocationId(string.Empty, "lizard_statue_award", Vector3.Zero), new ItemData(ItemType.HeartQ_1) }, //accès canyon + yoyo
                 { new LocationId(string.Empty, "chipmunk_statue_award", Vector3.Zero), new ItemData(ItemType.HeartQ_1) }, //accès est && accès nord && accès ouest && bombes && flipper
-                { new LocationId(string.Empty, "lizard_statue_award", Vector3.Zero), new ItemData(ItemType.HeartQ_1) }, //accès dark
+                { new LocationId(string.Empty, "bunny_statue_award", Vector3.Zero), new ItemData(ItemType.HeartQ_1) }, //accès dark
 
                 //minigames
                 { new LocationId("overworld-19x19.tmx", "raceGame", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.Crystal) }, //accès ouest

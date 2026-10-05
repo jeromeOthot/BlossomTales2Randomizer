@@ -36,6 +36,7 @@ namespace BlossomTales2.Randomizer.mm
         public Blockburg Blockburg { get; }
         public LabyrinthBack LabyrinthBack { get; }
         public MinotaurCastle MinotaurCastle { get; }
+        public GlobalRegion Global { get; }
 
         public World()
         {
@@ -67,6 +68,7 @@ namespace BlossomTales2.Randomizer.mm
             Blockburg = new Blockburg(this);
             LabyrinthBack = new LabyrinthBack(this);
             MinotaurCastle = new MinotaurCastle(this);
+            Global = new GlobalRegion(this);
 
             Regions = new List<Region>
             {
@@ -98,6 +100,7 @@ namespace BlossomTales2.Randomizer.mm
                 Blockburg,
                 LabyrinthBack,
                 MinotaurCastle,
+                Global
             };
         }
 

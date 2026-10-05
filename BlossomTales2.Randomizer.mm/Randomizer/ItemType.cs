@@ -69,11 +69,5 @@ namespace BlossomTales2.Randomizer.mm
         GrandpaHint,
         //Logic flags
         MorklaBoss,
-        PlantedTrees,
-        ChipmunkStatue,
-        FrogStatue,
-        BunnyStatue,
-        LizardStatue,
-        //end flags
     }
 }

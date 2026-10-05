@@ -67,15 +67,6 @@ namespace BlossomTales2.Randomizer.mm
                     "Ledge Chest",
                     _ => true,
                     ItemType.GoldCoin),
-                //Tracking only
-                new Location(new LocationId("overworld-21x21.tmx", "chipmunkStatue", Vector3.Zero), //need an ID?
-                    "Chipmunk Statue",
-                    inventory => inventory.HasFlipper,
-                    ItemType.ChipmunkStatue),
-                new Location(new LocationId("overworld-21x20.tmx", "seedling", Vector3.Zero), //need an ID?
-                    "Seed soil",
-                    inventory => inventory.HasTreeSeeds,
-                    ItemType.PlantedTrees),
             };
         }
     }

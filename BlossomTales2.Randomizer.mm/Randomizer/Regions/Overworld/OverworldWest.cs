@@ -56,23 +56,6 @@ namespace BlossomTales2.Randomizer.mm
                     "Hidden Trees Chest",
                     _ => true,
                     ItemType.Honeycomb),
-                //Tracking only
-                new Location(new LocationId("overworld-19x20.tmx", "chipmunkStatue", Vector3.Zero),
-                    "Chipmunk Statue",
-                    _ => true,
-                    ItemType.ChipmunkStatue),
-                new Location(new LocationId("overworld-20x19.tmx", "chipmunkStatue", Vector3.Zero),
-                    "Chipmunk Statue",
-                    _ => true,
-                    ItemType.ChipmunkStatue),
-                new Location(new LocationId("overworld-18x18.tmx", "seedling", Vector3.Zero),
-                    "Minotaur Gate Seed soil",
-                    _ => true,
-                    ItemType.PlantedTrees),
-                new Location(new LocationId("overworld-18x20.tmx", "seedling", Vector3.Zero),
-                    "Southwest Seed soil",
-                    _ => true,
-                    ItemType.PlantedTrees),
             };
         }
     }
