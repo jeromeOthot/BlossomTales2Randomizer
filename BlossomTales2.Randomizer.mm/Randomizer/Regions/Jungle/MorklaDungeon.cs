@@ -6,9 +6,9 @@ namespace BlossomTales2.Randomizer.mm
 {
     public class MorklaDungeon : Region
     {
-        public override Predicate<Inventory> CanAccess => inventory => World.JungleBack.CanAccess(inventory)
-                                                                       && inventory.HasFishingRod
-                                                                       && (inventory.HasBombs || inventory.HasFlipper);
+        public override bool CanAccess(Inventory inventory) => World.JungleBack.CanAccess(inventory)
+                                                               && inventory.HasFishingRod
+                                                               && (inventory.HasBombs || inventory.HasFlipper);
 
         private Predicate<Inventory> CanAccessMorklaBoss =>  inventory => inventory.CanDoDamage && inventory.HasFlipper && inventory.CanHitWaterLevers && inventory.HasBlueGem &&  inventory.HasGreenGem;
 

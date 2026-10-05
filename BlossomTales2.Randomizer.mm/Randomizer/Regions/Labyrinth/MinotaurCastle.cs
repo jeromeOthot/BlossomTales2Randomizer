@@ -6,7 +6,7 @@ namespace BlossomTales2.Randomizer.mm
 {
     public class MinotaurCastle : Region
     {
-        public override Predicate<Inventory> CanAccess => inventory => World.LabyrinthBack.CanAccess(inventory);
+        public override bool CanAccess(Inventory inventory) => World.LabyrinthBack.CanAccess(inventory);
 
         private Predicate<Inventory> CanAccessCastle2 => inventory => CanAccess(inventory) && inventory.HasRexTeleporter && inventory.HasGrappleHook && inventory.CanSwitchLevers && inventory.HasBow;
         private Predicate<Inventory> CanAccessCastle3 => inventory => CanAccess(inventory) && inventory.HasKeys;

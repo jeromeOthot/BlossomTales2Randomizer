@@ -10,7 +10,7 @@ namespace BlossomTales2.Randomizer.mm.Canyon
 
     public class CanyonTempleRegion : Region
     {
-        public override Predicate<Inventory> CanAccess => inventory => World.CanyonNorth.CanAccess(inventory) && inventory.CanOpenNoteDoor;
+        public override bool CanAccess(Inventory inventory) => World.CanyonNorth.CanAccess(inventory) && inventory.CanOpenNoteDoor;
 
         private Predicate<Inventory> CanAccessTemple2 =>  inventory => CanAccess(inventory) && inventory.HasKeys;
         private Predicate<Inventory> CanAccessTemple3 => inventory => CanAccessTemple2(inventory) && inventory.CanSwitchLevers && inventory.HasKeys && inventory.CanDoDamage;

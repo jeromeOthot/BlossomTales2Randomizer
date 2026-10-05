@@ -8,7 +8,7 @@ namespace BlossomTales2.Randomizer.mm
         public string Name { get; private set; }
         //public List<Region> Regions { get; private set; } = new List<Region>();
         public List<Location> Locations { get; set; } = new List<Location>();
-        public abstract Predicate<Inventory> CanAccess { get; }
+        public abstract bool CanAccess(Inventory inventory);
 
         protected World World { get ; private set; }
 
@@ -17,6 +17,7 @@ namespace BlossomTales2.Randomizer.mm
             Name = name;
             World = world;
         }
+
 
         public bool TryCollectItems(Inventory inventory)
         {
