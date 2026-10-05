@@ -27,6 +27,7 @@ namespace BlossomTales2.Randomizer.mm
         public CanyonIslandRegion CanyonIsland { get; }
         public CanyonSteppesNorthRegion CanyonSteppesNorth { get; }
         public CanyonSteppesSouthRegion CanyonSteppesSouth { get; }
+        public CanyonTempleRegion  CanyonTemple { get; }
         public DarkWoodsFront DarkWoodsFront { get; }
         public Monsterton Monsterton { get; }
         public DarkWoodsBack DarkWoodsBack { get; }
@@ -35,6 +36,7 @@ namespace BlossomTales2.Randomizer.mm
         public Blockburg Blockburg { get; }
         public LabyrinthBack LabyrinthBack { get; }
         public MinotaurCastle MinotaurCastle { get; }
+        public GlobalRegion Global { get; }
 
         public World()
         {
@@ -57,6 +59,7 @@ namespace BlossomTales2.Randomizer.mm
             CanyonVillage = new CanyonVillageRegion(this);
             CanyonSteppesNorth = new CanyonSteppesNorthRegion(this);
             CanyonSteppesSouth = new CanyonSteppesSouthRegion(this);
+            CanyonTemple = new CanyonTempleRegion(this);
             DarkWoodsFront = new DarkWoodsFront(this);
             Monsterton = new Monsterton(this);
             DarkWoodsBack = new DarkWoodsBack(this);
@@ -65,6 +68,7 @@ namespace BlossomTales2.Randomizer.mm
             Blockburg = new Blockburg(this);
             LabyrinthBack = new LabyrinthBack(this);
             MinotaurCastle = new MinotaurCastle(this);
+            Global = new GlobalRegion(this);
 
             Regions = new List<Region>
             {
@@ -86,6 +90,8 @@ namespace BlossomTales2.Randomizer.mm
                 CanyonIsland,
                 CanyonVillage,
                 CanyonSteppesNorth,
+                CanyonSteppesSouth,
+                CanyonTemple,
                 DarkWoodsFront,
                 Monsterton,
                 DarkWoodsBack,
@@ -94,6 +100,7 @@ namespace BlossomTales2.Randomizer.mm
                 Blockburg,
                 LabyrinthBack,
                 MinotaurCastle,
+                Global
             };
         }
 

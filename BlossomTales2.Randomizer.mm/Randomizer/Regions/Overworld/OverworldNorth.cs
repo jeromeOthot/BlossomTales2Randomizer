@@ -6,10 +6,10 @@ namespace BlossomTales2.Randomizer.mm
 {
     public class OverworldNorth : Region
     {
-        public override Predicate<Inventory> CanAccess => inventory => inventory.HasBoomerang
-                                                                       || inventory.HasGrappleHook &&
-                                                                       (inventory.HasBombs || inventory.HasFlipper ||
-                                                                        inventory.CanCutPegs);
+        public override bool CanAccess(Inventory inventory) => inventory.HasBoomerang
+                                                               || inventory.HasGrappleHook &&
+                                                               (inventory.HasBombs || inventory.HasFlipper ||
+                                                                inventory.CanCutPegs);
 
         public OverworldNorth(World world) : base("Northern Overworld", world)
         {
@@ -105,7 +105,7 @@ namespace BlossomTales2.Randomizer.mm
                 //Long side quests
                 new Location(new LocationId("overworld-19x16.tmx", "treeLordReward", Vector3.Zero),
                     "Tree Lord Reward",
-                    inventory => inventory.HasPlantedAllSeeds,
+                    inventory => World.OverworldEast.CanAccess(inventory) && World.OverworldWest.CanAccess(inventory) && World.OverworldNorth.CanAccess(inventory) && inventory.HasGrappleHook,
                     ItemType.HeartQ_1),
                 new Location(new LocationId("overworld-19x17.tmx", "queenBee", Vector3.Zero),
                     "Tree Lord Reward",

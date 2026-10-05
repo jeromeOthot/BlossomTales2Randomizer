@@ -6,7 +6,7 @@ namespace BlossomTales2.Randomizer.mm
 {
     public class LabyrinthFront : Region
     {
-        public override Predicate<Inventory> CanAccess => inventory => World.OverworldWest.CanAccess(inventory) && inventory.Has3DongeonKeys;
+        public override bool CanAccess(Inventory inventory) => World.OverworldWest.CanAccess(inventory) && inventory.Has3DongeonKeys;
 
         //accès labyrinthe 17x16: accès labyrinthe 18x16 && teleporter && leviers
         public Predicate<Inventory> CanAccessLabyrinthe17x16 => inventory => CanAccess(inventory) && inventory.HasRexTeleporter && inventory.CanSwitchLevers;

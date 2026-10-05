@@ -22,7 +22,7 @@ namespace BlossomTales2.Randomizer.mm
             do
             {
                 hasCollectedItem = world.TryCollectItems(inventory);
-                if (inventory.HasBeatenMinotaurKing)
+                if (world.MinotaurCastle.CanAccessMinotaurBoss(inventory))
                     return true;
 
             } while (hasCollectedItem);

@@ -6,7 +6,7 @@ namespace BlossomTales2.Randomizer.mm
 {
     public class BlossomCemetary : Region
     {
-        public override Predicate<Inventory> CanAccess => _ => true;
+        public override bool CanAccess(Inventory inventory) => true;
 
         public BlossomCemetary(World world) : base("BlossomCemetary", world)
         {
