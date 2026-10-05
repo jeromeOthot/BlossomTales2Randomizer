@@ -8,9 +8,9 @@ namespace BlossomTales2.Randomizer.mm
     {
         public override bool CanAccess(Inventory inventory) => World.DarkWoodsBack.CanAccess(inventory) && inventory.HasBoomerang;
 
-        private Predicate<Inventory> CanAccessMansion2 => inventory => CanAccess(inventory) && inventory.HasKeys && inventory.CanDoDamage;
-        private Predicate<Inventory> CanAccessMansion3 => inventory => CanAccessMansion2(inventory) && inventory.HasRexTeleporter;
-        private Predicate<Inventory> CanAccessMansionBoss => inventory => CanAccessMansion3(inventory) && inventory.HasKeys /* x2 */  && inventory.CanDoDamage && inventory.HasRexTeleporter;
+        private bool CanAccessMansion2(Inventory inventory) => CanAccess(inventory) && inventory.HasKeys && inventory.CanDoDamage;
+        private bool CanAccessMansion3(Inventory inventory) => CanAccessMansion2(inventory) && inventory.HasRexTeleporter;
+        private bool CanAccessMansionBoss(Inventory inventory) => CanAccessMansion3(inventory) && inventory.HasKeys /* x2 */  && inventory.CanDoDamage && inventory.HasRexTeleporter;
 
         public MansionDungeon(World world) : base("Mansion", world)
         {

@@ -10,7 +10,7 @@ namespace BlossomTales2.Randomizer.mm
                                                                && inventory.HasFishingRod
                                                                && (inventory.HasBombs || inventory.HasFlipper);
 
-        private Predicate<Inventory> CanAccessMorklaBoss =>  inventory => inventory.CanDoDamage && inventory.HasFlipper && inventory.CanHitWaterLevers && inventory.HasBlueGem &&  inventory.HasGreenGem;
+        private bool CanAccessMorklaBoss(Inventory inventory) => inventory.CanDoDamage && inventory.HasFlipper && inventory.CanHitWaterLevers && inventory.HasBlueGem &&  inventory.HasGreenGem;
 
         public MorklaDungeon(World world) : base("Morkla", world)
         {

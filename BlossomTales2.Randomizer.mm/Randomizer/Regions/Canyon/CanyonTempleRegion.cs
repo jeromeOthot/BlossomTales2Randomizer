@@ -12,9 +12,9 @@ namespace BlossomTales2.Randomizer.mm.Canyon
     {
         public override bool CanAccess(Inventory inventory) => World.CanyonNorth.CanAccess(inventory) && inventory.CanOpenNoteDoor;
 
-        private Predicate<Inventory> CanAccessTemple2 =>  inventory => CanAccess(inventory) && inventory.HasKeys;
-        private Predicate<Inventory> CanAccessTemple3 => inventory => CanAccessTemple2(inventory) && inventory.CanSwitchLevers && inventory.HasKeys && inventory.CanDoDamage;
-        private Predicate<Inventory> CanAccessTemple4 => inventory => CanAccessTemple3(inventory) && inventory.HasGrappleHook;
+        private bool CanAccessTemple2(Inventory inventory) => CanAccess(inventory) && inventory.HasKeys;
+        private bool CanAccessTemple3(Inventory inventory) => CanAccessTemple2(inventory) && inventory.CanSwitchLevers && inventory.HasKeys && inventory.CanDoDamage;
+        private bool CanAccessTemple4(Inventory inventory) => CanAccessTemple3(inventory) && inventory.HasGrappleHook;
 
         public CanyonTempleRegion(World world) : base("CanyonTemple", world)
         {
