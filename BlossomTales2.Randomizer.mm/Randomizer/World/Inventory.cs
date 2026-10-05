@@ -12,6 +12,7 @@ namespace BlossomTales2.Randomizer.mm
 
         public bool HasSword => Items.ContainsKey(ItemType.Sword);
         public bool HasSwordBeams => Items.TryGetValue(ItemType.Sword, out int swordLevel) && swordLevel >= 4;
+        public bool HasMirrorShield => Items.TryGetValue(ItemType.Shield, out int shieldLevel) && shieldLevel >= 3;
         public bool HasTorch => Items.ContainsKey(ItemType.Torch);
         public bool HasBombs => Items.ContainsKey(ItemType.Bombs);
         public bool HasFlipper => Items.ContainsKey(ItemType.Flippers);
