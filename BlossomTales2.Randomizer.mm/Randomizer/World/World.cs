@@ -6,7 +6,6 @@ namespace BlossomTales2.Randomizer.mm
     public class World
     {
         public List<Region> Regions { get; }
-        public Inventory Inventory { get; set; }
 
         public Blossomdale Blossomdale { get; }
         public BlossomCemetary BlossomdaleCemetary { get; }
@@ -103,6 +102,16 @@ namespace BlossomTales2.Randomizer.mm
                 Global
             };
         }
+
+        public bool CanAccessAnyOverworld(Inventory inventory) => true;
+        public bool CanAccessAnyJungle(Inventory inventory) => JungleFront.CanAccess(inventory) || Anchortown.CanAccess(inventory) || JungleBack.CanAccess(inventory)
+                                                               ||  JungleIsland.CanAccess(inventory) || JungleNorthEast.CanAccess(inventory);
+        public bool CanAccesJungleBeach(Inventory inventory) => JungleBack.CanAccess(inventory) || JungleIsland.CanAccess(inventory);
+        public bool CanAccessAnyCanyon(Inventory inventory) => CanyonNorth.CanAccess(inventory) || CanyonSouthWest.CanAccess(inventory) ||  CanyonSouthEast.CanAccess(inventory)
+                                                            ||  CanyonIsland.CanAccess(inventory) || CanyonVillage.CanAccess(inventory)
+                                                            ||  CanyonSteppesNorth.CanAccess(inventory) ||  CanyonSteppesSouth.CanAccess(inventory);
+        public bool CanAccessAnyDarkForest(Inventory inventory) => DarkWoodsFront.CanAccess(inventory) ||  DarkWoodsBack.CanAccess(inventory) || Monsterton.CanAccess(inventory);
+        public bool CanAccessAnyLabyrinth(Inventory inventory) => LabyrinthFront.CanAccess(inventory) ||  LabyrinthBack.CanAccess(inventory) || Blockburg.CanAccess(inventory);
 
         public bool TryCollectItems(Inventory inventory)
         {

@@ -68,7 +68,9 @@ namespace BlossomTales2.Randomizer.mm
                 //Traders
                 new Location(new LocationId("sandCastle.tmx", "Chest", new Vector3(384f, 0f, 256f)),
                     "Sand Castle Trader Chest",
-                    _ => true,
+                    inventory => inventory.CanCollectIngredient(EquipableItem.IngredientList.Spikeshell)
+                                 && inventory.CanCollectIngredient(EquipableItem.IngredientList.Clam)
+                                 && inventory.CanCollectIngredient(EquipableItem.IngredientList.Snailshell),
                     ItemType.HeartQ_1),
                 //Chests
                 new Location(new LocationId("jungles-22x20.tmx", "Chest_Small", new Vector3(1764f, 0f, 1896f)),

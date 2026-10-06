@@ -11,6 +11,30 @@ namespace BlossomTales2.Randomizer.mm
                                                                (inventory.HasBombs || inventory.HasFlipper ||
                                                                 inventory.CanCutPegs);
 
+        private bool CanDoFishTrade1(Inventory inventory) =>  inventory.CanCollectIngredient(EquipableItem.IngredientList.Fish1)
+                                                         && inventory.CanCollectIngredient(EquipableItem.IngredientList.Fish3)
+                                                         && inventory.CanCollectIngredient(EquipableItem.IngredientList.Fish2);
+        private bool CanDoFishTrade2(Inventory inventory) =>  CanDoFishTrade1(inventory)
+                                                              && inventory.CanCollectIngredient(EquipableItem.IngredientList.Fish1)
+                                                              && inventory.CanCollectIngredient(EquipableItem.IngredientList.Fish3)
+                                                              && inventory.CanCollectIngredient(EquipableItem.IngredientList.Fish5);
+        private bool CanDoFishTrade3(Inventory inventory) =>  CanDoFishTrade2(inventory)
+                                                              && inventory.CanCollectIngredient(EquipableItem.IngredientList.Fish5)
+                                                              && inventory.CanCollectIngredient(EquipableItem.IngredientList.Fish4)
+                                                              && inventory.CanCollectIngredient(EquipableItem.IngredientList.Fish2);
+        private bool CanDoFishTrade4(Inventory inventory) =>  CanDoFishTrade3(inventory)
+                                                              && inventory.CanCollectIngredient(EquipableItem.IngredientList.Fish8)
+                                                              && inventory.CanCollectIngredient(EquipableItem.IngredientList.Fish6)
+                                                              && inventory.CanCollectIngredient(EquipableItem.IngredientList.Fish4);
+        private bool CanDoFishTrade5(Inventory inventory) =>  CanDoFishTrade4(inventory)
+                                                              && inventory.CanCollectIngredient(EquipableItem.IngredientList.Fish5)
+                                                              && inventory.CanCollectIngredient(EquipableItem.IngredientList.Fish6)
+                                                              && inventory.CanCollectIngredient(EquipableItem.IngredientList.Fish7);
+        private bool CanDoFishTrade6(Inventory inventory) =>  CanDoFishTrade5(inventory)
+                                                              && inventory.CanCollectIngredient(EquipableItem.IngredientList.Fish8)
+                                                              && inventory.CanCollectIngredient(EquipableItem.IngredientList.Fish9)
+                                                              && inventory.CanCollectIngredient(EquipableItem.IngredientList.Fish10);
+
         public OverworldNorth(World world) : base("Northern Overworld", world)
         {
             Locations = new List<Location>
@@ -105,10 +129,11 @@ namespace BlossomTales2.Randomizer.mm
                 //Long side quests
                 new Location(new LocationId("overworld-19x16.tmx", "treeLordReward", Vector3.Zero),
                     "Tree Lord Reward",
-                    inventory => World.OverworldEast.CanAccess(inventory) && World.OverworldWest.CanAccess(inventory) && World.OverworldNorth.CanAccess(inventory) && inventory.HasGrappleHook,
+                    inventory => inventory.HasTreeSeeds && World.OverworldEast.CanAccess(inventory) && World.OverworldWest.CanAccess(inventory)
+                                 && World.OverworldNorth.CanAccess(inventory) && inventory.HasGrappleHook,
                     ItemType.HeartQ_1),
                 new Location(new LocationId("overworld-19x17.tmx", "queenBee", Vector3.Zero),
-                    "Tree Lord Reward",
+                    "Queen Bee Reward",
                     inventory => inventory.HasCollectedAllHoneycombs,
                     ItemType.BeeMedallion),
                 //bardes
@@ -119,27 +144,27 @@ namespace BlossomTales2.Randomizer.mm
                 //Traders
                 new Location(new LocationId(string.Empty, "traderFish20", Vector3.Zero),
                     "Fish Trade 1",
-                    inventory => true, //Fish access
+                    inventory => CanDoFishTrade1(inventory),
                     ItemType.Jar_SlowTime),
                 new Location(new LocationId(string.Empty, "traderFish21", Vector3.Zero),
                     "Fish Trade 2",
-                    inventory => true, //Fish access
+                    inventory => CanDoFishTrade2(inventory),
                     ItemType.Five_Gems),
                 new Location(new LocationId(string.Empty, "traderFish22", Vector3.Zero),
                     "Fish Trade 3",
-                    inventory => true, //Fish access
+                    inventory => CanDoFishTrade3(inventory),
                     ItemType.HeartQ_1),
                 new Location(new LocationId(string.Empty, "traderFish23", Vector3.Zero),
                     "Fish Trade 4",
-                    inventory => true, //Fish access
+                    inventory => CanDoFishTrade4(inventory),
                     ItemType.Five_Gems),
                 new Location(new LocationId(string.Empty, "traderFish24", Vector3.Zero),
                     "Fish Trade 5",
-                    inventory => true, //Fish access
+                    inventory => CanDoFishTrade5(inventory),
                     ItemType.Crystal),
                 new Location(new LocationId(string.Empty, "traderFish25", Vector3.Zero),
                     "Fish Trade 6",
-                    inventory => true, //Fish access
+                    inventory => CanDoFishTrade6(inventory),
                     ItemType.Five_Gems),
                 //mausoleum
                 new Location(new LocationId("overworld-20x16-combat.tmx", "Chest_Small", new Vector3(416f, 0f, 2084f)),
