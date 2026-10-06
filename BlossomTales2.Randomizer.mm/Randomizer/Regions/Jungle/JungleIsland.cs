@@ -39,7 +39,9 @@ namespace BlossomTales2.Randomizer.mm
                 //Traders
                 new Location(new LocationId("overworld-21x20.tmx", "Chest_Small", new Vector3(2096f, 0f, 2324f)),
                     "Lighthouse Trader Buried Chest",
-                    inventory => inventory.HasShovel, //TODO: Fishes
+                    inventory => inventory.HasShovel && inventory.CanCollectIngredient(EquipableItem.IngredientList.Fish7)
+                                                     && inventory.CanCollectIngredient(EquipableItem.IngredientList.Fish3)
+                                                     && inventory.CanCollectIngredient(EquipableItem.IngredientList.Fish8),
                     ItemType.HeartQ_1),
                 //Chests
                 new Location(new LocationId("jungles-21x22.tmx", "Chest_Small", new Vector3(852f, 0f, 684f)),
