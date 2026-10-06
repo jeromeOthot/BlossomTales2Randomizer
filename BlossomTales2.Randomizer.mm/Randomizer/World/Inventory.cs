@@ -5,6 +5,12 @@ namespace BlossomTales2.Randomizer.mm
     public class Inventory
     {
         public Dictionary<ItemType, int> Items { get; set; } =  new Dictionary<ItemType, int>();
+        private World _world;
+
+        public Inventory(World world)
+        {
+            _world = world;
+        }
 
         //TODO: Real endgame flag.
         public bool HasBeatenMinotaurKing => HasBombs && HasSword && HasFlipper && HasTorch && HasGrappleHook &&
@@ -59,7 +65,7 @@ namespace BlossomTales2.Randomizer.mm
         public bool CanDoDamage => HasSword || HasBombs || HasBow;
 
         public bool CanCutPegs => Items.TryGetValue(ItemType.Sword, out int swordLevel) && swordLevel >= 2;
-
+        public bool CanCutBushes => HasSword || HasBoomerang || HasGrappleHook || HasBombs || HasTorch || HasShovel;
         public bool CanSwitchLevers => HasSword || HasGrappleHook || HasBoomerang || HasBow;
         public bool CanHitWaterLevers => HasSword;
 
@@ -69,7 +75,52 @@ namespace BlossomTales2.Randomizer.mm
         {
             switch (ingredient)
             {
-                case EquipableItem.IngredientList.Apple: return true;
+                case EquipableItem.IngredientList.Mushroom: return _world.CanAccessAnyOverworld(this);
+                case EquipableItem.IngredientList.Clover: return _world.CanAccessAnyOverworld(this);
+                case EquipableItem.IngredientList.Lily: return _world.CanAccessAnyDarkForest(this);
+                case EquipableItem.IngredientList.RootWeed: return _world.CanAccessAnyDarkForest(this);
+                case EquipableItem.IngredientList.MoonFlower: return _world.CanAccessAnyDarkForest(this);
+                case EquipableItem.IngredientList.Apple: return _world.CanAccessAnyOverworld(this);
+                case EquipableItem.IngredientList.Tulip: return _world.CanAccessAnyOverworld(this);
+                case EquipableItem.IngredientList.Toadstool: return _world.CanAccessAnyJungle(this);
+                case EquipableItem.IngredientList.Willow: return _world.CanAccessAnyJungle(this);
+                case EquipableItem.IngredientList.Skyblossom: return _world.CanAccessAnyJungle(this);
+                case EquipableItem.IngredientList.CanyonWisp: return _world.CanAccessAnyJungle(this);
+                case EquipableItem.IngredientList.Orange: return _world.CanAccessAnyJungle(this);
+                case EquipableItem.IngredientList.Spikeshell: return _world.CanAccesJungleBeach(this);
+                case EquipableItem.IngredientList.Clam: return _world.CanAccesJungleBeach(this);
+                case EquipableItem.IngredientList.Snailshell: return _world.CanAccesJungleBeach(this);
+                case EquipableItem.IngredientList.Seaweed: return _world.CanAccesJungleBeach(this) || HasFishingRod;
+                case EquipableItem.IngredientList.Starfish: return _world.CanAccesJungleBeach(this);
+                case EquipableItem.IngredientList.Melon: return _world.CanAccessAnyDarkForest(this);
+                case EquipableItem.IngredientList.Chrysanthemum: return _world.CanAccessAnyOverworld(this);
+                case EquipableItem.IngredientList.Aster: return _world.CanAccessAnyDarkForest(this) && CanCutBushes;
+                case EquipableItem.IngredientList.Sunkiss: return _world.CanAccessAnyCanyon(this);
+                case EquipableItem.IngredientList.Jojoba: return _world.CanAccessAnyCanyon(this);
+                case EquipableItem.IngredientList.DesertPuff: return _world.CanAccessAnyCanyon(this);
+                case EquipableItem.IngredientList.WaterDrop: return _world.CanAccessAnyCanyon(this);
+                case EquipableItem.IngredientList.FlameTongue: return _world.CanAccessAnyCanyon(this);
+                case EquipableItem.IngredientList.CactusRose: return _world.CanAccessAnyCanyon(this);
+                case EquipableItem.IngredientList.PurpleMushroom: return _world.CanAccessAnyDarkForest(this);
+                case EquipableItem.IngredientList.RedMushroom: return _world.CanAccessAnyDarkForest(this);
+                case EquipableItem.IngredientList.GreenMushroom: return _world.CanAccessAnyDarkForest(this);
+                case EquipableItem.IngredientList.Guts: return CanDoDamage;
+                case EquipableItem.IngredientList.Poinsettia: return _world.CanAccessAnyLabyrinth(this);
+                case EquipableItem.IngredientList.Bellflower: return _world.CanAccessAnyLabyrinth(this);
+                case EquipableItem.IngredientList.Daisy: return _world.CanAccessAnyLabyrinth(this);
+                case EquipableItem.IngredientList.Carambola: return _world.CanAccessAnyLabyrinth(this);
+                case EquipableItem.IngredientList.Crab: return HasFishingRod && (_world.CanAccessAnyCanyon(this) || _world.MorklaDungeon.CanAccess(this));
+                case EquipableItem.IngredientList.Fishbones: return HasFishingRod;
+                case EquipableItem.IngredientList.Fish1: return HasFishingRod && (_world.OverworldNorth.CanAccess(this) || _world.CanAccessAnyOverworld(this) || _world.CanAccessAnyLabyrinth(this));
+                case EquipableItem.IngredientList.Fish2: return HasFishingRod && (_world.OverworldNorth.CanAccess(this) || _world.CanAccessAnyOverworld(this));
+                case EquipableItem.IngredientList.Fish3: return HasFishingRod && (_world.OverworldNorth.CanAccess(this) || _world.CanAccessAnyOverworld(this) || _world.CanAccessAnyJungle(this) );
+                case EquipableItem.IngredientList.Fish4: return HasFishingRod && (_world.OverworldNorth.CanAccess(this) || _world.CanAccessAnyCanyon(this) || _world.CanAccessAnyDarkForest(this));
+                case EquipableItem.IngredientList.Fish5: return HasFishingRod && (_world.OverworldNorth.CanAccess(this) || _world.CanAccessAnyDarkForest(this));
+                case EquipableItem.IngredientList.Fish6: return HasFishingRod && (_world.OverworldNorth.CanAccess(this) || _world.CanAccessAnyDarkForest(this) || _world.CanAccessAnyLabyrinth(this));
+                case EquipableItem.IngredientList.Fish7: return HasFishingRod && (_world.OverworldNorth.CanAccess(this) || _world.CanAccessAnyJungle(this));
+                case EquipableItem.IngredientList.Fish8: return HasFishingRod && (_world.OverworldNorth.CanAccess(this) || _world.CanAccessAnyJungle(this) || _world.CanAccessAnyCanyon(this));
+                case EquipableItem.IngredientList.Fish9: return HasFishingRod && (_world.OverworldNorth.CanAccess(this) || _world.CanAccessAnyCanyon(this));
+                case EquipableItem.IngredientList.Fish10: return HasFishingRod && (_world.OverworldNorth.CanAccess(this) || _world.CanAccessAnyLabyrinth(this));
                 default: return true;
             }
         }

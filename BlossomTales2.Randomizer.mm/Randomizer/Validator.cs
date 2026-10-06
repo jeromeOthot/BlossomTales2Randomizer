@@ -6,8 +6,8 @@ namespace BlossomTales2.Randomizer.mm
     {
         public static bool ValidateSeed(Dictionary<LocationId, ItemData> randomizedLocations)
         {
-            World world = new World();//WorldFactory.Create();
-            Inventory inventory = new Inventory();
+            World world = new World();
+            Inventory inventory = new Inventory(world);
 
             //Populate world
             List<Location> locations = world.CollectLocations();
