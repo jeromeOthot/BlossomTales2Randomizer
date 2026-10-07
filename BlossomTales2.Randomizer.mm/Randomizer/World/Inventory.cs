@@ -132,16 +132,46 @@ namespace BlossomTales2.Randomizer.mm
 
             switch(potionType)
             {
-                case ItemType.Jar_Health: return true;
-                case ItemType.Jar_ReduceCost: return true;
-                case ItemType.Jar_DoubleDamage: return true;
-                case ItemType.Jar_SlowTime: return true;
-                case ItemType.Jar_BubbleShield: return true;
-                case ItemType.Jar_ArmorOrbs: return true;
-                case ItemType.Jar_Resurrection: return true;
-                case ItemType.Jar_Ghost: return true;
-                case ItemType.Jar_Fire: return true;
-                case ItemType.Jar_Speedster: return true;
+                case ItemType.Jar_Health: return CanCollectIngredient(EquipableItem.IngredientList.Apple)
+                                                 && CanCollectIngredient(EquipableItem.IngredientList.Mushroom)
+                                                 && CanCollectIngredient(EquipableItem.IngredientList.Clover)
+                                                 && CanCollectIngredient(EquipableItem.IngredientList.Tulip);
+                case ItemType.Jar_ReduceCost: return CanCollectIngredient(EquipableItem.IngredientList.Toadstool)
+                                                     && CanCollectIngredient(EquipableItem.IngredientList.Fish3)
+                                                     && CanCollectIngredient(EquipableItem.IngredientList.CanyonWisp)
+                                                     && CanCollectIngredient(EquipableItem.IngredientList.Clam);
+                case ItemType.Jar_DoubleDamage: return CanCollectIngredient(EquipableItem.IngredientList.WaterDrop)
+                                                       && CanCollectIngredient(EquipableItem.IngredientList.Willow)
+                                                       && CanCollectIngredient(EquipableItem.IngredientList.Skyblossom)
+                                                       && CanCollectIngredient(EquipableItem.IngredientList.Melon);
+                case ItemType.Jar_SlowTime: return CanCollectIngredient(EquipableItem.IngredientList.RootWeed)
+                                                   && CanCollectIngredient(EquipableItem.IngredientList.Snailshell)
+                                                   && CanCollectIngredient(EquipableItem.IngredientList.RedMushroom)
+                                                   && CanCollectIngredient(EquipableItem.IngredientList.Fish7);
+                case ItemType.Jar_BubbleShield: return CanCollectIngredient(EquipableItem.IngredientList.Bellflower)
+                                                       && CanCollectIngredient(EquipableItem.IngredientList.Carambola)
+                                                       && CanCollectIngredient(EquipableItem.IngredientList.Fish6)
+                                                       && CanCollectIngredient(EquipableItem.IngredientList.Poinsettia);
+                case ItemType.Jar_ArmorOrbs: return CanCollectIngredient(EquipableItem.IngredientList.Fishbones)
+                                                    && CanCollectIngredient(EquipableItem.IngredientList.Spikeshell)
+                                                    && CanCollectIngredient(EquipableItem.IngredientList.Jojoba)
+                                                    && CanCollectIngredient(EquipableItem.IngredientList.Tulip);
+                case ItemType.Jar_Resurrection: return CanCollectIngredient(EquipableItem.IngredientList.Orange)
+                                                       && CanCollectIngredient(EquipableItem.IngredientList.Seaweed)
+                                                       && CanCollectIngredient(EquipableItem.IngredientList.Chrysanthemum)
+                                                       && CanCollectIngredient(EquipableItem.IngredientList.Starfish);
+                case ItemType.Jar_Ghost: return CanCollectIngredient(EquipableItem.IngredientList.MoonFlower)
+                                                && CanCollectIngredient(EquipableItem.IngredientList.Aster)
+                                                && CanCollectIngredient(EquipableItem.IngredientList.PurpleMushroom)
+                                                && CanCollectIngredient(EquipableItem.IngredientList.Fish5);
+                case ItemType.Jar_Fire: return CanCollectIngredient(EquipableItem.IngredientList.Sunkiss)
+                                               && CanCollectIngredient(EquipableItem.IngredientList.Guts)
+                                               && CanCollectIngredient(EquipableItem.IngredientList.FlameTongue)
+                                               && CanCollectIngredient(EquipableItem.IngredientList.Jojoba);
+                case ItemType.Jar_Speedster: return CanCollectIngredient(EquipableItem.IngredientList.Lily)
+                                                    && CanCollectIngredient(EquipableItem.IngredientList.GreenMushroom)
+                                                    && CanCollectIngredient(EquipableItem.IngredientList.Crab)
+                                                    && CanCollectIngredient(EquipableItem.IngredientList.Fish1);
                 default: return false;
             }
         }
