@@ -50,24 +50,24 @@ namespace BlossomTales2.Randomizer.mm.Canyon
                     new Location(
                         new LocationId("overworld-15x22-cave.tmx", "Chest_Small", new Vector3(1216f, 0f, 448f)),
                         "village  west cave chest left",
-                        (inventory) => inventory.CanOpenNoteDoor && inventory.CanActivateBlueSwitch, ItemType.GoldCoin)
+                        (inventory) => inventory.CanOpenNoteDoor && inventory.CanSwitchLevers, ItemType.GoldCoin)
                 }, //accès canyon && ouvrir portes note && levier
                 {
                     new Location(
                         new LocationId("overworld-15x22-cave.tmx", "Chest_Small", new Vector3(1408f, 0f, 448f)),
                         "village  west cave chest right",
-                        (inventory) => inventory.CanOpenNoteDoor && inventory.CanActivateBlueSwitch, ItemType.GoldCoin)
+                        (inventory) => inventory.CanOpenNoteDoor && inventory.CanSwitchLevers, ItemType.GoldCoin)
                 }, //accès canyon && ouvrir portes note && levier
                 {
                     new Location(
                         new LocationId("overworld-15x22-cave.tmx", "Chest_Small", new Vector3(1312f, 0f, 312f)),
                         "village  west cave chest center",
-                        (inventory) => inventory.CanOpenNoteDoor && inventory.CanActivateBlueSwitch, ItemType.GoldCoin)
+                        (inventory) => inventory.CanOpenNoteDoor && inventory.CanSwitchLevers, ItemType.GoldCoin)
                 }, //accès canyon && ouvrir portes note && levier
 
                 {
                     new Location(new LocationId("overworld-16x21-cave.tmx", "Chest_Small", new Vector3(544f, 0f, 228f)),
-                        "village  north cave chest", (inventory) => inventory.CanActivateBlueSwitch,
+                        "village  north cave chest", (inventory) => inventory.CanSwitchLevers,
                         ItemType.GoldCoin)
                 }, //accès canyon && levier
 

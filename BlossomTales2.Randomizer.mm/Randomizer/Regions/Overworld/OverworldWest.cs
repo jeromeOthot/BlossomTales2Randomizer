@@ -36,7 +36,14 @@ namespace BlossomTales2.Randomizer.mm
                     ItemType.HeartQ_1),
                 new Location(new LocationId("overworld-19x18-flowerShop.tmx", "flowerShop", Vector3.Zero),
                     "Flower Collection",
-                    _ => true, //TODO
+                    inventory => inventory.CanCollectIngredient(EquipableItem.IngredientList.Lily) && inventory.CanCollectIngredient(EquipableItem.IngredientList.MoonFlower)
+                        && inventory.CanCollectIngredient(EquipableItem.IngredientList.Tulip) && inventory.CanCollectIngredient(EquipableItem.IngredientList.Willow)
+                        && inventory.CanCollectIngredient(EquipableItem.IngredientList.Skyblossom) && inventory.CanCollectIngredient(EquipableItem.IngredientList.CanyonWisp)
+                        && inventory.CanCollectIngredient(EquipableItem.IngredientList.Chrysanthemum) && inventory.CanCollectIngredient(EquipableItem.IngredientList.Aster)
+                        && inventory.CanCollectIngredient(EquipableItem.IngredientList.Sunkiss) && inventory.CanCollectIngredient(EquipableItem.IngredientList.DesertPuff)
+                        && inventory.CanCollectIngredient(EquipableItem.IngredientList.WaterDrop) && inventory.CanCollectIngredient(EquipableItem.IngredientList.FlameTongue)
+                        && inventory.CanCollectIngredient(EquipableItem.IngredientList.CactusRose) && inventory.CanCollectIngredient(EquipableItem.IngredientList.Poinsettia)
+                        && inventory.CanCollectIngredient(EquipableItem.IngredientList.Bellflower) && inventory.CanCollectIngredient(EquipableItem.IngredientList.Daisy),
                     ItemType.HeartQ_1),
                 //Mingames
                 new Location(new LocationId("overworld-19x19.tmx", "raceGame", Vector3.Zero),

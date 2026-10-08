@@ -6,7 +6,7 @@ namespace BlossomTales2.Randomizer.mm
 {
     public class LabyrinthBack : Region
     {
-        public override bool CanAccess(Inventory inventory) => true;
+        public override bool CanAccess(Inventory inventory) => World.Blockburg.CanAccess(inventory) &&  inventory.HasMirrorShield;
 
         public LabyrinthBack(World world) : base("Labyrinth Back", world)
         {

@@ -13,7 +13,7 @@ namespace BlossomTales2.Randomizer.mm
             Locations = new List<Location>
             {
                 //NPC
-                { new Location(new LocationId("owlMap.tmx", "owl", new Vector3(0f, 0f, 0f)), "owl gift", (inventory) => inventory.HasInstrument && inventory.CanWakeUpPeople, ItemType.Boomerang) }, //accès dark && instrument && chanson wakeup
+                { new Location(new LocationId("owlMap.tmx", "owl", new Vector3(0f, 0f, 0f)), "owl gift", (inventory) => inventory.CanWakeUpPeople, ItemType.Boomerang) }, //accès dark && instrument && chanson wakeup
                 { new Location(new LocationId("overworld-23x17-farm.tmx", "farmer", new Vector3(0f, 0f, 0f)), "farmer award", (inventory) => inventory.CanDoDamage,ItemType.HeartQ_1) }, //accès dark && damage
 
                 //UFO
@@ -24,9 +24,9 @@ namespace BlossomTales2.Randomizer.mm
                 { new Location(new LocationId("overworld-23x18.tmx", "Chest_Small", new Vector3(932f, 0f, 752f)), "light ghost mini-game", (inventory) => inventory.CanSwitchLevers, ItemType.HeartQ_1) }, //accès dark && leviers
 
                 //Cave
-                { new Location(new LocationId("jungles-23x19-cave.tmx", "Chest_Small", new Vector3(416f, 0f, 896f)), "note cave south chest", (inventory) => inventory.HasInstrument && inventory.CanOpenNoteDoor && inventory.CanSwitchLevers, ItemType.Crystal) }, //accès dark && ouvrir portes notes && leviers
-                { new Location(new LocationId("overworld-23x17-noteCave.tmx", "Chest_Small", new Vector3(576f, 0f, 260f)), "note cave north chest left", (inventory) => inventory.HasInstrument && inventory.CanOpenNoteDoor && inventory.HasBombs && inventory.HasSword, ItemType.GoldCoin) }, //accès dark && ouvrir portes notes && (bombes && épée)
-                { new Location(new LocationId("overworld-23x17-noteCave.tmx", "Chest_Small", new Vector3(768f, 0f, 260f)), "note cave north chest right", (inventory) => inventory.HasInstrument && inventory.CanOpenNoteDoor && inventory.HasBombs && inventory.HasSword, ItemType.Five_Gems) }, //accès dark && ouvrir portes notes && (bombes && épée)
+                { new Location(new LocationId("jungles-23x19-cave.tmx", "Chest_Small", new Vector3(416f, 0f, 896f)), "note cave south chest", (inventory) => inventory.CanOpenNoteDoor && inventory.CanSwitchLevers, ItemType.Crystal) }, //accès dark && ouvrir portes notes && leviers
+                { new Location(new LocationId("overworld-23x17-noteCave.tmx", "Chest_Small", new Vector3(576f, 0f, 260f)), "note cave north chest left", (inventory) => inventory.CanOpenNoteDoor && inventory.HasBombs && inventory.HasSword, ItemType.GoldCoin) }, //accès dark && ouvrir portes notes && (bombes && épée)
+                { new Location(new LocationId("overworld-23x17-noteCave.tmx", "Chest_Small", new Vector3(768f, 0f, 260f)), "note cave north chest right", (inventory) => inventory.CanOpenNoteDoor && inventory.HasBombs && inventory.HasSword, ItemType.Five_Gems) }, //accès dark && ouvrir portes notes && (bombes && épée)
 
 
                 //Chest

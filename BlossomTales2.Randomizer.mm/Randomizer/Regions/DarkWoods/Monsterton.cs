@@ -16,7 +16,7 @@ namespace BlossomTales2.Randomizer.mm
                 //Side quest
                 {
                     new Location(new LocationId("darklands-house4.tmx", "sickZombie", new Vector3(352f, 0f, 268f)),
-                        "sick zombie", (inventory) => inventory.HasBottle && World.CanyonNorth.CanAccess(inventory), ItemType.HeartQ_1)
+                        "sick zombie", (inventory) => inventory.CanCraftPotion(ItemType.Jar_Fire) && World.CanyonNorth.CanAccess(inventory), ItemType.HeartQ_1)
                 }, //accès monsterton && bouteille && accès canyon
 
                 //NPC
@@ -46,7 +46,7 @@ namespace BlossomTales2.Randomizer.mm
                 }, //accès monsterton
                 {
                     new Location(new LocationId("overworld-24x17.tmx", "Chest_Small", new Vector3(352f, 0f, 244f)),
-                        "burried chest", (inventory) => inventory.HasShovel && inventory.HasBottle, ItemType.Crystal)
+                        "burried chest", (inventory) => inventory.HasShovel && inventory.HasJar, ItemType.Crystal)
                 }, //accès monsterton && bouteille && pelle  pelle id=3
                 {
                     new Location(

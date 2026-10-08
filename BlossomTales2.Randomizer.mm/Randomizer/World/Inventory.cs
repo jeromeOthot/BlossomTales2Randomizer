@@ -12,10 +12,6 @@ namespace BlossomTales2.Randomizer.mm
             _world = world;
         }
 
-        //TODO: Real endgame flag.
-        public bool HasBeatenMinotaurKing => HasBombs && HasSword && HasFlipper && HasTorch && HasGrappleHook &&
-                                             HasBoomerang && HasBow && CanWakeUpPeople;
-
         public bool HasSword => Items.ContainsKey(ItemType.Sword);
         public bool HasSwordBeams => Items.TryGetValue(ItemType.Sword, out int swordLevel) && swordLevel >= 4;
         public bool HasMirrorShield => Items.TryGetValue(ItemType.Shield, out int shieldLevel) && shieldLevel >= 3;
@@ -40,36 +36,21 @@ namespace BlossomTales2.Randomizer.mm
         public bool HasHeartNecklace => Items.ContainsKey(ItemType.HeartNecklace);
         public bool HasBlueGem =>  Items.ContainsKey(ItemType.BlueGem);
         public bool HasGreenGem => Items.ContainsKey(ItemType.GreenGem);
-        public bool Has3DongeonKeys => Items.ContainsKey(ItemType.KeyPiece1) && Items.ContainsKey(ItemType.KeyPiece2) && Items.ContainsKey(ItemType.KeyPiece3);
+        public bool HasAllKeyPieces => Items.ContainsKey(ItemType.KeyPiece1) && Items.ContainsKey(ItemType.KeyPiece2) && Items.ContainsKey(ItemType.KeyPiece3);
+        public int  IngredGemCount => Items.TryGetValue(ItemType.Five_Gems, out int count) ? count * 5 : 0;
+        public int CanyonBonesCount => Items.TryGetValue(ItemType.CanyonBone, out int count) ? count : 0;
 
         public bool CanOpenNoteDoor => HasInstrument && Items.ContainsKey(ItemType.OpenSesame);
         public bool CanWakeUpPeople => HasInstrument && Items.ContainsKey(ItemType.WakeUp);
-        public bool CanActivateBlueSwitch => true;
-        public bool  HasBottle => Items.ContainsKey(ItemType.Jar_Empty);
-        public bool  HasGhostPotion => Items.ContainsKey(ItemType.Jar_Ghost);
-
         public bool HasCollectedAllHoneycombs => Items.TryGetValue(ItemType.Honeycomb, out int count) && count >= 10;
         public bool CanLiftMasterSword => Items.TryGetValue(ItemType.HeartQ_4, out int fullHeartCount) && Items.TryGetValue(ItemType.HeartQ_1, out int quarterHeartCount) && fullHeartCount + quarterHeartCount/4 >= 7;
-        //todo
-        public int  NbBlueGem => 0;
 
         //TODO
-        public bool CanAccessCanyon => true;
-        //TODO
-        public bool CanAccessCanyonSteppe => true;
-
-        //TODO
-        public bool CanAccessDarkForest => true;
-
-        //TODO
-        public bool CanDoDamage => HasSword || HasBombs || HasBow;
-
+        public bool CanDoDamage => HasSword || HasBombs || HasBow || HasBoomerang;
         public bool CanCutPegs => Items.TryGetValue(ItemType.Sword, out int swordLevel) && swordLevel >= 2;
         public bool CanCutBushes => HasSword || HasBoomerang || HasGrappleHook || HasBombs || HasTorch || HasShovel;
         public bool CanSwitchLevers => HasSword || HasGrappleHook || HasBoomerang || HasBow;
         public bool CanHitWaterLevers => HasSword;
-
-        public bool CanCollectAllFishes => true;
 
         public bool CanCollectIngredient(EquipableItem.IngredientList ingredient)
         {

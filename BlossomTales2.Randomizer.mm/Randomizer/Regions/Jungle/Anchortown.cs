@@ -20,7 +20,10 @@ namespace BlossomTales2.Randomizer.mm
                 //Long sidequests
                 new Location(new LocationId("anchor-shop.tmx", "fisherman", Vector3.Zero),
                     "Fish Collector",
-                    inventory => inventory.CanCollectAllFishes,
+                    inventory => inventory.CanCollectIngredient(EquipableItem.IngredientList.Fish1) && inventory.CanCollectIngredient(EquipableItem.IngredientList.Fish2) && inventory.CanCollectIngredient(EquipableItem.IngredientList.Fish3)
+                                 && inventory.CanCollectIngredient(EquipableItem.IngredientList.Fish4) && inventory.CanCollectIngredient(EquipableItem.IngredientList.Fish5) && inventory.CanCollectIngredient(EquipableItem.IngredientList.Fish6)
+                                 && inventory.CanCollectIngredient(EquipableItem.IngredientList.Fish7) && inventory.CanCollectIngredient(EquipableItem.IngredientList.Fish8) && inventory.CanCollectIngredient(EquipableItem.IngredientList.Fish9)
+                                 && inventory.CanCollectIngredient(EquipableItem.IngredientList.Fish10),
                     ItemType.FishingRod),
                 //Shops
                 new Location(new LocationId("anchor-shop.tmx", "left", Vector3.Zero),

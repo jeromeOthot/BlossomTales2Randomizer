@@ -22,7 +22,7 @@ namespace BlossomTales2.Randomizer.mm.Canyon
 
 
                 //Chest
-                { new Location(new LocationId("overworld-17x22.tmx", "ghostCanyon", new Vector3(0f, 0f, 0f)), "Ghost",(inventory) => inventory.CanAccessCanyon && inventory.HasGhostPotion && inventory.CanAccessDarkForest && inventory.NbBlueGem > 10, ItemType.Crystal) }, //accès canyon && bouteille && accès dark && (blue gem > 10 || pelle)
+                { new Location(new LocationId("overworld-17x22.tmx", "ghostCanyon", new Vector3(0f, 0f, 0f)), "Ghost",(inventory) => inventory.CanCraftPotion(ItemType.Jar_Ghost) && (inventory.IngredGemCount >= 10 || inventory.HasShovel), ItemType.Crystal) }, //accès canyon && bouteille && accès dark && (blue gem > 10 || pelle)
 
             };
 

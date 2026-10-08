@@ -6,7 +6,7 @@ namespace BlossomTales2.Randomizer.mm
 {
     public class LabyrinthFront : Region
     {
-        public override bool CanAccess(Inventory inventory) => World.OverworldWest.CanAccess(inventory) && inventory.Has3DongeonKeys;
+        public override bool CanAccess(Inventory inventory) => World.OverworldWest.CanAccess(inventory) && inventory.HasAllKeyPieces && (inventory.HasBombs || inventory.HasBoomerang);
 
         //accès labyrinthe 17x16: accès labyrinthe 18x16 && teleporter && leviers
         public Predicate<Inventory> CanAccessLabyrinthe17x16 => inventory => CanAccess(inventory) && inventory.HasRexTeleporter && inventory.CanSwitchLevers;
@@ -23,7 +23,7 @@ namespace BlossomTales2.Randomizer.mm
                 //chests
                 { new Location(new LocationId("overworld-15x18.tmx", "Chest", new Vector3(1856f, 0f, 1408f)),  "mini-boss mirror shield", (inventory) => true,ItemType.Shield) }, //accès labyrinthe
 
-                { new Location(new LocationId("labyrinth-forge.tmx", "golemHead", new Vector3(0f, 0f, 0f)), "golem head forge", (inventory) => true && inventory.NbBlueGem >= 50, ItemType.Sword) }, //accès labyrinthe && blue gem == 50
+                { new Location(new LocationId("labyrinth-forge.tmx", "golemHead", new Vector3(0f, 0f, 0f)), "golem head forge", (inventory) => inventory.IngredGemCount >= 50 || inventory.HasShovel, ItemType.Sword) }, //accès labyrinthe && blue gem == 50
 
                 { new Location(new LocationId("overworld-15x18-cave.tmx", "Chest_Small", new Vector3(384f, 0f, 268f)), "bombable south cave chest down left", (inventory) => inventory.HasBombs, ItemType.GoldCoin) }, //accès labyrinthe back && bombes
                 { new Location(new LocationId("overworld-15x18-cave.tmx", "Chest_Small", new Vector3(576f, 0f, 268f)), "bombable south cave chest down right", (inventory) => inventory.HasBombs, ItemType.GoldCoin) }, //accès labyrinthe back && bombes

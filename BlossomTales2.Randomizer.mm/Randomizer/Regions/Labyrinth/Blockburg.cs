@@ -6,13 +6,13 @@ namespace BlossomTales2.Randomizer.mm
 {
     public class Blockburg : Region
     {
-        public override bool CanAccess(Inventory inventory) => true;
+        public override bool CanAccess(Inventory inventory) => World.LabyrinthFront.CanAccess(inventory);
 
         public Blockburg(World world) : base("Blockburg", world)
         {
             Locations = new List<Location>
             {
-                { new Location(new LocationId("overworld-16x17.tmx", "labSlime", new Vector3(0f, 0f, 0f)),  "lab Slimes", (inventory) => true, ItemType.HeartQ_1) }, //accès labyrinthe
+                { new Location(new LocationId("overworld-16x17.tmx", "labSlime", new Vector3(0f, 0f, 0f)),  "lab Slimes", (inventory) => inventory.CanDoDamage, ItemType.HeartQ_1) }, //accès labyrinthe
 
                 //Castle
                 { new Location(new LocationId("labHouse-shop.tmx", "left", Vector3.Zero), "shop item left", (inventory) => inventory.HasBombs, ItemType.Jar_Empty) },

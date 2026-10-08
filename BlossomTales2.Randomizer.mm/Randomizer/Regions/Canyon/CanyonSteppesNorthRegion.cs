@@ -22,9 +22,9 @@ namespace BlossomTales2.Randomizer.mm.Canyon
                 { new Location(new LocationId("overworld-18x20.tmx", "PickUpItem", new Vector3(304f, 0f, 520f)), "Bone North Steppes far west",_ => true, ItemType.CanyonBone) }, //accès canyon
 
                 //Chest
-                { new Location(new LocationId("overworld-17x20-cave.tmx", "Chest_Small", new Vector3(736f, 0f, 224f)), "falling tiles cave chest",(inventory) => inventory.CanAccessCanyonSteppe && inventory.HasGrappleHook, ItemType.HeartQ_1) }, //accès canyon plateau && grappin
-                { new Location(new LocationId("overworld-17x20.tmx", "Chest_Small", new Vector3(476f, 0f, 208f)), "Honeycomb North Steppes",(inventory) => inventory.CanAccessCanyonSteppe && inventory.HasGrappleHook, ItemType.Honeycomb) }, //accès canyon plateau
-                { new Location(new LocationId("overworld-18x19.tmx", "Chest_Small", new Vector3(792f, 0f, 1348f)), "Honeycomb on river",(inventory) => inventory.CanAccessCanyonSteppe && inventory.HasGrappleHook, ItemType.Honeycomb) }, //accès canyon plateau && grappin
+                { new Location(new LocationId("overworld-17x20-cave.tmx", "Chest_Small", new Vector3(736f, 0f, 224f)), "falling tiles cave chest",(inventory) => inventory.HasGrappleHook, ItemType.HeartQ_1) }, //accès canyon plateau && grappin
+                { new Location(new LocationId("overworld-17x20.tmx", "Chest_Small", new Vector3(476f, 0f, 208f)), "Honeycomb North Steppes",(inventory) => inventory.HasGrappleHook, ItemType.Honeycomb) }, //accès canyon plateau
+                { new Location(new LocationId("overworld-18x19.tmx", "Chest_Small", new Vector3(792f, 0f, 1348f)), "Honeycomb on river",(inventory) => inventory.HasGrappleHook, ItemType.Honeycomb) }, //accès canyon plateau && grappin
             };
         }
     }
