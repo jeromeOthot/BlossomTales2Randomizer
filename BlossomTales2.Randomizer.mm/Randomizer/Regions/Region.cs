@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace BlossomTales2.Randomizer.mm
 {
@@ -19,12 +20,12 @@ namespace BlossomTales2.Randomizer.mm
         }
 
 
-        public bool TryCollectItems(Inventory inventory)
+        public List<ItemType> CollectItems(Inventory inventory, ref StringBuilder spheres)
         {
-            if (!CanAccess(inventory))
-                return false;
+            List<ItemType> newItems = new List<ItemType>();
 
-            bool hasCollectedItem = false;
+            if (!CanAccess(inventory))
+                return newItems;
 
             // foreach (Region region in Regions)
             // {
@@ -38,11 +39,13 @@ namespace BlossomTales2.Randomizer.mm
                 if (!location.CanAccess(inventory) || location.HasCollectedItem)
                     continue;
 
-                inventory.AddItem(location.Item, 1);
+                newItems.Add(location.Item);
+                if(location.Item != ItemType.GoldCoin)
+                    spheres.AppendLine($"{Name} {location.Name} : {location.Item}");
                 location.HasCollectedItem = true;
             }
 
-            return hasCollectedItem;
+            return newItems;
         }
 
         public void CollectLocations(List<Location> locations)

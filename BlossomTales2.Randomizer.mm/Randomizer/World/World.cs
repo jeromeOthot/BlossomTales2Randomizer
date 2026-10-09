@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Text;
 using BlossomTales2.Randomizer.mm.Canyon;
 
 namespace BlossomTales2.Randomizer.mm
@@ -113,17 +114,16 @@ namespace BlossomTales2.Randomizer.mm
         public bool CanAccessAnyDarkForest(Inventory inventory) => DarkWoodsFront.CanAccess(inventory) ||  DarkWoodsBack.CanAccess(inventory) || Monsterton.CanAccess(inventory);
         public bool CanAccessAnyLabyrinth(Inventory inventory) => LabyrinthFront.CanAccess(inventory) ||  LabyrinthBack.CanAccess(inventory) || Blockburg.CanAccess(inventory);
 
-        public bool TryCollectItems(Inventory inventory)
+        public List<ItemType> CollectItems(Inventory inventory, ref StringBuilder spheres)
         {
-            bool hasCollectedItem = false;
+            List<ItemType> newItems = new List<ItemType>();
 
             foreach (Region region in Regions)
             {
-                bool hasItem = region.TryCollectItems(inventory);
-                if(!hasCollectedItem)
-                    hasCollectedItem = hasItem;
+                List<ItemType> items = region.CollectItems(inventory, ref spheres);
+                newItems.AddRange(items);
             }
-            return hasCollectedItem;
+            return newItems;
         }
 
         public void AddRegion(Region region)

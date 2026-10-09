@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Text;
 
 namespace BlossomTales2.Randomizer.mm
 {
@@ -18,13 +19,27 @@ namespace BlossomTales2.Randomizer.mm
             }
 
             //Validate seed
+            int sphere = 0;
+            StringBuilder spheres = new StringBuilder();
+
             bool hasCollectedItem;
             do
             {
-                hasCollectedItem = world.TryCollectItems(inventory);
-                if (world.MinotaurCastle.CanAccessMinotaurBoss(inventory))
-                    return true;
+                spheres.AppendLine($"---- Sphere: {sphere} ----");
+                List<ItemType> newItems = world.CollectItems(inventory, ref spheres);
+                hasCollectedItem = newItems.Count > 0;
 
+                foreach (ItemType newItem in newItems)
+                    inventory.AddItem(newItem, 1);
+
+                if (world.MinotaurCastle.CanAccessMinotaurBoss(inventory))
+                {
+                    spheres.AppendLine("Defeat Minotaur King: Victory!!!");
+                    GameLogger.LogInfo(spheres.ToString());
+                    return true;
+                }
+
+                sphere++;
             } while (hasCollectedItem);
 
             return false;
