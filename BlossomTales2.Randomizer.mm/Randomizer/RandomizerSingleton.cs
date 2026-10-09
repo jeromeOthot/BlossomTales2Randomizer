@@ -178,7 +178,6 @@ namespace BlossomTales2.Randomizer.mm
                 { new LocationId("morkla-20.tmx", "Chest_Small", new Vector3(640f, 0f, 384f)), new ItemData(ItemType.HeartQ_1) }, //accès Morkla && bombes && (lanterne || flippers)
                 { new LocationId("morkla-21.tmx", "Chest_Small", new Vector3(896f, 0f, 776f)), new ItemData(ItemType.GreenGem) }, //accès Morkla && water switch && flippers && leviers
                 { new LocationId("morkla-octopus.tmx", "BossOctopus", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.HeartQ_4) }, //accès Morkla && damage && flippers && water switch && blue gem && green gem
-                { new LocationId("morkla-octopus.tmx", "Chest", new Vector3(896f, 0f, 624f)), new ItemData(ItemType.KeyPiece1) }, //accès Morkla && damage && flippers && water switch && blue gem && green gem
                 { new LocationId("morkla-pirateBoss.tmx", "Chest", new Vector3(768f, 0f, 640f)), new ItemData(ItemType.Flippers) }, //accès Morkla && damage && (lanterne && water switch && clé || flippers)
 
                 { new LocationId("temple-1.tmx", "Chest_Small", new Vector3(1376f, 0f, 1184f)), new ItemData(ItemType.Gold_Key) }, //accès temple && (arc && leviers || grappin)
@@ -195,7 +194,6 @@ namespace BlossomTales2.Randomizer.mm
                 { new LocationId("temple-18.tmx", "Chest_Small", new Vector3(1152f, 0f, 1724f)), new ItemData(ItemType.GoldCoin) }, //accès temple 4
                 { new LocationId("temple-18-secret.tmx", "Chest_Small", new Vector3(640f, 0f, 284f)), new ItemData(ItemType.HeartQ_1) }, //accès temple 4 && bombes
                 { new LocationId("temple-genieBoss.tmx", "BossGenie", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.HeartQ_4) }, //accès temple 4 && lanterne
-                { new LocationId("temple-genieBoss.tmx", "Chest", new Vector3(832f, 0f, 640f)), new ItemData(ItemType.KeyPiece2) }, //accès temple 4 && lanterne
                 { new LocationId("temple-vultureBoss.tmx", "Chest", new Vector3(768f, 0f, 640f)), new ItemData(ItemType.GrappleHook) }, //accès temple 3 && (clé || grappin) && damage
 
                 { new LocationId("mansion-4.tmx", "Chest_Small", new Vector3(640f, 0f, 1280f)), new ItemData(ItemType.Gold_Key) }, //accès mansion && damage
@@ -208,7 +206,6 @@ namespace BlossomTales2.Randomizer.mm
                 { new LocationId("mansion-20.tmx", "Chest_Small", new Vector3(504f, 0f, 896f)), new ItemData(ItemType.Gold_Key) }, //accès mansion 3 && damage && teleporter
                 { new LocationId("mansion-bossVampire.tmx", "Chest", new Vector3(704f, 0f, 448f)), new ItemData(ItemType.RexTeleporter) }, //accès mansion 2 && clé && damage
                 { new LocationId("mansion-bossScientist.tmx", "BossScientist", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.HeartQ_4) }, //accès mansion 3 && clé x2 && damage && teleporter
-                { new LocationId("mansion-bossScientist.tmx", "Chest", new Vector3(704f, 0f, 448f)), new ItemData(ItemType.KeyPiece3) }, //accès mansion 3 && clé x2 && damage && teleporter
 
                 //note caves
                 { new LocationId("jungles-22x21-noteCave.tmx", "Chest_Small", new Vector3(480f, 0f, 224f)), new ItemData(ItemType.GoldCoin) }, //accès jungle ile && ouvrir portes notes
@@ -581,6 +578,11 @@ namespace BlossomTales2.Randomizer.mm
                 { new LocationId("overworld-24x18-blueTent.tmx", "Chest_Small", new Vector3(776f, 0f, 160f)), new ItemData(ItemType.GoldCoin) }, //accès dark
                 { new LocationId("overworld-24x18-greenTent.tmx", "Chest_Small", new Vector3(576f, 0f, 148f)), new ItemData(ItemType.GoldCoin) }, //accès dark
                 { new LocationId("overworld-24x18-greenTent.tmx", "Chest_Small", new Vector3(680f, 0f, 148f)), new ItemData(ItemType.GoldCoin) }, //accès dark
+
+                //Key pieces
+                { new LocationId("morkla-octopus.tmx", "Chest", new Vector3(896f, 0f, 624f)), new ItemData(ItemType.KeyPiece1) }, //accès Morkla && damage && flippers && water switch && blue gem && green gem
+                { new LocationId("temple-genieBoss.tmx", "Chest", new Vector3(832f, 0f, 640f)), new ItemData(ItemType.KeyPiece2) }, //accès temple 4 && lanterne
+                { new LocationId("mansion-bossScientist.tmx", "Chest", new Vector3(704f, 0f, 448f)), new ItemData(ItemType.KeyPiece3) }, //accès mansion 3 && clé x2 && damage && teleporter
             };
 
             if (ModGlobals.RandomizeColiseumCoins)
@@ -613,6 +615,17 @@ namespace BlossomTales2.Randomizer.mm
         private void PlaceItems()
         {
             List<ItemData> itemPool = _locationsVanilla.Values.ToList();
+
+            //TODO: Handle key pieces correctly
+            LocationId key1Location = new LocationId("morkla-octopus.tmx", "Chest", new Vector3(896f, 0f, 624f));
+            LocationId key2Location = new LocationId("temple-genieBoss.tmx", "Chest", new Vector3(832f, 0f, 640f));
+            LocationId key3Location = new LocationId("mansion-bossScientist.tmx", "Chest", new Vector3(704f, 0f, 448f));
+            for (int i = itemPool.Count - 1; i >= 0; i--)
+            {
+                if(itemPool[i].Item == ItemType.KeyPiece1 ||  itemPool[i].Item == ItemType.KeyPiece2  ||  itemPool[i].Item == ItemType.KeyPiece3)
+                    itemPool.RemoveAt(i);
+            }
+
             //TODO: Place items with logic
             bool isValid;
             int tries = 0;
@@ -623,12 +636,17 @@ namespace BlossomTales2.Randomizer.mm
                 List<LocationId> keyList = _locationsVanilla.Keys.ToList();
                 for (int i = 0; i < keyList.Count; i++)
                 {
-                    _randomizedLocations.Add(keyList[i], itemPool[i]);
+                    LocationId locationId = keyList[i];
+                    //TODO: Handle key pieces
+                    if (locationId.Equals(key1Location) || locationId.Equals(key2Location) || locationId.Equals(key3Location))
+                        continue;
+
+                    _randomizedLocations.Add(locationId, itemPool[i]);
                 }
 
                 isValid = Validator.ValidateSeed(_randomizedLocations);
                 tries++;
-            } while (!isValid && tries < 10000);
+            } while (!isValid && tries < 100000);
 
             if (isValid)
             {

@@ -17,6 +17,7 @@ namespace BlossomTales2.Randomizer.mm
             Name = name;
             CanAccess = canAccess;
             VanillaItem = vanillaItem;
+            Item = vanillaItem;
         }
     }
 }
