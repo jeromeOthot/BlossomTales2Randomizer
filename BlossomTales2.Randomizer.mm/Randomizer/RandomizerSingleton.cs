@@ -25,8 +25,6 @@ namespace BlossomTales2.Randomizer.mm
 
         public void RandomizeLocations()
         {
-            _random = new Random();
-            //seed = 0: jeu vanille
             RandomizeItems();
         }
 
@@ -601,28 +599,21 @@ namespace BlossomTales2.Randomizer.mm
 
         private void RandomizeItems()
         {
-            //Si on n'as pas de seed number
-            if (RamdomizerSettings.SeedNumber == null)
-            {
+            int seed = RamdomizerSettings.SeedNumber.HasValue ? RamdomizerSettings.SeedNumber.Value : Environment.TickCount;
+            _random = new Random(seed);
 
-            }
-            else if(RamdomizerSettings.SeedNumber == 0)
-            {
-                GameLogger.LogInfo("_locationsVanilla");
+            GameLogger.LogInfo($"Seed = {seed}");
+
+            if(seed == 0)
                 _randomizedLocations = _locationsVanilla;
-            }
-            //Si on as un seed number quelconque on l'utilise pour la seed du random
             else
-            {
                 PlaceItems();
-            }
         }
 
         private void PlaceItems()
         {
             List<ItemData> itemPool = _locationsVanilla.Values.ToList();
             //TODO: Place items with logic
-            //TODO: Randomizer avec le numéro de seed.
             bool isValid;
             int tries = 0;
             do
@@ -638,9 +629,6 @@ namespace BlossomTales2.Randomizer.mm
                 isValid = Validator.ValidateSeed(_randomizedLocations);
                 tries++;
             } while (!isValid && tries < 10000);
-
-
-
 
             if (isValid)
             {
