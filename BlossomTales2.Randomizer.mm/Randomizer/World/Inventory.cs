@@ -46,7 +46,7 @@ namespace BlossomTales2.Randomizer.mm
         public bool CanLiftMasterSword => Items.TryGetValue(ItemType.HeartQ_4, out int fullHeartCount) && Items.TryGetValue(ItemType.HeartQ_1, out int quarterHeartCount) && fullHeartCount + quarterHeartCount/4 >= 7;
 
         //TODO
-        public bool CanDoDamage => HasSword || HasBombs || HasBow || HasBoomerang;
+        public bool CanDoDamage => HasSword || HasBombs || HasBow || HasBoomerang || Items.ContainsKey(ItemType.Falcon) || Items.ContainsKey(ItemType.BeeMedallion);
         public bool CanCutPegs => Items.TryGetValue(ItemType.Sword, out int swordLevel) && swordLevel >= 2;
         public bool CanCutBushes => HasSword || HasBoomerang || HasGrappleHook || HasBombs || HasTorch || HasShovel;
         public bool CanSwitchLevers => HasSword || HasGrappleHook || HasBoomerang || HasBow;
