@@ -18,7 +18,7 @@ namespace BlossomTales2
           {
               GameLogger.LogInfo("Intro grand-pere Init " + ModGlobals.SkipCutscenes);
               //GameLogger.LogInfo("Test");
-              endCutScene();
+              //endCutScene();
               GameLogger.LogInfo("Fin Test");
               if(ModGlobals.SkipCutscenes)
                   tweener.Timer(0.2f).OnComplete(endCutScene);
@@ -70,9 +70,9 @@ namespace BlossomTales2
         //hack pour skipper le tutoriel festival
         public void  endCutScene()
         {
-            Game1.Dialoger.AddLine("Start Lily House endCutScene");
+            GameLogger.LogInfo("Start Lily House endCutScene");
             lily = new Puppet("lily", new Vector3(0f, 0.0f, 0f));
-            Game1.Dialoger.AddLine("End Lily House endCutScene");
+            GameLogger.LogInfo("End Lily House endCutScene");
             if(!ModGlobals.SkipFestival)
             {
                 orig_endCutScene();
@@ -90,7 +90,7 @@ namespace BlossomTales2
 
             Game1.Globals.Engineer_State = 1;
 
-            Game1.Dialoger.AddLine("giveControlToPlayer: ");
+            GameLogger.LogInfo("giveControlToPlayer: ");
             giveControlToPlayer(lily, false, 3);
             Game1.LOPuppets.Clear();
            // this.bedSheetLily.Zdepth = -99.5f;
@@ -98,8 +98,8 @@ namespace BlossomTales2
             //Game1.LOPuppets.Add(this.bedSheetLily);
             //Game1.LOPuppets.Add(this.bedSheetChrys);
             Game1.Gui.HideHud = false;
-            grandma.play("hide");
-            NPC npc = new NPC(new Vector3(grandma.myX, grandma.myY, grandma.myZ));
+            //grandma.play("hide");
+            NPC npc = new NPC(new Vector3(480, 0, 328));
             npc.IDNumber = 6;
             npc.linePointer = 199;
             Game1.CurrentLevel.LevelObjects.Add(npc);
