@@ -51,6 +51,7 @@ namespace BlossomTales2.Randomizer.mm
         public bool CanCutBushes => HasSword || HasBoomerang || HasGrappleHook || HasBombs || HasTorch || HasShovel;
         public bool CanSwitchLevers => HasSword || HasGrappleHook || HasBoomerang || HasBow;
         public bool CanHitWaterLevers => HasSword;
+        public bool CanHitTargets => HasGrappleHook || HasBow;
 
         public bool CanCollectIngredient(EquipableItem.IngredientList ingredient)
         {

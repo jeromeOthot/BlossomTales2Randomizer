@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 
 namespace BlossomTales2.Randomizer.mm
@@ -8,11 +7,9 @@ namespace BlossomTales2.Randomizer.mm
     {
         public override bool CanAccess(Inventory inventory) => World.OverworldWest.CanAccess(inventory) && inventory.HasAllKeyPieces && (inventory.HasBombs || inventory.HasBoomerang);
 
-        //accès labyrinthe 17x16: accès labyrinthe 18x16 && teleporter && leviers
-        public Predicate<Inventory> CanAccessLabyrinthe17x16 => inventory => CanAccess(inventory) && inventory.HasRexTeleporter && inventory.CanSwitchLevers;
-
-        //accès labyrinthe 18x16: accès labyrinthe && grappin && lanterne
-        public Predicate<Inventory> CanAccessLabyrinthe18x16 => inventory => CanAccess(inventory) && inventory.HasGrappleHook && inventory.HasTorch;
+        private bool CanAccessLabyrinth18x16(Inventory inventory) => CanAccess(inventory) && inventory.CanSwitchLevers && inventory.HasGrappleHook && inventory.HasTorch && inventory.CanHitTargets;
+        private bool CanAccessLabyrinth17x16(Inventory inventory) => CanAccessLabyrinth18x16(inventory) && inventory.CanSwitchLevers;
+        public bool CanAccessLabyrinth17x18(Inventory inventory) => CanAccessLabyrinth17x16(inventory) && inventory.CanSwitchLevers && inventory.CanHitTargets;
 
         //accès labyrinthe 17x18: ...
 
@@ -20,28 +17,62 @@ namespace BlossomTales2.Randomizer.mm
         {
             Locations = new List<Location>
             {
-                //chests
-                { new Location(new LocationId("overworld-15x18.tmx", "Chest", new Vector3(1856f, 0f, 1408f)),  "mini-boss mirror shield", (inventory) => true,ItemType.Shield) }, //accès labyrinthe
+                //Caves
+                new Location(new LocationId("overworld-17x16-cave.tmx", "Chest_Small", new Vector3(512f, 0f, 268f)),
+                    "North Bomb Cave Top Left Chest",
+                    inventory => CanAccessLabyrinth17x16(inventory) && inventory.HasBombs,
+                    ItemType.GoldCoin), //accès labyrinthe 17x16 && bombes
+                new Location(new LocationId("overworld-17x16-cave.tmx", "Chest_Small", new Vector3(672f, 0f, 268f)),
+                    "North Bomb Cave Top Center Chest",
+                    inventory => CanAccessLabyrinth17x16(inventory) && inventory.HasBombs,
+                    ItemType.GoldCoin),
+                new Location(new LocationId("overworld-17x16-cave.tmx", "Chest_Small", new Vector3(832f, 0f, 268f)),
+                    "North Bomb Cave Top Right Chest",
+                    inventory => CanAccessLabyrinth17x16(inventory) && inventory.HasBombs,
+                    ItemType.GoldCoin),
+                new Location(new LocationId("overworld-17x16-cave.tmx", "Chest_Small", new Vector3(512f, 0f, 456f)),
+                    "North Bomb Cave Bottom Left Chest",
+                    inventory => CanAccessLabyrinth17x16(inventory) && inventory.HasBombs,
+                    ItemType.GoldCoin),
+                new Location(new LocationId("overworld-17x16-cave.tmx", "Chest_Small", new Vector3(672f, 0f, 456f)),
+                    "North Bomb Cave Bottom Center Chest",
+                    inventory => CanAccessLabyrinth17x16(inventory) && inventory.HasBombs,
+                    ItemType.GoldCoin),
+                new Location(new LocationId("overworld-17x16-cave.tmx", "Chest_Small", new Vector3(828f, 0f, 456f)),
+                    "North Bomb Cave Bottom Right Chest",
+                    inventory => CanAccessLabyrinth17x16(inventory) && inventory.HasBombs,
+                    ItemType.GoldCoin),
+                new Location(new LocationId("overworld-18x17-cave.tmx", "Chest_Small", new Vector3(384f, 0f, 268f)),
+                    "East Bomb Cave Left Chest",
+                    inventory => inventory.HasBombs && inventory.HasGrappleHook,
+                    ItemType.GoldCoin),
+                new Location(new LocationId("overworld-18x17-cave.tmx", "Chest_Small", new Vector3(480f, 0f, 268f)),
+                    "East Bomb Cave Middle Chest",
+                    inventory => inventory.HasBombs && inventory.HasGrappleHook,
+                    ItemType.GoldCoin),
+                new Location(new LocationId("overworld-18x17-cave.tmx", "Chest_Small", new Vector3(576f, 0f, 268f)),
+                    "East Bomb Cave Right Chest",
+                    inventory => inventory.HasBombs && inventory.HasGrappleHook,
+                    ItemType.GoldCoin),
+                //Npcs
+                new Location(new LocationId("labyrinth-forge.tmx", "golemHead", Vector3.Zero),
+                    "Golem Forge",
+                    inventory => inventory.IngredGemCount >= 50 || inventory.HasShovel,
+                    ItemType.Sword),
+                //Chests
+                new Location(new LocationId("overworld-16x17.tmx", "Chest_Small", new Vector3(1576f, 0f, 280f)),
+                    "Near Blockburg Chest",
+                    inventory => CanAccessLabyrinth17x16(inventory),
+                    ItemType.GoldCoin),
+                new Location(new LocationId("overworld-17x16.tmx", "Chest_Small", new Vector3(2376f, 0f, 868f)),
+                    "North Blue Tree Chest",
+                    inventory => CanAccessLabyrinth17x16(inventory),
+                    ItemType.GoldCoin),
+                new Location(new LocationId("overworld-17x18.tmx", "Chest_Small", new Vector3(1308f, 0f, 224f)),
+                    "South blue Tree Chest",
+                    inventory => CanAccessLabyrinth17x18(inventory),
+                    ItemType.GoldCoin),
 
-                { new Location(new LocationId("labyrinth-forge.tmx", "golemHead", new Vector3(0f, 0f, 0f)), "golem head forge", (inventory) => inventory.IngredGemCount >= 50 || inventory.HasShovel, ItemType.Sword) }, //accès labyrinthe && blue gem == 50
-
-                { new Location(new LocationId("overworld-16x17.tmx", "Chest_Small", new Vector3(1576f, 0f, 280f)), "village other side wall chest", (inventory) => CanAccessLabyrinthe17x16(inventory), ItemType.GoldCoin) }, //accès labyrinthe 17x16
-
-                { new Location(new LocationId("overworld-16x18.tmx", "Chest_Small", new Vector3(176f, 0f, 1452f)), "south village chest", (inventory) => true, ItemType.GoldCoin) }, //accès labyrinthe
-
-                { new Location(new LocationId("overworld-17x16.tmx", "Chest_Small", new Vector3(2376f, 0f, 868f)), "blue tree right chest", (inventory) => true, ItemType.GoldCoin) }, //accès labyrinthe 17x16
-                { new Location(new LocationId("overworld-17x16-cave.tmx", "Chest_Small", new Vector3(512f, 0f, 268f)), "bombable north cave chest down left", (inventory) => CanAccessLabyrinthe17x16(inventory) && inventory.HasBombs, ItemType.GoldCoin) }, //accès labyrinthe 17x16 && bombes
-                { new Location(new LocationId("overworld-17x16-cave.tmx", "Chest_Small", new Vector3(672f, 0f, 268f)), "bombable north cave chest down center", (inventory) => CanAccessLabyrinthe17x16(inventory) && inventory.HasBombs, ItemType.GoldCoin) }, //accès labyrinthe 17x16 && bombes
-                { new Location(new LocationId("overworld-17x16-cave.tmx", "Chest_Small", new Vector3(832f, 0f, 268f)), "bombable north cave chest down right", (inventory) => CanAccessLabyrinthe17x16(inventory) && inventory.HasBombs, ItemType.GoldCoin) }, //accès labyrinthe 17x16 && bombes
-                { new Location(new LocationId("overworld-17x16-cave.tmx", "Chest_Small", new Vector3(512f, 0f, 456f)), "bombable north cave chest up left", (inventory) => CanAccessLabyrinthe17x16(inventory) && inventory.HasBombs, ItemType.GoldCoin) }, //accès labyrinthe 17x16 && bombes
-                { new Location(new LocationId("overworld-17x16-cave.tmx", "Chest_Small", new Vector3(672f, 0f, 456f)), "bombable north cave chest up center", (inventory) => CanAccessLabyrinthe17x16(inventory) && inventory.HasBombs, ItemType.GoldCoin) }, //accès labyrinthe 17x16 && bombes
-                { new Location(new LocationId("overworld-17x16-cave.tmx", "Chest_Small", new Vector3(828f, 0f, 456f)), "bombable north cave chest up right", (inventory) => CanAccessLabyrinthe17x16(inventory) && inventory.HasBombs, ItemType.GoldCoin) }, //accès labyrinthe 17x16 && bombes
-
-                { new Location(new LocationId("overworld-17x18.tmx", "Chest_Small", new Vector3(1308f, 0f, 224f)), "left blue tree chest", (inventory) => true, ItemType.GoldCoin) }, //accès labyrinthe 17x18
-
-                { new Location(new LocationId("overworld-18x17-cave.tmx", "Chest_Small", new Vector3(384f, 0f, 268f)), "entrance bombable cave chest left", (inventory) => inventory.HasBombs, ItemType.GoldCoin) }, //accès labyrinthe && bombes
-                { new Location(new LocationId("overworld-18x17-cave.tmx", "Chest_Small", new Vector3(480f, 0f, 268f)), "entrance bombable cave chest center", (inventory) => inventory.HasBombs, ItemType.GoldCoin) }, //accès labyrinthe && bombes
-                { new Location(new LocationId("overworld-18x17-cave.tmx", "Chest_Small", new Vector3(576f, 0f, 268f)), "entrance bombable cave chest right", (inventory) => inventory.HasBombs, ItemType.GoldCoin) }, //accès labyrinthe && bombes
             };
         }
     }
