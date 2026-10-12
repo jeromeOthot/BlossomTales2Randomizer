@@ -8,9 +8,33 @@ namespace BlossomTales2
         private Puppet lily = new Puppet("lily", new Vector3(0f, 0.0f, 0f));
         private Puppet grandma = new Puppet("Fake grandma", new Vector3(0f, 0f, 0f));
 
+        public extern void orig_Init();
+        public extern void orig_startScene();
         public extern void orig_equipShield();
         public extern void orig_equipSword();
         public extern void orig_endCutScene();
+
+          public void Init()
+          {
+              GameLogger.LogInfo("Intro grand-pere Init " + ModGlobals.SkipCutscenes);
+              //GameLogger.LogInfo("Test");
+              endCutScene();
+              GameLogger.LogInfo("Fin Test");
+              if(ModGlobals.SkipCutscenes)
+                  tweener.Timer(0.2f).OnComplete(endCutScene);
+              else
+                  orig_Init();
+          }
+
+        public void startScene()
+        {
+            GameLogger.LogInfo("patch_CS_LilysHouseWakeUp Init " + ModGlobals.SkipCutscenes);
+
+            if(ModGlobals.SkipCutscenes)
+                this.endCutScene();
+            else
+                orig_startScene();
+        }
 
         public void equipShield()
         {
@@ -44,8 +68,11 @@ namespace BlossomTales2
         }
 
         //hack pour skipper le tutoriel festival
-        public void endCutScene()
+        public void  endCutScene()
         {
+            Game1.Dialoger.AddLine("Start Lily House endCutScene");
+            lily = new Puppet("lily", new Vector3(0f, 0.0f, 0f));
+            Game1.Dialoger.AddLine("End Lily House endCutScene");
             if(!ModGlobals.SkipFestival)
             {
                 orig_endCutScene();
@@ -63,6 +90,7 @@ namespace BlossomTales2
 
             Game1.Globals.Engineer_State = 1;
 
+            Game1.Dialoger.AddLine("giveControlToPlayer: ");
             giveControlToPlayer(lily, false, 3);
             Game1.LOPuppets.Clear();
            // this.bedSheetLily.Zdepth = -99.5f;
