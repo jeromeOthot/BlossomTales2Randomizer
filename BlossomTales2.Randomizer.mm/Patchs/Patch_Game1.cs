@@ -52,7 +52,7 @@ namespace BlossomTales2
           player.Gold = 9999;
           player.Energy = 90f;
           player.MaxEnergy = 90f;
-          player.ShieldLevel = 2;
+          player.ShieldLevel = 3;
           player.Health = 40;
           player.MaxHealth = 40;
           Globals.First_FullHeart = false;
