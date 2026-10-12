@@ -34,7 +34,7 @@ namespace BlossomTales2.Randomizer.mm
                     "Pirate Cave Left Chest",
                     inventory => inventory.HasBombs,
                     ItemType.GoldCoin),
-                new Location(new LocationId("jungles-25x22-cave.tmx", "Chest_Small", new Vector3(288f, 0f, 488f)),
+                new Location(new LocationId("jungles-25x22-cave.tmx", "Chest_Small", new Vector3(544f, 0f, 488f)),
                     "Pirate Cave Right Chest",
                     inventory => inventory.HasBombs,
                     ItemType.GoldCoin),

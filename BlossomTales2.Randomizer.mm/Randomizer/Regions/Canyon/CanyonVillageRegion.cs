@@ -18,9 +18,9 @@ namespace BlossomTales2.Randomizer.mm.Canyon
                 {  new Location(new LocationId("overworld-16x22.tmx", "beggar", new Vector3(980f, 0f, 1616f)), "Beggar",(inventory) => true, ItemType.HeartQ_1) }, //accès canyon
 
                 //Canyon village
-                { new Location( new LocationId("canyon-shop.tmx", "canyon-shop left", Vector3.Zero), "canyon-shop  left",(inventory) => true, ItemType.Jar_Empty) },
-                { new Location(new LocationId("canyon-shop.tmx", "canyon-shop center", Vector3.Zero), "canyon-shop center ",(inventory) => true, ItemType.Crystal) },
-                { new Location(new LocationId("canyon-shop.tmx", "canyon-shop right", Vector3.Zero), "canyon-shop right",(inventory) => true, ItemType.HeartQ_1) },
+                { new Location( new LocationId("canyon-shop.tmx", "left", Vector3.Zero), "canyon-shop  left",(inventory) => true, ItemType.Jar_Empty) },
+                { new Location(new LocationId("canyon-shop.tmx", "center", Vector3.Zero), "canyon-shop center ",(inventory) => true, ItemType.Crystal) },
+                { new Location(new LocationId("canyon-shop.tmx", "right", Vector3.Zero), "canyon-shop right",(inventory) => true, ItemType.HeartQ_1) },
 
                 //House chest
                  { new Location(new LocationId("canyon-house1.tmx", "Chest_Small", new Vector3(576f, 0f, 208f)), "village house 1 chest left",(inventory) => true, ItemType.GoldCoin) }, //accès canyon

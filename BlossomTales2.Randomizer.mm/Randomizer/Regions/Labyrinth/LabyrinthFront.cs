@@ -25,11 +25,6 @@ namespace BlossomTales2.Randomizer.mm
 
                 { new Location(new LocationId("labyrinth-forge.tmx", "golemHead", new Vector3(0f, 0f, 0f)), "golem head forge", (inventory) => inventory.IngredGemCount >= 50 || inventory.HasShovel, ItemType.Sword) }, //accès labyrinthe && blue gem == 50
 
-                { new Location(new LocationId("overworld-15x18-cave.tmx", "Chest_Small", new Vector3(384f, 0f, 268f)), "bombable south cave chest down left", (inventory) => inventory.HasBombs, ItemType.GoldCoin) }, //accès labyrinthe back && bombes
-                { new Location(new LocationId("overworld-15x18-cave.tmx", "Chest_Small", new Vector3(576f, 0f, 268f)), "bombable south cave chest down right", (inventory) => inventory.HasBombs, ItemType.GoldCoin) }, //accès labyrinthe back && bombes
-                { new Location(new LocationId("overworld-15x18-cave.tmx", "Chest_Small", new Vector3(384f, 0f, 456f)), "bombable south cave chest up left", (inventory) => inventory.HasBombs, ItemType.GoldCoin) }, //accès labyrinthe back && bombes
-                { new Location(new LocationId("overworld-15x18-cave.tmx", "Chest_Small", new Vector3(572f, 0f, 456f)), "bombable south cave chest down right", (inventory) => inventory.HasBombs, ItemType.GoldCoin) }, //accès labyrinthe back && bombes
-
                 { new Location(new LocationId("overworld-16x17.tmx", "Chest_Small", new Vector3(1576f, 0f, 280f)), "village other side wall chest", (inventory) => CanAccessLabyrinthe17x16(inventory), ItemType.GoldCoin) }, //accès labyrinthe 17x16
 
                 { new Location(new LocationId("overworld-16x18.tmx", "Chest_Small", new Vector3(176f, 0f, 1452f)), "south village chest", (inventory) => true, ItemType.GoldCoin) }, //accès labyrinthe
