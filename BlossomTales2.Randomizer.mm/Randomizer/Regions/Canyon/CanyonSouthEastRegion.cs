@@ -6,7 +6,7 @@ namespace BlossomTales2.Randomizer.mm.Canyon
 {
     public class CanyonSouthEastRegion : Region
     {
-        public override bool CanAccess(Inventory inventory) => World.CanyonVillage.CanAccess(inventory);
+        public override bool CanAccess(Inventory inventory) => World.Dustwood.CanAccess(inventory);
 
 
         public CanyonSouthEastRegion(World world) : base("South East Region", world)

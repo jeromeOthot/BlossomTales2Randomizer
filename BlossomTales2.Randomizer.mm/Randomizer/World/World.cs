@@ -23,7 +23,7 @@ namespace BlossomTales2.Randomizer.mm
         public CanyonNorthRegion CanyonNorth { get; }
         public CanyonSouthWestRegion CanyonSouthWest { get; }
         public CanyonSouthEastRegion CanyonSouthEast { get; }
-        public CanyonVillageRegion CanyonVillage { get; }
+        public DustwoodRegion Dustwood { get; }
         public CanyonIslandRegion CanyonIsland { get; }
         public CanyonSteppesNorthRegion CanyonSteppesNorth { get; }
         public CanyonSteppesSouthRegion CanyonSteppesSouth { get; }
@@ -56,7 +56,7 @@ namespace BlossomTales2.Randomizer.mm
             CanyonSouthWest = new CanyonSouthWestRegion(this);
             CanyonSouthEast = new CanyonSouthEastRegion(this);
             CanyonIsland = new CanyonIslandRegion(this);
-            CanyonVillage = new CanyonVillageRegion(this);
+            Dustwood = new DustwoodRegion(this);
             CanyonSteppesNorth = new CanyonSteppesNorthRegion(this);
             CanyonSteppesSouth = new CanyonSteppesSouthRegion(this);
             CanyonTemple = new CanyonTempleRegion(this);
@@ -88,7 +88,7 @@ namespace BlossomTales2.Randomizer.mm
                 CanyonSouthWest,
                 CanyonSouthEast,
                 CanyonIsland,
-                CanyonVillage,
+                Dustwood,
                 CanyonSteppesNorth,
                 CanyonSteppesSouth,
                 CanyonTemple,
@@ -109,7 +109,7 @@ namespace BlossomTales2.Randomizer.mm
                                                                ||  JungleIsland.CanAccess(inventory) || JungleNorthEast.CanAccess(inventory);
         public bool CanAccesJungleBeach(Inventory inventory) => JungleBack.CanAccess(inventory) || JungleIsland.CanAccess(inventory);
         public bool CanAccessAnyCanyon(Inventory inventory) => CanyonNorth.CanAccess(inventory) || CanyonSouthWest.CanAccess(inventory) ||  CanyonSouthEast.CanAccess(inventory)
-                                                            ||  CanyonIsland.CanAccess(inventory) || CanyonVillage.CanAccess(inventory)
+                                                            ||  CanyonIsland.CanAccess(inventory) || Dustwood.CanAccess(inventory)
                                                             ||  CanyonSteppesNorth.CanAccess(inventory) ||  CanyonSteppesSouth.CanAccess(inventory);
         public bool CanAccessAnyDarkForest(Inventory inventory) => DarkWoodsFront.CanAccess(inventory) ||  DarkWoodsBack.CanAccess(inventory) || Monsterton.CanAccess(inventory);
         public bool CanAccessAnyLabyrinth(Inventory inventory) => LabyrinthFront.CanAccess(inventory) ||  LabyrinthBack.CanAccess(inventory) || Blockburg.CanAccess(inventory);

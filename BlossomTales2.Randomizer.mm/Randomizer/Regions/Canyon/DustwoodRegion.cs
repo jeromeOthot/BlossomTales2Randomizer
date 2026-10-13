@@ -6,11 +6,11 @@ using Microsoft.Xna.Framework;
 
 namespace BlossomTales2.Randomizer.mm.Canyon
 {
-    public class CanyonVillageRegion : Region
+    public class DustwoodRegion : Region
     {
         public override bool CanAccess(Inventory inventory) => World.CanyonSouthWest.CanAccess(inventory);
 
-        public CanyonVillageRegion(World world) : base("CanyonVillage", world)
+        public DustwoodRegion(World world) : base("Dustwood", world)
         {
             Locations = new List<Location>
             {
