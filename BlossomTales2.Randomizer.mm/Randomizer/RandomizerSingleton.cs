@@ -170,8 +170,23 @@ namespace BlossomTales2.Randomizer.mm
                 {
                     LocationId locationId = locations[i];
                     //TODO: Handle key pieces
-                    if (locationId.Equals(key1Location) || locationId.Equals(key2Location) || locationId.Equals(key3Location))
+                    if (locationId.Equals(key1Location))
+                    {
+                        _randomizedLocations.Add(locationId,  new ItemData(ItemType.KeyPiece1));
                         continue;
+                    }
+
+                    if (locationId.Equals(key2Location))
+                    {
+                        _randomizedLocations.Add(locationId,  new ItemData(ItemType.KeyPiece2));
+                        continue;
+                    }
+
+                    if (locationId.Equals(key3Location))
+                    {
+                        _randomizedLocations.Add(locationId,  new ItemData(ItemType.KeyPiece3));
+                        continue;
+                    }
 
                     _randomizedLocations.Add(locationId,  new ItemData(i < itemPool.Count ? itemPool[i] : ItemType.GoldCoin));
                 }
