@@ -1,8 +1,6 @@
-﻿﻿using System;
+﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text;
 using Microsoft.Xna.Framework;
 using Newtonsoft.Json;
 
@@ -20,7 +18,6 @@ namespace BlossomTales2.Randomizer.mm
             Instance = new RandomizerSingleton();
             Instance.InitializeSetting();
             Instance.InitializeLocations();
-
         }
 
         public void RandomizeLocations()
@@ -152,39 +149,36 @@ namespace BlossomTales2.Randomizer.mm
 
         private void PlaceItems()
         {
-            List<ItemData> itemPool = _locationsVanilla.Values.ToList();
+            List<ItemType> itemPool = new List<ItemType>();
+            itemPool.AddRange(ItemPools.CreateProgressionItemsPool());
+            itemPool.AddRange(ItemPools.CreateUsefulItemsPool());
 
             //TODO: Handle key pieces correctly
             LocationId key1Location = new LocationId("morkla-octopus.tmx", "Chest", new Vector3(896f, 0f, 624f));
             LocationId key2Location = new LocationId("temple-genieBoss.tmx", "Chest", new Vector3(832f, 0f, 640f));
             LocationId key3Location = new LocationId("mansion-bossScientist.tmx", "Chest", new Vector3(704f, 0f, 448f));
-            for (int i = itemPool.Count - 1; i >= 0; i--)
-            {
-                if(itemPool[i].Item == ItemType.KeyPiece1 ||  itemPool[i].Item == ItemType.KeyPiece2  ||  itemPool[i].Item == ItemType.KeyPiece3)
-                    itemPool.RemoveAt(i);
-            }
 
             //TODO: Place items with logic
             bool isValid;
             int tries = 0;
             do
             {
-                ShuffleList(itemPool);
+                List<LocationId> locations = new List<LocationId>(_locationsVanilla.Keys);
+                ShuffleList(locations);
                 _randomizedLocations = new Dictionary<LocationId, ItemData>();
-                List<LocationId> keyList = _locationsVanilla.Keys.ToList();
-                for (int i = 0; i < keyList.Count; i++)
+                for (int i = 0; i < locations.Count; i++)
                 {
-                    LocationId locationId = keyList[i];
+                    LocationId locationId = locations[i];
                     //TODO: Handle key pieces
                     if (locationId.Equals(key1Location) || locationId.Equals(key2Location) || locationId.Equals(key3Location))
                         continue;
 
-                    _randomizedLocations.Add(locationId, itemPool[i]);
+                    _randomizedLocations.Add(locationId,  new ItemData(i < itemPool.Count ? itemPool[i] : ItemType.GoldCoin));
                 }
 
                 isValid = Validator.ValidateSeed(_randomizedLocations);
                 tries++;
-            } while (!isValid && tries < 100000);
+            } while (!isValid && tries < 1000);
 
             if (isValid)
             {
@@ -203,13 +197,13 @@ namespace BlossomTales2.Randomizer.mm
             }
         }
 
-        private void ShuffleList(List<ItemData> list)
+        private void ShuffleList<T>(List<T> list)
         {
             //Fisher-yates shuffle
             for (int i = list.Count - 1; i > 0; i--)
             {
                 int j = _random.Next(0, i+1);
-                ItemData temp = list[i];
+                T temp = list[i];
                 list[i] = list[j];
                 list[j] = temp;
             }
