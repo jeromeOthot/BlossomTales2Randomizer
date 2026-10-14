@@ -12,8 +12,8 @@ namespace BlossomTales2.Randomizer.mm.Canyon
     {
         public override bool CanAccess(Inventory inventory) => World.CanyonNorth.CanAccess(inventory) && inventory.CanOpenNoteDoor;
 
-        private bool CanAccessTemple2(Inventory inventory) => CanAccess(inventory) && inventory.HasKeys;
-        private bool CanAccessTemple3(Inventory inventory) => CanAccessTemple2(inventory) && inventory.CanSwitchLevers && inventory.HasKeys && inventory.CanDoDamage;
+        private bool CanAccessTemple2(Inventory inventory) => CanAccess(inventory) && inventory.GoldKeyCount >= 7;
+        private bool CanAccessTemple3(Inventory inventory) => CanAccessTemple2(inventory) && inventory.CanSwitchLevers && inventory.GoldKeyCount >= 8 && inventory.CanDoDamage;
         private bool CanAccessTemple4(Inventory inventory) => CanAccessTemple3(inventory) && inventory.HasGrappleHook;
 
         public CanyonTempleRegion(World world) : base("CanyonTemple", world)
@@ -75,7 +75,7 @@ namespace BlossomTales2.Randomizer.mm.Canyon
                     ItemType.HeartQ_1), //accès temple 4 && bombes
                 new Location(new LocationId("temple-vultureBoss.tmx", "Chest", new Vector3(768f, 0f, 640f)),
                     "Vulture Boss Chest",
-                    inventory => CanAccessTemple3(inventory) && (inventory.HasKeys || inventory.HasGrappleHook) && inventory.CanDoDamage,
+                    inventory => CanAccessTemple3(inventory) && (inventory.GoldKeyCount >= 9 || inventory.HasGrappleHook) && inventory.CanDoDamage,
                     ItemType.GrappleHook), //accès temple 3 && (clé || grappin) && damage
                 new Location(new LocationId("temple-genieBoss.tmx", "BossGenie", Vector3.Zero),
                     "Genie Boss Reward",inventory => CanAccessTemple4(inventory) && inventory.HasTorch,

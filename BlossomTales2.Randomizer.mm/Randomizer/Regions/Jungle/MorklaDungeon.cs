@@ -66,7 +66,7 @@ namespace BlossomTales2.Randomizer.mm
                     ItemType.GreenGem),
                 new Location(new LocationId("morkla-pirateBoss.tmx", "Chest", new Vector3(768f, 0f, 640f)),
                     "Pirate Boss Chest",
-                    inventory => inventory.CanDoDamage && (inventory.HasTorch && inventory.CanHitWaterLevers && inventory.HasKeys || inventory.HasFlipper),
+                    inventory => inventory.CanDoDamage && (inventory.HasTorch && inventory.CanHitWaterLevers && inventory.GoldKeyCount >= 9 || inventory.HasFlipper),
                     ItemType.KeyPiece1),
                 new Location(new LocationId("morkla-octopus.tmx", "BossOctopus", Vector3.Zero),
                     "Octopus Boss Reward",

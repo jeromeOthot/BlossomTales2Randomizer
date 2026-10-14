@@ -18,15 +18,15 @@ namespace BlossomTales2.Randomizer.mm
                     ItemType.Gold_Key),
                 new Location(new LocationId("orchid-tomb-4.tmx", "orchid_heart", new Vector3(604f, 0f, 304f)),
                     "King Orchid Reward",
-                    inventory => inventory.HasKeys && inventory.HasTorch && inventory.CanDoDamage,
+                    inventory => inventory.GoldKeyCount >= 9 && inventory.HasTorch && inventory.CanDoDamage,
                     ItemType.HeartQ_4),
                 new Location(new LocationId("orchid-tomb-4.tmx", "orchid_sword", new Vector3(604f, 0f, 304f)),
                     "King Orchid Sword",
-                    inventory => inventory.HasKeys && inventory.HasTorch && inventory.CanDoDamage,
+                    inventory => inventory.GoldKeyCount >= 9 && inventory.HasTorch && inventory.CanDoDamage,
                     ItemType.Sword),
                 new Location(new LocationId("orchid-tomb-4.tmx", "orchid_shield", new Vector3(604f, 0f, 304f)),
                     "King Orchid Shield",
-                    inventory => inventory.HasKeys && inventory.HasTorch && inventory.CanDoDamage,
+                    inventory => inventory.GoldKeyCount >= 9 && inventory.HasTorch && inventory.CanDoDamage,
                     ItemType.Shield)
             };
         }
