@@ -61,7 +61,10 @@ namespace BlossomTales2
             orig_endScene();
 
             if (ModGlobals.OpenWorldState)
+            {
                 Game1.Globals.MainQuestObjective = mainGameObjective;
+                Game1Extensions.MarkObjectiveComplete(Globaler.MainGameObjective.dark_talkToOwl);
+            }
         }
 
         private void Mod_GiveItem()
@@ -108,7 +111,7 @@ namespace MonoMod
             //ModCSOwl.Mod_IsTalkToOwlObjectiveNotComplete()
             cursor.RemoveRange(4);
             cursor.Emit(OpCodes.Call, mod_IsTalkToOwlObjectiveNotCompleted);
-            cursor.Emit(OpCodes.Brfalse, returnLabel);
+            cursor.Emit(OpCodes.Brtrue, returnLabel);
         }
     }
 }
