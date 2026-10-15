@@ -7,6 +7,7 @@ namespace BlossomTales2.Randomizer.mm
     public class OrchidTomb : Region
     {
         public override bool CanAccess(Inventory inventory) => inventory.HasTorch;
+        public override int Locks => 1;
 
         public OrchidTomb(World world) : base("King Orchid's Tomb", world)
         {
@@ -18,17 +19,27 @@ namespace BlossomTales2.Randomizer.mm
                     ItemType.Gold_Key),
                 new Location(new LocationId("orchid-tomb-4.tmx", "orchid_heart", new Vector3(604f, 0f, 304f)),
                     "King Orchid Reward",
-                    inventory => inventory.GoldKeyCount >= 9 && inventory.HasTorch && inventory.CanDoDamage,
+                    inventory => inventory.GoldKeyCount >= RequiredKeyCount(inventory) && inventory.HasTorch && inventory.CanDoDamage,
                     ItemType.HeartQ_4),
                 new Location(new LocationId("orchid-tomb-4.tmx", "orchid_sword", new Vector3(604f, 0f, 304f)),
                     "King Orchid Sword",
-                    inventory => inventory.GoldKeyCount >= 9 && inventory.HasTorch && inventory.CanDoDamage,
+                    inventory => inventory.GoldKeyCount >= RequiredKeyCount(inventory) && inventory.HasTorch && inventory.CanDoDamage,
                     ItemType.Sword),
                 new Location(new LocationId("orchid-tomb-4.tmx", "orchid_shield", new Vector3(604f, 0f, 304f)),
                     "King Orchid Shield",
-                    inventory => inventory.GoldKeyCount >= 9 && inventory.HasTorch && inventory.CanDoDamage,
+                    inventory => inventory.GoldKeyCount >= RequiredKeyCount(inventory) && inventory.HasTorch && inventory.CanDoDamage,
                     ItemType.Shield)
             };
+        }
+
+        private int RequiredKeyCount(Inventory inventory)
+        {
+            int keyCount = Locks;
+            keyCount += World.MorklaDungeon.CanAccess(inventory) ? World.MorklaDungeon.Locks : 0;
+            keyCount += World.CanyonTemple.CanAccess(inventory) ? World.CanyonTemple.Locks : 0;
+            keyCount += World.MansionDungeon.CanAccess(inventory) ? World.MansionDungeon.Locks : 0;
+            keyCount += World.MinotaurCastle.CanAccess(inventory) ? World.MinotaurCastle.Locks : 0;
+            return keyCount;
         }
     }
 }

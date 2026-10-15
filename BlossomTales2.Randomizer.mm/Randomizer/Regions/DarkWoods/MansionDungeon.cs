@@ -7,10 +7,10 @@ namespace BlossomTales2.Randomizer.mm
     public class MansionDungeon : Region
     {
         public override bool CanAccess(Inventory inventory) => World.DarkWoodsBack.CanAccess(inventory) && inventory.HasBoomerang;
-
-        private bool CanAccessMansion2(Inventory inventory) => CanAccess(inventory) && inventory.GoldKeyCount >= 6 && inventory.CanDoDamage;
+        public override int Locks => 4;
+        private bool CanAccessMansion2(Inventory inventory) => CanAccess(inventory) && inventory.GoldKeyCount >= RequiredKeyCount(inventory) + 1 && inventory.CanDoDamage;
         private bool CanAccessMansion3(Inventory inventory) => CanAccessMansion2(inventory) && inventory.HasRexTeleporter;
-        private bool CanAccessMansionBoss(Inventory inventory) => CanAccessMansion3(inventory) && inventory.GoldKeyCount >= 9  && inventory.CanDoDamage && inventory.HasRexTeleporter;
+        private bool CanAccessMansionBoss(Inventory inventory) => CanAccessMansion3(inventory) && inventory.GoldKeyCount >= RequiredKeyCount(inventory) + 4  && inventory.CanDoDamage && inventory.HasRexTeleporter;
 
         public MansionDungeon(World world) : base("Mansion", world)
         {
@@ -50,7 +50,7 @@ namespace BlossomTales2.Randomizer.mm
                     ItemType.Gold_Key),
                 new Location(new LocationId("mansion-bossVampire.tmx", "Chest", new Vector3(704f, 0f, 448f)),
                     "Vampire Boss Chest",
-                    inventory => CanAccessMansion2(inventory) && inventory.GoldKeyCount >= 9 && inventory.CanDoDamage,
+                    inventory => CanAccessMansion2(inventory) && inventory.GoldKeyCount >= RequiredKeyCount(inventory) + 4 && inventory.CanDoDamage,
                     ItemType.RexTeleporter),
                 new Location(new LocationId("mansion-bossScientist.tmx", "BossScientist", Vector3.Zero),
                     "Scientist Boss Reward",
@@ -61,6 +61,16 @@ namespace BlossomTales2.Randomizer.mm
                     inventory => CanAccessMansionBoss(inventory),
                     ItemType.HeartQ_4)
             };
+        }
+
+        private int RequiredKeyCount(Inventory inventory)
+        {
+            int keyCount = 0;
+            keyCount += World.OrchidTomb.CanAccess(inventory) ? World.OrchidTomb.Locks : 0;
+            keyCount += World.MorklaDungeon.CanAccess(inventory) ? World.MorklaDungeon.Locks : 0;
+            keyCount += World.CanyonTemple.CanAccess(inventory) ? World.CanyonTemple.Locks : 0;
+            keyCount += World.MinotaurCastle.CanAccess(inventory) ? World.MinotaurCastle.Locks : 0;
+            return keyCount;
         }
     }
 }
