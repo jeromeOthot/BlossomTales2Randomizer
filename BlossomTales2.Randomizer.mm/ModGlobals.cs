@@ -3,8 +3,6 @@
     public static class ModGlobals
     {
         public static bool SkipCutscenes = true;
-        public static bool SkipFestival = true;
-        public static bool SkipInvasion = true;
         public static bool OpenWorldState = true;
         public static bool RandomizeColiseumCoins = false;
     }
