@@ -149,51 +149,21 @@ namespace BlossomTales2.Randomizer.mm
 
         private void PlaceItems()
         {
-            List<ItemType> itemPool = new List<ItemType>();
-            itemPool.AddRange(ItemPools.CreateProgressionItemsPool());
-            itemPool.AddRange(ItemPools.CreateUsefulItemsPool());
 
-            //TODO: Handle key pieces correctly
-            LocationId key1Location = new LocationId("morkla-octopus.tmx", "Chest", new Vector3(896f, 0f, 624f));
-            LocationId key2Location = new LocationId("temple-genieBoss.tmx", "Chest", new Vector3(832f, 0f, 640f));
-            LocationId key3Location = new LocationId("mansion-bossScientist.tmx", "Chest", new Vector3(704f, 0f, 448f));
 
-            //TODO: Place items with logic
             bool isValid;
             int tries = 0;
             do
             {
-                List<LocationId> locations = new List<LocationId>(_locationsVanilla.Keys);
-                ShuffleList(locations);
-                _randomizedLocations = new Dictionary<LocationId, ItemData>();
-                for (int i = 0; i < locations.Count; i++)
+                tries++;
+                isValid = FillLocations();
+                if (!isValid)
                 {
-                    LocationId locationId = locations[i];
-                    //TODO: Handle key pieces
-                    if (locationId.Equals(key1Location))
-                    {
-                        _randomizedLocations.Add(locationId,  new ItemData(ItemType.KeyPiece1));
-                        continue;
-                    }
-
-                    if (locationId.Equals(key2Location))
-                    {
-                        _randomizedLocations.Add(locationId,  new ItemData(ItemType.KeyPiece2));
-                        continue;
-                    }
-
-                    if (locationId.Equals(key3Location))
-                    {
-                        _randomizedLocations.Add(locationId,  new ItemData(ItemType.KeyPiece3));
-                        continue;
-                    }
-
-                    _randomizedLocations.Add(locationId,  new ItemData(i < itemPool.Count ? itemPool[i] : ItemType.GoldCoin));
+                    continue;
                 }
 
                 isValid = Validator.ValidateSeed(_randomizedLocations);
-                tries++;
-            } while (!isValid && tries < 1000);
+            } while (!isValid && tries <= 1000);
 
             if (isValid)
             {
@@ -210,6 +180,82 @@ namespace BlossomTales2.Randomizer.mm
                 GameLogger.LogInfo("Too many tries. Setting game as vanilla.");
                 _randomizedLocations = _locationsVanilla;
             }
+        }
+
+        private bool FillLocations()
+        {
+            // List<ItemType> itemPool = new List<ItemType>();
+            // itemPool.AddRange(ItemPools.CreateProgressionItemsPool());
+            // itemPool.AddRange(ItemPools.CreateUsefulItemsPool());
+
+            //TODO: Handle key pieces correctly
+            LocationId key1Location = new LocationId("morkla-octopus.tmx", "Chest", new Vector3(896f, 0f, 624f));
+            LocationId key2Location = new LocationId("temple-genieBoss.tmx", "Chest", new Vector3(832f, 0f, 640f));
+            LocationId key3Location = new LocationId("mansion-bossScientist.tmx", "Chest", new Vector3(704f, 0f, 448f));
+
+            _randomizedLocations = new Dictionary<LocationId, ItemData>();
+            //Place key pieces
+            List<ItemType> keyPool = new List<ItemType>(ItemPools.CreateKeyRewardsPool());
+            ShuffleList(keyPool);
+            _randomizedLocations.Add(key1Location, new ItemData(keyPool[0]));
+            _randomizedLocations.Add(key2Location, new ItemData(keyPool[1]));
+            _randomizedLocations.Add(key3Location, new ItemData(keyPool[2]));
+
+            World world = new World();
+            List<Location> locations = world.CollectLocations();
+            for (int i = locations.Count - 1; i >= 0; i--)
+            {
+                Location locationId = locations[i];
+                //TODO: Handle key pieces
+                if (locationId.Id.Equals(key1Location) ||  locationId.Id.Equals(key2Location) || locationId.Id.Equals(key3Location))
+                    locations.RemoveAt(i);
+            }
+
+            ShuffleList(locations);
+
+            Inventory assumedInventory = new Inventory(world);
+            List<ItemType> progressionPool = new List<ItemType>(ItemPools.CreateProgressionItemsPool());
+            List<ItemType> usefulItemsPool = new List<ItemType>(ItemPools.CreateUsefulItemsPool());
+            assumedInventory.AddItem(progressionPool);
+            assumedInventory.AddItem(usefulItemsPool);
+            ShuffleList(progressionPool);
+            ShuffleList(usefulItemsPool);
+            //Place progression item
+
+            foreach (ItemType itemToPlace in progressionPool)
+            {
+                assumedInventory.RemoveItem(itemToPlace, 1);
+                Location assignableLocation = locations.Find(loc => loc.CanAccess(assumedInventory));
+                if (assignableLocation == null)
+                {
+                    //Pas trouvé location
+                    GameLogger.LogInfo($"Cannot place {itemToPlace}, seed not valid");
+                    return false;
+                }
+                assignableLocation.Item = itemToPlace;
+                locations.Remove(assignableLocation);
+                _randomizedLocations.Add(assignableLocation.Id, new ItemData(itemToPlace));
+            }
+
+            foreach (ItemType itemToPlace in usefulItemsPool)
+            {
+                assumedInventory.RemoveItem(itemToPlace, 1);
+                Location assignableLocation = locations.Find(loc => loc.CanAccess(assumedInventory));
+                if (assignableLocation == null)
+                {
+                    //Pas trouvé location
+                    GameLogger.LogInfo($"Cannot place {itemToPlace}, seed not valid");
+                    return false;
+                }
+                assignableLocation.Item = itemToPlace;
+                locations.Remove(assignableLocation);
+                _randomizedLocations.Add(assignableLocation.Id, new ItemData(itemToPlace));
+            }
+
+            foreach (Location remainingLocation in locations)
+                _randomizedLocations.Add(remainingLocation.Id, new ItemData(ItemType.GoldCoin));
+
+            return true;
         }
 
         private void ShuffleList<T>(List<T> list)

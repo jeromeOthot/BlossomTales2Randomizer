@@ -22,7 +22,6 @@ namespace BlossomTales2.Randomizer.mm
             { ItemType.GreenGem, 1},
             { ItemType.Gold_Key, 11},
             { ItemType.OpenSesame, 1},
-            { ItemType.WakeUp, 1},
         };
 
         private static readonly IReadOnlyDictionary<ItemType, int> s_usefulItems = new Dictionary<ItemType, int>()
@@ -39,6 +38,7 @@ namespace BlossomTales2.Randomizer.mm
             { ItemType.CanyonBone, 20},
             { ItemType.CombatScroll, 4},
             { ItemType.HeartNecklace, 1},
+            { ItemType.WakeUp, 1},
             { ItemType.CallHorse, 1},
             { ItemType.SummonBalloon, 1},
             { ItemType.GrandpaHint, 1},
