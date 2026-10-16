@@ -8,7 +8,7 @@ namespace BlossomTales2.Randomizer.mm
         public string Name { get; set; }
         public Predicate<Inventory> CanAccess { get; set; }
         public ItemType VanillaItem { get; set; }
-        public ItemType Item { get; set; }
+        public ItemType Item { get; set; } = ItemType.None;
         public bool HasCollectedItem { get; set; }
 
         public Location(LocationId id, string name,  Predicate<Inventory> canAccess, ItemType vanillaItem)

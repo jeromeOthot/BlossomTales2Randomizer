@@ -10,6 +10,7 @@ namespace BlossomTales2.Randomizer.mm
         //public List<Region> Regions { get; private set; } = new List<Region>();
         public List<Location> Locations { get; set; } = new List<Location>();
         public abstract bool CanAccess(Inventory inventory);
+        public virtual int Locks => 0;
 
         protected World World { get ; private set; }
 

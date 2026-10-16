@@ -7,10 +7,10 @@ namespace BlossomTales2.Randomizer.mm
     public class MinotaurCastle : Region
     {
         public override bool CanAccess(Inventory inventory) => World.LabyrinthBack.CanAccessLabyrinth15x16(inventory);
-
+        public override int Locks => 2;
         private bool CanAccessCastle2(Inventory inventory) => CanAccess(inventory) && inventory.HasRexTeleporter && inventory.HasGrappleHook && inventory.CanSwitchLevers && inventory.HasBow;
-        private bool CanAccessCastle3(Inventory inventory) => CanAccess(inventory) && inventory.HasKeys;
-        private bool CanAccessCastle4(Inventory inventory) => CanAccessCastle3(inventory) && inventory.HasKeys;
+        private bool CanAccessCastle3(Inventory inventory) => CanAccess(inventory) && inventory.GoldKeyCount >= RequiredKeyCount(inventory) + 1;
+        private bool CanAccessCastle4(Inventory inventory) => CanAccessCastle3(inventory) && inventory.GoldKeyCount >= RequiredKeyCount(inventory) + 2;
         private bool CanAccessCastle5(Inventory inventory) => CanAccessCastle4(inventory)
                                                                       && inventory.HasGrappleHook && inventory.HasRexTeleporter && inventory.HasTorch && inventory.CanSwitchLevers
                                                                       && (inventory.HasMirrorShield || inventory.CanDoDamage);
@@ -43,6 +43,16 @@ namespace BlossomTales2.Randomizer.mm
                     inventory => CanAccessCastle5(inventory),
                     ItemType.GoldCoin),
             };
+        }
+
+        private int RequiredKeyCount(Inventory inventory)
+        {
+            int keyCount = 0;
+            keyCount += World.OrchidTomb.CanAccess(inventory) ? World.OrchidTomb.Locks : 0;
+            keyCount += World.MorklaDungeon.CanAccess(inventory) ? World.MorklaDungeon.Locks : 0;
+            keyCount += World.CanyonTemple.CanAccess(inventory) ? World.CanyonTemple.Locks : 0;
+            keyCount += World.MansionDungeon.CanAccess(inventory) ? World.MansionDungeon.Locks : 0;
+            return keyCount;
         }
     }
 }

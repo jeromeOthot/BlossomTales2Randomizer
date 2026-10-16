@@ -24,6 +24,9 @@ namespace BlossomTales2
                 case 102:
                     BlacksmithDialog();
                     break;
+                case 103:
+                    DarkOwlDialog();
+                    break;
                 case 109:
                     FarmerConnyDialog();
                     break;
@@ -248,6 +251,21 @@ namespace BlossomTales2
             else if (Game1.Globals.Blacksmith_State == 4)
             {
                 Game1.Dialoger.AddLine("Blacksmith: You enjoying that <R>Bow?");
+            }
+        }
+
+        private static void DarkOwlDialog()
+        {
+            if (!Game1Extensions.IsObjectiveCompleted(Globaler.MainGameObjective.dark_talkToOwl))
+            {
+                randomLines = new string[2] { "Owl: zzzZZZzzzZZZ...", "Owl: hoo ZZZ hooo..." };
+                Game1.Dialoger.AddLine(randomLines[Game1.RandomNumber.Next(randomLines.Length)]);
+            }
+            else
+            {
+                Game1.playSoundCue("blank124");
+                randomLines = new string[1] { "Owl: Be careful on your quest." };
+                Game1.Dialoger.AddLine(randomLines[Game1.RandomNumber.Next(randomLines.Length)]);
             }
         }
 

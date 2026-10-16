@@ -46,6 +46,7 @@ namespace BlossomTales2
         public extern void orig_onCollision(string xz, Player entity);
         public override void onCollision(string xz, Player entity)
         {
+            GameLogger.LogInfo("onCollision: " + IDNumber);
             if (!Alive || Position.Y >= 4.0 && IDNumber != 0 || Game1.player.InWater)
                 return;
 
