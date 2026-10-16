@@ -62,7 +62,7 @@ namespace BlossomTales2.Randomizer.mm
 
         public ItemData GetItemByNameAndLocation(string name, Vector3 position)
         {
-            if (TryGetItemAtLocation(Game1.CurrentLevel.Name ,name, position, out ItemData item))
+            if (TryGetItemAtLocation(Game1.CurrentLevel.Name, name, position, out ItemData item))
                 return item;
             return null;
         }

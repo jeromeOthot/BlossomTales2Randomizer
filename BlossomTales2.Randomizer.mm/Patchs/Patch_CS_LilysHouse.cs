@@ -21,16 +21,14 @@ namespace BlossomTales2
               //endCutScene();
               GameLogger.LogInfo("Fin Test");
               if(ModGlobals.SkipCutscenes)
-                  tweener.Timer(0.2f).OnComplete(endCutScene);
+                  tweener.Timer(0.2f).OnComplete(equipShield);
               else
                   orig_Init();
           }
 
         public void startScene()
         {
-            GameLogger.LogInfo("patch_CS_LilysHouseWakeUp Init " + ModGlobals.SkipCutscenes);
-
-            if(ModGlobals.SkipCutscenes)
+            if (ModGlobals.SkipCutscenes)
                 this.endCutScene();
             else
                 orig_startScene();
@@ -38,13 +36,17 @@ namespace BlossomTales2
 
         public void equipShield()
         {
-            //TODO: Move later if we skip cutscene.
+            if (ModGlobals.SkipCutscenes)
+            {
+                lily = new Puppet("lily", new Vector3(480, 0, 428));
+            }
+            RandomizerSingleton.Instance.GiveItemAtLocation("Grandma 1", new Vector3(480f, 0f, 328f));
+
             Game1.player.SwordLevel = 0;
             Game1.player.Position = lily.getPosition();
 
             lily.play("getItem");
             Game1.playSoundCue("newWeapon");
-            Mod_GrandmaGiveItem("_1");
             tweener.Timer(2.3f).OnComplete(delegate
             {
                 lily.play("idleDown");
@@ -56,7 +58,8 @@ namespace BlossomTales2
         {
             lily.play("getItem");
             Game1.playSoundCue("newWeapon");
-            Mod_GrandmaGiveItem("_2");
+            RandomizerSingleton.Instance.GiveItemAtLocation("Grandma 2", new Vector3(480f, 0f, 328f));
+
             tweener.Timer(2.3f).OnComplete(delegate
             {
                 lily.play("idleDown");
@@ -70,9 +73,6 @@ namespace BlossomTales2
         //hack pour skipper le tutoriel festival
         public void  endCutScene()
         {
-            GameLogger.LogInfo("Start Lily House endCutScene");
-            lily = new Puppet("lily", new Vector3(0f, 0.0f, 0f));
-            GameLogger.LogInfo("End Lily House endCutScene");
             if(!ModGlobals.SkipFestival)
             {
                 orig_endCutScene();
@@ -90,7 +90,6 @@ namespace BlossomTales2
 
             Game1.Globals.Engineer_State = 1;
 
-            GameLogger.LogInfo("giveControlToPlayer: ");
             giveControlToPlayer(lily, false, 3);
             Game1.LOPuppets.Clear();
            // this.bedSheetLily.Zdepth = -99.5f;
@@ -99,11 +98,12 @@ namespace BlossomTales2
             //Game1.LOPuppets.Add(this.bedSheetChrys);
             Game1.Gui.HideHud = false;
             //grandma.play("hide");
+            /*
             NPC npc = new NPC(new Vector3(480, 0, 328));
             npc.IDNumber = 6;
             npc.linePointer = 199;
             Game1.CurrentLevel.LevelObjects.Add(npc);
-            Running = false;
+            Running = false; */
 
             //Mettre cette ligne si on veut commencer une game avec tout pour debbuger
             //patch_Game1.UnlockAllForDebug();
@@ -111,7 +111,6 @@ namespace BlossomTales2
 
         private void Mod_GrandmaGiveItem(string locationName)
         {
-            GameLogger.LogInfo(Game1.CurrentLevel.Name + " " + grandma.name + " " + grandma.getPosition());
             RandomizerSingleton.Instance.GiveItemAtLocation(grandma.name + locationName, grandma.getPosition());
         }
     }
