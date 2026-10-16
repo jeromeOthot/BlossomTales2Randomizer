@@ -166,6 +166,12 @@ namespace BlossomTales2.Randomizer.mm
                 Items.Add(itemType, amount);
         }
 
+        public void AddItem(List<ItemType> items)
+        {
+            foreach(ItemType itemType in items)
+                AddItem(itemType, 1);
+        }
+
         public void RemoveItem(ItemType itemType, int amount)
         {
             if (Items.ContainsKey(itemType))
