@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 
 namespace BlossomTales2.Randomizer.mm
@@ -44,7 +43,7 @@ namespace BlossomTales2.Randomizer.mm
                     _ => true,
                     ItemType.GoldCoin),
                 new Location(new LocationId("jungles-23x20.tmx", "Chest_Small", new Vector3(2264f, 0f, 1928f)),
-                    "Anchortown Back Chest",
+                    "Waterfall North Chest",
                     _ => true,
                     ItemType.GoldCoin),
             };

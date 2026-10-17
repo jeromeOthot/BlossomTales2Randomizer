@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 
 namespace BlossomTales2.Randomizer.mm
@@ -14,53 +13,49 @@ namespace BlossomTales2.Randomizer.mm
             Locations = new List<Location>
             {
                 //Side quest
-                {
-                    new Location(new LocationId("darklands-house4.tmx", "sickZombie", new Vector3(352f, 0f, 268f)),
-                        "sick zombie", (inventory) => inventory.CanCraftPotion(ItemType.Jar_Fire) && World.CanyonNorth.CanAccess(inventory), ItemType.HeartQ_1)
-                }, //accès monsterton && bouteille && accès canyon
-
+                new Location(new LocationId("darklands-house4.tmx", "sickZombie", new Vector3(352f, 0f, 268f)),
+                    "Sick Zombie Reward",
+                    inventory => inventory.CanCraftPotion(ItemType.Jar_Fire),
+                    ItemType.HeartQ_1),
                 //NPC
-                {
-                    new Location(new LocationId("darklands-house2-floor2.tmx", "bard_song", new Vector3(0f, 0f, 0f)),
-                        "bard song", (inventory) => true,ItemType.WakeUp)
-                }, //accès monsterton
-
-                //Darklands village shop
-                {
-                    new Location(new LocationId("darklands-house2-shop.tmx", "left", Vector3.Zero),
-                        "shop left", (inventory) => true, ItemType.Jar_Empty)
-                },
-                {
-                    new Location(new LocationId("darklands-house2-shop.tmx", "center", Vector3.Zero),
-                        "shop center", (inventory) => true,ItemType.Crystal)
-                },
-                {
-                    new Location(new LocationId("darklands-house2-shop.tmx", "right", Vector3.Zero),
-                        "shop right", (inventory) => true,ItemType.HeartQ_1)
-                },
-
+                new Location(new LocationId("darklands-house2-floor2.tmx", "bard_song", Vector3.Zero),
+                    "Shop Bard Song",
+                    _ => true,
+                    ItemType.WakeUp),
+                //Shops
+                new Location(new LocationId("darklands-house2-shop.tmx", "left", Vector3.Zero),
+                    "Shop Left Item",
+                    _ => true,
+                    ItemType.Jar_Empty),
+                new Location(new LocationId("darklands-house2-shop.tmx", "center", Vector3.Zero),
+                    "Shop Middle Item",
+                    _ => true,
+                    ItemType.Crystal),
+                new Location(new LocationId("darklands-house2-shop.tmx", "right", Vector3.Zero),
+                    "Shop Right Item",
+                    _ => true,
+                    ItemType.HeartQ_1),
                 //Chest
-                {
-                    new Location(new LocationId("overworld-23x17.tmx", "Chest_Small", new Vector3(2176f, 0f, 704f)),
-                        "left village chest", (inventory) => true,ItemType.GoldCoin)
-                }, //accès monsterton
-                {
-                    new Location(new LocationId("overworld-24x17.tmx", "Chest_Small", new Vector3(352f, 0f, 244f)),
-                        "burried chest", (inventory) => inventory.HasShovel && inventory.HasJar, ItemType.Crystal)
-                }, //accès monsterton && bouteille && pelle  pelle id=3
-                {
-                    new Location(
-                        new LocationId("darklands-house2-floor2.tmx", "Chest_Small", new Vector3(284f, 0f, 496f)),
-                        "shop 2nd floor chest", (inventory) => true,ItemType.GoldCoin)
-                }, //accès monsterton
-                {
-                    new Location(new LocationId("darklands-house6.tmx", "Chest_Small", new Vector3(264f, 0f, 428f)),
-                        "house north push table chest", (inventory) => true,ItemType.GoldCoin)
-                }, //accès monsterton
-                {
-                    new Location(new LocationId("darklands-house7.tmx", "Chest_Small", new Vector3(320f, 0f, 380f)),
-                        "house south chest", (inventory) => true, ItemType.GoldCoin)
-                }, //accès monsterton
+                new Location(new LocationId("overworld-23x17.tmx", "Chest_Small", new Vector3(2176f, 0f, 704f)),
+                    "Ledge Chest",
+                    _ => true,
+                    ItemType.GoldCoin),
+                new Location(new LocationId("overworld-24x17.tmx", "Chest_Small", new Vector3(352f, 0f, 244f)),
+                    "Ghost Buried Chest",
+                    inventory => inventory.CanCraftPotion(ItemType.Jar_Ghost) && inventory.HasShovel,
+                    ItemType.Crystal),
+                new Location(new LocationId("darklands-house2-floor2.tmx", "Chest_Small", new Vector3(284f, 0f, 496f)),
+                    "Shop 2nd Floor Chest",
+                    _ => true,
+                    ItemType.GoldCoin),
+                new Location(new LocationId("darklands-house6.tmx", "Chest_Small", new Vector3(264f, 0f, 428f)),
+                    "South House Chest",
+                    _ => true,
+                    ItemType.GoldCoin),
+                new Location(new LocationId("darklands-house7.tmx", "Chest_Small", new Vector3(320f, 0f, 380f)),
+                    "North House Table Chest",
+                    _ => true,
+                    ItemType.GoldCoin),
             };
         }
     }

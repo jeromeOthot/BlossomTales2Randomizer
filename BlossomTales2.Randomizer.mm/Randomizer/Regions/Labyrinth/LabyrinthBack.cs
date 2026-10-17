@@ -14,19 +14,19 @@ namespace BlossomTales2.Randomizer.mm
             {
                 //Caves
                 new Location(new LocationId("overworld-15x18-cave.tmx", "Chest_Small", new Vector3(384f, 0f, 268f)),
-                    "Bombable Cave Top Left Chest",
+                    "Bomb Cave Top Left Chest",
                     inventory => inventory.HasBombs,
                     ItemType.GoldCoin),
                 new Location(new LocationId("overworld-15x18-cave.tmx", "Chest_Small", new Vector3(576f, 0f, 268f)),
-                    "Bombable Cave Top Right Chest",
+                    "Bomb Cave Top Right Chest",
                     inventory => inventory.HasBombs,
                     ItemType.GoldCoin),
                 new Location(new LocationId("overworld-15x18-cave.tmx", "Chest_Small", new Vector3(384f, 0f, 456f)),
-                    "Bombable Cave Bottom Left Chest",
+                    "Bomb Cave Bottom Left Chest",
                     inventory =>  inventory.HasBombs,
                     ItemType.GoldCoin),
                 new Location(new LocationId("overworld-15x18-cave.tmx", "Chest_Small", new Vector3(572f, 0f, 456f)),
-                    "Bombable Cave Bottom Right Chest",
+                    "Bomb Cave Bottom Right Chest",
                     inventory => inventory.HasBombs,
                     ItemType.GoldCoin),
                 //Chests
@@ -35,11 +35,11 @@ namespace BlossomTales2.Randomizer.mm
                     inventory => CanAccessLabyrinth15x16(inventory),
                     ItemType.GoldCoin),
                 new Location(new LocationId("overworld-15x17.tmx", "Chest_Small", new Vector3(2392f, 0f, 2348f)),
-                    "center far west chest",
+                    "Statue Puzzle Zrea Chest",
                     inventory => true,
                     ItemType.GoldCoin),
                 new Location(new LocationId("overworld-15x18.tmx", "Chest_Small", new Vector3(1948f, 0f, 292f)),
-                    "south far west chest",
+                    "Cyclops Area Chest",
                     inventory => true,
                     ItemType.GoldCoin)
             };

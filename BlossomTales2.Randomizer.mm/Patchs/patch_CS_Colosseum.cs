@@ -90,13 +90,13 @@ namespace BlossomTales2
 
         public void giveHeart()
         {
-            RandomizerSingleton.Instance.GiveItemAtLocation("price_heart", Vector3.Zero);
+            RandomizerSingleton.Instance.GiveItemAtLocation("prize_heart", Vector3.Zero);
             tweener.Timer(3f).OnComplete(preCrystal);
         }
 
         public void giveCrystal()
         {
-            RandomizerSingleton.Instance.GiveItemAtLocation("price_crystal", Vector3.Zero);
+            RandomizerSingleton.Instance.GiveItemAtLocation("prize_crystal", Vector3.Zero);
             tweener.Timer(3f).OnComplete(keepTalking);
         }
 

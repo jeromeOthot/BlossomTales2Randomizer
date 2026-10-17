@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 
 namespace BlossomTales2.Randomizer.mm
@@ -24,11 +23,11 @@ namespace BlossomTales2.Randomizer.mm
                     inventory => inventory.HasBombs,
                     ItemType.GoldCoin),
                 new Location(new LocationId("overworld-20x21-cave.tmx", "Chest_Small", new Vector3(424f, 0f, 320f)),
-                    "Bomb Cave Lower Left Chest",
+                    "Bomb Cave Bottom Left Chest",
                     inventory => inventory.HasBombs,
                     ItemType.GoldCoin),
                 new Location(new LocationId("overworld-20x21-cave.tmx", "Chest_Small", new Vector3(296f, 0f, 320f)),
-                    "Bomb Cave Lower Right Chest",
+                    "Bomb Cave Bottom Right Chest",
                     inventory => inventory.HasBombs,
                     ItemType.GoldCoin),
                 //Note Caves
@@ -38,19 +37,19 @@ namespace BlossomTales2.Randomizer.mm
                     ItemType.HeartQ_1),
                 //Long sidequests
                 new Location(new LocationId("chipmunkKing.tmx", "chipmunk", Vector3.Zero),
-                    "Chipmunk King",
+                    "Chipmunk King Reward",
                     inventory => inventory.CanCollectIngredient(EquipableItem.IngredientList.Apple) && (inventory.HasFlipper || inventory.HasBombs || inventory.HasBoomerang) ,
                     ItemType.HeartQ_1),
                 //Minigames
-                new Location(new LocationId("overworld-21x20-gabby.tmx", "Chest_price_1", Vector3.Zero),
+                new Location(new LocationId("overworld-21x20-gabby.tmx", "Chest_prize_1", Vector3.Zero),
                     "Treasure Mini-game Prize 1",
                     _ => true,
                     ItemType.HeartQ_1),
-                new Location(new LocationId("overworld-21x20-gabby.tmx", "Chest_price_2", Vector3.Zero),
+                new Location(new LocationId("overworld-21x20-gabby.tmx", "Chest_prize_2", Vector3.Zero),
                     "Treasure Mini-game Prize 2",
                     _ => true,
                     ItemType.Crystal),
-                new Location(new LocationId("overworld-21x20-gabby.tmx", "Chest_price_3", Vector3.Zero),
+                new Location(new LocationId("overworld-21x20-gabby.tmx", "Chest_prize_3", Vector3.Zero),
                     "Treasure Mini-game Prize 3",
                     _ => true,
                     ItemType.Five_Gems),

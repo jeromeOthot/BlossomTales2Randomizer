@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 
 namespace BlossomTales2.Randomizer.mm
@@ -23,11 +22,11 @@ namespace BlossomTales2.Randomizer.mm
                     inventory => inventory.HasBombs,
                     ItemType.GoldCoin),
                 new Location(new LocationId("overworld-18x19-cave.tmx", "Chest_Small", new Vector3(512f, 0f, 544f)),
-                    "Bomb Cave Lower Left Chest",
+                    "Bomb Cave Bottom Left Chest",
                     inventory => inventory.HasBombs,
                     ItemType.GoldCoin),
                 new Location(new LocationId("overworld-18x19-cave.tmx", "Chest_Small", new Vector3(704f, 0f, 544f)),
-                    "Bomb Cave Lower Right Chest",
+                    "Bomb Cave Bottom Right Chest",
                     inventory => inventory.HasBombs,
                     ItemType.GoldCoin),
                 new Location(new LocationId("overworld-19x19-cave.tmx", "Chest_Small", new Vector3(608f, 0f, 224f)),
@@ -56,7 +55,7 @@ namespace BlossomTales2.Randomizer.mm
                     inventory => inventory.HasBombs,
                     ItemType.GoldCoin),
                 new Location(new LocationId("overworld-19x18.tmx", "Chest_Small", new Vector3(184f, 0f, 296f)),
-                    "Hidden Trees Chest",
+                    "Hidden Trees Honeycomb Chest",
                     _ => true,
                     ItemType.Honeycomb),
             };

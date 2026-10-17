@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 
@@ -16,74 +15,74 @@ namespace BlossomTales2.Randomizer.mm.Canyon
         private bool CanAccessTemple3(Inventory inventory) => CanAccessTemple2(inventory) && inventory.CanSwitchLevers && inventory.GoldKeyCount >= RequiredKeyCount(inventory) + 2 && inventory.CanDoDamage;
         private bool CanAccessTemple4(Inventory inventory) => CanAccessTemple3(inventory) && inventory.HasGrappleHook;
 
-        public CanyonTempleRegion(World world) : base("CanyonTemple", world)
+        public CanyonTempleRegion(World world) : base("Canyon Temple", world)
         {
             Locations = new List<Location>
             {
                 //Chest
                 new Location(new LocationId("temple-1.tmx", "Chest_Small", new Vector3(1376f, 0f, 1184f)),
-                    "Entrance chest",
+                    "Entrance Chest",
                     inventory => inventory.HasBow && inventory.CanSwitchLevers || inventory.HasGrappleHook,
-                    ItemType.Gold_Key), //accès temple && (arc && leviers || grappin)
+                    ItemType.Gold_Key),
                 new Location(new LocationId("temple-4.tmx", "Chest_Small", new Vector3(3232f, 0f, 1392f)),
-                    "Chest isolated down-right corner",
+                    "Collapsing Paths Chest",
                     inventory => CanAccessTemple2(inventory) && inventory.CanSwitchLevers,
-                    ItemType.GoldCoin), //accès temple 2 && leviers
+                    ItemType.GoldCoin),
                 new Location(new LocationId("temple-5.tmx", "Chest_Small", new Vector3(624f, 0f, 1728f)),
-                    "Chest middle hole",
+                    "Cart Platform Chest",
                     inventory => CanAccessTemple2(inventory) && (inventory.CanSwitchLevers || inventory.HasGrappleHook),
-                    ItemType.Gold_Key), //accès temple 2 && (leviers || grappin)
+                    ItemType.Gold_Key),
                 new Location(new LocationId("temple-5-secret.tmx", "Chest_Small", new Vector3(640f, 0f, 292f)),
-                    "Hidden Cristal chest",
+                    "Secret Room Crystal Chest",
                     inventory => CanAccessTemple2(inventory) && inventory.CanSwitchLevers && inventory.HasBombs,
-                    ItemType.Crystal), //accès temple 2 && leviers && bombes
+                    ItemType.Crystal),
                 new Location(new LocationId("temple-6.tmx", "Chest_Small", new Vector3(388f, 0f, 756f)),
-                    "Chest under rock",
+                    "Bomb Rocks Chest",
                     inventory => CanAccessTemple2(inventory) && inventory.CanSwitchLevers && inventory.HasBombs,
-                    ItemType.GoldCoin), //accès temple 2 && leviers && bombes
+                    ItemType.GoldCoin),
                 new Location(new LocationId("temple-8.tmx", "Chest_Small", new Vector3(896f, 0f, 1792f)),
-                    "Chest left hole island",
+                    "Left Peg Platform Chest",
                     inventory => CanAccessTemple3(inventory) && inventory.HasGrappleHook,
-                    ItemType.GoldCoin), //accès temple 3 && grappin
+                    ItemType.GoldCoin),
                 new Location(new LocationId("temple-8.tmx", "Chest_Small", new Vector3(1728f, 0f, 1792f)),
-                    "Chest right hole island",
+                    "Right Peg Platform Chest",
                     inventory => CanAccessTemple3(inventory) && inventory.HasGrappleHook,
-                    ItemType.GoldCoin), //accès temple 3 && grappin
+                    ItemType.GoldCoin),
                 new Location(new LocationId("temple-11.tmx", "Chest_Small", new Vector3(440f, 0f, 452f)),
-                    "Chest north east room 11 down",
+                    "Room 11 Chest",
                     inventory => CanAccessTemple3(inventory) && inventory.CanSwitchLevers,
-                    ItemType.GoldCoin), //accès temple 3 && leviers
+                    ItemType.GoldCoin),
                 new Location(new LocationId("temple-11.tmx", "Chest_Small", new Vector3(448f, 0f, 1920f)),
-                    "Chest north east room 11 up",
+                    "Room 11 Bomb Chest",
                     inventory => CanAccessTemple3(inventory) && inventory.CanSwitchLevers && inventory.HasBombs,
-                    ItemType.Gold_Key), //accès temple 3 && leviers && bombes
+                    ItemType.Gold_Key),
                 new Location(new LocationId("temple-15-secret.tmx", "Chest_Small",new Vector3(640f, 0f, 292f)),
-                    "Hidden Heart Piece chest North",
+                    "Grapplehook Paths Secret Room Chest",
                     inventory => CanAccessTemple4(inventory) && inventory.HasBombs,
-                    ItemType.HeartQ_1), //accès temple 4 && bombes
+                    ItemType.HeartQ_1),
                 new Location(new LocationId("temple-17.tmx", "Chest_Small", new Vector3(276f, 0f, 220f)),
-                    "Chest far linear pegs",
+                    "Room 17",
                     inventory => CanAccessTemple4(inventory),
-                    ItemType.GoldCoin), //accès temple 4
+                    ItemType.GoldCoin),
                 new Location(new LocationId("temple-18.tmx", "Chest_Small", new Vector3(1152f, 0f, 1724f)),
-                    "Chest down entrance Heart Piece chest East",
+                    "Room 18 Chest",
                     inventory => CanAccessTemple4(inventory),
-                    ItemType.GoldCoin), //accès temple 4
+                    ItemType.GoldCoin),
                 new Location(new LocationId("temple-18-secret.tmx", "Chest_Small", new Vector3(640f, 0f, 284f)),
-                    "Hidden Heart Piece chest East",
+                    "Secret Room 18 Chest",
                     inventory => CanAccessTemple4(inventory) && inventory.HasBombs,
-                    ItemType.HeartQ_1), //accès temple 4 && bombes
+                    ItemType.HeartQ_1),
                 new Location(new LocationId("temple-vultureBoss.tmx", "Chest", new Vector3(768f, 0f, 640f)),
                     "Vulture Boss Chest",
                     inventory => CanAccessTemple3(inventory) && (inventory.GoldKeyCount >= RequiredKeyCount(inventory) + 3 || inventory.HasGrappleHook) && inventory.CanDoDamage,
-                    ItemType.GrappleHook), //accès temple 3 && (clé || grappin) && damage
+                    ItemType.GrappleHook),
                 new Location(new LocationId("temple-genieBoss.tmx", "BossGenie", Vector3.Zero),
                     "Genie Boss Reward",inventory => CanAccessTemple4(inventory) && inventory.HasTorch,
-                    ItemType.HeartQ_4), //accès temple 4 && lanterne
+                    ItemType.HeartQ_4),
                 new Location(new LocationId("temple-genieBoss.tmx", "Chest", new Vector3(832f, 0f, 640f)),
                     "Genie Boss Chest",
                     inventory => CanAccessTemple4(inventory) && inventory.HasTorch,
-                    ItemType.KeyPiece2), //accès temple 4 && lanterne
+                    ItemType.KeyPiece2),
             };
         }
 

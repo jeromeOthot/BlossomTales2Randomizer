@@ -1,6 +1,3 @@
-// Licensed to the .NET Foundation under one or more agreements.
-// The .NET Foundation licenses this file to you under the MIT license.
-using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 
@@ -15,19 +12,37 @@ namespace BlossomTales2.Randomizer.mm.Canyon
             Locations = new List<Location>
             {
                 //NPC
-                {  new Location(new LocationId("overworld-16x22.tmx", "beggar", new Vector3(980f, 0f, 1616f)), "Beggar",(inventory) => true, ItemType.HeartQ_1) }, //accès canyon
-
-                //Canyon village
-                { new Location( new LocationId("canyon-shop.tmx", "left", Vector3.Zero), "canyon-shop  left",(inventory) => true, ItemType.Jar_Empty) },
-                { new Location(new LocationId("canyon-shop.tmx", "center", Vector3.Zero), "canyon-shop center ",(inventory) => true, ItemType.Crystal) },
-                { new Location(new LocationId("canyon-shop.tmx", "right", Vector3.Zero), "canyon-shop right",(inventory) => true, ItemType.HeartQ_1) },
-
+                new Location(new LocationId("overworld-16x22.tmx", "beggar", new Vector3(980f, 0f, 1616f)),
+                    "Beggar Reward",
+                    _ => true,
+                    ItemType.HeartQ_1),
+                //Shop
+                new Location( new LocationId("canyon-shop.tmx", "left", Vector3.Zero),
+                    "Shop Left Item",
+                    _ => true,
+                    ItemType.Jar_Empty),
+                new Location(new LocationId("canyon-shop.tmx", "center", Vector3.Zero),
+                    "Shop Middle Item",
+                    _ => true,
+                    ItemType.Crystal),
+                new Location(new LocationId("canyon-shop.tmx", "right", Vector3.Zero),
+                    "Shop Right Item",
+                    _ => true,
+                    ItemType.HeartQ_1),
                 //House chest
-                 { new Location(new LocationId("canyon-house1.tmx", "Chest_Small", new Vector3(576f, 0f, 208f)), "village house 1 chest left",(inventory) => true, ItemType.GoldCoin) }, //accès canyon
-                 { new Location(new LocationId("canyon-house3.tmx", "Chest_Small", new Vector3(772f, 0f, 580f)), "village house 3 chest right",(inventory) => true, ItemType.GoldCoin) }, //accès canyon
-                 { new Location(new LocationId("canyon-house3.tmx", "Chest_Small", new Vector3(344f, 0f, 496f)), "village house 3 chest center",(inventory) => true, ItemType.GoldCoin) }, //accès canyon
+                 new Location(new LocationId("canyon-house1.tmx", "Chest_Small", new Vector3(576f, 0f, 208f)),
+                     "Northwest House Chest",
+                     _ => true,
+                     ItemType.GoldCoin),
+                 new Location(new LocationId("canyon-house3.tmx", "Chest_Small", new Vector3(344f, 0f, 496f)),
+                     "Southeast House Left Chest",
+                     _ => true,
+                     ItemType.GoldCoin),
+                 new Location(new LocationId("canyon-house3.tmx", "Chest_Small", new Vector3(772f, 0f, 580f)),
+                     "Southeast House Right Chest",
+                     _ => true,
+                     ItemType.GoldCoin),
             };
-
         }
     }
 }

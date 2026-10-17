@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 
 namespace BlossomTales2.Randomizer.mm
@@ -40,7 +39,7 @@ namespace BlossomTales2.Randomizer.mm
                     ItemType.GoldCoin),
                 //Short sidequests
                 new Location(new LocationId("jungles-22x21.tmx", "ghostJungle", Vector3.Zero),
-                    "Jungle Ghost",
+                    "Ghost",
                     inventory => inventory.CanCraftPotion(ItemType.Jar_Ghost) && inventory.HasHeartNecklace,
                     ItemType.HeartQ_1),
                 new Location(new LocationId("jungles-firstPrimate.tmx", "Chest", new Vector3(480f, 0f, 256f)),
@@ -62,7 +61,7 @@ namespace BlossomTales2.Randomizer.mm
                     ItemType.HeartQ_1),
                 //Bardes
                 new Location(new LocationId("jungles-23x22.tmx", "bard_song", Vector3.Zero),
-                    "Horse Bard",
+                    "Horse Bard Song",
                     inventory => inventory.HasGrappleHook,
                     ItemType.CallHorse),
                 //Traders
@@ -86,11 +85,11 @@ namespace BlossomTales2.Randomizer.mm
                     inventory => inventory.CanCraftPotion(ItemType.Jar_Ghost) && inventory.HasFishingRod,
                     ItemType.HeartNecklace),
                 new Location(new LocationId("jungles-23x22.tmx", "Chest_Small", new Vector3(740f, 0f, 1252f)),
-                    "Bridge Chest",
+                    "Trader Bridge Chest",
                     _ => true,
                     ItemType.GoldCoin),
                 new Location(new LocationId("jungles-24x20.tmx", "Chest_Small", new Vector3(2088f, 0f, 2200f)),
-                    "Morkla Bomb Chest",
+                    "Morkla Bomb Rock Chest",
                     inventory => inventory.HasBombs,
                     ItemType.GoldCoin),
                 new Location(new LocationId("jungles-24x22.tmx", "Chest_Small", new Vector3(2336f, 0f, 496f)),
@@ -102,7 +101,7 @@ namespace BlossomTales2.Randomizer.mm
                     inventory => inventory.HasBombs,
                     ItemType.GoldCoin),
                 new Location(new LocationId("jungles-25x22.tmx", "Chest_Small", new Vector3(160f, 0f, 836f)),
-                    "Tree Trunk Chest",
+                    "Pirate Tree Trunk Chest",
                     _ => true,
                     ItemType.GoldCoin),
                 new Location(new LocationId("jungles-25x22.tmx", "Chest_Small", new Vector3(1760f, 0f, 728f)),

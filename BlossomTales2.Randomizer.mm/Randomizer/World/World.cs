@@ -54,9 +54,9 @@ namespace BlossomTales2.Randomizer.mm
             MorklaDungeon = new MorklaDungeon(this);
             CanyonNorth = new CanyonNorthRegion(this);
             CanyonSouthWest = new CanyonSouthWestRegion(this);
+            Dustwood = new DustwoodRegion(this);
             CanyonSouthEast = new CanyonSouthEastRegion(this);
             CanyonIsland = new CanyonIslandRegion(this);
-            Dustwood = new DustwoodRegion(this);
             CanyonSteppesNorth = new CanyonSteppesNorthRegion(this);
             CanyonSteppesSouth = new CanyonSteppesSouthRegion(this);
             CanyonTemple = new CanyonTempleRegion(this);
@@ -86,9 +86,9 @@ namespace BlossomTales2.Randomizer.mm
                 MorklaDungeon,
                 CanyonNorth,
                 CanyonSouthWest,
+                Dustwood,
                 CanyonSouthEast,
                 CanyonIsland,
-                Dustwood,
                 CanyonSteppesNorth,
                 CanyonSteppesSouth,
                 CanyonTemple,

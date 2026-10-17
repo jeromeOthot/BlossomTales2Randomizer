@@ -59,17 +59,17 @@ namespace BlossomTales2
                         Game1.player.LockDirection = false;
                         if (this.IDNumber == 1)
                         {
-                            RandomizerSingleton.Instance.GiveItemAtLocation("Chest_price_1", Vector3.Zero);
+                            RandomizerSingleton.Instance.GiveItemAtLocation("Chest_prize_1", Vector3.Zero);
                             ++Game1.Globals.RandomRoll_Interaction;
                         }
                         else if (this.IDNumber == 2)
                         {
-                            RandomizerSingleton.Instance.GiveItemAtLocation( "Chest_price_2", Vector3.Zero);
+                            RandomizerSingleton.Instance.GiveItemAtLocation( "Chest_prize_2", Vector3.Zero);
                             ++Game1.Globals.RandomRoll_Interaction;
                         }
                         else if (this.IDNumber == 3)
                         {
-                            RandomizerSingleton.Instance.GiveItemAtLocation("Chest_price_3", Vector3.Zero);
+                            RandomizerSingleton.Instance.GiveItemAtLocation("Chest_prize_3", Vector3.Zero);
                             Game1.Globals.RandomRoll_Interaction = 99;
                         }
                         this.killOthersTimer = 1;

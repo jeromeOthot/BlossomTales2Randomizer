@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 
 namespace BlossomTales2.Randomizer.mm
@@ -30,7 +29,6 @@ namespace BlossomTales2.Randomizer.mm
                     "Note Cave Bottom Right Chest",
                     inventory => inventory.CanOpenNoteDoor,
                     ItemType.GoldCoin),
-
                 //Caves
                 new Location(new LocationId("jungles-21x22-cave.tmx", "Chest_Small", new Vector3(416f, 0f, 304f)),
                     "Bomb Cave Top Left Chest",
@@ -60,10 +58,9 @@ namespace BlossomTales2.Randomizer.mm
                     "Skull Cave Chest",
                     inventory => inventory.HasFlipper,
                     ItemType.HeartQ_1),
-
                 //short sidequests
                 new Location(new LocationId("jungles-21x22.tmx", "hunter", Vector3.Zero),
-                    "Troll Hunter",
+                    "Troll Hunter Reward",
                     inventory => inventory.HasGrappleHook && inventory.HasBow,
                     ItemType.Bow),
                 //Traders
@@ -79,7 +76,7 @@ namespace BlossomTales2.Randomizer.mm
                     inventory => inventory.HasGrappleHook,
                     ItemType.GoldCoin),
                 new Location(new LocationId("jungles-21x22.tmx", "Chest_Small", new Vector3(1336f, 0f, 896f)),
-                    "Bomb Rock Chest",
+                    "Hunter Bomb Rock Chest",
                     inventory => inventory.HasBombs,
                     ItemType.GoldCoin),
                 new Location(new LocationId("jungles-21x22-island.tmx", "Chest_Small", new Vector3(552f, 0f, 688f)),
