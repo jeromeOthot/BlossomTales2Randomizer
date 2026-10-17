@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using Microsoft.Xna.Framework;
 using Newtonsoft.Json;
 
@@ -138,6 +139,7 @@ namespace BlossomTales2.Randomizer.mm
             }
 
             Random random = new Random(seed);
+            World world = null;
             bool isValid;
             int tries = 0;
             do
@@ -145,7 +147,7 @@ namespace BlossomTales2.Randomizer.mm
                 tries++;
 
                 Filler filler = new Filler(random);
-                isValid = filler.TryFillWorld(out World world);
+                isValid = filler.TryFillWorld(out world);
                 if (!isValid)
                     continue;
 
@@ -163,18 +165,29 @@ namespace BlossomTales2.Randomizer.mm
             if (isValid)
             {
                 GameLogger.LogInfo($"Total tries {tries}");
-                GameLogger.LogInfo("Spoiler log begin:");
-                foreach (KeyValuePair<LocationId, ItemData> kvp in _randomizedLocations)
-                {
-                    GameLogger.LogInfo($"{kvp.Key}: {kvp.Value}");
-                }
-                GameLogger.LogInfo("Spoiler log end");
+                OutputSpoilerLog(world);
             }
             else
             {
                 GameLogger.LogInfo("Too many tries. Setting game as vanilla.");
                 InitializeAsVanilla();
             }
+        }
+
+        private void OutputSpoilerLog(World world)
+        {
+            StringBuilder spoilerLog = new StringBuilder();
+            List<Location> locations = new List<Location>();
+            spoilerLog.AppendLine("Spoiler log:");
+            foreach (Region region in world.Regions)
+            {
+                locations.Clear();
+                region.CollectLocations(locations);
+                foreach (Location location in locations)
+                    spoilerLog.AppendLine($"{region.Name} {location.Name} : {location.Item}");
+            }
+
+            GameLogger.LogInfo(spoilerLog.ToString());
         }
     }
 }
