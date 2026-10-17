@@ -28,13 +28,6 @@ namespace BlossomTales2.Randomizer.mm
             if (!CanAccess(inventory))
                 return newItems;
 
-            // foreach (Region region in Regions)
-            // {
-            //     bool hasItem = region.TryCollectItems(inventory);
-            //     if(!hasCollectedItem)
-            //         hasCollectedItem = hasItem;
-            // }
-
             foreach (Location location in Locations)
             {
                 if (!location.CanAccess(inventory) || location.HasCollectedItem)
@@ -42,7 +35,7 @@ namespace BlossomTales2.Randomizer.mm
 
                 newItems.Add(location.Item);
                 if(location.Item != ItemType.GoldCoin)
-                    spheres.AppendLine($"{Name} {location.Name} : {location.Item}");
+                    spheres.AppendLine($"{Name} - {location.Name} : {location.Item}");
                 location.HasCollectedItem = true;
             }
 

@@ -184,7 +184,7 @@ namespace BlossomTales2.Randomizer.mm
                 locations.Clear();
                 region.CollectLocations(locations);
                 foreach (Location location in locations)
-                    spoilerLog.AppendLine($"{region.Name} {location.Name} : {location.Item}");
+                    spoilerLog.AppendLine($"{region.Name} - {location.Name} : {location.Item}");
             }
 
             GameLogger.LogInfo(spoilerLog.ToString());
