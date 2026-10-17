@@ -15,11 +15,6 @@ namespace BlossomTales2.Randomizer.mm.Canyon
         {
             Locations = new List<Location>
             {
-                //Caves
-                new Location(new LocationId("overworld-17x21-cave.tmx", "Chest_Small", new Vector3(416f, 0f, 480f)),
-                    "Cave Chest",
-                    inventory => inventory.CanSwitchLevers,
-                    ItemType.HeartQ_1),
                 //Os
                 new Location(new LocationId("overworld-18x21.tmx", "PickUpItem", new Vector3(160f, 0f, 736f)),
                     "bone corner edge",

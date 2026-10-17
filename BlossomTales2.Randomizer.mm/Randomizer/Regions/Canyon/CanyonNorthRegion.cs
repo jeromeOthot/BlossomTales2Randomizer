@@ -14,6 +14,11 @@ namespace BlossomTales2.Randomizer.mm.Canyon
         {
             Locations = new List<Location>
             {
+                //Note Caves
+                new Location(new LocationId("overworld-17x21-cave.tmx", "Chest_Small", new Vector3(416f, 0f, 480f)),
+                    "Note Cave Chest",
+                    inventory => inventory.HasBoomerang || World.CanyonSteppesSouth.CanAccess(inventory) && inventory.CanOpenNoteDoor && inventory.CanSwitchLevers,
+                    ItemType.HeartQ_1),
                 //Os
                 { new Location(new LocationId("overworld-15x19.tmx", "PickUpItem", new Vector3(1804f, 0f, 2292f)), "Bone North Archaeological site",_ => true, ItemType.CanyonBone) }, //accès canyon
                 { new Location(new LocationId("overworld-15x19.tmx", "PickUpItem", new Vector3(820f, 0f, 952f)), "Bone North West Archaeological site",_ => true, ItemType.CanyonBone) }, //accès canyon

@@ -22,9 +22,9 @@ namespace BlossomTales2.Randomizer.mm
                 { new Location(new LocationId("overworld-25x16-cave.tmx", "Chest_Small", new Vector3(352f, 0f, 432f)), "cave beside mansion chest north left", (inventory) => inventory.HasBombs, ItemType.GoldCoin) }, //accès mansion && bombes
                 { new Location(new LocationId("overworld-25x16-cave.tmx", "Chest_Small", new Vector3(608f, 0f, 432f)), "cave beside mansion chest north right", (inventory) => inventory.HasBombs, ItemType.GoldCoin) }, //accès mansion && bombes
 
-                { new Location(new LocationId("overworld-25x17-cave.tmx", "Chest_Small", new Vector3(320f, 0f, 352f)), "south purple merchant cave chest left", (inventory) => true, ItemType.GoldCoin) }, //accès monsterton
-                { new Location(new LocationId("overworld-25x17-cave.tmx", "Chest_Small", new Vector3(544f, 0f, 352f)), "south purple merchant cave chest center", (inventory) => true, ItemType.GoldCoin) }, //accès monsterton
-                { new Location(new LocationId("overworld-25x17-cave.tmx", "Chest_Small", new Vector3(772f, 0f, 352f)), "south purple merchant cave chest right", (inventory) => true, ItemType.GoldCoin) }, //accès monsterton
+                { new Location(new LocationId("overworld-25x17-cave.tmx", "Chest_Small", new Vector3(320f, 0f, 352f)), "south purple merchant cave chest left", (inventory) => inventory.HasBombs, ItemType.GoldCoin) }, //accès monsterton
+                { new Location(new LocationId("overworld-25x17-cave.tmx", "Chest_Small", new Vector3(544f, 0f, 352f)), "south purple merchant cave chest center", (inventory) => inventory.HasBombs, ItemType.GoldCoin) }, //accès monsterton
+                { new Location(new LocationId("overworld-25x17-cave.tmx", "Chest_Small", new Vector3(772f, 0f, 352f)), "south purple merchant cave chest right", (inventory) => inventory.HasBombs, ItemType.GoldCoin) }, //accès monsterton
 
                 { new Location(new LocationId("overworld-25x18-cave.tmx", "Chest_Small", new Vector3(640f, 0f, 256f)), "cave river chest left", (inventory) => inventory.HasFlipper && inventory.HasRexTeleporter, ItemType.GoldCoin) }, //(accès dark || accès monsterton) && flippers && teleporter
                 { new Location(new LocationId("overworld-25x18-cave.tmx", "Chest_Small", new Vector3(732f, 0f, 292f)), "cave river chest center", (inventory) => inventory.HasFlipper && inventory.HasRexTeleporter, ItemType.Honeycomb) }, //(accès dark || accès monsterton) && flippers && teleporter
