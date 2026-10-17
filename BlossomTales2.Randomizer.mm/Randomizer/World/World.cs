@@ -126,11 +126,6 @@ namespace BlossomTales2.Randomizer.mm
             return newItems;
         }
 
-        public void AddRegion(Region region)
-        {
-            Regions.Add(region);
-        }
-
         public List<Location> CollectLocations()
         {
             List<Location> locations = new List<Location>();
