@@ -21,7 +21,7 @@ namespace BlossomTales2.Randomizer.mm
         }
 
 
-        public List<ItemType> CollectItems(Inventory inventory, ref StringBuilder spheres)
+        public List<ItemType> CollectItems(Inventory inventory, Spoiler spoilerLog)
         {
             List<ItemType> newItems = new List<ItemType>();
 
@@ -34,8 +34,7 @@ namespace BlossomTales2.Randomizer.mm
                     continue;
 
                 newItems.Add(location.Item);
-                if(location.Item != ItemType.GoldCoin)
-                    spheres.AppendLine($"{Name} - {location.Name} : {location.Item}");
+                spoilerLog.AddLocationToPlaythrough(this, location);
                 location.HasCollectedItem = true;
             }
 

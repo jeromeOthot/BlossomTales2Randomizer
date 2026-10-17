@@ -91,30 +91,25 @@ namespace BlossomTales2.Randomizer.mm
         }
 
 
-        public bool ValidateWorld(World world)
+        public bool ValidateWorld(World world, Spoiler spoilerLog)
         {
             Inventory inventory = new Inventory(world);
 
             //Validate seed
             int sphere = 0;
-            StringBuilder spheres = new StringBuilder();
 
             bool hasCollectedItem;
             do
             {
-                spheres.AppendLine($"---- Sphere: {sphere} ----");
-                List<ItemType> newItems = world.CollectItems(inventory, ref spheres);
+                spoilerLog.SetSphere(sphere);
+                List<ItemType> newItems = world.CollectItems(inventory, spoilerLog);
                 hasCollectedItem = newItems.Count > 0;
 
                 foreach (ItemType newItem in newItems)
                     inventory.AddItem(newItem, 1);
 
                 if (world.MinotaurCastle.CanAccessMinotaurBoss(inventory))
-                {
-                    spheres.AppendLine("Defeat Minotaur King: Victory!!!");
-                    GameLogger.LogInfo(spheres.ToString());
                     return true;
-                }
 
                 sphere++;
             } while (hasCollectedItem);

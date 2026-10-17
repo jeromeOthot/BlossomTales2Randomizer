@@ -131,15 +131,15 @@ namespace BlossomTales2.Randomizer.mm
         public void RandomizeLocations()
         {
             int seed = RamdomizerSettings.SeedNumber.HasValue ? RamdomizerSettings.SeedNumber.Value : Environment.TickCount;
-            GameLogger.LogInfo($"Seed = {seed}");
             if (seed == 0)
             {
                 InitializeAsVanilla();
                 return;
             }
 
+            Spoiler spoilerLog = new Spoiler(seed);
             Random random = new Random(seed);
-            World world = null;
+            World world;
             bool isValid;
             int tries = 0;
             do
@@ -151,9 +151,14 @@ namespace BlossomTales2.Randomizer.mm
                 if (!isValid)
                     continue;
 
-                isValid = filler.ValidateWorld(world);
+                isValid = filler.ValidateWorld(world, spoilerLog);
                 if (!isValid)
+                {
+                    spoilerLog.ResetPlaythrough();
                     continue;
+                }
+
+                spoilerLog.CompletePlaythrough();
 
                 _randomizedLocations = new Dictionary<LocationId, ItemData>();
                 List<Location> locations = world.CollectLocations();
@@ -165,7 +170,7 @@ namespace BlossomTales2.Randomizer.mm
             if (isValid)
             {
                 GameLogger.LogInfo($"Total tries {tries}");
-                OutputSpoilerLog(world);
+                OutputSpoilerLog(world, spoilerLog);
             }
             else
             {
@@ -174,20 +179,18 @@ namespace BlossomTales2.Randomizer.mm
             }
         }
 
-        private void OutputSpoilerLog(World world)
+        private void OutputSpoilerLog(World world, Spoiler spoiler)
         {
-            StringBuilder spoilerLog = new StringBuilder();
             List<Location> locations = new List<Location>();
-            spoilerLog.AppendLine("Spoiler log:");
             foreach (Region region in world.Regions)
             {
                 locations.Clear();
                 region.CollectLocations(locations);
                 foreach (Location location in locations)
-                    spoilerLog.AppendLine($"{region.Name} - {location.Name} : {location.Item}");
+                    spoiler.AddLocationToSpoiler(region, location);
             }
 
-            GameLogger.LogInfo(spoilerLog.ToString());
+            spoiler.ExportToFile();
         }
     }
 }
