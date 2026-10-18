@@ -55,7 +55,7 @@ namespace BlossomTales2.Randomizer.mm
 
         private void AddToLog(StringBuilder log, Region region, Location location)
         {
-            log.AppendLine($"{region.Name} - {location.Name} : {location.Item}");
+            log.AppendLine($"{region.Name} - {location.Name}: {location.Item.GetPrettyName()}");
         }
 
         public void CompletePlaythrough()
