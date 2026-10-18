@@ -30,6 +30,10 @@ namespace BlossomTales2
         public extern void orig_RemoveItem_NE(EquipableItem.ItemList item, bool playAnimation = false, int amount = 1);
         public extern void orig_ChangeGoldAmount(int p);
 
+        [MonoModIgnore]
+        [PatchPlayerUpdate]
+        public extern override void Update(GameTime gameTime);
+
         public  void ChangeGoldAmount(int p)
         {
             this.Gold += p;
@@ -65,107 +69,13 @@ namespace BlossomTales2
             switch (item)
             {
                 case EquipableItem.ItemList.Sword:
-                    switch (SwordLevel)
-                    {
-                        case 0:
-                            item = EquipableItem.ItemList.WoodSword;
-                            break;
-                        case 1:
-                            item = EquipableItem.ItemList.Sword;
-                            break;
-                        case 2:
-                            item = EquipableItem.ItemList.KingSword;
-                            HasChargeSword = true;
-                            break;
-                        case 3:
-                            item = EquipableItem.ItemList.KingSword;
-                            HasSwordBeams = true;
-                            break;
-                    }
-
-                    if(SwordLevel < 3)
-                        SwordLevel++;
+                    item = Mod_HandleProgressiveSword();
                     break;
                 case EquipableItem.ItemList.Shield:
-                    this.ShieldLevel = 1;
-                    for (int index = 0; index < this.Inventory.Count; ++index)
-                    {
-                        //Si on passe de woodShield --> Shield
-                        if ((object)this.Inventory[index] is EquipableItem.ItemList.WoodShield)
-                        {
-                          this.ShieldLevel = 2;
-                          this.Inventory[index] = EquipableItem.ItemList.Shield;
-
-                          if (!this.Inventory.Contains(EquipableItem.ItemList.Shield))
-                            this.Inventory.Add(EquipableItem.ItemList.Shield);
-
-                          if (this.Ability[0] is E_Shield || this.Ability[0] is E_Empty && !(this.Ability[1] is E_Shield))
-                          {
-                            this.Ability[0] = (EquipableItem) new E_Shield();
-                            break;
-                          }
-                          if (this.Ability[1] is E_Shield)
-                          {
-                            this.Ability[1] = (EquipableItem) new E_Shield();
-                            break;
-                          }
-                          break;
-                        }
-
-                        //On upgrade au shield -> mirror shield
-                        if ((object)this.Inventory[index] is EquipableItem.ItemList.Shield)
-                        {
-                          this.ShieldLevel = 3;
-                          this.Inventory[index] = EquipableItem.ItemList.MirrorShield;
-                          if (!this.Inventory.Contains(EquipableItem.ItemList.MirrorShield))
-                            this.Inventory.Add(EquipableItem.ItemList.MirrorShield);
-                          if (this.Ability[0] is E_Shield)
-                            this.Ability[0] = (EquipableItem) new E_Shield();
-                          if (this.Ability[1] is E_Shield)
-                          {
-                            this.Ability[1] = (EquipableItem) new E_Shield();
-                          }
-
-                          item = EquipableItem.ItemList.MirrorShield;
-                          GameLogger.LogInfo("Get MirrorShield item: " + (int)item );
-                          break;
-                        }
-                    }
-
-                    //Si on passe de aucun shield --> wood shield
-                    if (this.ShieldLevel == 1)
-                    {
-                      Game1.player.Inventory.Add(EquipableItem.ItemList.WoodShield);
-                      Game1.player.Ability[0] = (EquipableItem) new E_Shield();
-                      item = EquipableItem.ItemList.WoodShield;
-                      GameLogger.LogInfo("Get wood Shield item: " + (int)item );
-                    }
+                    item = Mod_HandleProgressiveShield();
                     break;
                 case EquipableItem.ItemList.Bow:
-                  for (int index = 0; index < Inventory.Count; ++index)
-                  {
-                    //Si on passe de bow --> tribow
-                    if (Inventory[index] == EquipableItem.ItemList.Bow)
-                    {
-                            Game1.player.BowUpgrade = true;
-                            for (int n = 0; n < Game1.player.Inventory.Count; n++)
-                            {
-                                if (Equals(EquipableItem.ItemList.Bow, Game1.player.Inventory[n]))
-                                    Game1.player.Inventory[n] = EquipableItem.ItemList.TriBow;
-                            }
-
-                            if (Game1.player.Ability[0] is E_Bow)
-                                Game1.player.Ability[0].ListType = EquipableItem.ItemList.TriBow;
-
-                            if (Game1.player.Ability[1] is E_Bow)
-                                Game1.player.Ability[1].ListType = EquipableItem.ItemList.TriBow;
-
-                            item = EquipableItem.ItemList.TriBow;
-                            break;
-                    }
-                  }
-                  if(!Game1.player.BowUpgrade)
-                    Game1.player.Inventory.Add(EquipableItem.ItemList.Bow);
+                  item = Mod_HandleProgressiveBow();
                   break;
                 case EquipableItem.ItemList.Bombs:
                   Game1.player.Inventory.Add(EquipableItem.ItemList.Bombs);
@@ -284,7 +194,6 @@ namespace BlossomTales2
                 case EquipableItem.ItemList.MinotaurCoin:
                   if (!this.Inventory_NE.Contains(item))
                     this.Inventory_NE.Add(item);
-                  if (item == EquipableItem.ItemList.MinotaurCoin)
                     ++this.Count_MinotaurCoins;
                   break;
                 case EquipableItem.ItemList.KeyPiece1:
@@ -298,10 +207,7 @@ namespace BlossomTales2
                   break;
                 case EquipableItem.ItemList.HeartNecklace:
                   if (!this.Inventory_NE.Contains(EquipableItem.ItemList.HeartNecklace))
-                  {
                     this.Inventory_NE.Add(EquipableItem.ItemList.HeartNecklace);
-                    break;
-                  }
                   break;
                 case EquipableItem.ItemList.GoldCoin:
                   int num4 = Game1.RandomNumber.Next(20, 26);
@@ -471,9 +377,122 @@ namespace BlossomTales2
           Game1.Particles.Add((Particle) new GetItemLight(this.Position));
         }
 
-        [MonoModIgnore]
-        [PatchPlayerUpdate]
-        public extern override void Update(GameTime gameTime);
+        private EquipableItem.ItemList Mod_HandleProgressiveSword()
+        {
+            EquipableItem.ItemList item = EquipableItem.ItemList.Sword;
+            switch (SwordLevel)
+            {
+                case 0:
+                    item = EquipableItem.ItemList.WoodSword;
+                    break;
+                case 1:
+                    item = EquipableItem.ItemList.Sword;
+                    break;
+                case 2:
+                    item = EquipableItem.ItemList.KingSword;
+                    HasChargeSword = true;
+                    break;
+                case 3:
+                    item = EquipableItem.ItemList.KingSword;
+                    HasSwordBeams = true;
+                    break;
+            }
+
+            if(SwordLevel < 3)
+                SwordLevel++;
+            return item;
+        }
+
+        private EquipableItem.ItemList Mod_HandleProgressiveShield()
+        {
+            EquipableItem.ItemList item = EquipableItem.ItemList.Shield;
+            this.ShieldLevel = 1;
+            for (int index = 0; index < this.Inventory.Count; ++index)
+            {
+                //Si on passe de woodShield --> Shield
+                if ((object)this.Inventory[index] is EquipableItem.ItemList.WoodShield)
+                {
+                    this.ShieldLevel = 2;
+                    this.Inventory[index] = EquipableItem.ItemList.Shield;
+
+                    if (!this.Inventory.Contains(EquipableItem.ItemList.Shield))
+                        this.Inventory.Add(EquipableItem.ItemList.Shield);
+
+                    if (this.Ability[0] is E_Shield || this.Ability[0] is E_Empty && !(this.Ability[1] is E_Shield))
+                    {
+                        this.Ability[0] = (EquipableItem) new E_Shield();
+                        break;
+                    }
+                    if (this.Ability[1] is E_Shield)
+                    {
+                        this.Ability[1] = (EquipableItem) new E_Shield();
+                        break;
+                    }
+                    break;
+                }
+
+                //On upgrade au shield -> mirror shield
+                if ((object)this.Inventory[index] is EquipableItem.ItemList.Shield)
+                {
+                    this.ShieldLevel = 3;
+                    this.Inventory[index] = EquipableItem.ItemList.MirrorShield;
+                    if (!this.Inventory.Contains(EquipableItem.ItemList.MirrorShield))
+                        this.Inventory.Add(EquipableItem.ItemList.MirrorShield);
+                    if (this.Ability[0] is E_Shield)
+                        this.Ability[0] = (EquipableItem) new E_Shield();
+                    if (this.Ability[1] is E_Shield)
+                    {
+                        this.Ability[1] = (EquipableItem) new E_Shield();
+                    }
+
+                    item = EquipableItem.ItemList.MirrorShield;
+                    GameLogger.LogInfo("Get MirrorShield item: " + (int)item );
+                    break;
+                }
+            }
+
+            //Si on passe de aucun shield --> wood shield
+            if (this.ShieldLevel == 1)
+            {
+                Game1.player.Inventory.Add(EquipableItem.ItemList.WoodShield);
+                Game1.player.Ability[0] = (EquipableItem) new E_Shield();
+                item = EquipableItem.ItemList.WoodShield;
+                GameLogger.LogInfo("Get wood Shield item: " + (int)item );
+            }
+
+            return item;
+        }
+
+        private EquipableItem.ItemList Mod_HandleProgressiveBow()
+        {
+            EquipableItem.ItemList item;
+            for (int index = 0; index < Inventory.Count; ++index)
+            {
+                //Si on passe de bow --> tribow
+                if (Inventory[index] == EquipableItem.ItemList.Bow)
+                {
+                    Game1.player.BowUpgrade = true;
+                    for (int n = 0; n < Game1.player.Inventory.Count; n++)
+                    {
+                        if (Equals(EquipableItem.ItemList.Bow, Game1.player.Inventory[n]))
+                            Game1.player.Inventory[n] = EquipableItem.ItemList.TriBow;
+                    }
+
+                    if (Game1.player.Ability[0] is E_Bow)
+                        Game1.player.Ability[0].ListType = EquipableItem.ItemList.TriBow;
+
+                    if (Game1.player.Ability[1] is E_Bow)
+                        Game1.player.Ability[1].ListType = EquipableItem.ItemList.TriBow;
+
+                    item = EquipableItem.ItemList.TriBow;
+                    break;
+                }
+            }
+            if(!Game1.player.BowUpgrade)
+                Game1.player.Inventory.Add(EquipableItem.ItemList.Bow);
+            return EquipableItem.ItemList.Sword;
+        }
+
     }
 
     public class ModPlayer
