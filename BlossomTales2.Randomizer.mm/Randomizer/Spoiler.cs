@@ -1,13 +1,12 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
-// The .NET Foundation licenses this file to you under the MIT license.
-
+﻿using System.IO;
 using System.Text;
-using Microsoft.Xna.Framework;
 
 namespace BlossomTales2.Randomizer.mm
 {
     public class Spoiler
     {
+        private const string SpoilerLogFileName = "SpoilerLog_slot_{0}.txt";
+
         private StringBuilder _spoilerLog = new StringBuilder();
         private StringBuilder _spheres = new StringBuilder();
         private int _seed;
@@ -55,10 +54,13 @@ namespace BlossomTales2.Randomizer.mm
 
         public void ExportToFile()
         {
-            GameLogger.LogInfo($"Seed = {_seed}");
-            GameLogger.LogInfo(_spoilerLog.ToString());
-            GameLogger.LogInfo(string.Empty);
-            GameLogger.LogInfo(_spheres.ToString());
+            StringBuilder log = new StringBuilder();
+            log.AppendLine($"Seed = {_seed}");
+            log.AppendLine(_spoilerLog.ToString());
+            log.AppendLine(_spheres.ToString());
+
+            string path = Path.Combine(Game1.OSDir, string.Format(SpoilerLogFileName, Game1.SaveSlotSelected + 1));
+            File.WriteAllText(path, log.ToString());
         }
     }
 }
