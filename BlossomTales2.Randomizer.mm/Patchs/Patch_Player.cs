@@ -250,7 +250,7 @@ namespace BlossomTales2
             Game1.Particles.Add(new P_GetItem(Position + new Vector3(0.0f, 100f, 0.0f), itemIndex));
             Game1.Particles.Add(new GetItemLight(Position));
 
-            if (itemIndex == 26 || itemIndex == 27 || itemIndex == 40 || itemIndex == 41 || itemIndex == 42 || itemIndex == 100)
+            if (itemIndex == 26 || itemIndex == 40 || itemIndex == 41 || itemIndex == 42 || itemIndex == 100)
                 giveNewItemDescription = itemIndex;
         }
 
@@ -513,6 +513,7 @@ namespace MonoMod
             PatchGiveFishingItem(cursor, modPatchPlayerType);
             PatchFishNecklace(cursor, modPatchPlayerType);
             PatchGiveKingSword(cursor, modPatchPlayerType);
+            PatchHeartPieceGrandpaDialog(cursor);
         }
 
         private static void PatchGiveFishingItem(ILCursor cursor, TypeDefinition modPatchPlayerType)
@@ -583,6 +584,25 @@ namespace MonoMod
             MethodDefinition mod_GiveKingSwordMethod = modPatchPlayerType.FindMethod("Mod_GiveKingSword");
             cursor.RemoveRange(4);
             cursor.Emit(OpCodes.Call, mod_GiveKingSwordMethod);
+        }
+
+        private static void PatchHeartPieceGrandpaDialog(ILCursor cursor)
+        {
+            //Find L.3393
+            // if (this.giveNewItemDescription == 26)
+            cursor.GotoNext(MoveType.Before,
+                instr => instr.MatchLdarg(0),
+                instr => instr.MatchLdfld("BlossomTales2.Player", "giveNewItemDescription"),
+                instr => instr.MatchLdcI4(26),
+                instr => instr.MatchBneUn(out ILLabel _),
+                instr => instr.MatchLdsfld("BlossomTales2.Game1", "Globals")
+            );
+            //Remove all except this
+            // Game1.Globals.First_Heart = false;
+            cursor.Index += 4;
+            cursor.RemoveRange(3);
+            cursor.Index += 3;
+            cursor.RemoveRange(25);
         }
     }
 }
