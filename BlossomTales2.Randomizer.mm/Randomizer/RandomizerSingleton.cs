@@ -165,6 +165,8 @@ namespace BlossomTales2.Randomizer.mm
                 foreach (Location location in locations)
                     _randomizedLocations.Add(location.Id, new ItemData(location.Item));
 
+                ForceLocations();
+
             } while (!isValid && tries <= 1000);
 
             if (isValid)
@@ -191,6 +193,18 @@ namespace BlossomTales2.Randomizer.mm
             }
 
             spoiler.ExportToFile();
+        }
+
+        private void ForceLocations()
+        {
+            //Uncomment and set the location id and item to what you need.
+            //These one are the most easily accessed locations for a new game.
+            // _randomizedLocations[new LocationId("blossom-lilyHouse.tmx", "Grandma 1", Vector3.Zero)] = new ItemData(ItemType.Bombs);
+            // _randomizedLocations[new LocationId("blossom-lilyHouse.tmx", "Grandma 2", Vector3.Zero)] = new ItemData(ItemType.Bow);
+            // _randomizedLocations[new LocationId("blossom-tavern-basement.tmx", "Chest_Small", new Vector3(256f, 0f, 272f))] = new ItemData(ItemType.Shield);
+            // _randomizedLocations[new LocationId("blossom-tavern-basement.tmx", "Chest_Small", new Vector3(256f, 0f, 464f))] = new ItemData(ItemType.Shield);
+            // _randomizedLocations[new LocationId("blossom-tavern-basement.tmx", "Chest_Small", new Vector3(448f, 0f, 272f))] = new ItemData(ItemType.Shield);
+            // _randomizedLocations[new LocationId("blossom-tavern-basement.tmx", "Chest_Small", new Vector3(448f, 0f, 464f))] = new ItemData(ItemType.Flippers);
         }
     }
 }
