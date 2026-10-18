@@ -47,7 +47,13 @@ namespace BlossomTales2.Randomizer.mm
 
         public void AddLocationToPlaythrough(Region region, Location location)
         {
-            if (!_progressionItems.Remove(location.Item))
+            ItemType item = location.Item;
+
+            //Reverse search bottles in progression
+            if(item >= ItemType.Jar_Empty && item <= ItemType.Jar_Speedster)
+                item = ItemType.Jar_Empty;
+
+            if (!_progressionItems.Remove(item))
                 return;
 
             AddToLog(_spheres, region, location);

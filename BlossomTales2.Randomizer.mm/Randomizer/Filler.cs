@@ -53,7 +53,12 @@ namespace BlossomTales2.Randomizer.mm
                     GameLogger.LogInfo($"Cannot place {itemToPlace}, seed not valid");
                     return false;
                 }
-                assignableLocation.Item = itemToPlace;
+
+                ItemType item = itemToPlace;
+                if (itemToPlace == ItemType.Jar_Empty)
+                    item = RandomizeBottle();
+
+                assignableLocation.Item = item;
                 locations.Remove(assignableLocation);
             }
 
@@ -90,6 +95,10 @@ namespace BlossomTales2.Randomizer.mm
             }
         }
 
+        private ItemType RandomizeBottle()
+        {
+            return (ItemType)_random.Next(11, 22);
+        }
 
         public bool ValidateWorld(World world, Spoiler spoilerLog)
         {
