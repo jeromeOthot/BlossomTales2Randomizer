@@ -451,9 +451,7 @@ namespace BlossomTales2
             if (ShieldLevel == 1)
             {
                 Game1.player.Inventory.Add(EquipableItem.ItemList.WoodShield);
-                Game1.player.Ability[0] = new E_Shield();
                 item = EquipableItem.ItemList.WoodShield;
-                GameLogger.LogInfo("Get wood Shield item: " + (int)item);
             }
 
             return item;
