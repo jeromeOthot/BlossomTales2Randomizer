@@ -404,57 +404,37 @@ namespace BlossomTales2
 
         private EquipableItem.ItemList Mod_HandleProgressiveShield()
         {
-            EquipableItem.ItemList item = EquipableItem.ItemList.Shield;
-            ShieldLevel = 1;
+            if (ShieldLevel == 3)
+                return EquipableItem.ItemList.MirrorShield;
+
+            ShieldLevel++;
+            if (Ability[0] is E_Shield)
+                Ability[0] = new E_Shield();
+
+            if (Ability[1] is E_Shield)
+                Ability[1] = new E_Shield();
+
+            //Upgrade inventory shield
             for (int index = 0; index < Inventory.Count; ++index)
             {
-                //Si on passe de woodShield --> Shield
-                if ((object)Inventory[index] is EquipableItem.ItemList.WoodShield)
+                //woodShield --> Shield
+                if (Inventory[index] == EquipableItem.ItemList.WoodShield)
                 {
-                    ShieldLevel = 2;
                     Inventory[index] = EquipableItem.ItemList.Shield;
-
-                    if (!Inventory.Contains(EquipableItem.ItemList.Shield))
-                        Inventory.Add(EquipableItem.ItemList.Shield);
-
-                    if (Ability[0] is E_Shield || Ability[0] is E_Empty && !(Ability[1] is E_Shield))
-                    {
-                        Ability[0] = new E_Shield();
-                        break;
-                    }
-
-                    if (Ability[1] is E_Shield)
-                        Ability[1] = new E_Shield();
-
-                    break;
+                    return EquipableItem.ItemList.Shield;
                 }
 
-                //On upgrade au shield -> mirror shield
-                if ((object)Inventory[index] is EquipableItem.ItemList.Shield)
+                //shield -> mirror shield
+                if (Inventory[index] == EquipableItem.ItemList.Shield)
                 {
-                    ShieldLevel = 3;
                     Inventory[index] = EquipableItem.ItemList.MirrorShield;
-                    if (!Inventory.Contains(EquipableItem.ItemList.MirrorShield))
-                        Inventory.Add(EquipableItem.ItemList.MirrorShield);
-                    if (Ability[0] is E_Shield)
-                        Ability[0] = new E_Shield();
-                    if (Ability[1] is E_Shield)
-                        Ability[1] = new E_Shield();
-
-                    item = EquipableItem.ItemList.MirrorShield;
-                    GameLogger.LogInfo("Get MirrorShield item: " + (int)item);
-                    break;
+                    return EquipableItem.ItemList.MirrorShield;
                 }
             }
 
-            //Si on passe de aucun shield --> wood shield
-            if (ShieldLevel == 1)
-            {
-                Game1.player.Inventory.Add(EquipableItem.ItemList.WoodShield);
-                item = EquipableItem.ItemList.WoodShield;
-            }
-
-            return item;
+            //Add wood shield
+            Inventory.Add(EquipableItem.ItemList.WoodShield);
+            return EquipableItem.ItemList.WoodShield;
         }
 
         private EquipableItem.ItemList Mod_HandleProgressiveBow()

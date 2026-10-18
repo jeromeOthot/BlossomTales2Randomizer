@@ -13,6 +13,7 @@ namespace BlossomTales2
           public void Init()
           {
               Game1.player.SwordLevel = 0;
+              Game1.player.ShieldLevel = 0;
               if(ModGlobals.SkipCutscenes)
                   Mod_Init();
               else
