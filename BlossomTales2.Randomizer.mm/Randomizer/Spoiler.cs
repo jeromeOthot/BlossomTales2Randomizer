@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 namespace BlossomTales2.Randomizer.mm
@@ -10,16 +11,26 @@ namespace BlossomTales2.Randomizer.mm
         private StringBuilder _spoilerLog = new StringBuilder();
         private StringBuilder _spheres = new StringBuilder();
         private int _seed;
+        private List<ItemType> _progressionItems = new List<ItemType>();
 
         public Spoiler(int seed)
         {
             _seed = seed;
             _spoilerLog.AppendLine("Spoiler log:");
             _spheres.AppendLine("Playthough:");
+            CreateProgressionItemList();
+        }
+
+        private void CreateProgressionItemList()
+        {
+            _progressionItems.Clear();
+            _progressionItems.AddRange(ItemPools.CreateProgressionItemsPool());
+            _progressionItems.AddRange(ItemPools.CreateKeyRewardsPool());
         }
 
         public void ResetPlaythrough()
         {
+            CreateProgressionItemList();
             _spheres.Clear();
             _spheres.AppendLine("Playthough:");
         }
@@ -36,7 +47,7 @@ namespace BlossomTales2.Randomizer.mm
 
         public void AddLocationToPlaythrough(Region region, Location location)
         {
-            if (location.Item == ItemType.GoldCoin)
+            if (!_progressionItems.Remove(location.Item))
                 return;
 
             AddToLog(_spheres, region, location);

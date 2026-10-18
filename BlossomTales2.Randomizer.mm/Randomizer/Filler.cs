@@ -101,6 +101,7 @@ namespace BlossomTales2.Randomizer.mm
             bool hasCollectedItem;
             do
             {
+                sphere++;
                 spoilerLog.SetSphere(sphere);
                 List<ItemType> newItems = world.CollectItems(inventory, spoilerLog);
                 hasCollectedItem = newItems.Count > 0;
@@ -111,7 +112,6 @@ namespace BlossomTales2.Randomizer.mm
                 if (world.MinotaurCastle.CanAccessMinotaurBoss(inventory))
                     return true;
 
-                sphere++;
             } while (hasCollectedItem);
 
             return false;
