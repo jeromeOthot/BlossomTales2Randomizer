@@ -110,11 +110,13 @@ namespace BlossomTales2
           player.Inventory.Add(EquipableItem.ItemList.Jar_Speedster);
           player.Inventory_NE.Add(EquipableItem.ItemList.Flippers);
           player.Inventory_NE.Add(EquipableItem.ItemList.Honeycomb);
+          player.Inventory_NE.Add(EquipableItem.ItemList.CanyonBone);
           player.Inventory_NE.Add(EquipableItem.ItemList.Ingred_Gem);
           player.Inventory_NE.Add(EquipableItem.ItemList.CombatScroll);
           player.Inventory_NE.Add(EquipableItem.ItemList.TreeSeed);
           player.Inventory_NE.Add(EquipableItem.ItemList.BlueGem);
           player.Inventory_NE.Add(EquipableItem.ItemList.GreenGem);
+          player.Inventory_NE.Add(EquipableItem.ItemList.HeartNecklace);
           player.GiveIngredientReflection(EquipableItem.IngredientList.Mushroom, 99);
           player.GiveIngredientReflection(EquipableItem.IngredientList.Clover, 99);
           player.GiveIngredientReflection(EquipableItem.IngredientList.Lily, 99);
@@ -164,6 +166,7 @@ namespace BlossomTales2
           player.Count_Gems = 60;
           player.Count_CombatScrolls = 4;
           player.Count_TreeSeeds = 5;
+          player.Count_CanyonBones = 20;
         }
     }
 }
