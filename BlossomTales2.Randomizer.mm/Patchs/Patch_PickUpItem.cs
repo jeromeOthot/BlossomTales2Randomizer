@@ -10,67 +10,59 @@ namespace BlossomTales2
 
         private bool underwater;
 
-        public extern void orig_Init();
-
-        public patch_PickUpItem(Vector3 position) : base(position)
-        {
-        }
-
-        public void Init()
-        {
-            orig_Init();
-            //ItemData itemData = RandomizerSingleton.Instance.GetItemByNameAndLocation(Name, Position);
-        }
-
         public extern void orig_Draw(SpriteBatch spriteBatch);
+        public extern void orig_onCollision(string xz, Player entity);
+
+        public patch_PickUpItem(Vector3 position) : base(position) { }
+
         public override void Draw(SpriteBatch spriteBatch)
         {
             if (!Alive)
                 return;
 
             if(IDNumber == CanyonBoneID)
-            {
-                ItemData itemData = RandomizerSingleton.Instance.GetItemByNameAndLocation(Name, Position);
-                if (itemData == null)
-                    return;
-
-                int itemIndex = (int)itemData.Item;
-                spriteBatch.Draw(Game1.masterTileset,new Vector2(Position.X -48, Position.Z - Position.Y-48), new Rectangle(itemIndex * 32, 592, 32, 32), Color.White, 0.0f, Center, 4f, SpriteEffects.None, Position.Z + 48f + Zdepth);
-            }
+                Mod_DrawCanyonBoneItem(spriteBatch);
             else
-            {
                 orig_Draw(spriteBatch);
-            }
         }
 
-        public extern void orig_onCollision(string xz, Player entity);
         public override void onCollision(string xz, Player entity)
         {
             if (!Alive || Position.Y >= 4.0 && IDNumber != 0 || Game1.player.InWater)
                 return;
 
             if (IDNumber == CanyonBoneID)
+                Mod_OnCollisionCanyonBoneItem();
+            else
+                orig_onCollision(xz, entity);
+        }
+
+        private void Mod_DrawCanyonBoneItem(SpriteBatch spriteBatch)
+        {
+            ItemData itemData = RandomizerSingleton.Instance.GetItemByNameAndLocation(Name, Position);
+            if (itemData == null)
+                return;
+            
+            spriteBatch.Draw(Game1.masterTileset,new Vector2(Position.X -48, Position.Z - Position.Y-48), new Rectangle(itemData.SpriteIndex * 32, 592, 32, 32), Color.White, 0.0f, Center, 4f, SpriteEffects.None, Position.Z + 48f + Zdepth);
+        }
+
+        private void Mod_OnCollisionCanyonBoneItem()
+        {
+            Alive = false;
+            if (SaveToMap)
+                Game1.Perma_Objects.Add(new PermaListItem(Game1.CurrentLevel.Name, Name, Position));
+
+            Game1.playSoundCue("pickUp");
+
+            ItemData itemData = RandomizerSingleton.Instance.GetItemByNameAndLocation(Name, Position);
+            if (itemData != null)
             {
-                Alive = false;
-                if (SaveToMap)
-                    Game1.Perma_Objects.Add(new PermaListItem(Game1.CurrentLevel.Name, Name, Position));
-
-                Game1.playSoundCue("pickUp");
-
-                ItemData itemData = RandomizerSingleton.Instance.GetItemByNameAndLocation(Name, Position);
-                if (itemData != null)
-                {
-                    RandomizerSingleton.Instance.GiveItem(itemData);
-                }
-                else
-                {
-                    GameLogger.LogInfo("Localisation pickItem NOT FOUND: " + new LocationId(Game1.CurrentLevel.Name, Name, Position));
-                    RandomizerSingleton.Instance.GiveItem(new ItemData(ItemType.Tomahawk));
-                }
+                RandomizerSingleton.Instance.GiveItem(itemData);
             }
             else
             {
-                orig_onCollision(xz, entity);
+                GameLogger.LogInfo("Localisation pickItem NOT FOUND: " + new LocationId(Game1.CurrentLevel.Name, Name, Position));
+                RandomizerSingleton.Instance.GiveItem(new ItemData(ItemType.Tomahawk));
             }
         }
     }
