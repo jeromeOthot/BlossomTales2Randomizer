@@ -399,6 +399,7 @@ namespace BlossomTales2
 
             if (SwordLevel < 3)
                 SwordLevel++;
+
             return item;
         }
 
@@ -408,11 +409,11 @@ namespace BlossomTales2
                 return EquipableItem.ItemList.MirrorShield;
 
             ShieldLevel++;
-            if (Ability[0] is E_Shield)
-                Ability[0] = new E_Shield();
-
-            if (Ability[1] is E_Shield)
-                Ability[1] = new E_Shield();
+            for (int n = 0; n < 2; n++)
+            {
+                if (Ability[n] is E_Shield)
+                    Ability[n] = new E_Shield();
+            }
 
             //Upgrade inventory shield
             for (int index = 0; index < Inventory.Count; ++index)
@@ -439,33 +440,28 @@ namespace BlossomTales2
 
         private EquipableItem.ItemList Mod_HandleProgressiveBow()
         {
-            EquipableItem.ItemList item = EquipableItem.ItemList.Bow;
+            if (BowUpgrade)
+                return EquipableItem.ItemList.TriBow;
+
             for (int index = 0; index < Inventory.Count; ++index)
             {
-                //Si on passe de bow --> tribow
+                //bow --> tribow
                 if (Inventory[index] == EquipableItem.ItemList.Bow)
                 {
-                    Game1.player.BowUpgrade = true;
-                    for (int n = 0; n < Game1.player.Inventory.Count; n++)
+                    BowUpgrade = true;
+                    Inventory[index] = EquipableItem.ItemList.TriBow;
+
+                    for (int n = 0; n < 2; n++)
                     {
-                        if (Equals(EquipableItem.ItemList.Bow, Game1.player.Inventory[n]))
-                            Game1.player.Inventory[n] = EquipableItem.ItemList.TriBow;
+                        if (Ability[n] is E_Bow)
+                            Ability[n].ListType = EquipableItem.ItemList.TriBow;
                     }
-
-                    if (Game1.player.Ability[0] is E_Bow)
-                        Game1.player.Ability[0].ListType = EquipableItem.ItemList.TriBow;
-
-                    if (Game1.player.Ability[1] is E_Bow)
-                        Game1.player.Ability[1].ListType = EquipableItem.ItemList.TriBow;
-
-                    item = EquipableItem.ItemList.TriBow;
-                    break;
+                    return EquipableItem.ItemList.TriBow;
                 }
             }
 
-            if (!Game1.player.BowUpgrade)
-                Game1.player.Inventory.Add(EquipableItem.ItemList.Bow);
-            return item;
+            Game1.player.Inventory.Add(EquipableItem.ItemList.Bow);
+            return EquipableItem.ItemList.Bow;
         }
     }
 
