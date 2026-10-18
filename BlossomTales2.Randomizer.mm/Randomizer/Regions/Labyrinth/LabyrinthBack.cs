@@ -35,7 +35,7 @@ namespace BlossomTales2.Randomizer.mm
                     inventory => CanAccessLabyrinth15x16(inventory),
                     ItemType.GoldCoin),
                 new Location(new LocationId("overworld-15x17.tmx", "Chest_Small", new Vector3(2392f, 0f, 2348f)),
-                    "Statue Puzzle Zrea Chest",
+                    "Statue Puzzle Area Chest",
                     inventory => true,
                     ItemType.GoldCoin),
                 new Location(new LocationId("overworld-15x18.tmx", "Chest_Small", new Vector3(1948f, 0f, 292f)),
