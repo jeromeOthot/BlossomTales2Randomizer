@@ -126,18 +126,18 @@ namespace BlossomTales2
             }
             else if (chest.IDNumber == 14)
             {
-                if (Game1.Globals.MainQuestObjective < Globaler.MainGameObjective.lab_findCastleEntrance)
-                {
+                if (!ModGlobals.OpenWorldState && Game1.Globals.MainQuestObjective < Globaler.MainGameObjective.lab_findCastleEntrance)
                     Game1.Globals.MainQuestObjective = Globaler.MainGameObjective.lab_findCastleEntrance;
-                }
             }
             else if (chest.IDNumber == 21)
             {
                 Game1.player.RemovePlayerControls = true;
+                Game1.player.giveNewItemDescription = (int)EquipableItem.ItemList.KeyPiece1;
             }
             else if (chest.IDNumber == 22)
             {
                 Game1.player.RemovePlayerControls = true;
+                Game1.player.giveNewItemDescription = (int)EquipableItem.ItemList.KeyPiece2;
             }
             else if (chest.IDNumber == 23)
             {

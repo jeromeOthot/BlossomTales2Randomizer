@@ -250,7 +250,7 @@ namespace BlossomTales2
             Game1.Particles.Add(new P_GetItem(Position + new Vector3(0.0f, 100f, 0.0f), itemIndex));
             Game1.Particles.Add(new GetItemLight(Position));
 
-            if (itemIndex == 26 || itemIndex == 40 || itemIndex == 41 || itemIndex == 42 || itemIndex == 100)
+            if (itemIndex == 26 || itemIndex == 100)
                 giveNewItemDescription = itemIndex;
         }
 
