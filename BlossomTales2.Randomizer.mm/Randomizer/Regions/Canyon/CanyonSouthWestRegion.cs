@@ -1,6 +1,3 @@
-// Licensed to the .NET Foundation under one or more agreements.
-// The .NET Foundation licenses this file to you under the MIT license.
-using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 
@@ -10,78 +7,66 @@ namespace BlossomTales2.Randomizer.mm.Canyon
     {
         public override bool CanAccess(Inventory inventory) => World.CanyonNorth.CanAccess(inventory);
 
-        public CanyonSouthWestRegion(World world) : base("South West Region", world)
+        public CanyonSouthWestRegion(World world) : base("Canyon Southwest", world)
         {
             Locations = new List<Location>
             {
-                //Os
-                {
-                    new Location(new LocationId("overworld-15x21.tmx", "PickUpItem", new Vector3(288f, 0f, 1952f)),
-                        "bone north east village", _ => true, ItemType.CanyonBone)
-                }, //accès canyon
-                {
-                    new Location(new LocationId("overworld-15x22.tmx", "PickUpItem", new Vector3(1568f, 0f, 2400f)),
-                        "bone east village", _ => true, ItemType.CanyonBone)
-                }, //accès canyon
-                {
-                    new Location(new LocationId("overworld-16x21.tmx", "PickUpItem", new Vector3(288f, 0f, 296f)),
-                        "bone north  village", _ => true, ItemType.CanyonBone)
-                }, //accès canyon
-
-                //Chest
-                {
-                    new Location(new LocationId("overworld-15x21-cave.tmx", "Chest_Small", new Vector3(352f, 0f, 412f)),
-                        "village north west cave chest left up", (inventory) => inventory.HasBombs, ItemType.GoldCoin)
-                }, //accès canyon && bombes
-                {
-                    new Location(new LocationId("overworld-15x21-cave.tmx", "Chest_Small", new Vector3(608f, 0f, 408f)),
-                        "village north west cave chest right up", (inventory) => inventory.HasBombs, ItemType.GoldCoin)
-                }, //accès canyon && bombes
-                {
-                    new Location(new LocationId("overworld-15x21-cave.tmx", "Chest_Small", new Vector3(352f, 0f, 604f)),
-                        "village north west cave chest left down", (inventory) => inventory.HasBombs, ItemType.GoldCoin)
-                }, //accès canyon && bombes
-                {
-                    new Location(new LocationId("overworld-15x21-cave.tmx", "Chest_Small", new Vector3(608f, 0f, 604f)),
-                        "village north west cave chest right down", (inventory) => inventory.HasBombs, ItemType.GoldCoin)
-                }, //accès canyon && bombes
-
-                {
-                    new Location(
-                        new LocationId("overworld-15x22-cave.tmx", "Chest_Small", new Vector3(1216f, 0f, 448f)),
-                        "village  west cave chest left",
-                        (inventory) => inventory.CanOpenNoteDoor && inventory.CanSwitchLevers, ItemType.GoldCoin)
-                }, //accès canyon && ouvrir portes note && levier
-                {
-                    new Location(
-                        new LocationId("overworld-15x22-cave.tmx", "Chest_Small", new Vector3(1408f, 0f, 448f)),
-                        "village  west cave chest right",
-                        (inventory) => inventory.CanOpenNoteDoor && inventory.CanSwitchLevers, ItemType.GoldCoin)
-                }, //accès canyon && ouvrir portes note && levier
-                {
-                    new Location(
-                        new LocationId("overworld-15x22-cave.tmx", "Chest_Small", new Vector3(1312f, 0f, 312f)),
-                        "village  west cave chest center",
-                        (inventory) => inventory.CanOpenNoteDoor && inventory.CanSwitchLevers, ItemType.GoldCoin)
-                }, //accès canyon && ouvrir portes note && levier
-
-                {
-                    new Location(new LocationId("overworld-16x21-cave.tmx", "Chest_Small", new Vector3(544f, 0f, 228f)),
-                        "village  north cave chest", (inventory) => inventory.CanSwitchLevers,
-                        ItemType.GoldCoin)
-                }, //accès canyon && levier
-
+                //Note Caves
+                new Location(new LocationId("overworld-15x22-cave.tmx", "Chest_Small", new Vector3(1312f, 0f, 312f)),
+                    "Note Cave Top Chest",
+                    inventory => inventory.CanOpenNoteDoor && inventory.CanSwitchLevers,
+                    ItemType.GoldCoin),
+                new Location(new LocationId("overworld-15x22-cave.tmx", "Chest_Small", new Vector3(1216f, 0f, 448f)),
+                    "Note Cave Bottom Left Chest",
+                    inventory => inventory.CanOpenNoteDoor && inventory.CanSwitchLevers,
+                    ItemType.GoldCoin),
+                new Location(new LocationId("overworld-15x22-cave.tmx", "Chest_Small", new Vector3(1408f, 0f, 448f)),
+                    "Note Cave Bottom Right Chest",
+                    inventory => inventory.CanOpenNoteDoor && inventory.CanSwitchLevers,
+                    ItemType.GoldCoin),
+                //Caves
+                new Location(new LocationId("overworld-15x21-cave.tmx", "Chest_Small", new Vector3(352f, 0f, 412f)),
+                    "Bomb Cave Top Left Chest",
+                    inventory => inventory.HasBombs,
+                    ItemType.GoldCoin),
+                new Location(new LocationId("overworld-15x21-cave.tmx", "Chest_Small", new Vector3(608f, 0f, 408f)),
+                    "Bomb Cave Top Right Chest",
+                    inventory => inventory.HasBombs,
+                    ItemType.GoldCoin),
+                new Location(new LocationId("overworld-15x21-cave.tmx", "Chest_Small", new Vector3(352f, 0f, 604f)),
+                    "Bomb Cave Bottom Left Chest",
+                    inventory => inventory.HasBombs,
+                    ItemType.GoldCoin),
+                new Location(new LocationId("overworld-15x21-cave.tmx", "Chest_Small", new Vector3(608f, 0f, 604f)),
+                    "Bomb Cave Bottom Right Chest",
+                    inventory => inventory.HasBombs,
+                    ItemType.GoldCoin),
+                new Location(new LocationId("overworld-16x21-cave.tmx", "Chest_Small", new Vector3(544f, 0f, 228f)),
+                    "Random Puzzle Cave Chest",
+                    inventory => inventory.CanSwitchLevers,
+                    ItemType.HeartQ_1),
                 //short sidequests
-                {
-                    new Location(new LocationId("colosseum.tmx", "price_heart", Vector3.Zero),
-                        "colosseum price heart", (inventory) => inventory.CanDoDamage && inventory.HasBombs,
-                        ItemType.HeartQ_1)
-                },
-                {
-                    new Location(new LocationId("colosseum.tmx", "price_crystal", Vector3.Zero),
-                        "colosseum price crystal", (inventory) => inventory.CanDoDamage && inventory.HasBombs,
-                        ItemType.Crystal)
-                },
+                new Location(new LocationId("colosseum.tmx", "prize_heart", Vector3.Zero),
+                    "Colosseum Prize 1",
+                    inventory => inventory.CanDoDamage && (inventory.HasBombs || inventory.HasGrappleHook || inventory.HasFalcon),
+                    ItemType.HeartQ_1),
+                new Location(new LocationId("colosseum.tmx", "prize_crystal", Vector3.Zero),
+                    "Colosseum Prize 2",
+                    inventory => inventory.CanDoDamage && (inventory.HasBombs || inventory.HasGrappleHook || inventory.HasFalcon),
+                    ItemType.Crystal),
+                //Os
+                new Location(new LocationId("overworld-15x21.tmx", "PickUpItem", new Vector3(288f, 0f, 1952f)),
+                    "Colosseum Bone",
+                    _ => true,
+                    ItemType.CanyonBone),
+                new Location(new LocationId("overworld-15x22.tmx", "PickUpItem", new Vector3(1568f, 0f, 2400f)),
+                    "Trader Area Bone",
+                    _ => true,
+                    ItemType.CanyonBone),
+                new Location(new LocationId("overworld-16x21.tmx", "PickUpItem", new Vector3(288f, 0f, 296f)),
+                    "North Village Bone",
+                    _ => true,
+                    ItemType.CanyonBone),
             };
         }
     }

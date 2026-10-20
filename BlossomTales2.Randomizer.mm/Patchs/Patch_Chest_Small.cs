@@ -66,7 +66,12 @@ namespace BlossomTales2
         {
             GameLogger.LogInfo(new LocationId(Game1.CurrentLevel.Name, chest.Name, chest.Position).ToString() + " IDNumber = " + chest.IDNumber);
 
-            ItemData item = RandomizerSingleton.Instance.GetItemByNameAndLocation(chest.Name, chest.Position);
+            string mapName = Game1.CurrentLevel.Name;
+            //For some reason, this map name get mixed up.
+            if(mapName == "overworld-22x20.tmx")
+                mapName = "jungles-22x20.tmx";
+
+            ItemData item = RandomizerSingleton.Instance.GetItemAtLocation(mapName, chest.Name, chest.Position);
             if (item != null)
             {
                 RandomizerSingleton.Instance.GiveItem(item);

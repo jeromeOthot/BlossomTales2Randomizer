@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 
 namespace BlossomTales2.Randomizer.mm
@@ -19,7 +18,7 @@ namespace BlossomTales2.Randomizer.mm
                     ItemType.HeartQ_1),
                 //Mausoleum
                 new Location(new LocationId("jungles-25x19-combat.tmx", "Chest_Small", new Vector3(2176f, 0f, 1792f)),
-                    "Jungle Combat Mausoleum",
+                    "Combat Mausoleum",
                     inventory => inventory.HasTorch && inventory.HasBow,
                     ItemType.CombatScroll),
                 //Chests

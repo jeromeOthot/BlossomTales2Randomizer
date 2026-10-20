@@ -34,72 +34,6 @@ namespace BlossomTales2
                 RandomizerSingleton.Instance.GiveItem(item);
                 HandleSpecialChests(chest);
             }
-            else
-            {
-                if (chest.IDNumber == 0)
-                {
-                    int num3 = Game1.RandomNumber.Next(20, 30);
-                    for (int k = 0; k < num3; k++)
-                    {
-                        Vector3 velocity = new Vector3(patch_Game1.RandomFloat(-60, 60, 10f), patch_Game1.RandomFloat(40, 70, 10f), patch_Game1.RandomFloat(30, 60, 10f));
-                        Game1.CurrentLevel.LevelObjects.Add(new Coin_PU(chest.Position, velocity));
-                    }
-                }
-                else if (chest.IDNumber == 1)
-                {
-                    Game1.player.GiveItemReflection(EquipableItem.ItemList.Gold_Key);
-                }
-                else if (chest.IDNumber == 2)
-                {
-                    Game1.player.GiveItemReflection(EquipableItem.ItemList.Gold_Key);
-                    chest.opendoors = true;
-                }
-                else if (chest.IDNumber == 5)
-                {
-                    Game1.player.GiveItemReflection(EquipableItem.ItemList.HeartQ_1);
-                }
-                else if (chest.IDNumber == 12)
-                {
-                    Game1.player.GiveItemReflection(EquipableItem.ItemList.GrappleHook);
-                }
-                else if (chest.IDNumber == 13)
-                {
-                    Game1.player.GiveItemReflection(EquipableItem.ItemList.RexTeleporter);
-                }
-                else if (chest.IDNumber == 14)
-                {
-                    Game1.player.GiveItemReflection(EquipableItem.ItemList.MirrorShield);
-                    if (Game1.Globals.MainQuestObjective < Globaler.MainGameObjective.lab_findCastleEntrance)
-                    {
-                        Game1.Globals.MainQuestObjective = Globaler.MainGameObjective.lab_findCastleEntrance;
-                    }
-                }
-                else if (chest.IDNumber == 21)
-                {
-                    Game1.player.RemovePlayerControls = true;
-                }
-                else if (chest.IDNumber == 22)
-                {
-                    Game1.player.GiveItemReflection(EquipableItem.ItemList.KeyPiece2);
-                    Game1.player.RemovePlayerControls = true;
-                    Game1.Achievementer.CheckAchievment(3);
-                }
-                else if (chest.IDNumber == 23)
-                {
-                    Game1.player.GiveItemReflection(EquipableItem.ItemList.KeyPiece3);
-                    Game1.player.RemovePlayerControls = true;
-                    Game1.Achievementer.CheckAchievment(4);
-                }
-                else if (chest.IDNumber == 27)
-                {
-                    int num4 = Game1.RandomNumber.Next(30, 50);
-                    for (int l = 0; l < num4; l++)
-                    {
-                        Vector3 velocity2 = new Vector3(patch_Game1.RandomFloat(-60, 60, 10f), patch_Game1.RandomFloat(40, 70, 10f), patch_Game1.RandomFloat(30, 60, 10f));
-                        Game1.CurrentLevel.LevelObjects.Add(new Coin_PU(chest.Position, velocity2));
-                    }
-                }
-            }
         }
 
         private static void HandleSpecialChests(Chest chest)
@@ -126,22 +60,23 @@ namespace BlossomTales2
             }
             else if (chest.IDNumber == 14)
             {
-                if (Game1.Globals.MainQuestObjective < Globaler.MainGameObjective.lab_findCastleEntrance)
-                {
+                if (!ModGlobals.OpenWorldState && Game1.Globals.MainQuestObjective < Globaler.MainGameObjective.lab_findCastleEntrance)
                     Game1.Globals.MainQuestObjective = Globaler.MainGameObjective.lab_findCastleEntrance;
-                }
             }
             else if (chest.IDNumber == 21)
             {
                 Game1.player.RemovePlayerControls = true;
+                Game1.player.giveNewItemDescription = (int)EquipableItem.ItemList.KeyPiece1;
             }
             else if (chest.IDNumber == 22)
             {
                 Game1.player.RemovePlayerControls = true;
+                Game1.player.giveNewItemDescription = (int)EquipableItem.ItemList.KeyPiece2;
             }
             else if (chest.IDNumber == 23)
             {
                 Game1.player.RemovePlayerControls = true;
+                Game1.player.giveNewItemDescription = (int)EquipableItem.ItemList.KeyPiece3;
             }
         }
     }

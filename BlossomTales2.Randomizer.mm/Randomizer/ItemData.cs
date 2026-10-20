@@ -5,6 +5,7 @@ namespace BlossomTales2.Randomizer.mm
     public class ItemData
     {
         public ItemType Item { get; private set; }
+        public int SpriteIndex => GetSpriteIndex();
 
         public ItemData(ItemType item)
         {
@@ -32,6 +33,45 @@ namespace BlossomTales2.Randomizer.mm
         public override string ToString()
         {
             return Item.ToString();
+        }
+
+        private int GetSpriteIndex()
+        {
+            switch (Item)
+            {
+                case ItemType.Sword:
+                {
+                    switch (Game1.player.SwordLevel)
+                    {
+                        case 0:
+                            return (int)EquipableItem.ItemList.WoodSword;
+                        case 1:
+                            return (int)EquipableItem.ItemList.Sword;
+                        default:
+                            return (int)EquipableItem.ItemList.KingSword;
+                    }
+                }
+                case ItemType.Shield:
+                {
+                    switch (Game1.player.ShieldLevel)
+                    {
+                        case 0:
+                            return (int)EquipableItem.ItemList.WoodShield;
+                        case 1:
+                            return (int)EquipableItem.ItemList.Shield;
+                        default:
+                            return (int)EquipableItem.ItemList.MirrorShield;
+                    }
+                }
+                case ItemType.Bow:
+                {
+                    return (int)(Game1.player.Inventory.Contains(EquipableItem.ItemList.Bow) ? EquipableItem.ItemList.TriBow : EquipableItem.ItemList.Bow);
+                }
+                default:
+                {
+                    return (int)Item;
+                }
+            }
         }
     }
 }

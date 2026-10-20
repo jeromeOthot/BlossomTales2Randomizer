@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 
 namespace BlossomTales2.Randomizer.mm
@@ -17,35 +16,35 @@ namespace BlossomTales2.Randomizer.mm
             Locations = new List<Location>()
             {
                 new Location(new LocationId("mansion-4.tmx", "Chest_Small", new Vector3(640f, 0f, 1280f)),
-                    "Room 4 Chest",
+                    "Memory Room Falling Chest",
                     inventory => inventory.CanDoDamage,
                     ItemType.Gold_Key),
                 new Location(new LocationId("mansion-12.tmx", "Chest_Small", new Vector3(1920f, 0f, 892f)),
-                    "Room 12 Chest",
-                    inventory => CanAccessMansion2(inventory) && inventory.HasGrappleHook,
+                    "Roller Room Chest",
+                    inventory => CanAccessMansion2(inventory) && inventory.HasGrappleHook || CanAccessMansion3(inventory) && inventory.HasRexTeleporter,
                     ItemType.Gold_Key),
                 new Location(new LocationId("mansion-12-secret.tmx", "Chest_Small", new Vector3(640f, 0f, 384f)),
-                    "Room 12 Secret Room Chest",
-                    inventory => CanAccessMansion2(inventory) && inventory.HasGrappleHook && inventory.HasBombs,
+                    "Roller Secret Room Chest",
+                    inventory => (CanAccessMansion2(inventory) && inventory.HasGrappleHook || CanAccessMansion3(inventory) && inventory.HasRexTeleporter) && inventory.HasBombs,
                     ItemType.HeartQ_1),
                 new Location(new LocationId("mansion-15-secret.tmx", "Chest_Small", new Vector3(640f, 0f, 384f)),
-                    "Room 15 Secret Room Top Chest",
+                    "Laser Secret Room Top Chest",
                     inventory => CanAccessMansion3(inventory) && inventory.HasBombs,
                     ItemType.HeartQ_1),
                 new Location(new LocationId("mansion-15-secret.tmx", "Chest_Small", new Vector3(512f, 0f, 456f)),
-                    "Room 15 Secret Room Bottom Left Chest",
+                    "Laser Secret Room Bottom Left Chest",
                     inventory => CanAccessMansion3(inventory) && inventory.HasBombs,
                     ItemType.GoldCoin),
                 new Location(new LocationId("mansion-15-secret.tmx", "Chest_Small", new Vector3(768f, 0f, 456f)),
-                    "Room 15 Secret Room Bottom Right Chest",
+                    "Laser Secret Room Bottom Right Chest",
                     inventory => CanAccessMansion3(inventory) && inventory.HasBombs,
                     ItemType.GoldCoin),
                 new Location(new LocationId("mansion-16.tmx", "Chest_Small", new Vector3(1832f, 0f, 636f)),
-                    "Room 16 Chest",
+                    "Laser Memory Puzzle Room Falling Chest",
                     inventory => CanAccessMansion3(inventory),
                     ItemType.Gold_Key),
                 new Location(new LocationId("mansion-20.tmx", "Chest_Small", new Vector3(504f, 0f, 896f)),
-                    "Room 20 Chest",
+                    "Path Puzzle Room Falling Chest",
                     inventory => CanAccessMansion3(inventory) && inventory.CanDoDamage && inventory.HasRexTeleporter,
                     ItemType.Gold_Key),
                 new Location(new LocationId("mansion-bossVampire.tmx", "Chest", new Vector3(704f, 0f, 448f)),

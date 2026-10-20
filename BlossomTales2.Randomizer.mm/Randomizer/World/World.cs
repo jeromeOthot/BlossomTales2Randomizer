@@ -54,9 +54,9 @@ namespace BlossomTales2.Randomizer.mm
             MorklaDungeon = new MorklaDungeon(this);
             CanyonNorth = new CanyonNorthRegion(this);
             CanyonSouthWest = new CanyonSouthWestRegion(this);
+            Dustwood = new DustwoodRegion(this);
             CanyonSouthEast = new CanyonSouthEastRegion(this);
             CanyonIsland = new CanyonIslandRegion(this);
-            Dustwood = new DustwoodRegion(this);
             CanyonSteppesNorth = new CanyonSteppesNorthRegion(this);
             CanyonSteppesSouth = new CanyonSteppesSouthRegion(this);
             CanyonTemple = new CanyonTempleRegion(this);
@@ -86,9 +86,9 @@ namespace BlossomTales2.Randomizer.mm
                 MorklaDungeon,
                 CanyonNorth,
                 CanyonSouthWest,
+                Dustwood,
                 CanyonSouthEast,
                 CanyonIsland,
-                Dustwood,
                 CanyonSteppesNorth,
                 CanyonSteppesSouth,
                 CanyonTemple,
@@ -114,21 +114,16 @@ namespace BlossomTales2.Randomizer.mm
         public bool CanAccessAnyDarkForest(Inventory inventory) => DarkWoodsFront.CanAccess(inventory) ||  DarkWoodsBack.CanAccess(inventory) || Monsterton.CanAccess(inventory);
         public bool CanAccessAnyLabyrinth(Inventory inventory) => LabyrinthFront.CanAccess(inventory) ||  LabyrinthBack.CanAccess(inventory) || Blockburg.CanAccess(inventory);
 
-        public List<ItemType> CollectItems(Inventory inventory, ref StringBuilder spheres)
+        public List<ItemType> CollectItems(Inventory inventory, Spoiler spoilerLog)
         {
             List<ItemType> newItems = new List<ItemType>();
 
             foreach (Region region in Regions)
             {
-                List<ItemType> items = region.CollectItems(inventory, ref spheres);
+                List<ItemType> items = region.CollectItems(inventory, spoilerLog);
                 newItems.AddRange(items);
             }
             return newItems;
-        }
-
-        public void AddRegion(Region region)
-        {
-            Regions.Add(region);
         }
 
         public List<Location> CollectLocations()

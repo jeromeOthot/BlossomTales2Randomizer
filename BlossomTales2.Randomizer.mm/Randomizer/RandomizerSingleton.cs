@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using Microsoft.Xna.Framework;
 using Newtonsoft.Json;
 
@@ -9,20 +10,13 @@ namespace BlossomTales2.Randomizer.mm
     public class RandomizerSingleton
     {
         public static RandomizerSingleton Instance { get; private set; }
-        private Dictionary<LocationId, ItemData> _locationsVanilla;
+
         private Dictionary<LocationId, ItemData> _randomizedLocations;
-        private Random _random;
 
         public static void Initialize()
         {
             Instance = new RandomizerSingleton();
             Instance.InitializeSetting();
-            Instance.InitializeLocations();
-        }
-
-        public void RandomizeLocations()
-        {
-            RandomizeItems();
         }
 
         public string SaveRandomizedLocations()
@@ -34,7 +28,7 @@ namespace BlossomTales2.Randomizer.mm
         {
             if(json == null)
             {
-                _randomizedLocations = _locationsVanilla;
+                InitializeAsVanilla();
                 return;
             }
 
@@ -114,13 +108,13 @@ namespace BlossomTales2.Randomizer.mm
             GameLogger.LogInfo("Check value: Dongeons" + RamdomizerSettings.ItemLocalisation.Dongeons);
         }
 
-        private void InitializeLocations()
+        private void InitializeAsVanilla()
         {
             World world = new World();
             List<Location> locations = world.CollectLocations();
-            _locationsVanilla = new Dictionary<LocationId, ItemData>();
+            _randomizedLocations = new Dictionary<LocationId, ItemData>();
             foreach (Location location in locations)
-                _locationsVanilla.Add(location.Id, new ItemData(location.VanillaItem));
+                _randomizedLocations.Add(location.Id, new ItemData(location.VanillaItem));
 
             // if (ModGlobals.RandomizeColiseumCoins)
             // {
@@ -136,140 +130,83 @@ namespace BlossomTales2.Randomizer.mm
             // }
         }
 
-        private void RandomizeItems()
+        public void RandomizeLocations()
         {
             int seed = RamdomizerSettings.SeedNumber.HasValue ? RamdomizerSettings.SeedNumber.Value : Environment.TickCount;
-            _random = new Random(seed);
+            if (seed == 0)
+            {
+                InitializeAsVanilla();
+                return;
+            }
 
-            GameLogger.LogInfo($"Seed = {seed}");
-
-            if(seed == 0)
-                _randomizedLocations = _locationsVanilla;
-            else
-                PlaceItems();
-        }
-
-        private void PlaceItems()
-        {
-
-
+            Spoiler spoilerLog = new Spoiler(seed);
+            Random random = new Random(seed);
+            World world;
             bool isValid;
             int tries = 0;
             do
             {
                 tries++;
-                isValid = FillLocations();
+
+                Filler filler = new Filler(random);
+                isValid = filler.TryFillWorld(out world);
+                if (!isValid)
+                    continue;
+
+                isValid = filler.ValidateWorld(world, spoilerLog);
                 if (!isValid)
                 {
+                    spoilerLog.ResetPlaythrough();
                     continue;
                 }
 
-                isValid = Validator.ValidateSeed(_randomizedLocations);
+                spoilerLog.CompletePlaythrough();
+
+                _randomizedLocations = new Dictionary<LocationId, ItemData>();
+                List<Location> locations = world.CollectLocations();
+                foreach (Location location in locations)
+                    _randomizedLocations.Add(location.Id, new ItemData(location.Item));
+
+                ForceLocations();
+
             } while (!isValid && tries <= 1000);
 
             if (isValid)
             {
                 GameLogger.LogInfo($"Total tries {tries}");
-                GameLogger.LogInfo("Spoiler log begin:");
-                foreach (KeyValuePair<LocationId, ItemData> kvp in _randomizedLocations)
-                {
-                    GameLogger.LogInfo($"{kvp.Key}: {kvp.Value}");
-                }
-                GameLogger.LogInfo("Spoiler log end");
+                OutputSpoilerLog(world, spoilerLog);
             }
             else
             {
                 GameLogger.LogInfo("Too many tries. Setting game as vanilla.");
-                _randomizedLocations = _locationsVanilla;
+                InitializeAsVanilla();
             }
         }
 
-        private bool FillLocations()
+        private void OutputSpoilerLog(World world, Spoiler spoiler)
         {
-            // List<ItemType> itemPool = new List<ItemType>();
-            // itemPool.AddRange(ItemPools.CreateProgressionItemsPool());
-            // itemPool.AddRange(ItemPools.CreateUsefulItemsPool());
-
-            //TODO: Handle key pieces correctly
-            LocationId key1Location = new LocationId("morkla-octopus.tmx", "Chest", new Vector3(896f, 0f, 624f));
-            LocationId key2Location = new LocationId("temple-genieBoss.tmx", "Chest", new Vector3(832f, 0f, 640f));
-            LocationId key3Location = new LocationId("mansion-bossScientist.tmx", "Chest", new Vector3(704f, 0f, 448f));
-
-            _randomizedLocations = new Dictionary<LocationId, ItemData>();
-            //Place key pieces
-            List<ItemType> keyPool = new List<ItemType>(ItemPools.CreateKeyRewardsPool());
-            ShuffleList(keyPool);
-            _randomizedLocations.Add(key1Location, new ItemData(keyPool[0]));
-            _randomizedLocations.Add(key2Location, new ItemData(keyPool[1]));
-            _randomizedLocations.Add(key3Location, new ItemData(keyPool[2]));
-
-            World world = new World();
-            List<Location> locations = world.CollectLocations();
-            for (int i = locations.Count - 1; i >= 0; i--)
+            List<Location> locations = new List<Location>();
+            foreach (Region region in world.Regions)
             {
-                Location locationId = locations[i];
-                //TODO: Handle key pieces
-                if (locationId.Id.Equals(key1Location) ||  locationId.Id.Equals(key2Location) || locationId.Id.Equals(key3Location))
-                    locations.RemoveAt(i);
+                locations.Clear();
+                region.CollectLocations(locations);
+                foreach (Location location in locations)
+                    spoiler.AddLocationToSpoiler(region, location);
             }
 
-            ShuffleList(locations);
-
-            Inventory assumedInventory = new Inventory(world);
-            List<ItemType> progressionPool = new List<ItemType>(ItemPools.CreateProgressionItemsPool());
-            List<ItemType> usefulItemsPool = new List<ItemType>(ItemPools.CreateUsefulItemsPool());
-            assumedInventory.AddItem(progressionPool);
-            assumedInventory.AddItem(usefulItemsPool);
-            ShuffleList(progressionPool);
-            ShuffleList(usefulItemsPool);
-            //Place progression item
-
-            foreach (ItemType itemToPlace in progressionPool)
-            {
-                assumedInventory.RemoveItem(itemToPlace, 1);
-                Location assignableLocation = locations.Find(loc => loc.CanAccess(assumedInventory));
-                if (assignableLocation == null)
-                {
-                    //Pas trouvé location
-                    GameLogger.LogInfo($"Cannot place {itemToPlace}, seed not valid");
-                    return false;
-                }
-                assignableLocation.Item = itemToPlace;
-                locations.Remove(assignableLocation);
-                _randomizedLocations.Add(assignableLocation.Id, new ItemData(itemToPlace));
-            }
-
-            foreach (ItemType itemToPlace in usefulItemsPool)
-            {
-                assumedInventory.RemoveItem(itemToPlace, 1);
-                Location assignableLocation = locations.Find(loc => loc.CanAccess(assumedInventory));
-                if (assignableLocation == null)
-                {
-                    //Pas trouvé location
-                    GameLogger.LogInfo($"Cannot place {itemToPlace}, seed not valid");
-                    return false;
-                }
-                assignableLocation.Item = itemToPlace;
-                locations.Remove(assignableLocation);
-                _randomizedLocations.Add(assignableLocation.Id, new ItemData(itemToPlace));
-            }
-
-            foreach (Location remainingLocation in locations)
-                _randomizedLocations.Add(remainingLocation.Id, new ItemData(ItemType.GoldCoin));
-
-            return true;
+            spoiler.ExportToFile();
         }
 
-        private void ShuffleList<T>(List<T> list)
+        private void ForceLocations()
         {
-            //Fisher-yates shuffle
-            for (int i = list.Count - 1; i > 0; i--)
-            {
-                int j = _random.Next(0, i+1);
-                T temp = list[i];
-                list[i] = list[j];
-                list[j] = temp;
-            }
+            //Uncomment and set the location id and item to what you need.
+            //These one are the most easily accessed locations for a new game.
+            // _randomizedLocations[new LocationId("blossom-lilyHouse.tmx", "Grandma 1", Vector3.Zero)] = new ItemData(ItemType.Bombs);
+            // _randomizedLocations[new LocationId("blossom-lilyHouse.tmx", "Grandma 2", Vector3.Zero)] = new ItemData(ItemType.Bow);
+            // _randomizedLocations[new LocationId("blossom-tavern-basement.tmx", "Chest_Small", new Vector3(256f, 0f, 272f))] = new ItemData(ItemType.Shield);
+            // _randomizedLocations[new LocationId("blossom-tavern-basement.tmx", "Chest_Small", new Vector3(256f, 0f, 464f))] = new ItemData(ItemType.Shield);
+            // _randomizedLocations[new LocationId("blossom-tavern-basement.tmx", "Chest_Small", new Vector3(448f, 0f, 272f))] = new ItemData(ItemType.Shield);
+            // _randomizedLocations[new LocationId("blossom-tavern-basement.tmx", "Chest_Small", new Vector3(448f, 0f, 464f))] = new ItemData(ItemType.Flippers);
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 
 namespace BlossomTales2.Randomizer.mm
@@ -8,12 +7,12 @@ namespace BlossomTales2.Randomizer.mm
     {
         public override bool CanAccess(Inventory inventory) => true;
 
-        public BlossomCemetary(World world) : base("BlossomCemetary", world)
+        public BlossomCemetary(World world) : base("Blossom Cemetary", world)
         {
             Locations = new List<Location>()
             {
                 new Location(new LocationId("overworld-20x18-cave1.tmx", "Chest_Small", new Vector3(1184f, 0f, 2208f)),
-                    "Cave Chest",
+                    "Peg Cave Chest",
                     inventory => inventory.CanCutPegs && inventory.HasTorch,
                     ItemType.HeartQ_1),
                 new Location(new LocationId("overworld-20x18.tmx", "lanternGuy", new Vector3(1036f, 0f, 660f)),

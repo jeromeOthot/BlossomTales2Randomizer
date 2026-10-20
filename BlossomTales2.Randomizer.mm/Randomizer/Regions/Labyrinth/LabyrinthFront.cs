@@ -21,7 +21,7 @@ namespace BlossomTales2.Randomizer.mm
                 new Location(new LocationId("overworld-17x16-cave.tmx", "Chest_Small", new Vector3(512f, 0f, 268f)),
                     "North Bomb Cave Top Left Chest",
                     inventory => CanAccessLabyrinth17x16(inventory) && inventory.HasBombs,
-                    ItemType.GoldCoin), //accès labyrinthe 17x16 && bombes
+                    ItemType.GoldCoin),
                 new Location(new LocationId("overworld-17x16-cave.tmx", "Chest_Small", new Vector3(672f, 0f, 268f)),
                     "North Bomb Cave Top Center Chest",
                     inventory => CanAccessLabyrinth17x16(inventory) && inventory.HasBombs,
@@ -69,7 +69,7 @@ namespace BlossomTales2.Randomizer.mm
                     inventory => CanAccessLabyrinth17x16(inventory),
                     ItemType.GoldCoin),
                 new Location(new LocationId("overworld-17x18.tmx", "Chest_Small", new Vector3(1308f, 0f, 224f)),
-                    "South blue Tree Chest",
+                    "South Blue Tree Chest",
                     inventory => CanAccessLabyrinth17x18(inventory),
                     ItemType.GoldCoin),
 

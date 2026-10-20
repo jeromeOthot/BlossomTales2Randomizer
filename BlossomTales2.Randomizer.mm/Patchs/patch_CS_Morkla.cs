@@ -11,8 +11,11 @@ namespace BlossomTales2
         public extern void orig_Init();
         public extern void orig_morklaDone();
         public extern void orig_fishCaught();
+        public extern void orig_placeMorklaInWater();
+        public extern void orig_placeMorklaOutOfWater();
         public extern void orig_goTurtle();
         public extern void orig_piratesPoisoned();
+        public extern void orig_sink();
         public extern void orig_lowerMorky();
         public extern void orig_Update(GameTime gameTime);
 
@@ -73,7 +76,21 @@ namespace BlossomTales2
                 Game1.Globals.MainQuestObjective = mainGameObjective;
             }
         }
-        
+
+        public void placeMorklaInWater()
+        {
+            Game1.CurrentLevel.Grid_Collision[29, 19] = 0;
+            Game1.CurrentLevel.Grid_Collision[29, 20] = 0;
+            orig_placeMorklaInWater();
+        }
+
+        public void placeMorklaOutOfWater()
+        {
+            Game1.CurrentLevel.Grid_Collision[29, 19] = 1;
+            Game1.CurrentLevel.Grid_Collision[29, 20] = 1;
+            orig_placeMorklaOutOfWater();
+        }
+
         public void goTurtle()
         {
             if (Mod_ShouldPlayMorklaIntro())
@@ -106,6 +123,13 @@ namespace BlossomTales2
                 Game1Extensions.MarkObjectiveComplete(Globaler.MainGameObjective.jungles_talkToMorkla);
                 Game1.Globals.MainQuestObjective = mainGameObjective;
             }
+        }
+
+        public void sink()
+        {
+            Game1.CurrentLevel.Grid_Collision[29, 19] = 0;
+            Game1.CurrentLevel.Grid_Collision[29, 20] = 0;
+            orig_sink();
         }
 
         public void lowerMorky()
