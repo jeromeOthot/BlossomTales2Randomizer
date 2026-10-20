@@ -8,6 +8,7 @@ namespace BlossomTales2
     {
         private const int CanyonBoneID = 37;
 
+        private Vector3 startPosition;
         private bool underwater;
 
         public extern void orig_Draw(SpriteBatch spriteBatch);
@@ -39,10 +40,10 @@ namespace BlossomTales2
 
         private void Mod_DrawCanyonBoneItem(SpriteBatch spriteBatch)
         {
-            ItemData itemData = RandomizerSingleton.Instance.GetItemByNameAndLocation(Name, Position);
+            ItemData itemData = RandomizerSingleton.Instance.GetItemByNameAndLocation(Name, startPosition);
             if (itemData == null)
                 return;
-            
+
             spriteBatch.Draw(Game1.masterTileset,new Vector2(Position.X -48, Position.Z - Position.Y-48), new Rectangle(itemData.SpriteIndex * 32, 592, 32, 32), Color.White, 0.0f, Center, 4f, SpriteEffects.None, Position.Z + 48f + Zdepth);
         }
 
@@ -50,18 +51,19 @@ namespace BlossomTales2
         {
             Alive = false;
             if (SaveToMap)
-                Game1.Perma_Objects.Add(new PermaListItem(Game1.CurrentLevel.Name, Name, Position));
+                Game1.Perma_Objects.Add(new PermaListItem(Game1.CurrentLevel.Name, Name, startPosition));
 
             Game1.playSoundCue("pickUp");
 
-            ItemData itemData = RandomizerSingleton.Instance.GetItemByNameAndLocation(Name, Position);
+            ItemData itemData = RandomizerSingleton.Instance.GetItemByNameAndLocation(Name, startPosition);
             if (itemData != null)
             {
+                GameLogger.LogInfo("PickupItem: " + new LocationId(Game1.CurrentLevel.Name, Name, startPosition));
                 RandomizerSingleton.Instance.GiveItem(itemData);
             }
             else
             {
-                GameLogger.LogInfo("Localisation pickItem NOT FOUND: " + new LocationId(Game1.CurrentLevel.Name, Name, Position));
+                GameLogger.LogInfo("Localisation pickItem NOT FOUND: " + new LocationId(Game1.CurrentLevel.Name, Name, startPosition));
                 RandomizerSingleton.Instance.GiveItem(new ItemData(ItemType.Tomahawk));
             }
         }
