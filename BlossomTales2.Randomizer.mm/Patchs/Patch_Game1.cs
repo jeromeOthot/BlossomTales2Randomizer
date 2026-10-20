@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Linq;
 using BlossomTales2;
+using BlossomTales2.Extensions;
 using BlossomTales2.Randomizer.mm;
 using Mono.Cecil;
+using Mono.Cecil.Cil;
 using MonoMod;
 using MonoMod.Cil;
+using MonoMod.InlineRT;
+using MonoMod.Utils;
 
 namespace BlossomTales2
 {
@@ -169,6 +173,16 @@ namespace BlossomTales2
           player.Count_CanyonBones = 20;
         }
     }
+
+    public class ModGame1
+    {
+        public static bool Mod_ShouldLoadDarklandsParty()
+        {
+            return ModGlobals.OpenWorldState
+                ? Game1Extensions.IsObjectiveCompleted(Globaler.MainGameObjective.dark_fightScientist)
+                : Game1.Globals.MainQuestObjective > Globaler.MainGameObjective.dark_fightScientist;
+        }
+    }
 }
 
 namespace MonoMod
@@ -181,8 +195,30 @@ namespace MonoMod
         public static void PatchGame1LoadThreadStuff(ILContext context, CustomAttribute attrib)
         {
             ILCursor cursor = new ILCursor(context);
+            PatchDarklandsParty(cursor);
             PatchCanyonBardCutscene(cursor);
             PatchFalconCutscene(cursor);
+        }
+
+        private static void PatchDarklandsParty(ILCursor cursor)
+        {
+            TypeDefinition modGame1 = MonoModRule.Modder.FindType("BlossomTales2.ModGame1").Resolve();
+            MethodDefinition mod_ShouldLoadDarklandsPartyMethod = modGame1.FindMethod("Mod_ShouldLoadDarklandsParty");
+
+            //Find L.1316
+            //if (Game1.Globals.MainQuestObjective > Globaler.MainGameObjective.dark_fightScientist)
+            ILLabel returnLabel = null;
+            cursor.GotoNext(MoveType.Before,
+                instr => instr.MatchLdsfld("BlossomTales2.Game1", "Globals"),
+                instr => instr.MatchLdfld("BlossomTales2.Globaler", "MainQuestObjective"),
+                instr => instr.MatchLdcI4(43),
+                instr => instr.MatchBle(out returnLabel));
+
+                //Replace with
+                //if(ModGame1.Mod_ShouldLoadDarklandsParty())
+                cursor.RemoveRange(4);
+                cursor.Emit(OpCodes.Call, mod_ShouldLoadDarklandsPartyMethod);
+                cursor.Emit(OpCodes.Brfalse, returnLabel);
         }
 
         private static void PatchCanyonBardCutscene(ILCursor cursor)
