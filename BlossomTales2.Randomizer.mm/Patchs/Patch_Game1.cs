@@ -171,6 +171,7 @@ namespace BlossomTales2
           player.Count_CombatScrolls = 4;
           player.Count_TreeSeeds = 5;
           player.Count_CanyonBones = 20;
+          player.Keys_Gold = 11;
         }
     }
 
