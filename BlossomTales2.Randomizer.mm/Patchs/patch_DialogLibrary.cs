@@ -259,7 +259,7 @@ namespace BlossomTales2
 
         private static void DarkOwlDialog()
         {
-            if (!Game1Extensions.IsObjectiveCompleted(Globaler.MainGameObjective.dark_talkToOwl))
+            if (Mod_IsTalkToOwlObjectiveNotCompleted())
             {
                 randomLines = new string[2] { "Owl: zzzZZZzzzZZZ...", "Owl: hoo ZZZ hooo..." };
                 Game1.Dialoger.AddLine(randomLines[Game1.RandomNumber.Next(randomLines.Length)]);
@@ -678,6 +678,14 @@ namespace BlossomTales2
                 return !Game1Extensions.IsObjectiveCompleted(Globaler.MainGameObjective.dark_enterTown);
             else
                 return Game1.Globals.MainQuestObjective < Globaler.MainGameObjective.dark_learnSong;
+        }
+
+        public static bool Mod_IsTalkToOwlObjectiveNotCompleted()
+        {
+            if (ModGlobals.OpenWorldState)
+                return !Game1Extensions.IsObjectiveCompleted(Globaler.MainGameObjective.dark_talkToOwl);
+            else
+                return Game1.Globals.MainQuestObjective < Globaler.MainGameObjective.dark_enterDungeon;
         }
 
         private static void Mod_PurchaseItem(string itemName, int price)
