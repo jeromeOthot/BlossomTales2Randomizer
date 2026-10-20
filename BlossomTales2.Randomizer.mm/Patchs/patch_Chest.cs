@@ -76,6 +76,7 @@ namespace BlossomTales2
             else if (chest.IDNumber == 23)
             {
                 Game1.player.RemovePlayerControls = true;
+                Game1.player.giveNewItemDescription = (int)EquipableItem.ItemList.KeyPiece3;
             }
         }
     }
