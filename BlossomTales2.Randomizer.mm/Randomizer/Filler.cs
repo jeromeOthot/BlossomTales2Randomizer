@@ -97,7 +97,7 @@ namespace BlossomTales2.Randomizer.mm
 
         private ItemType RandomizeBottle()
         {
-            return (ItemType)_random.Next(11, 22);
+            return (ItemType)_random.Next((int)EquipableItem.ItemList.Jar_Empty, (int)EquipableItem.ItemList.Jar_Sludge + 1);
         }
 
         public bool ValidateWorld(World world, Spoiler spoilerLog)
