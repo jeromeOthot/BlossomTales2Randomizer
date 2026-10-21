@@ -211,13 +211,15 @@ namespace BlossomTales2
                         Inventory_NE.Add(EquipableItem.ItemList.HeartNecklace);
                     break;
                 case EquipableItem.ItemList.GoldCoin:
-                    int num4 = Game1.RandomNumber.Next(20, 26);
-                    for (int l = 0; l < num4; l++)
+                    tweener.Timer(0.01f).OnComplete(delegate
                     {
-                        Vector3 velocity = new Vector3(patch_Game1.RandomFloat(-60, 60, 10f),
-                            patch_Game1.RandomFloat(40, 70, 10f), patch_Game1.RandomFloat(30, 60, 10f));
-                        Game1.CurrentLevel.LevelObjects.Add(new Coin_PU(Position, velocity));
-                    }
+                        int amount = Game1.RandomNumber.Next(20, 26);
+                        for (int l = 0; l < amount; l++)
+                        {
+                            Vector3 velocity = new Vector3(patch_Game1.RandomFloat(-60, 60, 10f), patch_Game1.RandomFloat(40, 70, 10f), patch_Game1.RandomFloat(30, 60, 10f));
+                            Game1.CurrentLevel.LevelObjects.Add(new Coin_PU(Position, velocity));
+                        }
+                    });
 
                     playAnimation = false;
                     break;
