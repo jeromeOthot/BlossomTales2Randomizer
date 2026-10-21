@@ -77,10 +77,8 @@ namespace BlossomTales2.Randomizer.mm
 
         public void GiveItem(ItemData itemData)
         {
-            Game1.Dialoger.AddLine($"GiveItem");
             if (itemData.TryConvertToEquipableItem(out EquipableItem.ItemList item))
             {
-                Game1.Dialoger.AddLine($"TryConvertToEquipableItem");
                 Game1.player.GiveItemReflection(item);
                 return;
             }
