@@ -169,8 +169,10 @@ namespace BlossomTales2.Randomizer.mm
 
         public void AddItem(List<ItemType> items)
         {
+            GameLogger.LogInfo("AddItem start");
             foreach(ItemType itemType in items)
                 AddItem(itemType, 1);
+            GameLogger.LogInfo("AddItem end");
         }
 
         public void RemoveItem(ItemType itemType, int amount)

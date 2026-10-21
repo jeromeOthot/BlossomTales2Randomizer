@@ -23,11 +23,13 @@ namespace BlossomTales2.Randomizer.mm
 
         public List<ItemType> CollectItems(Inventory inventory, Spoiler spoilerLog)
         {
+            GameLogger.LogInfo("CollectItems");
             List<ItemType> newItems = new List<ItemType>();
 
             if (!CanAccess(inventory))
                 return newItems;
 
+            GameLogger.LogInfo("foreach CollectItems");
             foreach (Location location in Locations)
             {
                 if (!location.CanAccess(inventory) || location.HasCollectedItem)
@@ -48,6 +50,7 @@ namespace BlossomTales2.Randomizer.mm
             //     foreach (Region region in Regions)
             //         region.CollectLocations(locations);
             // }
+            GameLogger.LogInfo("CollectLocations");
             locations.AddRange(Locations);
         }
     }

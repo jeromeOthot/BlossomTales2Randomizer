@@ -56,17 +56,25 @@ namespace BlossomTales2
 
             Game1.playSoundCue("pickUp");
 
-            ItemData itemData = RandomizerSingleton.Instance.GetItemByNameAndLocation(Name, startPosition);
+             RandomizerSingleton.Instance.GiveItemAtLocation(Name, startPosition);
+             /*
             if (itemData != null)
             {
-                GameLogger.LogInfo("PickupItem: " + new LocationId(Game1.CurrentLevel.Name, Name, startPosition));
+                GameLogger.LogInfo("PickupItem 2: " + new LocationId(Game1.CurrentLevel.Name, Name, startPosition));
                 RandomizerSingleton.Instance.GiveItem(itemData);
             }
             else
             {
                 GameLogger.LogInfo("Localisation pickItem NOT FOUND: " + new LocationId(Game1.CurrentLevel.Name, Name, startPosition));
                 RandomizerSingleton.Instance.GiveItem(new ItemData(ItemType.Tomahawk));
-            }
+            }*/
         }
+
+        /*
+        private void Mod_GiveItem()
+        {
+            RandomizerSingleton.Instance.GiveItemAtLocation(blacksmith.Name, blacksmith.getPosition());
+            Game1Extensions.AddLevelPermaObject(blacksmith.Name, blacksmith.getPosition());
+        }*/
     }
 }

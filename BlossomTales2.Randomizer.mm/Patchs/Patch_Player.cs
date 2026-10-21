@@ -64,6 +64,7 @@ namespace BlossomTales2
         //TODO: Extract method
         internal void GiveItem(EquipableItem.ItemList item, bool playAnimation = true)
         {
+            GameLogger.LogInfo("GiveItem");
             idleCount = 0;
             idleFrame = 0;
             idleTimer = 0;
@@ -211,14 +212,15 @@ namespace BlossomTales2
                         Inventory_NE.Add(EquipableItem.ItemList.HeartNecklace);
                     break;
                 case EquipableItem.ItemList.GoldCoin:
+                    GameLogger.LogInfo("GoldCoin");
                     int num4 = Game1.RandomNumber.Next(20, 26);
-                    for (int l = 0; l < num4; l++)
-                    {
+                    //for (int l = 0; l < num4; l++)
+                  //  {
                         Vector3 velocity = new Vector3(patch_Game1.RandomFloat(-60, 60, 10f),
                             patch_Game1.RandomFloat(40, 70, 10f), patch_Game1.RandomFloat(30, 60, 10f));
                         Game1.CurrentLevel.LevelObjects.Add(new Coin_PU(Position, velocity));
-                    }
-
+                    //}
+                    GameLogger.LogInfo("fin GoldCoin");
                     playAnimation = false;
                     break;
                 default:
@@ -234,8 +236,12 @@ namespace BlossomTales2
                     break;
             }
 
+            GameLogger.LogInfo("playAnimation");
+
             if (!playAnimation)
                 return;
+
+            GameLogger.LogInfo("ghostTimer");
             if (ghostTimer < 1)
             {
                 ClearPlayer();
@@ -244,14 +250,17 @@ namespace BlossomTales2
             else
                 Game1.playSoundCue("newWeapon");
 
+            GameLogger.LogInfo("itemIndex");
             int itemIndex = (int)item;
             Game1.playSoundCue("blank098");
             GameLogger.LogInfo("Play animation item: " + itemIndex);
             Game1.Particles.Add(new P_GetItem(Position + new Vector3(0.0f, 100f, 0.0f), itemIndex));
             Game1.Particles.Add(new GetItemLight(Position));
 
+            GameLogger.LogInfo("itemIndex");
             if (itemIndex == 26 || itemIndex == 100)
                 giveNewItemDescription = itemIndex;
+            GameLogger.LogInfo("fin");
         }
 
         public void GiveIngredient(EquipableItem.IngredientList ingred, int amount = 1, bool playAnimation = false)
@@ -507,6 +516,7 @@ namespace MonoMod
     {
         public static void PatchPlayerUpdate(ILContext context, CustomAttribute attrib)
         {
+           // GameLogger.LogInfo("PatchPlayerUpdate");
             TypeDefinition modPatchPlayerType = MonoModRule.Modder.FindType("BlossomTales2.ModPlayer").Resolve();
             ILCursor cursor = new ILCursor(context);
 
@@ -514,6 +524,8 @@ namespace MonoMod
             PatchFishNecklace(cursor, modPatchPlayerType);
             PatchGiveKingSword(cursor, modPatchPlayerType);
             PatchHeartPieceGrandpaDialog(cursor);
+          //  GameLogger.LogInfo("end PatchPlayerUpdate");
+
         }
 
         private static void PatchGiveFishingItem(ILCursor cursor, TypeDefinition modPatchPlayerType)
@@ -588,6 +600,7 @@ namespace MonoMod
 
         private static void PatchHeartPieceGrandpaDialog(ILCursor cursor)
         {
+           // GameLogger.LogInfo("PatchHeartPieceGrandpaDialog");
             //Find L.3393
             // if (this.giveNewItemDescription == 26)
             cursor.GotoNext(MoveType.Before,
@@ -603,6 +616,7 @@ namespace MonoMod
             cursor.RemoveRange(3);
             cursor.Index += 3;
             cursor.RemoveRange(25);
+           // GameLogger.LogInfo("end PatchHeartPieceGrandpaDialog");
         }
     }
 }
