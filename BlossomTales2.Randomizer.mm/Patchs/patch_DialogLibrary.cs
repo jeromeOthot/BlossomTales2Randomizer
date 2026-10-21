@@ -617,7 +617,7 @@ namespace BlossomTales2
 
         private static bool Mod_ShouldFishCrabs()
         {
-            if (ModGlobals.OpenWorldState)
+            if (RandomizerSettings.GamePlay.OpenWorldState)
                 return !Game1Extensions.IsObjectiveCompleted(Globaler.MainGameObjective.jungles_fishCrabsMorkla);
             else
                 return Game1.Globals.MainQuestObjective == Globaler.MainGameObjective.jungles_fishCrabsMorkla;
@@ -625,7 +625,7 @@ namespace BlossomTales2
 
         private static bool Mod_ShouldPlayLowerMorklaDialog()
         {
-            if(ModGlobals.OpenWorldState)
+            if(RandomizerSettings.GamePlay.OpenWorldState)
             {
                 return Game1Extensions.IsObjectiveCompleted(Globaler.MainGameObjective.jungles_fishCrabsMorkla) && !Game1Extensions.IsObjectiveCompleted(Globaler.MainGameObjective.jungles_crabsCaughtMorkla);
             }
@@ -637,7 +637,7 @@ namespace BlossomTales2
 
         private static bool Mod_HasNotCompletedMorkla()
         {
-            if (ModGlobals.OpenWorldState)
+            if (RandomizerSettings.GamePlay.OpenWorldState)
                 return !Game1Extensions.IsObjectiveCompleted(Globaler.MainGameObjective.jungles_morklaComplete);
             else
                 return Game1.Globals.MainQuestObjective < Globaler.MainGameObjective.jungles_morklaComplete;
@@ -650,7 +650,7 @@ namespace BlossomTales2
 
         private static bool Mod_IsSaveBettyNotCompleted()
         {
-            if (ModGlobals.OpenWorldState)
+            if (RandomizerSettings.GamePlay.OpenWorldState)
                 return !Game1Extensions.IsObjectiveCompleted(Globaler.MainGameObjective.dark_saveBetty);
             else
                 return Game1.Globals.MainQuestObjective <= Globaler.MainGameObjective.dark_saveBetty;
@@ -658,7 +658,7 @@ namespace BlossomTales2
 
         private static bool Mod_IsHeadToConstructionNotCompleted()
         {
-            if (ModGlobals.OpenWorldState)
+            if (RandomizerSettings.GamePlay.OpenWorldState)
                 return !Game1Extensions.IsObjectiveCompleted(Globaler.MainGameObjective.dark_headToConstruction);
             else
                 return Game1.Globals.MainQuestObjective < Globaler.MainGameObjective.dark_saveBetty;
@@ -666,7 +666,7 @@ namespace BlossomTales2
 
         private static void Mod_CompleteHeadToConstructionObjective()
         {
-            if (ModGlobals.OpenWorldState)
+            if (RandomizerSettings.GamePlay.OpenWorldState)
                 Game1Extensions.MarkObjectiveComplete(Globaler.MainGameObjective.dark_headToConstruction);
             else
                 Game1.Globals.MainQuestObjective = Globaler.MainGameObjective.dark_saveBetty;
@@ -674,7 +674,7 @@ namespace BlossomTales2
 
         private static bool Mod_HasNeverEnteredMonsterton()
         {
-            if (ModGlobals.OpenWorldState)
+            if (RandomizerSettings.GamePlay.OpenWorldState)
                 return !Game1Extensions.IsObjectiveCompleted(Globaler.MainGameObjective.dark_enterTown);
             else
                 return Game1.Globals.MainQuestObjective < Globaler.MainGameObjective.dark_learnSong;
@@ -682,7 +682,7 @@ namespace BlossomTales2
 
         public static bool Mod_IsTalkToOwlObjectiveNotCompleted()
         {
-            if (ModGlobals.OpenWorldState)
+            if (RandomizerSettings.GamePlay.OpenWorldState)
                 return !Game1Extensions.IsObjectiveCompleted(Globaler.MainGameObjective.dark_talkToOwl);
             else
                 return Game1.Globals.MainQuestObjective < Globaler.MainGameObjective.dark_enterDungeon;

@@ -58,7 +58,7 @@ namespace BlossomTales2
             Globaler.MainGameObjective mainGameObjective = Game1.Globals.MainQuestObjective;
             orig_morklaDone();
 
-            if (ModGlobals.OpenWorldState)
+            if (RandomizerSettings.GamePlay.OpenWorldState)
             {
                 Game1Extensions.MarkObjectiveComplete(Globaler.MainGameObjective.jungles_morklaComplete);
                 Game1.Globals.MainQuestObjective = mainGameObjective;
@@ -70,7 +70,7 @@ namespace BlossomTales2
             Globaler.MainGameObjective mainGameObjective = Game1.Globals.MainQuestObjective;
             orig_fishCaught();
 
-            if (ModGlobals.OpenWorldState)
+            if (RandomizerSettings.GamePlay.OpenWorldState)
             {
                 Game1Extensions.MarkObjectiveComplete(Globaler.MainGameObjective.jungles_fishCrabsMorkla);
                 Game1.Globals.MainQuestObjective = mainGameObjective;
@@ -95,9 +95,9 @@ namespace BlossomTales2
         {
             if (Mod_ShouldPlayMorklaIntro())
             {
-                if(ModGlobals.SkipCutscenes)
+                if(RandomizerSettings.GamePlay.SkipCutscenes)
                 {
-                    if(ModGlobals.OpenWorldState)
+                    if(RandomizerSettings.GamePlay.OpenWorldState)
                         Game1Extensions.MarkObjectiveComplete(Globaler.MainGameObjective.jungles_talkToMorkla);
                     else
                         Game1.Globals.MainQuestObjective = Globaler.MainGameObjective.jungles_fishCrabsMorkla;
@@ -118,7 +118,7 @@ namespace BlossomTales2
             Globaler.MainGameObjective mainGameObjective = Game1.Globals.MainQuestObjective;
             orig_piratesPoisoned();
 
-            if (ModGlobals.OpenWorldState)
+            if (RandomizerSettings.GamePlay.OpenWorldState)
             {
                 Game1Extensions.MarkObjectiveComplete(Globaler.MainGameObjective.jungles_talkToMorkla);
                 Game1.Globals.MainQuestObjective = mainGameObjective;
@@ -137,7 +137,7 @@ namespace BlossomTales2
             Globaler.MainGameObjective mainGameObjective = Game1.Globals.MainQuestObjective;
             orig_lowerMorky();
 
-            if (ModGlobals.OpenWorldState)
+            if (RandomizerSettings.GamePlay.OpenWorldState)
             {
                 Game1Extensions.MarkObjectiveComplete(Globaler.MainGameObjective.jungles_crabsCaughtMorkla);
                 Game1.Globals.MainQuestObjective = mainGameObjective;
@@ -174,7 +174,7 @@ namespace BlossomTales2
 
         private bool Mod_IsMorklaOut()
         {
-            if (ModGlobals.OpenWorldState)
+            if (RandomizerSettings.GamePlay.OpenWorldState)
                 return !Game1Extensions.IsObjectiveCompleted(Globaler.MainGameObjective.jungles_crabsCaughtMorkla);
             else
                 return Game1.Globals.MainQuestObjective >= Globaler.MainGameObjective.jungles_talkToMorkla && Game1.Globals.MainQuestObjective <= Globaler.MainGameObjective.jungles_crabsCaughtMorkla;
@@ -182,7 +182,7 @@ namespace BlossomTales2
 
         private bool Mod_ShouldPlayMorklaIntro()
         {
-            if(ModGlobals.OpenWorldState)
+            if(RandomizerSettings.GamePlay.OpenWorldState)
                 return !Game1Extensions.IsObjectiveCompleted(Globaler.MainGameObjective.jungles_talkToMorkla);
             else
                 return Game1.Globals.MainQuestObjective == Globaler.MainGameObjective.jungles_talkToMorkla;
@@ -190,7 +190,7 @@ namespace BlossomTales2
 
         private bool Mod_IsMorklaCompleted()
         {
-            if (ModGlobals.OpenWorldState)
+            if (RandomizerSettings.GamePlay.OpenWorldState)
                 return Game1Extensions.IsObjectiveCompleted(Globaler.MainGameObjective.jungles_morklaGetEyes) && !Game1Extensions.IsObjectiveCompleted(Globaler.MainGameObjective.jungles_morklaComplete);
             else
                 return Game1.Globals.MainQuestObjective == Globaler.MainGameObjective.jungles_morklaComplete;
@@ -198,7 +198,7 @@ namespace BlossomTales2
 
         private bool Mod_IsNotFishingCrabs()
         {
-            if (ModGlobals.OpenWorldState)
+            if (RandomizerSettings.GamePlay.OpenWorldState)
                 return Game1Extensions.IsObjectiveCompleted(Globaler.MainGameObjective.jungles_fishCrabsMorkla);
             else
                 return Game1.Globals.MainQuestObjective != Globaler.MainGameObjective.jungles_fishCrabsMorkla;
@@ -206,7 +206,7 @@ namespace BlossomTales2
 
         private void Mod_BaseUpdate(GameTime gameTime)
         {
-            //Copy-pasting base because it somehow crash at launch 
+            //Copy-pasting base because it somehow crash at launch
             tweener.Update((float)gameTime.ElapsedGameTime.TotalSeconds);
             if (focusCam)
             {

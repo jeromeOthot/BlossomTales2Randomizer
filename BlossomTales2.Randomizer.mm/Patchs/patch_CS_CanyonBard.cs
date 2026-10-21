@@ -49,7 +49,7 @@ namespace BlossomTales2
 
         public void talkBard()
         {
-            if(ModGlobals.SkipCutscenes)
+            if(RandomizerSettings.GamePlay.SkipCutscenes)
                 raiseWalls();
             else
                 orig_talkBard();
@@ -57,7 +57,7 @@ namespace BlossomTales2
 
         public void talkMayor()
         {
-            if(ModGlobals.SkipCutscenes)
+            if(RandomizerSettings.GamePlay.SkipCutscenes)
                 startFight();
             else
                 orig_talkMayor();
@@ -65,7 +65,7 @@ namespace BlossomTales2
 
         public void bardTalk1()
         {
-            if (ModGlobals.SkipCutscenes)
+            if (RandomizerSettings.GamePlay.SkipCutscenes)
             {
                 bard.play("idle");
                 giveGuitar();
@@ -90,7 +90,7 @@ namespace BlossomTales2
 
         public void lessonPre()
         {
-            if (ModGlobals.OpenWorldState)
+            if (RandomizerSettings.GamePlay.OpenWorldState)
                 startTheSong();
             else
                 orig_lessonPre();
@@ -104,7 +104,7 @@ namespace BlossomTales2
             Game1.player.StopUpdating = false;
             Game1.player.RemovePlayerControls = true;
 
-            if (ModGlobals.SkipCutscenes)
+            if (RandomizerSettings.GamePlay.SkipCutscenes)
             {
                 focusMusicDoor2();
             }
@@ -138,7 +138,7 @@ namespace BlossomTales2
 
         public void bardTalkAgain()
         {
-            if(ModGlobals.SkipCutscenes)
+            if(RandomizerSettings.GamePlay.SkipCutscenes)
                 goPlayer();
             else
                 orig_bardTalkAgain();
@@ -149,7 +149,7 @@ namespace BlossomTales2
             Globaler.MainGameObjective mainGameObjective = Game1.Globals.MainQuestObjective;
             orig_goPlayer();
 
-            if (ModGlobals.OpenWorldState)
+            if (RandomizerSettings.GamePlay.OpenWorldState)
             {
                 Game1Extensions.MarkObjectiveComplete(Globaler.MainGameObjective.canyons_headToBard);
                 Game1.Globals.MainQuestObjective = mainGameObjective;
@@ -164,7 +164,7 @@ namespace BlossomTales2
 
         private bool Mod_HasNotSavedBard()
         {
-            if (ModGlobals.OpenWorldState)
+            if (RandomizerSettings.GamePlay.OpenWorldState)
                 return !Game1Extensions.IsObjectiveCompleted(Globaler.MainGameObjective.canyons_headToBard);
             else
                 return Game1.Globals.MainQuestObjective <= Globaler.MainGameObjective.canyons_headToBard;

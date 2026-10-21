@@ -1,4 +1,5 @@
 ﻿using BlossomTales2.Extensions;
+using BlossomTales2.Randomizer.mm;
 using Microsoft.Xna.Framework;
 
 namespace BlossomTales2
@@ -10,15 +11,15 @@ namespace BlossomTales2
 
         public override void Init()
         {
-            if (ModGlobals.OpenWorldState)
-                return;            
+            if (RandomizerSettings.GamePlay.OpenWorldState)
+                return;
 
             orig_Init();
         }
 
         public void goPirates()
         {
-            if (ModGlobals.OpenWorldState)
+            if (RandomizerSettings.GamePlay.OpenWorldState)
             {
                 if (!Game1Extensions.IsObjectiveCompleted(Globaler.MainGameObjective.jungles_headToTown))
                 {
@@ -28,7 +29,7 @@ namespace BlossomTales2
                 return;
             }
 
-            if (ModGlobals.SkipCutscenes && Game1.Globals.MainQuestObjective <= Globaler.MainGameObjective.jungles_headToTown)
+            if (RandomizerSettings.GamePlay.SkipCutscenes && Game1.Globals.MainQuestObjective <= Globaler.MainGameObjective.jungles_headToTown)
             {
                 Game1.Globals.MainQuestObjective = Globaler.MainGameObjective.jungles_getBombs;
                 return;

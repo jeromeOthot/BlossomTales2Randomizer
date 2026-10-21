@@ -26,7 +26,7 @@ namespace BlossomTales2
 
         public void startLesson()
         {
-            if(ModGlobals.SkipCutscenes)
+            if(RandomizerSettings.GamePlay.SkipCutscenes)
                 startTheSong();
             else
                 orig_startLesson();
@@ -39,7 +39,7 @@ namespace BlossomTales2
             Game1.player.StopUpdating = false;
             Game1.player.RemovePlayerControls = false;
 
-            if (ModGlobals.SkipCutscenes)
+            if (RandomizerSettings.GamePlay.SkipCutscenes)
             {
                 tweener.Timer(2f).OnComplete(turnPlayer);
             }
@@ -62,7 +62,7 @@ namespace BlossomTales2
 
         public void bardTalkAgain()
         {
-            if (ModGlobals.SkipCutscenes)
+            if (RandomizerSettings.GamePlay.SkipCutscenes)
                 jumpOff();
             else
                 orig_bardTalkAgain();
@@ -91,7 +91,7 @@ namespace BlossomTales2
 
         private void Mod_CompleteLearnSongObjective()
         {
-            if(!ModGlobals.OpenWorldState)
+            if(!RandomizerSettings.GamePlay.OpenWorldState)
                 Game1.Globals.MainQuestObjective = Globaler.MainGameObjective.dark_talkToOwl;
         }
     }

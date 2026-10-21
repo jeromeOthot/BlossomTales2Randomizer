@@ -40,7 +40,7 @@ namespace BlossomTales2
 
         public void startLesson()
         {
-            if(ModGlobals.SkipCutscenes)
+            if(RandomizerSettings.GamePlay.SkipCutscenes)
                 learntLesson();
             else
                 orig_startLesson();
@@ -55,7 +55,7 @@ namespace BlossomTales2
             Game1.player.RemovePlayerControls = true;
             FORBARD = true;
 
-            if (ModGlobals.SkipCutscenes)
+            if (RandomizerSettings.GamePlay.SkipCutscenes)
             {
                 //Duplicated delegate
                 tweener.Timer(2f).OnComplete(delegate

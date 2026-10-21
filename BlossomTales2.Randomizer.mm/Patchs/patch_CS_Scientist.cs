@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 using BlossomTales2.Extensions;
+using BlossomTales2.Randomizer.mm;
 using Microsoft.Xna.Framework;
 
 namespace BlossomTales2
@@ -57,7 +58,7 @@ namespace BlossomTales2
             Globaler.MainGameObjective mainGameObjective = Game1.Globals.MainQuestObjective;
             orig_changeLevel();
 
-            if (ModGlobals.OpenWorldState)
+            if (RandomizerSettings.GamePlay.OpenWorldState)
             {
                 Game1Extensions.MarkObjectiveComplete(Globaler.MainGameObjective.dark_fightScientist);
                 Game1.Globals.MainQuestObjective = mainGameObjective;

@@ -1,5 +1,6 @@
 ﻿using System;
 using BlossomTales2.Extensions;
+using BlossomTales2.Randomizer.mm;
 using Microsoft.Xna.Framework;
 using Mono.Cecil;
 using Mono.Cecil.Cil;
@@ -24,7 +25,7 @@ namespace BlossomTales2
     {
         public static void Mod_CompleteCyclopsObjective()
         {
-            if (ModGlobals.OpenWorldState)
+            if (RandomizerSettings.GamePlay.OpenWorldState)
             {
                 Game1Extensions.MarkObjectiveComplete(Globaler.MainGameObjective.lab_enterLabyrinth);
             }

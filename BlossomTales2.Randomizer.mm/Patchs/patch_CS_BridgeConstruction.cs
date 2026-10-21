@@ -123,7 +123,7 @@ namespace BlossomTales2
             Globaler.MainGameObjective mainGameObjective = Game1.Globals.MainQuestObjective;
             orig_youDidIt();
 
-            if (ModGlobals.OpenWorldState)
+            if (RandomizerSettings.GamePlay.OpenWorldState)
             {
                 Game1Extensions.MarkObjectiveComplete(Globaler.MainGameObjective.dark_crossBridge);
                 Game1.Globals.MainQuestObjective = mainGameObjective;
@@ -132,7 +132,7 @@ namespace BlossomTales2
 
         private bool Mod_IsObjectiveNotHeadToConstruction()
         {
-            if (ModGlobals.OpenWorldState)
+            if (RandomizerSettings.GamePlay.OpenWorldState)
                 return false;
             else
                 return Game1.Globals.MainQuestObjective < Globaler.MainGameObjective.dark_headToConstruction;
@@ -140,7 +140,7 @@ namespace BlossomTales2
 
         private bool Mod_IsSaveBettyNotCompleted()
         {
-            if (ModGlobals.OpenWorldState)
+            if (RandomizerSettings.GamePlay.OpenWorldState)
                 return !Game1Extensions.IsObjectiveCompleted(Globaler.MainGameObjective.dark_saveBetty);
             else
                 return Game1.Globals.MainQuestObjective <= Globaler.MainGameObjective.dark_saveBetty;
@@ -148,7 +148,7 @@ namespace BlossomTales2
 
         private bool Mod_IsSaveBettyCompleted()
         {
-            if (ModGlobals.OpenWorldState)
+            if (RandomizerSettings.GamePlay.OpenWorldState)
                 return Game1Extensions.IsObjectiveCompleted(Globaler.MainGameObjective.dark_saveBetty);
             else
                 return Game1.Globals.MainQuestObjective >= Globaler.MainGameObjective.dark_crossBridge;
@@ -156,7 +156,7 @@ namespace BlossomTales2
 
         private bool Mod_IsObjectiveCrossBridge()
         {
-            if (ModGlobals.OpenWorldState)
+            if (RandomizerSettings.GamePlay.OpenWorldState)
                 return Game1Extensions.IsObjectiveCompleted(Globaler.MainGameObjective.dark_saveBetty) && !Game1Extensions.IsObjectiveCompleted(Globaler.MainGameObjective.dark_crossBridge);
             else
                 return Game1.Globals.MainQuestObjective == Globaler.MainGameObjective.dark_crossBridge;
@@ -164,14 +164,14 @@ namespace BlossomTales2
 
         private bool Mod_IsObjectiveBeforeCrossBridge()
         {
-            if (ModGlobals.OpenWorldState)
+            if (RandomizerSettings.GamePlay.OpenWorldState)
                 return !Game1Extensions.IsObjectiveCompleted(Globaler.MainGameObjective.dark_saveBetty);
             return Game1.Globals.MainQuestObjective < Globaler.MainGameObjective.dark_crossBridge;
         }
 
         private bool Mod_IsCrossBridgeCompleted()
         {
-            if (ModGlobals.OpenWorldState)
+            if (RandomizerSettings.GamePlay.OpenWorldState)
                 return Game1Extensions.IsObjectiveCompleted(Globaler.MainGameObjective.dark_crossBridge);
             else
                 return Game1.Globals.MainQuestObjective > Globaler.MainGameObjective.dark_crossBridge;

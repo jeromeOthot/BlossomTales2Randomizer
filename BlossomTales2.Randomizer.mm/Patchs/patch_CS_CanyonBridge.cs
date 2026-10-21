@@ -1,6 +1,7 @@
 ﻿
 using System.Collections.Generic;
 using BlossomTales2.Extensions;
+using BlossomTales2.Randomizer.mm;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -116,7 +117,7 @@ namespace BlossomTales2
 
         private bool Mod_HasNotRaisedBridge()
         {
-            if (ModGlobals.OpenWorldState)
+            if (RandomizerSettings.GamePlay.OpenWorldState)
                 return !Game1Extensions.IsObjectiveCompleted(Globaler.MainGameObjective.canyons_getBow);
             else
                 return Game1.Globals.MainQuestObjective <= Globaler.MainGameObjective.canyons_crossBridge;
@@ -124,7 +125,7 @@ namespace BlossomTales2
 
         private bool Mod_HasBowObjective()
         {
-            if (ModGlobals.OpenWorldState)
+            if (RandomizerSettings.GamePlay.OpenWorldState)
                 return Game1Extensions.IsObjectiveCompleted(Globaler.MainGameObjective.jungles_morklaComplete) && !Game1Extensions.IsObjectiveCompleted(Globaler.MainGameObjective.canyons_getBow);
             else
                 return Game1.Globals.MainQuestObjective == Globaler.MainGameObjective.canyons_talkToBowGuy || Game1.Globals.MainQuestObjective == Globaler.MainGameObjective.canyons_getBow;
@@ -132,13 +133,13 @@ namespace BlossomTales2
 
         private void Mod_SetBowObjective()
         {
-            if(!ModGlobals.OpenWorldState)
+            if(!RandomizerSettings.GamePlay.OpenWorldState)
                 Game1.Globals.MainQuestObjective = Globaler.MainGameObjective.canyons_getBow;
         }
 
         private void Mod_CompleteBridgeObjective()
         {
-            if(ModGlobals.OpenWorldState)
+            if(RandomizerSettings.GamePlay.OpenWorldState)
             {
                 Game1Extensions.MarkObjectiveComplete(Globaler.MainGameObjective.canyons_getBow);
             }

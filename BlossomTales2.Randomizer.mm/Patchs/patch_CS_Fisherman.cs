@@ -36,7 +36,7 @@ namespace BlossomTales2
 
         public void callForHelp()
         {
-            if (!ModGlobals.SkipCutscenes)
+            if (!RandomizerSettings.GamePlay.SkipCutscenes)
                 orig_callForHelp();
         }
 

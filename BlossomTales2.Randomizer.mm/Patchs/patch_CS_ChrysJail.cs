@@ -1,4 +1,6 @@
-﻿namespace BlossomTales2
+﻿using BlossomTales2.Randomizer.mm;
+
+namespace BlossomTales2
 {
     internal class patch_CS_ChrysJail : CS_ChrysJail
     {
@@ -8,7 +10,7 @@
         {
             Globaler.MainGameObjective mainGameObjective = Game1.Globals.MainQuestObjective;
             orig_loadMap();
-            if (ModGlobals.OpenWorldState)
+            if (RandomizerSettings.GamePlay.OpenWorldState)
                 Game1.Globals.MainQuestObjective = mainGameObjective;
         }
     }

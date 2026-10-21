@@ -13,9 +13,9 @@ namespace BlossomTales2
 
         public  void Init()
         {
-            GameLogger.LogInfo("patch_CS_LilysHouseWakeUp Init " + ModGlobals.SkipCutscenes);
+            GameLogger.LogInfo("patch_CS_LilysHouseWakeUp Init " + RandomizerSettings.GamePlay.SkipCutscenes);
 
-            if(ModGlobals.SkipCutscenes)
+            if(RandomizerSettings.GamePlay.SkipCutscenes)
                 this.endCutScene();
             else
                 orig_Init();

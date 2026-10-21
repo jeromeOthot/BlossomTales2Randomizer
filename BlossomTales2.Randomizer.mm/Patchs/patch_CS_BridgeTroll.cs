@@ -1,5 +1,6 @@
 ﻿using System;
 using BlossomTales2.Extensions;
+using BlossomTales2.Randomizer.mm;
 using Mono.Cecil;
 using Mono.Cecil.Cil;
 using MonoMod;
@@ -33,7 +34,7 @@ namespace BlossomTales2
             Globaler.MainGameObjective mainGameObjective = Game1.Globals.MainQuestObjective;
             tweener.Timer(0.1f).OnComplete(delegate
             {
-                if (ModGlobals.OpenWorldState)
+                if (RandomizerSettings.GamePlay.OpenWorldState)
                     Game1.Globals.MainQuestObjective = mainGameObjective;
             });
         }
@@ -43,9 +44,9 @@ namespace BlossomTales2
     {
         public static bool Mod_ShouldDisplayTroll()
         {
-            if(ModGlobals.OpenWorldState)
+            if(RandomizerSettings.GamePlay.OpenWorldState)
             {
-                return (ModGlobals.SkipCutscenes || Game1Extensions.IsObjectiveCompleted(Globaler.MainGameObjective.jungles_talkToGruff))
+                return (RandomizerSettings.GamePlay.SkipCutscenes || Game1Extensions.IsObjectiveCompleted(Globaler.MainGameObjective.jungles_talkToGruff))
                        && !Game1Extensions.IsObjectiveCompleted(Globaler.MainGameObjective.jungles_giveGruffJuice);
             }
 
@@ -54,7 +55,7 @@ namespace BlossomTales2
 
         public static bool Mod_ShouldTriggerTrollCutscene()
         {
-            return !ModGlobals.OpenWorldState &&
+            return !RandomizerSettings.GamePlay.OpenWorldState &&
                    Game1.Globals.MainQuestObjective < Globaler.MainGameObjective.jungles_headToTown;
         }
     }

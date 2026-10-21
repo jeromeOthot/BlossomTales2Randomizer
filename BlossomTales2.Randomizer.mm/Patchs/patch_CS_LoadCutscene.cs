@@ -12,8 +12,8 @@ namespace BlossomTales2
 
         private void  startDialog()
         {
-            GameLogger.LogInfo("Starting load cutscene... " + ModGlobals.SkipCutscenes);
-            if(ModGlobals.SkipCutscenes)
+            GameLogger.LogInfo("Starting load cutscene... " + RandomizerSettings.GamePlay.SkipCutscenes);
+            if(RandomizerSettings.GamePlay.SkipCutscenes)
                 this.endCutScene();
             else
                 orig_startDialog();

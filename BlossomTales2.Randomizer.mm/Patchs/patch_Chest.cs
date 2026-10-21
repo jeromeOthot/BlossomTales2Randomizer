@@ -44,7 +44,7 @@ namespace BlossomTales2
             }
             else if (chest.IDNumber == 10)
             {
-                if (ModGlobals.OpenWorldState)
+                if (RandomizerSettings.GamePlay.OpenWorldState)
                     Game1Extensions.MarkObjectiveComplete(Globaler.MainGameObjective.jungles_getBombs);
                 else
                     Game1.Globals.MainQuestObjective = Globaler.MainGameObjective.jungles_talkToMorkla;
@@ -60,7 +60,7 @@ namespace BlossomTales2
             }
             else if (chest.IDNumber == 14)
             {
-                if (!ModGlobals.OpenWorldState && Game1.Globals.MainQuestObjective < Globaler.MainGameObjective.lab_findCastleEntrance)
+                if (!RandomizerSettings.GamePlay.OpenWorldState && Game1.Globals.MainQuestObjective < Globaler.MainGameObjective.lab_findCastleEntrance)
                     Game1.Globals.MainQuestObjective = Globaler.MainGameObjective.lab_findCastleEntrance;
             }
             else if (chest.IDNumber == 21)

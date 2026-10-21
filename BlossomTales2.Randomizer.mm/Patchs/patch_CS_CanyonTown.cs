@@ -12,7 +12,7 @@ namespace BlossomTales2
 
         public override void Init()
         {
-            if (ModGlobals.OpenWorldState)
+            if (RandomizerSettings.GamePlay.OpenWorldState)
             {
                 if (Game1.Globals.beggarState < 5)
                 {

@@ -179,7 +179,7 @@ namespace BlossomTales2
     {
         public static bool Mod_ShouldLoadDarklandsParty()
         {
-            return ModGlobals.OpenWorldState
+            return RandomizerSettings.GamePlay.OpenWorldState
                 ? Game1Extensions.IsObjectiveCompleted(Globaler.MainGameObjective.dark_fightScientist)
                 : Game1.Globals.MainQuestObjective > Globaler.MainGameObjective.dark_fightScientist;
         }

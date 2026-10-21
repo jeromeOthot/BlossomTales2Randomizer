@@ -5,11 +5,17 @@ using Newtonsoft.Json;
 
 namespace BlossomTales2.Randomizer.mm
 {
-    public static class RamdomizerSettings
+    public static class RandomizerSettings
     {
         public static int? SeedNumber = null;
-        public static OtherSetting Other = new OtherSetting();
-        public static ItemLocalisationSetting ItemLocalisation = new ItemLocalisationSetting();
+        public static GamePlaySettings GamePlay = new GamePlaySettings();
+
+        public class GamePlaySettings
+        {
+            public  bool SkipCutscenes = true;
+            public  bool OpenWorldState = true;
+            public  bool RandomizeColiseumCoins = false;
+        }
 
         public class OtherSetting
         {
@@ -22,10 +28,10 @@ namespace BlossomTales2.Randomizer.mm
 
         public class ItemLocalisationSetting
         {
-            public bool Dongeons = false;
+            public bool Dungeons = false;
             public bool Caves = false;
             public bool NoteCaves = false;
-            public bool NPC = false;
+            public bool Gifts = false;
             public bool ShortSideQuest = false;
             public bool LongSideQuest = false;
             public bool MiniGames = false;
@@ -39,24 +45,23 @@ namespace BlossomTales2.Randomizer.mm
         {
             string json = File.ReadAllText(path);
 
-            var loaded = JsonConvert.DeserializeObject<RamdomizerSettingsFile>(json);
+            var loaded = JsonConvert.DeserializeObject<RandomizerSettingsFile>(json);
 
             if (loaded != null)
             {
                 SeedNumber = loaded.SeedNumber;
-                if (loaded.Other != null)
-                    Other = loaded.Other;
-
-                if (loaded.ItemLocalisation != null)
-                    ItemLocalisation = loaded.ItemLocalisation;
+                if (loaded.GamePlay != null)
+                    GamePlay = loaded.GamePlay;
             }
         }
 
-        private class RamdomizerSettingsFile
+        private class RandomizerSettingsFile
         {
             public int? SeedNumber { get; set; }
-            public OtherSetting Other { get; set; }
-            public ItemLocalisationSetting ItemLocalisation { get; set; }
+
+            public GamePlaySettings GamePlay { get; set; }
+          //  public OtherSetting Other { get; set; }
+          //  public ItemLocalisationSetting ItemLocalisation { get; set; }
         }
     }
 }

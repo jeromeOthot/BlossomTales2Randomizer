@@ -14,7 +14,7 @@ namespace BlossomTales2
           {
               Game1.player.SwordLevel = 0;
               Game1.player.ShieldLevel = 0;
-              if(ModGlobals.SkipCutscenes)
+              if(RandomizerSettings.GamePlay.SkipCutscenes)
                   Mod_Init();
               else
                   orig_Init();
@@ -41,7 +41,7 @@ namespace BlossomTales2
             tweener.Timer(2.3f).OnComplete(delegate
             {
                 lily.play("idleDown");
-                if (ModGlobals.SkipCutscenes)
+                if (RandomizerSettings.GamePlay.SkipCutscenes)
                     tweener.Timer(0.2f).OnComplete(endCutScene);
                 else
                     Game1.Dialoger.AddLine("Lily: Thanks, Grandma. Love you!", endCutScene);
@@ -50,10 +50,10 @@ namespace BlossomTales2
 
         public void  endCutScene()
         {
-            if(!ModGlobals.SkipCutscenes)
+            if(!RandomizerSettings.GamePlay.SkipCutscenes)
             {
                 orig_endCutScene();
-                if (ModGlobals.OpenWorldState)
+                if (RandomizerSettings.GamePlay.OpenWorldState)
                 {
                     Game1.Globals.MainQuestObjective = Globaler.MainGameObjective.lab_openDoor;
                     Game1.Globals.blossomInvasionState = 2;
@@ -63,7 +63,7 @@ namespace BlossomTales2
             }
 
             //On change de quete pour skipper le tutoriel festival
-            if (ModGlobals.OpenWorldState)
+            if (RandomizerSettings.GamePlay.OpenWorldState)
             {
                 Game1.Globals.MainQuestObjective = Globaler.MainGameObjective.lab_openDoor;
                 Game1.Globals.blossomInvasionState = 2;

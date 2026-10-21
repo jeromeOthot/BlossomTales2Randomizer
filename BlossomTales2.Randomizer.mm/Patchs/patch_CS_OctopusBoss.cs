@@ -1,4 +1,5 @@
 ﻿using BlossomTales2.Extensions;
+using BlossomTales2.Randomizer.mm;
 using Microsoft.Xna.Framework;
 
 namespace BlossomTales2
@@ -42,7 +43,7 @@ namespace BlossomTales2
 
         private void Mod_CompleteGetEyesObjective()
         {
-            if (ModGlobals.OpenWorldState)
+            if (RandomizerSettings.GamePlay.OpenWorldState)
                 Game1Extensions.MarkObjectiveComplete(Globaler.MainGameObjective.jungles_morklaGetEyes);
             else
                 Game1.Globals.MainQuestObjective = Globaler.MainGameObjective.jungles_morklaComplete;

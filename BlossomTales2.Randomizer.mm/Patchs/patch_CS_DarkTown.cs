@@ -1,4 +1,5 @@
 ﻿using BlossomTales2.Extensions;
+using BlossomTales2.Randomizer.mm;
 using Microsoft.Xna.Framework;
 
 namespace BlossomTales2
@@ -43,7 +44,7 @@ namespace BlossomTales2
 
         private bool Mod_HasNeverEnteredTown()
         {
-            if (ModGlobals.OpenWorldState)
+            if (RandomizerSettings.GamePlay.OpenWorldState)
                 return !Game1Extensions.IsObjectiveCompleted(Globaler.MainGameObjective.dark_enterTown);
             else
                 return Game1.Globals.MainQuestObjective < Globaler.MainGameObjective.dark_learnSong;
@@ -51,7 +52,7 @@ namespace BlossomTales2
 
         private void Mod_CompleteEnterTownObjective()
         {
-            if (ModGlobals.OpenWorldState)
+            if (RandomizerSettings.GamePlay.OpenWorldState)
                 Game1Extensions.MarkObjectiveComplete(Globaler.MainGameObjective.dark_enterTown);
             else
                 Game1.Globals.MainQuestObjective = Globaler.MainGameObjective.dark_learnSong;

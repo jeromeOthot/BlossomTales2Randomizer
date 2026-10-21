@@ -1,4 +1,5 @@
 ﻿using BlossomTales2.Extensions;
+using BlossomTales2.Randomizer.mm;
 using Microsoft.Xna.Framework;
 
 namespace BlossomTales2
@@ -41,7 +42,7 @@ namespace BlossomTales2
             Globaler.MainGameObjective mainGameObjective = Game1.Globals.MainQuestObjective;
             orig_goPlayer();
 
-            if (ModGlobals.OpenWorldState)
+            if (RandomizerSettings.GamePlay.OpenWorldState)
             {
                 Game1Extensions.MarkObjectiveComplete(Globaler.MainGameObjective.dark_enterDungeon);
                 Game1.Globals.MainQuestObjective = mainGameObjective;
@@ -51,7 +52,7 @@ namespace BlossomTales2
 
         private bool Mod_IsEnterDungeonObjectiveCompleted()
         {
-            if (ModGlobals.OpenWorldState)
+            if (RandomizerSettings.GamePlay.OpenWorldState)
                 return Game1Extensions.IsObjectiveCompleted(Globaler.MainGameObjective.dark_enterDungeon);
             else
                 return Game1.Globals.MainQuestObjective >= Globaler.MainGameObjective.dark_openMiniBossDoor;

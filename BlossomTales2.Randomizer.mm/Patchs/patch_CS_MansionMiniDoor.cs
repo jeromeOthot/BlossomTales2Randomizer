@@ -3,6 +3,7 @@
 
 using System;
 using BlossomTales2.Extensions;
+using BlossomTales2.Randomizer.mm;
 using Microsoft.Xna.Framework;
 using Mono.Cecil;
 using Mono.Cecil.Cil;
@@ -41,7 +42,7 @@ namespace BlossomTales2
 
         private bool Mod_IsMansionMiniBossDoorOpened()
         {
-            if (ModGlobals.OpenWorldState)
+            if (RandomizerSettings.GamePlay.OpenWorldState)
                 return Game1Extensions.IsObjectiveCompleted(Globaler.MainGameObjective.dark_openMiniBossDoor);
             else
                 return Game1.Globals.MainQuestObjective > Globaler.MainGameObjective.dark_openMiniBossDoor;
@@ -52,7 +53,7 @@ namespace BlossomTales2
     {
         public static void Mod_CompleteOpenMiniDoor()
         {
-            if(ModGlobals.OpenWorldState)
+            if(RandomizerSettings.GamePlay.OpenWorldState)
                 Game1Extensions.MarkObjectiveComplete(Globaler.MainGameObjective.dark_openMiniBossDoor);
             else
                 Game1.Globals.MainQuestObjective = Globaler.MainGameObjective.dark_headToVlad;

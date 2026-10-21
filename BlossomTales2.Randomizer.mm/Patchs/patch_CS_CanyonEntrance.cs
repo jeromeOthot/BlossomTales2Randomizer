@@ -1,4 +1,5 @@
 ﻿using BlossomTales2.Extensions;
+using BlossomTales2.Randomizer.mm;
 
 namespace BlossomTales2
 {
@@ -45,7 +46,7 @@ namespace BlossomTales2
             Globaler.MainGameObjective mainGameObjective = Game1.Globals.MainQuestObjective;
             orig_talkToOwlAgain();
 
-            if (ModGlobals.OpenWorldState)
+            if (RandomizerSettings.GamePlay.OpenWorldState)
             {
                 Game1Extensions.MarkObjectiveComplete(Globaler.MainGameObjective.canyons_talkToOwlAgain);
                 Game1.Globals.MainQuestObjective = mainGameObjective;
@@ -54,7 +55,7 @@ namespace BlossomTales2
 
         public void goOwl()
         {
-            if(ModGlobals.OpenWorldState)
+            if(RandomizerSettings.GamePlay.OpenWorldState)
                 return;
             else
                 orig_goOwl();
@@ -77,7 +78,7 @@ namespace BlossomTales2
             Globaler.MainGameObjective mainGameObjective = Game1.Globals.MainQuestObjective;
             orig_enterDungeon();
 
-            if (ModGlobals.OpenWorldState)
+            if (RandomizerSettings.GamePlay.OpenWorldState)
             {
                 Game1Extensions.MarkObjectiveComplete(Globaler.MainGameObjective.canyons_enterDungeon);
                 Game1.Globals.MainQuestObjective = mainGameObjective;
@@ -86,7 +87,7 @@ namespace BlossomTales2
 
         public bool Mod_HasNotOpenedDoor()
         {
-            if (ModGlobals.OpenWorldState)
+            if (RandomizerSettings.GamePlay.OpenWorldState)
                 return !Game1Extensions.IsObjectiveCompleted(Globaler.MainGameObjective.canyons_enterDungeon);
             else
                 return Game1.Globals.MainQuestObjective <= Globaler.MainGameObjective.canyons_enterDungeon;
@@ -94,7 +95,7 @@ namespace BlossomTales2
 
         public bool Mod_IsObjectiveEnterDungeon()
         {
-            if (ModGlobals.OpenWorldState)
+            if (RandomizerSettings.GamePlay.OpenWorldState)
                 return !Game1Extensions.IsObjectiveCompleted(Globaler.MainGameObjective.canyons_enterDungeon);
             else
                 return Game1.Globals.MainQuestObjective == Globaler.MainGameObjective.canyons_enterDungeon;
@@ -102,7 +103,7 @@ namespace BlossomTales2
 
         public bool Mod_IsObjectiveTalkToOwlAgain()
         {
-            if (ModGlobals.OpenWorldState)
+            if (RandomizerSettings.GamePlay.OpenWorldState)
                 return Game1Extensions.IsObjectiveCompleted(Globaler.MainGameObjective.canyons_fightGolem) && !Game1Extensions.IsObjectiveCompleted(Globaler.MainGameObjective.canyons_talkToOwlAgain);
             else
                 return Game1.Globals.MainQuestObjective == Globaler.MainGameObjective.canyons_talkToOwlAgain;

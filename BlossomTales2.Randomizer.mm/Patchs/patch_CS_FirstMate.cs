@@ -1,4 +1,5 @@
 ﻿using BlossomTales2.Extensions;
+using BlossomTales2.Randomizer.mm;
 using Microsoft.Xna.Framework;
 
 namespace BlossomTales2
@@ -24,7 +25,7 @@ namespace BlossomTales2
 
         public bool Mod_ShouldStartMonkeyFight()
         {
-            if (ModGlobals.OpenWorldState)
+            if (RandomizerSettings.GamePlay.OpenWorldState)
                 return !Game1Extensions.IsObjectiveCompleted(Globaler.MainGameObjective.jungles_getBombs);
             else
                 return Game1.Globals.MainQuestObjective <= Globaler.MainGameObjective.jungles_getBombs;

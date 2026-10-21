@@ -1,4 +1,5 @@
 ﻿using BlossomTales2.Extensions;
+using BlossomTales2.Randomizer.mm;
 using Microsoft.Xna.Framework;
 
 namespace BlossomTales2
@@ -52,7 +53,7 @@ namespace BlossomTales2
             Globaler.MainGameObjective mainGameObjective = Game1.Globals.MainQuestObjective;
             orig_changeLevel();
 
-            if (ModGlobals.OpenWorldState)
+            if (RandomizerSettings.GamePlay.OpenWorldState)
             {
                 Game1Extensions.MarkObjectiveComplete(Globaler.MainGameObjective.canyons_fightGolem);
                 Game1.Globals.MainQuestObjective = mainGameObjective;
@@ -61,7 +62,7 @@ namespace BlossomTales2
 
         private bool Mod_HasNotDefeatedGenie()
         {
-            if (ModGlobals.OpenWorldState)
+            if (RandomizerSettings.GamePlay.OpenWorldState)
                 return !Game1Extensions.IsObjectiveCompleted(Globaler.MainGameObjective.canyons_fightGolem);
             else
                 return Game1.Globals.MainQuestObjective <= Globaler.MainGameObjective.canyons_fightGolem;

@@ -86,7 +86,7 @@ namespace BlossomTales2
 
         public void wakeUpLanternGuy()
         {
-            if (ModGlobals.SkipCutscenes)
+            if (RandomizerSettings.GamePlay.SkipCutscenes)
                 giveLantern();
             else
                 orig_wakeUpLanternGuy();
@@ -106,7 +106,7 @@ namespace BlossomTales2
             }
 
             EraseNPCStuff();
-            if (ModGlobals.SkipCutscenes)
+            if (RandomizerSettings.GamePlay.SkipCutscenes)
             {
                 tweener.Timer(2f).OnComplete(runOff);
             }
@@ -137,7 +137,7 @@ namespace BlossomTales2
             Globaler.MainGameObjective mainGameObjective = Game1.Globals.MainQuestObjective;
             orig_openDoor();
 
-            if (ModGlobals.OpenWorldState)
+            if (RandomizerSettings.GamePlay.OpenWorldState)
                 Game1.Globals.MainQuestObjective = mainGameObjective;
             Game1Extensions.AddLevelPermaObject(doorPuppet.name, doorPuppet.getPosition());
         }

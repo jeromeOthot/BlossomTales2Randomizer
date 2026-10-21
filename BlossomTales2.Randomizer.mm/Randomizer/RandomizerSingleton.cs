@@ -98,12 +98,7 @@ namespace BlossomTales2.Randomizer.mm
 
         private void InitializeSetting()
         {
-            RamdomizerSettings.Load("settings.json");
-            //Exemple
-            bool skip = RamdomizerSettings.Other.SkipInvasion;
-            GameLogger.LogInfo("Seed number: " + RamdomizerSettings.SeedNumber);
-            GameLogger.LogInfo("Check value SkipInvasion: " + RamdomizerSettings.Other.SkipInvasion);
-            GameLogger.LogInfo("Check value: Dongeons" + RamdomizerSettings.ItemLocalisation.Dongeons);
+            RandomizerSettings.Load("settings.json");
         }
 
         private void InitializeAsVanilla()
@@ -114,7 +109,7 @@ namespace BlossomTales2.Randomizer.mm
             foreach (Location location in locations)
                 _randomizedLocations.Add(location.Id, new ItemData(location.VanillaItem));
 
-            // if (ModGlobals.RandomizeColiseumCoins)
+            // if (RamdomizerSettings.GamePlay.RandomizeColiseumCoins)
             // {
             //     _locationsVanilla.Add(new LocationId("colosseum.tmx", "price1", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.GoldCoin));
             //     _locationsVanilla.Add(new LocationId("colosseum.tmx", "price2", new Vector3(0f, 0f, 0f)), new ItemData(ItemType.GoldCoin));
@@ -130,7 +125,7 @@ namespace BlossomTales2.Randomizer.mm
 
         public void RandomizeLocations()
         {
-            int seed = RamdomizerSettings.SeedNumber.HasValue ? RamdomizerSettings.SeedNumber.Value : Environment.TickCount;
+            int seed = RandomizerSettings.SeedNumber.HasValue ? RandomizerSettings.SeedNumber.Value : Environment.TickCount;
             if (seed == 0)
             {
                 InitializeAsVanilla();

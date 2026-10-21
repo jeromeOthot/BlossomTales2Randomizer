@@ -50,7 +50,7 @@ namespace BlossomTales2
 
         public void howDareYou()
         {
-            if (ModGlobals.SkipCutscenes)
+            if (RandomizerSettings.GamePlay.SkipCutscenes)
                 SwitchWithBoss();
             else
                 orig_howDareYou();
@@ -58,7 +58,7 @@ namespace BlossomTales2
 
         public void talkOrchid()
         {
-            if (ModGlobals.SkipCutscenes)
+            if (RandomizerSettings.GamePlay.SkipCutscenes)
                 giveHeart();
             else
                 orig_talkOrchid();
@@ -68,7 +68,7 @@ namespace BlossomTales2
         {
             Game1.Gui.HideHud = false;
             Mod_OrchidGiveItem("_heart");
-            if (ModGlobals.SkipCutscenes)
+            if (RandomizerSettings.GamePlay.SkipCutscenes)
             {
                 tweener.Timer(3f).OnComplete(delegate
                 {
@@ -100,7 +100,7 @@ namespace BlossomTales2
 
         public void openTomb()
         {
-            if(!ModGlobals.SkipCutscenes)
+            if(!RandomizerSettings.GamePlay.SkipCutscenes)
             {
                 orig_openTomb();
                 return;
@@ -138,8 +138,8 @@ namespace BlossomTales2
 
         private bool Mod_CanInteractWithTomb()
         {
-            return ModGlobals.OpenWorldState && !Game1Extensions.IsObjectiveCompleted(Globaler.MainGameObjective.intro_enterCatacombs)
-                            || !ModGlobals.OpenWorldState && Game1.Globals.MainQuestObjective <= Globaler.MainGameObjective.intro_enterCatacombs;
+            return RandomizerSettings.GamePlay.OpenWorldState && !Game1Extensions.IsObjectiveCompleted(Globaler.MainGameObjective.intro_enterCatacombs)
+                            || !RandomizerSettings.GamePlay.OpenWorldState && Game1.Globals.MainQuestObjective <= Globaler.MainGameObjective.intro_enterCatacombs;
         }
 
         private void Mod_OrchidGiveItem(string locationName)
@@ -152,7 +152,7 @@ namespace BlossomTales2
 
         private void Mod_SkipOpenTombCutscene()
         {
-            if (ModGlobals.SkipCutscenes)
+            if (RandomizerSettings.GamePlay.SkipCutscenes)
             {
                 takeSword();
             }
@@ -166,7 +166,7 @@ namespace BlossomTales2
         private void Mod_SkipMorklaCutscene()
         {
             Game1Extensions.MarkObjectiveComplete(Globaler.MainGameObjective.intro_enterCatacombs);
-            if (ModGlobals.SkipCutscenes)
+            if (RandomizerSettings.GamePlay.SkipCutscenes)
                 fadeOut(); //TODO: Skip la cutscene du minotaure et sortir du donjon.
             else
                 orchidMorkla();

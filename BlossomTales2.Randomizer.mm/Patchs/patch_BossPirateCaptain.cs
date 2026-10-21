@@ -7,6 +7,7 @@ using MonoMod.Cil;
 using MonoMod.InlineRT;
 using MonoMod.Utils;
 using System;
+using BlossomTales2.Randomizer.mm;
 
 namespace BlossomTales2
 {
@@ -29,7 +30,7 @@ namespace BlossomTales2
     {
         public static void Mod_CompleteMorklaObjective()
         {
-            if (ModGlobals.OpenWorldState)
+            if (RandomizerSettings.GamePlay.OpenWorldState)
             {
                 Game1Extensions.MarkObjectiveComplete(Globaler.MainGameObjective.jungles_morklaEnter);
             }
@@ -44,7 +45,7 @@ namespace BlossomTales2
 
         public static void Mod_SetPiratesDefeated()
         {
-            if (ModGlobals.OpenWorldState)
+            if (RandomizerSettings.GamePlay.OpenWorldState)
                 Game1Extensions.MarkObjectiveComplete(Globaler.MainGameObjective.jungles_morklaEnter);
             else
                 Game1.Globals.MainQuestObjective = Globaler.MainGameObjective.jungles_pirateDefeated;

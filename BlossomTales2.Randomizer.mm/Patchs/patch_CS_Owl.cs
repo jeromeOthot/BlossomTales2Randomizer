@@ -60,7 +60,7 @@ namespace BlossomTales2
             Globaler.MainGameObjective mainGameObjective = Game1.Globals.MainQuestObjective;
             orig_endScene();
 
-            if (ModGlobals.OpenWorldState)
+            if (RandomizerSettings.GamePlay.OpenWorldState)
             {
                 Game1.Globals.MainQuestObjective = mainGameObjective;
                 Game1Extensions.MarkObjectiveComplete(Globaler.MainGameObjective.dark_talkToOwl);
@@ -77,7 +77,7 @@ namespace BlossomTales2
     {
         public static bool Mod_IsTalkToOwlObjectiveNotCompleted()
         {
-            if (ModGlobals.OpenWorldState)
+            if (RandomizerSettings.GamePlay.OpenWorldState)
                 return !Game1Extensions.IsObjectiveCompleted(Globaler.MainGameObjective.dark_talkToOwl);
             else
                 return Game1.Globals.MainQuestObjective < Globaler.MainGameObjective.dark_enterDungeon;

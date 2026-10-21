@@ -16,8 +16,8 @@ namespace BlossomTales2
 
         public override void Init()
         {
-            GameLogger.LogInfo("patch_CS_Intro Init " + ModGlobals.SkipCutscenes);
-            if(ModGlobals.SkipCutscenes)
+            GameLogger.LogInfo("patch_CS_Intro Init " + RandomizerSettings.GamePlay.SkipCutscenes);
+            if(RandomizerSettings.GamePlay.SkipCutscenes)
                 this.endCutScene();
             else
                 orig_Init();

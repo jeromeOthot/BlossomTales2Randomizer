@@ -1,4 +1,5 @@
 ﻿using BlossomTales2.Extensions;
+using BlossomTales2.Randomizer.mm;
 
 namespace BlossomTales2
 {
@@ -26,7 +27,7 @@ namespace BlossomTales2
             Globaler.MainGameObjective mainGameObjective = Game1.Globals.MainQuestObjective;
             orig_goPlayer();
 
-            if (ModGlobals.OpenWorldState)
+            if (RandomizerSettings.GamePlay.OpenWorldState)
             {
                 Game1Extensions.MarkObjectiveComplete(Globaler.MainGameObjective.lab_headToTop);
                 Game1.Globals.MainQuestObjective = mainGameObjective;
@@ -35,7 +36,7 @@ namespace BlossomTales2
 
         private bool Mod_HasNotSeenCastleEntranceCutscene()
         {
-            if (ModGlobals.OpenWorldState)
+            if (RandomizerSettings.GamePlay.OpenWorldState)
                 return !Game1Extensions.IsObjectiveCompleted(Globaler.MainGameObjective.lab_findCastleEntrance);
             else
                 return Game1.Globals.MainQuestObjective < Globaler.MainGameObjective.lab_headToTop;
