@@ -28,10 +28,10 @@ namespace BlossomTales2.Randomizer.mm
             assumedInventory.AddItem(progressionPool);
             assumedInventory.AddItem(usefulItemsPool);
 
-            if (!AssumedFill(progressionPool, assumedInventory, locations))
+            if (!AssumedFill(progressionPool, assumedInventory, locations, RandomizerSettings.GamePlay.LocationPools))
                 return false;
 
-            if (!AssumedFill(usefulItemsPool, assumedInventory, locations))
+            if (!AssumedFill(usefulItemsPool, assumedInventory, locations, LocationPool.AllExceptKeyPieces))
                 return false;
 
             foreach (Location remainingLocation in locations)
@@ -40,13 +40,13 @@ namespace BlossomTales2.Randomizer.mm
             return true;
         }
 
-        private bool AssumedFill(List<ItemType> itemPool, Inventory assumedInventory, List<Location> locations)
+        private bool AssumedFill(List<ItemType> itemPool, Inventory assumedInventory, List<Location> locations, LocationPool locationPoolToFill)
         {
             ShuffleList(itemPool);
             foreach (ItemType itemToPlace in itemPool)
             {
                 assumedInventory.RemoveItem(itemToPlace, 1);
-                Location assignableLocation = locations.Find(loc => loc.CanAccess(assumedInventory));
+                Location assignableLocation = locations.Find(loc => locationPoolToFill.HasFlag(loc.LocationPool) && loc.CanAccess(assumedInventory));
                 if (assignableLocation == null)
                 {
                     //Pas trouvé location

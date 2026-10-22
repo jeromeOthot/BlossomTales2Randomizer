@@ -12,9 +12,10 @@ namespace BlossomTales2.Randomizer.mm
 
         public class GamePlaySettings
         {
-            public  bool SkipCutscenes = true;
-            public  bool OpenWorldState = true;
-            public  bool RandomizeColiseumCoins = false;
+            public bool SkipCutscenes = true;
+            public bool OpenWorldState = true;
+            public bool RandomizeColiseumCoins = false;
+            public LocationPool LocationPools = LocationPool.None;
         }
 
         public class OtherSetting
@@ -36,7 +37,6 @@ namespace BlossomTales2.Randomizer.mm
             public bool LongSideQuest = false;
             public bool MiniGames = false;
             public bool Shops = false;
-            public bool Bards = false;
             public bool Traders = false;
             public bool Mausoleum = false;
         }
@@ -51,7 +51,9 @@ namespace BlossomTales2.Randomizer.mm
             {
                 SeedNumber = loaded.SeedNumber;
                 if (loaded.GamePlay != null)
+                {
                     GamePlay = loaded.GamePlay;
+                }
             }
         }
 
