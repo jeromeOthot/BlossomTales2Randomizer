@@ -7,7 +7,7 @@ namespace BlossomTales2.Randomizer.mm
 {
     public static class RandomizerSettings
     {
-        public static int? SeedNumber = null;
+        public static uint? SeedNumber = null;
         public static GamePlaySettings GamePlay = new GamePlaySettings();
 
         public class GamePlaySettings
@@ -59,7 +59,7 @@ namespace BlossomTales2.Randomizer.mm
 
         private class RandomizerSettingsFile
         {
-            public int? SeedNumber { get; set; }
+            public uint? SeedNumber { get; set; }
 
             public GamePlaySettings GamePlay { get; set; }
           //  public OtherSetting Other { get; set; }

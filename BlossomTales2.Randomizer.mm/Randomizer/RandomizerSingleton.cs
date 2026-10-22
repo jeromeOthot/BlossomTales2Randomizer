@@ -125,7 +125,7 @@ namespace BlossomTales2.Randomizer.mm
 
         public void RandomizeLocations()
         {
-            int seed = RandomizerSettings.SeedNumber.HasValue ? RandomizerSettings.SeedNumber.Value : Environment.TickCount;
+            uint seed = RandomizerSettings.SeedNumber.HasValue ? RandomizerSettings.SeedNumber.Value : (uint)Environment.TickCount;
             if (seed == 0)
             {
                 InitializeAsVanilla();
@@ -133,7 +133,7 @@ namespace BlossomTales2.Randomizer.mm
             }
 
             Spoiler spoilerLog = new Spoiler(seed);
-            Random random = new Random(seed);
+            Random random = new Random((int)seed);
             World world;
             bool isValid;
             int tries = 0;
