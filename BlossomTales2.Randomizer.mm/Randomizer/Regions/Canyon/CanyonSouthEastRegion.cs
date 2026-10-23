@@ -16,7 +16,8 @@ namespace BlossomTales2.Randomizer.mm.Canyon
                 new Location(new LocationId("overworld-17x22.tmx", "ghostCanyon", Vector3.Zero),
                     "Ghost",
                     inventory => inventory.CanCraftPotion(ItemType.Jar_Ghost) && (inventory.IngredGemCount >= 10 || inventory.HasShovel),
-                    ItemType.Crystal),
+                    ItemType.Crystal,
+                    LocationPool.Sidequests),
                 //0S
                 new Location(new LocationId("overworld-17x21.tmx", "PickUpItem", new Vector3(412f, 0f, 2164f)),
                     "Witch Area Bone",

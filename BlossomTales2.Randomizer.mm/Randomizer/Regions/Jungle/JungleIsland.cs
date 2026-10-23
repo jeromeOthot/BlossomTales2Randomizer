@@ -62,14 +62,16 @@ namespace BlossomTales2.Randomizer.mm
                 new Location(new LocationId("jungles-21x22.tmx", "hunter", Vector3.Zero),
                     "Troll Hunter Reward",
                     inventory => inventory.HasGrappleHook && inventory.HasBow,
-                    ItemType.Bow),
+                    ItemType.Bow,
+                    LocationPool.Sidequests),
                 //Traders
                 new Location(new LocationId("overworld-21x20.tmx", "Chest_Small", new Vector3(2096f, 0f, 2324f)),
                     "Lighthouse Trader Buried Chest",
                     inventory => inventory.HasShovel && inventory.CanCollectIngredient(EquipableItem.IngredientList.Fish7)
                                                      && inventory.CanCollectIngredient(EquipableItem.IngredientList.Fish3)
                                                      && inventory.CanCollectIngredient(EquipableItem.IngredientList.Fish8),
-                    ItemType.HeartQ_1),
+                    ItemType.HeartQ_1,
+                    LocationPool.Traders),
                 //Chests
                 new Location(new LocationId("jungles-21x22.tmx", "Chest_Small", new Vector3(852f, 0f, 684f)),
                     "Hunter Camp Chest",

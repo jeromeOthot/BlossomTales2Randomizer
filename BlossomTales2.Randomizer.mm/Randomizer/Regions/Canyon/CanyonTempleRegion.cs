@@ -82,7 +82,8 @@ namespace BlossomTales2.Randomizer.mm.Canyon
                 new Location(new LocationId("temple-genieBoss.tmx", "Chest", new Vector3(832f, 0f, 640f)),
                     "Genie Boss Chest",
                     inventory => CanAccessTemple4(inventory) && inventory.HasTorch,
-                    ItemType.KeyPiece2),
+                    ItemType.KeyPiece2,
+                    LocationPool.KeyPieces),
             };
         }
 

@@ -43,7 +43,8 @@ namespace BlossomTales2.Randomizer.mm
                         && inventory.CanCollectIngredient(EquipableItem.IngredientList.WaterDrop) && inventory.CanCollectIngredient(EquipableItem.IngredientList.FlameTongue)
                         && inventory.CanCollectIngredient(EquipableItem.IngredientList.CactusRose) && inventory.CanCollectIngredient(EquipableItem.IngredientList.Poinsettia)
                         && inventory.CanCollectIngredient(EquipableItem.IngredientList.Bellflower) && inventory.CanCollectIngredient(EquipableItem.IngredientList.Daisy),
-                    ItemType.HeartQ_1),
+                    ItemType.HeartQ_1,
+                    LocationPool.LongFetchQuests),
                 //Mingames
                 new Location(new LocationId("overworld-19x19.tmx", "raceGame", Vector3.Zero),
                     "Racing Minigame",

@@ -12,7 +12,7 @@ namespace BlossomTales2.Randomizer.mm
         public bool HasCollectedItem { get; set; }
         public LocationPool LocationPool { get; set; }
 
-        public Location(LocationId id, string name,  Predicate<Inventory> canAccess, ItemType vanillaItem, LocationPool locationPool = LocationPool.Default)
+        public Location(LocationId id, string name,  Predicate<Inventory> canAccess, ItemType vanillaItem, LocationPool locationPool = LocationPool.TreasureChests)
         {
             Id = id;
             Name = name;

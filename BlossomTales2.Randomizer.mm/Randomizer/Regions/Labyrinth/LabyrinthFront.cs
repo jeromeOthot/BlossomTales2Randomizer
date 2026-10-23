@@ -58,7 +58,8 @@ namespace BlossomTales2.Randomizer.mm
                 new Location(new LocationId("labyrinth-forge.tmx", "golemHead", Vector3.Zero),
                     "Golem Forge",
                     inventory => inventory.IngredGemCount >= 50 || inventory.HasShovel,
-                    ItemType.Sword),
+                    ItemType.Sword,
+                    LocationPool.LongFetchQuests),
                 //Chests
                 new Location(new LocationId("overworld-16x17.tmx", "Chest_Small", new Vector3(1576f, 0f, 280f)),
                     "Near Blockburg Chest",

@@ -38,7 +38,8 @@ namespace BlossomTales2.Randomizer.mm
                 new Location(new LocationId("jungles-23x19.tmx", "archJungle", Vector3.Zero),
                     "Archeologist Puzzle Reward",
                     _ => true,
-                    ItemType.Shovel),
+                    ItemType.Shovel,
+                    LocationPool.Sidequests),
                 //Chests
                 new Location(new LocationId("overworld-22x19.tmx", "Chest_Small", new Vector3(2240f, 0f, 1752f)),
                     "Vine Cliff Chest",
