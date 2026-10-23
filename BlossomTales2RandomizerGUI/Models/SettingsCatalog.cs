@@ -10,7 +10,6 @@ public static class SettingsCatalog
     private static readonly string[] CategoryDisplayOrder =
     {
         nameof(RamdomizerSettings.ItemLocalisationSetting),
-        nameof(RamdomizerSettings.OtherSetting),
     };
 
     public static readonly List<SettingDefinition> Definitions = BuildFromRandomizerSettings();
@@ -20,6 +19,7 @@ public static class SettingsCatalog
         var definitions = new List<SettingDefinition>();
 
         var categoryTypes = typeof(RamdomizerSettings).GetNestedTypes(BindingFlags.Public)
+            .Where(t => t.IsClass)
             .OrderBy(t =>
             {
                 var index = Array.IndexOf(CategoryDisplayOrder, t.Name);
@@ -31,22 +31,61 @@ public static class SettingsCatalog
             var categoryKey = TrimSettingSuffix(categoryType.Name);
             var categoryLabel = Humanize(categoryKey);
 
-            var fields = categoryType.GetFields(BindingFlags.Public | BindingFlags.Static)
-                .Where(f => f.FieldType == typeof(bool));
-
-            foreach (var field in fields)
+            foreach (var field in categoryType.GetFields(BindingFlags.Public | BindingFlags.Static))
             {
-                definitions.Add(new SettingDefinition
+                if (field.FieldType == typeof(bool))
                 {
-                    Key = $"{categoryKey}.{field.Name}",
-                    Label = Humanize(field.Name),
-                    Category = categoryLabel,
-                    DefaultValue = (bool)field.GetValue(null)!,
-                });
+                    definitions.Add(new SettingDefinition
+                    {
+                        Key = $"{categoryKey}.{field.Name}",
+                        Label = Humanize(field.Name),
+                        Category = categoryLabel,
+                        CategoryKey = categoryKey,
+                        FieldName = field.Name,
+                        DefaultValue = (bool)field.GetValue(null)!,
+                    });
+                }
+                else if (field.FieldType.IsEnum && field.FieldType.IsDefined(typeof(FlagsAttribute), false))
+                {
+                    AddFlagDefinitions(definitions, categoryKey, categoryLabel, field);
+                }
             }
         }
 
         return definitions;
+    }
+
+    // A [Flags] enum field becomes one checkbox per single-bit value. None and combined
+    // values (e.g. AllExceptKeyPieces) get no checkbox of their own.
+    private static void AddFlagDefinitions(
+        List<SettingDefinition> definitions, string categoryKey, string categoryLabel, FieldInfo field)
+    {
+        var enumType = field.FieldType;
+        var current = Convert.ToInt64(field.GetValue(null));
+
+        foreach (var value in Enum.GetValues(enumType))
+        {
+            var flagValue = Convert.ToInt64(value);
+            if (flagValue <= 0 || (flagValue & (flagValue - 1)) != 0)
+            {
+                continue;
+            }
+
+            var flagName = Enum.GetName(enumType, value)!;
+
+            definitions.Add(new SettingDefinition
+            {
+                Key = $"{categoryKey}.{field.Name}.{flagName}",
+                Label = Humanize(flagName),
+                Category = categoryLabel,
+                CategoryKey = categoryKey,
+                FieldName = field.Name,
+                FlagsEnumType = enumType,
+                FlagValue = flagValue,
+                Description = $"Included in {field.Name}.",
+                DefaultValue = (current & flagValue) == flagValue,
+            });
+        }
     }
 
     private static string TrimSettingSuffix(string name)

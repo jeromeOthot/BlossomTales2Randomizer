@@ -267,7 +267,7 @@ public sealed class MainForm : Form
     {
         try
         {
-            SettingsStore.Save(_values);
+            SettingsStore.Save(_catalog, _values);
             SettingsStore.SaveSeedNumber(_seedTextBox.Text);
             SetStatus($"Saved to {SettingsStore.GetSettingsPath()}");
         }

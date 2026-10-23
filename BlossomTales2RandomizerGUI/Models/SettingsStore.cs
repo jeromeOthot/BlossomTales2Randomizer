@@ -64,27 +64,42 @@ public static class SettingsStore
 
         return catalog.ToDictionary(
             def => def.Key,
-            def => TryGetSavedValue(root, def.Key, out var value) ? value : def.DefaultValue);
+            def => TryGetSavedValue(root, def, out var value) ? value : def.DefaultValue);
     }
 
-    public static void Save(Dictionary<string, bool> values)
+    public static void Save(IReadOnlyList<SettingDefinition> catalog, Dictionary<string, bool> values)
     {
         var root = LoadRoot();
 
-        foreach (var (key, value) in values)
+        foreach (var categoryDefs in catalog.GroupBy(d => d.CategoryKey))
         {
-            var (category, field) = SplitKey(key);
-
-            if (root[category] is not JsonObject group)
+            if (root[categoryDefs.Key] is not JsonObject group)
             {
                 group = new JsonObject();
-                root[category] = group;
+                root[categoryDefs.Key] = group;
             }
 
-            group[field] = value;
+            foreach (var fieldDefs in categoryDefs.GroupBy(d => d.FieldName))
+            {
+                group[fieldDefs.Key] = ToJsonValue(fieldDefs.ToList(), values);
+            }
         }
 
         SaveRoot(root);
+    }
+
+    // Flag checkboxes of one field are written back as a single integer: the OR of the
+    // checked flag values (e.g. TreasureChests | Shops = 9).
+    private static JsonNode ToJsonValue(List<SettingDefinition> fieldDefs, Dictionary<string, bool> values)
+    {
+        if (fieldDefs[0].FlagsEnumType is null)
+        {
+            return JsonValue.Create(values[fieldDefs[0].Key]);
+        }
+
+        var combined = fieldDefs.Where(d => values[d.Key]).Aggregate(0L, (acc, d) => acc | d.FlagValue);
+
+        return JsonValue.Create(combined);
     }
 
     public static string LoadSeedNumber() =>
@@ -97,22 +112,37 @@ public static class SettingsStore
         SaveRoot(root);
     }
 
-    private static bool TryGetSavedValue(JsonObject root, string key, out bool value)
+    private static bool TryGetSavedValue(JsonObject root, SettingDefinition def, out bool value)
     {
         value = false;
 
-        var (category, field) = SplitKey(key);
+        if (root[def.CategoryKey] is not JsonObject group || group[def.FieldName] is not JsonValue node)
+        {
+            return false;
+        }
 
-        return root[category] is JsonObject group
-            && group[field] is JsonValue node
-            && node.TryGetValue(out value);
+        if (def.FlagsEnumType is not { } enumType)
+        {
+            return node.TryGetValue(out value);
+        }
+
+        // The saved integer is turned back into the enum so each flag can be tested on it.
+        // A string such as "Shops, Traders" (an earlier format) is still understood.
+        if (node.TryGetValue<long>(out var bits))
+        {
+            value = HasFlag(Enum.ToObject(enumType, bits), def.FlagValue);
+            return true;
+        }
+
+        if (node.TryGetValue<string>(out var text) && Enum.TryParse(enumType, text, true, out var parsed))
+        {
+            value = HasFlag(parsed, def.FlagValue);
+            return true;
+        }
+
+        return false;
     }
 
-    private static (string Category, string Field) SplitKey(string key)
-    {
-        var separatorIndex = key.IndexOf('.');
-        return separatorIndex >= 0
-            ? (key[..separatorIndex], key[(separatorIndex + 1)..])
-            : (key, key);
-    }
+    private static bool HasFlag(object enumValue, long flagValue) =>
+        (Convert.ToInt64(enumValue) & flagValue) == flagValue;
 }
