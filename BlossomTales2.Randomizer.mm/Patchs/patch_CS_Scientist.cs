@@ -16,8 +16,8 @@ namespace BlossomTales2
         private Puppet coilRightLight;
         private Puppet table;
 
-        public extern void orig_Init();
-        public extern void orig_changeLevel();
+        // public extern void orig_Init();
+        // public extern void orig_changeLevel();
 
         public override void Init()
         {
@@ -53,17 +53,17 @@ namespace BlossomTales2
             Game1.CurrentLevel.LevelObjects.Add(chest);
         }
 
-        public void changeLevel()
-        {
-            Globaler.MainGameObjective mainGameObjective = Game1.Globals.MainQuestObjective;
-            orig_changeLevel();
-
-            if (RandomizerSettings.GamePlay.OpenWorldState)
-            {
-                Game1Extensions.MarkObjectiveComplete(Globaler.MainGameObjective.dark_fightScientist);
-                Game1.Globals.MainQuestObjective = mainGameObjective;
-            }
-        }
+        // public void changeLevel()
+        // {
+        //     Globaler.MainGameObjective mainGameObjective = Game1.Globals.MainQuestObjective;
+        //     orig_changeLevel();
+        //
+        //     if (RandomizerSettings.GamePlay.OpenWorldState)
+        //     {
+        //         Game1Extensions.MarkObjectiveComplete(Globaler.MainGameObjective.dark_fightScientist);
+        //         Game1.Globals.MainQuestObjective = mainGameObjective;
+        //     }
+        // }
 
         private bool Mod_HasOpenedBossChest()
         {
