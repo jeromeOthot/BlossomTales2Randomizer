@@ -57,7 +57,8 @@ namespace BlossomTales2.Randomizer.mm.Canyon
                 new Location(new LocationId("overworld-15x20.tmx", "archCanyon", Vector3.Zero),
                     "Archaeologist Reward",
                     inventory => inventory.CanyonBonesCount >= 20,
-                    ItemType.Crystal),
+                    ItemType.Crystal,
+                    LocationPool.LongFetchQuests),
             };
         }
     }

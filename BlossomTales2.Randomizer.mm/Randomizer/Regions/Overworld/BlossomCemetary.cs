@@ -18,11 +18,13 @@ namespace BlossomTales2.Randomizer.mm
                 new Location(new LocationId("overworld-20x18.tmx", "lanternGuy", new Vector3(1036f, 0f, 660f)),
                     "Lantern Guy",
                     _ => true,
-                    ItemType.Torch),
+                    ItemType.Torch,
+                    LocationPool.FreeGifts),
                 new Location(new LocationId("overworld-20x18.tmx", "ghostDrink", Vector3.Zero),
                     "Ghost",
                     inventory => inventory.CanCraftPotion(ItemType.Jar_Ghost) && inventory.CanCraftPotion(ItemType.Jar_Resurrection),
-                    ItemType.Crystal)
+                    ItemType.Crystal,
+                    LocationPool.Sidequests)
             };
         }
     }

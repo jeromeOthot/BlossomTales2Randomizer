@@ -39,7 +39,8 @@ namespace BlossomTales2.Randomizer.mm
                 new Location(new LocationId("chipmunkKing.tmx", "chipmunk", Vector3.Zero),
                     "Chipmunk King Reward",
                     inventory => inventory.CanCollectIngredient(EquipableItem.IngredientList.Apple) && (inventory.HasFlipper || inventory.HasBombs || inventory.HasBoomerang) ,
-                    ItemType.HeartQ_1),
+                    ItemType.HeartQ_1,
+                    LocationPool.LongFetchQuests),
                 //Minigames
                 new Location(new LocationId("overworld-21x20-gabby.tmx", "Chest_prize_1", Vector3.Zero),
                     "Treasure Mini-game Prize 1",

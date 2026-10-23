@@ -74,7 +74,8 @@ namespace BlossomTales2.Randomizer.mm
                 new Location(new LocationId("morkla-octopus.tmx", "Chest", new Vector3(896f, 0f, 624f)),
                     "Octopus Boss Chest",
                     inventory => CanAccessMorklaBoss(inventory),
-                    ItemType.KeyPiece1),
+                    ItemType.KeyPiece1,
+                    LocationPool.KeyPieces),
             };
         }
 

@@ -58,7 +58,8 @@ namespace BlossomTales2.Randomizer.mm
                 new Location(new LocationId("mansion-bossScientist.tmx", "Chest", new Vector3(704f, 0f, 448f)),
                     "Scientist Boss Chest",
                     inventory => CanAccessMansionBoss(inventory),
-                    ItemType.HeartQ_4)
+                    ItemType.KeyPiece3,
+                    LocationPool.KeyPieces)
             };
         }
 
