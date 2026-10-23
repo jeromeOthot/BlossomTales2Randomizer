@@ -1,7 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
-// The .NET Foundation licenses this file to you under the MIT license.
-
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using BlossomTales2.Extensions;
 using BlossomTales2.Randomizer.mm;
 using Microsoft.Xna.Framework;
@@ -16,8 +13,7 @@ namespace BlossomTales2
         private Puppet coilRightLight;
         private Puppet table;
 
-        // public extern void orig_Init();
-        // public extern void orig_changeLevel();
+         public extern void orig_changeLevel();
 
         public override void Init()
         {
@@ -53,17 +49,39 @@ namespace BlossomTales2
             Game1.CurrentLevel.LevelObjects.Add(chest);
         }
 
-        // public void changeLevel()
-        // {
-        //     Globaler.MainGameObjective mainGameObjective = Game1.Globals.MainQuestObjective;
-        //     orig_changeLevel();
-        //
-        //     if (RandomizerSettings.GamePlay.OpenWorldState)
-        //     {
-        //         Game1Extensions.MarkObjectiveComplete(Globaler.MainGameObjective.dark_fightScientist);
-        //         Game1.Globals.MainQuestObjective = mainGameObjective;
-        //     }
-        // }
+        public void postFight()
+        {
+            Game1.Gui.HideHud = true;
+            Game1.player.Direction = 3;
+            if (RandomizerSettings.GamePlay.SkipCutscenes)
+            {
+                tweener.Timer(1f).OnComplete(changeLevel);
+            }
+            else
+            {
+                Game1.Narrator.AddLine("Grandpa: At long last, <B>Lily possessed all three of the fabled key pieces!", 12);
+                Game1.Narrator.AddLine("Grandpa: Well aware of her progress, the <A>Minotaur <A>King began setting his crafty plans in motion.", 12, changeLevel);
+            }
+        }
+
+        public void changeLevel()
+        {
+            if (!RandomizerSettings.GamePlay.SkipCutscenes)
+            {
+                orig_changeLevel();
+                return;
+            }
+
+            //Copy-pasted from CS_GolemForge.loadMap
+            Game1.FadeOut = true;
+            Game1.FadeAlpha = 255;
+            Game1.TransitionType = Game1.Transitions.FadeBlack;
+            Game1.FadeNewLevelName = "overworld-25x16.tmx";
+            Game1.FadeNewDoorNumber = 1;
+            Game1.FadeNewDoorType = 0;
+            Game1.player.RemovePlayerControls = false;
+            Game1.fadeController.Clear();
+        }
 
         private bool Mod_HasOpenedBossChest()
         {
