@@ -17,7 +17,7 @@ namespace BlossomTales2
 
         public override void Init()
         {
-            if (Game1.Globals.Learned_Songs.Contains(Globaler.Songs.CallHorse))
+            if (Mod_HasItem())
             {
                 hasSong = true;
             }
@@ -29,7 +29,7 @@ namespace BlossomTales2
                 bard = new Puppet("bard", new Vector3(724f, 0f, 1260f));
                 return;
             }
-            if (Game1.Globals.Learned_Songs.Contains(Globaler.Songs.CallHorse))
+            if (Mod_HasItem())
             {
                 foreach (LevelObject levelObject in Game1.CurrentLevel.LevelObjects)
                 {
@@ -146,7 +146,7 @@ namespace BlossomTales2
 
         private bool Mod_HasItem()
         {
-            return Game1Extensions.HasLevelPermaObject(bard.name + "_song");
+            return Game1Extensions.HasLevelPermaObject("bard_song");
         }
 
         private void Mod_GiveSong()
