@@ -21,9 +21,6 @@ namespace BlossomTales2.Randomizer.mm
             { ItemType.Flippers, 1},
             { ItemType.BlueGem, 1},
             { ItemType.GreenGem, 1},
-            { ItemType.Honeycomb, 10},
-            { ItemType.TreeSeed, 1},
-            { ItemType.CanyonBone, 20},
             { ItemType.HeartNecklace, 1},
             { ItemType.Gold_Key, 11},
             { ItemType.OpenSesame, 1},
@@ -47,6 +44,13 @@ namespace BlossomTales2.Randomizer.mm
             { ItemType.Crystal, 20},
         };
 
+        private static readonly IReadOnlyDictionary<ItemType, int> s_fetchQuestItems = new Dictionary<ItemType, int>()
+        {
+            { ItemType.Honeycomb, 10 },
+            { ItemType.TreeSeed, 1 },
+            { ItemType.CanyonBone, 20 },
+        };
+
         private static readonly IReadOnlyDictionary<ItemType, int> s_keyRewards = new Dictionary<ItemType, int>()
         {
             { ItemType.KeyPiece1, 1},
@@ -56,12 +60,18 @@ namespace BlossomTales2.Randomizer.mm
 
         public static IReadOnlyCollection<ItemType> CreateProgressionItemsPool()
         {
-            return CreatePool(s_progressionItems);
+            List<ItemType> progressionItemsPool = CreatePool(s_progressionItems);
+            if(RandomizerSettings.GamePlay.LocationPools.HasFlag(LocationPool.LongFetchQuests))
+                progressionItemsPool.AddRange(CreatePool(s_fetchQuestItems));
+            return progressionItemsPool;
         }
 
         public static IReadOnlyCollection<ItemType> CreateUsefulItemsPool()
         {
-            return CreatePool(s_usefulItems);
+            List<ItemType> usefulItemsPool = CreatePool(s_usefulItems);
+            if(!RandomizerSettings.GamePlay.LocationPools.HasFlag(LocationPool.LongFetchQuests))
+                usefulItemsPool.AddRange(CreatePool(s_fetchQuestItems));
+            return usefulItemsPool;
         }
 
         public static IReadOnlyCollection<ItemType> CreateKeyRewardsPool()
