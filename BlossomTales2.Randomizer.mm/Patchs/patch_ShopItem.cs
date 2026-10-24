@@ -1,12 +1,15 @@
-using System.Collections.Generic;
 using BlossomTales2.Randomizer.mm;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using MonoMod;
 
 namespace BlossomTales2
 {
     public class patch_ShopItem : ShopItem
     {
         private int itemPosition;
+        [MonoModAdded]
+        private ItemData itemData;
 
         public patch_ShopItem(Vector3 position) : base(position)
         {
@@ -45,11 +48,12 @@ namespace BlossomTales2
             Game1.Globals.ShopItems[17] = Game1.Globals.ShopItems[17] == 24 ? 24 : (int)singleton.GetItemAtLocation("labHouse-shop.tmx", "right", Vector3.Zero).Item;
 
             Row = Game1.Globals.ShopItems[IDNumber - 1];
+            itemData = new ItemData((ItemType)Row);
         }
 
         public override void onCollision(string xz, Player entity)
         {
-            if (!(xz == "z") || Row == 0 || Row == 24 || Game1.player.Direction != 1 ||
+            if (!(xz == "z") || Row == 24 || Game1.player.Direction != 1 ||
                 !(Game1.player.Position.X + 4f > Position.X) ||
                 !(Game1.player.Position.X - 4f < Position.X + Size.Z * 4f))
                 return;
@@ -60,6 +64,12 @@ namespace BlossomTales2
 
             Velocity.X = 1f;
             Mod_AskPurchaseItem();
+        }
+
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            if (Row != 24)
+                spriteBatch.Draw(Game1.masterTileset, new Vector2((int)Position.X + 28, (int)Position.Z - 40), new Rectangle(itemData.SpriteIndex * 32, 592, 32, 32), Color.White, 0f, Center, 4f, SpriteEffects.None, Position.Z + 48f + Zdepth);
         }
 
         private void Mod_AskPurchaseItem()
