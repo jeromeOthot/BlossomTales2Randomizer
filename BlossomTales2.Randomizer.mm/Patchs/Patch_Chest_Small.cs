@@ -68,8 +68,8 @@ namespace BlossomTales2
 
             string mapName = Game1.CurrentLevel.Name;
             //For some reason, this map name get mixed up.
-            if(mapName == "overworld-22x20.tmx")
-                mapName = "jungles-22x20.tmx";
+            if(mapName == "jungles-22x20.tmx")
+                mapName = "overworld-22x20.tmx";
 
             ItemData item = RandomizerSingleton.Instance.GetItemAtLocation(mapName, chest.Name, chest.Position);
             if (item != null)

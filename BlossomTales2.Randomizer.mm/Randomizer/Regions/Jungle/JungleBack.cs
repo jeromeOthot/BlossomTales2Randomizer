@@ -78,7 +78,7 @@ namespace BlossomTales2.Randomizer.mm
                     ItemType.HeartQ_1,
                     LocationPool.Traders),
                 //Chests
-                new Location(new LocationId("jungles-22x20.tmx", "Chest_Small", new Vector3(1764f, 0f, 1896f)),
+                new Location(new LocationId("overworld-22x20.tmx", "Chest_Small", new Vector3(1764f, 0f, 1896f)),
                     "West Honeycomb Chest",
                     inventory => inventory.HasFlipper || inventory.HasBombs || inventory.HasBoomerang,
                     ItemType.Honeycomb),
