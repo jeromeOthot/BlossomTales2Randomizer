@@ -395,7 +395,7 @@ namespace BlossomTales2
                                     Game1.CurrentLevel.LevelObjects[j].Velocity.X == 1f)
                                 {
                                     Game1.CurrentLevel.LevelObjects[j].Velocity.X = 0f;
-                                    Game1.CurrentLevel.LevelObjects[j].Row = 0;
+                                    Game1.CurrentLevel.LevelObjects[j].Row = 24;
                                     Game1.Globals.ShopItems[Game1.CurrentLevel.LevelObjects[j].IDNumber - 1] = 24;
                                     break;
                                 }
