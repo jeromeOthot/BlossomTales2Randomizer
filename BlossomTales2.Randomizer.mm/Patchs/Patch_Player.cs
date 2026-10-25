@@ -492,6 +492,14 @@ namespace BlossomTales2
                 player.GiveIngredientReflection(player.fishingIngredient, playAnimation: true);
             }
         }
+
+        public static bool Mod_HasCompletedCanyonBossDoorPuzzle()
+        {
+            if (RandomizerSettings.GamePlay.OpenWorldState)
+                return !Game1Extensions.IsObjectiveCompleted(Globaler.MainGameObjective.canyons_fightGolem);
+            else
+                return Game1.Globals.MainQuestObjective < Globaler.MainGameObjective.canyons_fightGolem;
+        }
     }
 }
 
@@ -512,6 +520,7 @@ namespace MonoMod
             PatchGiveFishingItem(cursor, modPatchPlayerType);
             PatchFishNecklace(cursor, modPatchPlayerType);
             PatchGiveKingSword(cursor, modPatchPlayerType);
+            PatchCanyonTempleObjective(cursor, modPatchPlayerType);
             PatchHeartPieceGrandpaDialog(cursor);
         }
 
@@ -583,6 +592,26 @@ namespace MonoMod
             MethodDefinition mod_GiveKingSwordMethod = modPatchPlayerType.FindMethod("Mod_GiveKingSword");
             cursor.RemoveRange(4);
             cursor.Emit(OpCodes.Call, mod_GiveKingSwordMethod);
+        }
+
+        private static void PatchCanyonTempleObjective(ILCursor cursor, TypeDefinition modPatchPlayerType)
+        {
+            MethodDefinition mod_HasCompletedCanyonBossDoorPuzzleMethod = modPatchPlayerType.FindMethod("Mod_HasCompletedCanyonBossDoorPuzzle");
+
+            //Find L.3027
+            //if (Game1.Globals.MainQuestObjective < Globaler.MainGameObjective.canyons_fightGolem)
+            ILLabel returnLabel = null;
+            cursor.GotoNext(MoveType.Before,
+                instr => instr.MatchLdsfld("BlossomTales2.Game1", "Globals"),
+                instr => instr.MatchLdfld("BlossomTales2.Globaler", "MainQuestObjective"),
+                instr => instr.MatchLdcI4(29),
+                instr => instr.MatchBge(out returnLabel));
+
+            //Replace with
+            //if(ModPlayer.Mod_HasCompletedCanyonBossDoorPuzzle())
+            cursor.RemoveRange(4);
+            cursor.Emit(OpCodes.Call, mod_HasCompletedCanyonBossDoorPuzzleMethod);
+            cursor.Emit(OpCodes.Brfalse, returnLabel);
         }
 
         private static void PatchHeartPieceGrandpaDialog(ILCursor cursor)
