@@ -32,9 +32,30 @@ namespace BlossomTales2
             }
         }
 
+        internal void achoo()
+        {
+            Game1.player.RemovePlayerControls = true;
+            Mod_CompleteGetEyesObjective();
+            if (RandomizerSettings.GamePlay.SkipCutscenes)
+            {
+                tweener.Timer(1f).OnComplete(switchMaps);
+            }
+            else
+            {
+                Game1.playSoundCue("blank112");
+                Game1.Dialoger.AddLine("<P>Morkla: Ahh...", achoo2);
+            }
+        }
+
+        //only here so that the code compile.
+        internal void achoo2()
+        {
+            Game1.playSoundCue("blank112");
+            Game1.Dialoger.AddLine("<P>Morkla: Ahh...", switchMaps);
+        }
+
         internal void switchMaps()
         {
-            Mod_CompleteGetEyesObjective();
             Game1.FadeOut = true;
             Game1.TransitionType = Game1.Transitions.FadeBlack;
             Game1.FadeAlpha = 1;
