@@ -76,7 +76,7 @@ namespace BlossomTales2
                 case "giveShovel":
                     GiveShovelEvent();
                     break;
-                case "giveTribow":
+                case "giveTriBow":
                     GiveNpcItem("hunter");
                     break;
                 case "giveBeePendant":
