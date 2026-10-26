@@ -545,7 +545,7 @@ namespace BlossomTales2
                 case 1:
                   if (Game1.player.Gold > 29)
                   {
-                      Game1.player.ChangeGoldAmountReflection(30);
+                      Game1.player.ChangeGoldAmountReflection(-30);
                     for (int index = 0; index < Game1.CurrentLevel.LevelObjects.Count; ++index)
                     {
                       if (Game1.CurrentLevel.LevelObjects[index] is Chest_RandomRoll)
