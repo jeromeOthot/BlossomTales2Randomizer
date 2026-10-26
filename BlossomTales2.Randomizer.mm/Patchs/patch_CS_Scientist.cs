@@ -72,6 +72,8 @@ namespace BlossomTales2
                 return;
             }
 
+            Game1.player.CamOffset = Vector2.Zero;
+            Game1.player.HasMoved = false;
             //Copy-pasted from CS_GolemForge.loadMap
             Game1.FadeOut = true;
             Game1.FadeAlpha = 255;

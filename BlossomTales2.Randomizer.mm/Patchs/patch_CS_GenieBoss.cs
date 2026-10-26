@@ -48,8 +48,43 @@ namespace BlossomTales2
             }
         }
 
+        public void postFight()
+        {
+            Game1.Gui.HideHud = true;
+            Game1.player.Direction = 3;
+            if (RandomizerSettings.GamePlay.SkipCutscenes)
+            {
+                tweener.Timer(1f).OnComplete(changeLevel);
+            }
+            else
+            {
+                Game1.Narrator.AddLine("Grandpa: After a hard-fought battle, <B>Lily was one key piece closer to her goal.", 12);
+                Game1.Narrator.AddLine("Chrys: <B>Lily found another piece of the key, blah blah blah.", 1);
+                Game1.Narrator.AddLine("Chrys: What about me and the <A>Minotaur <A>King, Grandpa?", 1);
+                Game1.Narrator.AddLine("Grandpa: Ah, yes. Meanwhile, the enemy's wily plans were also unfolding...", 12, changeLevel);
+            }
+        }
+
         public void changeLevel()
         {
+            if (RandomizerSettings.GamePlay.SkipCutscenes)
+            {
+                Game1.player.CamOffset = Vector2.Zero;
+                Game1.player.HasMoved = false;
+                //Copy-pasted from CS_ChrysBaseball
+                Game1.FadeOut = true;
+                Game1.FadeAlpha = 255;
+                Game1.TransitionType = Game1.Transitions.FadeBlack;
+                Game1.FadeNewLevelName = "overworld-16x20.tmx";
+                Game1.FadeNewDoorNumber = 1;
+                Game1.FadeNewDoorType = 0;
+                if (!RandomizerSettings.GamePlay.OpenWorldState)
+                    Game1.Globals.MainQuestObjective = Globaler.MainGameObjective.canyons_talkToOwlAgain;
+                Game1.player.RemovePlayerControls = false;
+                Game1.fadeController.Clear();
+                return;
+            }
+
             Globaler.MainGameObjective mainGameObjective = Game1.Globals.MainQuestObjective;
             orig_changeLevel();
 
