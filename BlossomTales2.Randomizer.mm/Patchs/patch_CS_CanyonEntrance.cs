@@ -26,10 +26,17 @@ namespace BlossomTales2
 
             if (Mod_IsObjectiveTalkToOwlAgain())
             {
-                Game1.player.EnteringDoor = false;
-                Game1.player.RemovePlayerControls = true;
-                Game1.player.Direction = 3;
-                talkToOwlAgain();
+                if (RandomizerSettings.GamePlay.SkipCutscenes)
+                {
+                    ModCSCanyonEntrance.Mod_CompleteTalkToOwlAgain();
+                }
+                else
+                {
+                    Game1.player.EnteringDoor = false;
+                    Game1.player.RemovePlayerControls = true;
+                    Game1.player.Direction = 3;
+                    talkToOwlAgain();
+                }
             }
 
             if (Mod_IsObjectiveEnterDungeon())
