@@ -78,8 +78,12 @@ namespace BlossomTales2
                 Game1.FadeNewLevelName = "overworld-16x20.tmx";
                 Game1.FadeNewDoorNumber = 1;
                 Game1.FadeNewDoorType = 0;
+
                 if (!RandomizerSettings.GamePlay.OpenWorldState)
                     Game1.Globals.MainQuestObjective = Globaler.MainGameObjective.canyons_talkToOwlAgain;
+                else
+                    Game1Extensions.MarkObjectiveComplete(Globaler.MainGameObjective.canyons_fightGolem);
+
                 Game1.player.RemovePlayerControls = false;
                 Game1.fadeController.Clear();
                 return;
