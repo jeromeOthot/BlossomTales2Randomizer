@@ -11,12 +11,14 @@ namespace BlossomTales2.Randomizer.mm
 
         public static void LogInfo(string message)
         {
+#if DEBUG
             if(_cachedLogInfoMethod == null)
             {
                 Type loggerClass = typeof(Game1).Assembly.GetType("BlossomTales2.Logger");
                 _cachedLogInfoMethod = loggerClass.GetMethod("LogInfo", BindingFlags.Static | BindingFlags.Public);
             }
             _cachedLogInfoMethod.Invoke(null, new object[] { message });
+#endif
         }
 
         public static void LogStack()
