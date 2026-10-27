@@ -1,6 +1,7 @@
 using BlossomTales2.Randomizer.mm;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MonoMod;
 
 namespace BlossomTales2
 {
@@ -10,6 +11,9 @@ namespace BlossomTales2
 
         private Vector3 startPosition;
         private bool underwater;
+
+        [MonoModAdded]
+        private bool hasGivenItem;
 
         public extern void orig_Draw(SpriteBatch spriteBatch);
         public extern void orig_onCollision(string xz, Player entity);
@@ -49,6 +53,10 @@ namespace BlossomTales2
 
         private void Mod_OnCollisionCanyonBoneItem()
         {
+            if (hasGivenItem)
+                return;
+            
+            hasGivenItem = true;
             tweener.Timer(0.01f).OnComplete(delegate
             {
                 Alive = false;
