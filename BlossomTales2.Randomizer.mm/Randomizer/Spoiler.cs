@@ -6,7 +6,7 @@ namespace BlossomTales2.Randomizer.mm
 {
     public class Spoiler
     {
-        private const string SpoilerLogFileName = "SpoilerLog_slot_{0}_{1}.txt";
+        private const string SpoilerLogFileName = "SpoilerLog_slot_{0}.txt";
 
         private StringBuilder _spoilerLog = new StringBuilder();
         private StringBuilder _spheres = new StringBuilder();
@@ -76,7 +76,7 @@ namespace BlossomTales2.Randomizer.mm
             log.AppendLine(_spoilerLog.ToString());
             log.AppendLine(_spheres.ToString());
 
-            string path = Path.Combine(Game1.OSDir, string.Format(SpoilerLogFileName, Game1.SaveSlotSelected + 1, _seed));
+            string path = Path.Combine(Game1.OSDir, string.Format(SpoilerLogFileName, Game1.SaveSlotSelected + 1));
             File.WriteAllText(path, log.ToString());
         }
     }
