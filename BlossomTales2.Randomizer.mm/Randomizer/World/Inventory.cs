@@ -31,7 +31,7 @@ namespace BlossomTales2.Randomizer.mm
                               || Items.ContainsKey(ItemType.Jar_DoubleDamage) || Items.ContainsKey(ItemType.Jar_SlowTime) || Items.ContainsKey(ItemType.Jar_BubbleShield)
                               || Items.ContainsKey(ItemType.Jar_ArmorOrbs) || Items.ContainsKey(ItemType.Jar_Resurrection) || Items.ContainsKey(ItemType.Jar_Ghost)
                               || Items.ContainsKey(ItemType.Jar_Fire) || Items.ContainsKey(ItemType.Jar_Speedster);
-        public bool HasBeatenMorklaBoss => Items.ContainsKey(ItemType.MorklaBoss);
+        public bool HasBeatenMorklaBoss => _world.MorklaDungeon.CanAccessMorklaBoss(this);
         public int GoldKeyCount => Items.TryGetValue(ItemType.Gold_Key, out int count) ? count : 0;
         public bool HasTreeSeeds => Items.ContainsKey(ItemType.TreeSeed);
         public bool HasHeartNecklace => Items.ContainsKey(ItemType.HeartNecklace);

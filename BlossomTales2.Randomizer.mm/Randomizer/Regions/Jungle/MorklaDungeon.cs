@@ -9,7 +9,7 @@ namespace BlossomTales2.Randomizer.mm
                                                                && inventory.HasFishingRod
                                                                && (inventory.HasBombs || inventory.HasFlipper);
         public override int Locks => 1;
-        private bool CanAccessMorklaBoss(Inventory inventory) => inventory.CanDoDamage && inventory.HasFlipper && inventory.CanHitWaterLevers && inventory.HasBlueGem &&  inventory.HasGreenGem;
+        public bool CanAccessMorklaBoss(Inventory inventory) => inventory.CanDoDamage && inventory.HasFlipper && inventory.CanHitWaterLevers && inventory.HasBlueGem &&  inventory.HasGreenGem;
 
         public MorklaDungeon(World world) : base("Morkla", world)
         {
