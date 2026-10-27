@@ -64,8 +64,6 @@ namespace BlossomTales2
     {
         public static  void Mod_GiveItem(Chest_Small chest)
         {
-            GameLogger.LogInfo(new LocationId(Game1.CurrentLevel.Name, chest.Name, chest.Position).ToString() + " IDNumber = " + chest.IDNumber);
-
             string mapName = Game1.CurrentLevel.Name;
             //For some reason, this map name get mixed up.
             if(mapName == "jungles-22x20.tmx")

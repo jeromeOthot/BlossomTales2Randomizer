@@ -145,7 +145,6 @@ namespace BlossomTales2
         private void Mod_OrchidGiveItem(string locationName)
         {
             Vector3 position = orchid.getPosition();
-            GameLogger.LogInfo(Game1.CurrentLevel.Name + " " + orchid.name + " " + position);
             position.Y = 0;
             RandomizerSingleton.Instance.GiveItemAtLocation(orchid.name + locationName, position);
         }

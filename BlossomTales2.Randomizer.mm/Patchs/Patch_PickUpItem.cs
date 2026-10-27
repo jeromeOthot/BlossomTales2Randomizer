@@ -55,7 +55,7 @@ namespace BlossomTales2
         {
             if (hasGivenItem)
                 return;
-            
+
             hasGivenItem = true;
             tweener.Timer(0.01f).OnComplete(delegate
             {
@@ -68,7 +68,6 @@ namespace BlossomTales2
                 ItemData itemData = RandomizerSingleton.Instance.GetItemByNameAndLocation(Name, startPosition);
                 if (itemData != null)
                 {
-                    GameLogger.LogInfo("PickupItem: " + new LocationId(Game1.CurrentLevel.Name, Name, startPosition));
                     RandomizerSingleton.Instance.GiveItem(itemData);
                 }
                 else

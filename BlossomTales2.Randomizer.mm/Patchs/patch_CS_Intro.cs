@@ -10,15 +10,14 @@ namespace BlossomTales2
 {
     internal class patch_CS_Intro : CS_Intro
     {
-        public patch_CS_Intro() => this.Init();
+        public patch_CS_Intro() => Init();
 
         public extern void orig_Init();
 
         public override void Init()
         {
-            GameLogger.LogInfo("patch_CS_Intro Init " + RandomizerSettings.GamePlay.SkipCutscenes);
             if(RandomizerSettings.GamePlay.SkipCutscenes)
-                this.endCutScene();
+                endCutScene();
             else
                 orig_Init();
         }

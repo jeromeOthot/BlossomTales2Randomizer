@@ -53,7 +53,6 @@ namespace BlossomTales2
 
         private void Mod_GetFishermanItem()
         {
-            GameLogger.LogInfo(Game1.CurrentLevel.Name + " " + fisherman.name + " " + fisherman.getPosition());
             //Fisherman can move, so don't register its position.
             RandomizerSingleton.Instance.GiveItemAtLocation(fisherman.name, Vector3.Zero);
             Game1Extensions.AddLevelPermaObject(fisherman.name, Vector3.Zero);

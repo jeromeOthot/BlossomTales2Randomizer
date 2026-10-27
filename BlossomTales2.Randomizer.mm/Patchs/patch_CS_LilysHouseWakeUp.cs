@@ -7,16 +7,14 @@ namespace BlossomTales2
 {
     public class patch_CS_LilysHouseWakeUp : CS_LilysHouseWakeUp
     {
-        public patch_CS_LilysHouseWakeUp() => this.Init();
+        public patch_CS_LilysHouseWakeUp() => Init();
 
         public extern void orig_Init();
 
         public  void Init()
         {
-            GameLogger.LogInfo("patch_CS_LilysHouseWakeUp Init " + RandomizerSettings.GamePlay.SkipCutscenes);
-
             if(RandomizerSettings.GamePlay.SkipCutscenes)
-                this.endCutScene();
+                endCutScene();
             else
                 orig_Init();
         }

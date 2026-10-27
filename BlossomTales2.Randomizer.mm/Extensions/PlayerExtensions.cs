@@ -7,7 +7,6 @@ namespace BlossomTales2.Randomizer.mm
     {
         public static void GiveItemReflection(this Player player, EquipableItem.ItemList item, bool playAnimation = true)
         {
-            GameLogger.LogInfo("GiveItemReflection: " );
             MethodInfo info = Game1.player.GetType().GetMethod("GiveItem", BindingFlags.NonPublic | BindingFlags.Instance);
             info.Invoke(Game1.player, new object[] { item, playAnimation });
         }
@@ -57,7 +56,6 @@ namespace BlossomTales2.Randomizer.mm
             const int startIndexSong = 56;
             int itemIndex = (int)newSong;
             Game1.playSoundCue("blank098");
-            GameLogger.LogInfo("Play animation item: " + itemIndex);
             Game1.Particles.Add(new P_GetItem(Game1.player.Position + new Vector3(0.0f, 100f, 0.0f), itemIndex + startIndexSong));
             Game1.Particles.Add(new GetItemLight(Game1.player.Position));
         }

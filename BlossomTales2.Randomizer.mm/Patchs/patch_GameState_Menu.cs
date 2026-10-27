@@ -10,7 +10,6 @@ namespace BlossomTales2
         private void NewGameReset()
         {
             orig_NewGameReset();
-            GameLogger.LogInfo("NewGameReset was called! Didn't complete Load == " + Game1.DidntCompleteLoad);
             if (Game1.DidntCompleteLoad)
             {
                 RandomizerSingleton.Instance.RandomizeLocations();

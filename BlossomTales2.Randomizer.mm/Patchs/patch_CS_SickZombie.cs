@@ -16,7 +16,6 @@ namespace BlossomTales2
 
         private void Mod_GiveItem()
         {
-            GameLogger.LogInfo(zombie.name + " " + zombie.getPosition());
             RandomizerSingleton.Instance.GiveItemAtLocation(zombie.name, zombie.getPosition());
         }
     }

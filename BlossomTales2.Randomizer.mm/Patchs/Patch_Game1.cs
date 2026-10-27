@@ -26,12 +26,9 @@ namespace BlossomTales2
         public static void LoadStuff()
         {
             orig_LoadStuff();
-            GameLogger.LogInfo("Is save successful " + !DidntCompleteLoad);
             if (!DidntCompleteLoad)
             {
-                //TODO: Loader la liste de locations depuis la save<
                 PermaListItem permaItem = Game1.Perma_Objects.FirstOrDefault(o => o.Name == "RandomizedLocations");
-
                 RandomizerSingleton.Instance.LoadRandomizedLocations(permaItem?.LevelName);
             }
         }

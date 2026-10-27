@@ -245,7 +245,6 @@ namespace BlossomTales2
 
             int itemIndex = (int)item;
             Game1.playSoundCue("blank098");
-            GameLogger.LogInfo("Play animation item: " + itemIndex);
             Game1.Particles.Add(new P_GetItem(Position + new Vector3(0.0f, 100f, 0.0f), itemIndex));
             Game1.Particles.Add(new GetItemLight(Position));
 

@@ -43,7 +43,6 @@ namespace BlossomTales2
 
         private void Mod_GiveItem()
         {
-            GameLogger.LogInfo(Game1.CurrentLevel.Name + " " + beggar.name + " " + beggar.getPosition());
             Vector3 positionOffset = beggar.getPosition();
             positionOffset.Y = 0f;
             RandomizerSingleton.Instance.GiveItemAtLocation(beggar.name, positionOffset);
