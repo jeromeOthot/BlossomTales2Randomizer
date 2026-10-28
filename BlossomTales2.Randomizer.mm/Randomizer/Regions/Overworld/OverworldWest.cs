@@ -31,7 +31,7 @@ namespace BlossomTales2.Randomizer.mm
                     ItemType.GoldCoin),
                 new Location(new LocationId("overworld-19x19-cave.tmx", "Chest_Small", new Vector3(608f, 0f, 224f)),
                     "Pond Cave Chest",
-                    inventory => inventory.HasBow,
+                    inventory => inventory.HasBow || inventory.HasGrappleHook,
                     ItemType.HeartQ_1),
                 new Location(new LocationId("overworld-19x18-flowerShop.tmx", "flowerShop", Vector3.Zero),
                     "Flower Collection",
