@@ -137,7 +137,7 @@ namespace BlossomTales2.Randomizer.mm
                 //bardes
                 new Location(new LocationId("overworld-20x16.tmx", "bard_song", Vector3.Zero),
                     "Forest Bard Song",
-                    inventory => inventory.CanDoDamage,
+                    inventory => inventory.HasSword,
                     ItemType.SummonBalloon,
                     LocationPool.Sidequests),
                 //Traders
