@@ -43,6 +43,12 @@ namespace BlossomTales2.Randomizer.mm
 
         public static void Load(string path)
         {
+            if (!File.Exists(path))
+            {
+                InitializeDefaultSettings();
+                return;
+            }
+
             string json = File.ReadAllText(path);
 
             var loaded = JsonConvert.DeserializeObject<RandomizerSettingsFile>(json);
@@ -55,6 +61,12 @@ namespace BlossomTales2.Randomizer.mm
                     GamePlay = loaded.GamePlay;
                 }
             }
+        }
+
+        private static void InitializeDefaultSettings()
+        {
+            SeedNumber = null;
+            GamePlay = new GamePlaySettings { LocationPools = LocationPool.AllExceptKeyPieces };
         }
 
         private class RandomizerSettingsFile
