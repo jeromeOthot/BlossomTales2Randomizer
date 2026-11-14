@@ -72,7 +72,7 @@ namespace BlossomTales2.Randomizer.mm
                 //UFO
                 new Location(new LocationId("ufo.tmx", "aliens", new Vector3(0f, 0f, 0f)),
                     "Ufo Reward",
-                    _ => true,
+                    inventory => inventory.CanDoDamage,
                     ItemType.Crystal,
                     LocationPool.Sidequests),
                 //Minigame
