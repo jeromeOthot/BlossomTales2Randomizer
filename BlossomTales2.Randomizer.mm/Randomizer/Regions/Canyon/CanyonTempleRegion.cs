@@ -61,7 +61,7 @@ namespace BlossomTales2.Randomizer.mm.Canyon
                     inventory => CanAccessTemple4(inventory) && inventory.HasBombs,
                     ItemType.HeartQ_1),
                 new Location(new LocationId("temple-17.tmx", "Chest_Small", new Vector3(276f, 0f, 220f)),
-                    "Room 17",
+                    "Room 17 Chest",
                     inventory => CanAccessTemple4(inventory),
                     ItemType.GoldCoin),
                 new Location(new LocationId("temple-18.tmx", "Chest_Small", new Vector3(1152f, 0f, 1724f)),

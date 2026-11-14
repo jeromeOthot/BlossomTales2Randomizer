@@ -111,7 +111,7 @@ namespace BlossomTales2.Randomizer.mm
         public bool CanAccessAnyCanyon(Inventory inventory) => CanyonNorth.CanAccess(inventory) || CanyonSouthWest.CanAccess(inventory) ||  CanyonSouthEast.CanAccess(inventory)
                                                             ||  CanyonIsland.CanAccess(inventory) || Dustwood.CanAccess(inventory)
                                                             ||  CanyonSteppesNorth.CanAccess(inventory) ||  CanyonSteppesSouth.CanAccess(inventory);
-        public bool CanAccessAnyDarkForest(Inventory inventory) => DarkWoodsFront.CanAccess(inventory) ||  DarkWoodsBack.CanAccess(inventory) || Monsterton.CanAccess(inventory);
+        public bool CanAccessAnyDarkWoods(Inventory inventory) => DarkWoodsFront.CanAccess(inventory) ||  DarkWoodsBack.CanAccess(inventory) || Monsterton.CanAccess(inventory);
         public bool CanAccessAnyLabyrinth(Inventory inventory) => LabyrinthFront.CanAccess(inventory) ||  LabyrinthBack.CanAccess(inventory) || Blockburg.CanAccess(inventory);
 
         public List<ItemType> CollectItems(Inventory inventory, Spoiler spoilerLog)
