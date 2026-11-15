@@ -7,7 +7,7 @@ namespace BlossomTales2.Randomizer.mm
     {
         public override bool CanAccess(Inventory inventory) => (World.OverworldEast.CanAccess(inventory)
                                                                 && (inventory.CanCraftPotion(ItemType.Jar_Health) || inventory.HasFlipper))
-                                                               || (World.DarkWoodsFront.CanAccess(inventory) && inventory.HasGrappleHook);
+                                                               || World.DarkWoodsFront.CanAccess(inventory);
 
         public JungleFront(World world) : base("Jungle Front", world)
         {
