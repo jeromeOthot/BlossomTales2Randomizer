@@ -8,16 +8,14 @@ namespace BlossomTales2
     //TODO: Refactor conditions if we remove cutscenes.
     internal class patch_CS_Morkla : CS_Morkla
     {
-        public extern void orig_Init();
         public extern void orig_morklaDone();
         public extern void orig_fishCaught();
+        public extern void orig_allFishCaught();
         public extern void orig_placeMorklaInWater();
         public extern void orig_placeMorklaOutOfWater();
-        public extern void orig_goTurtle();
         public extern void orig_piratesPoisoned();
         public extern void orig_sink();
         public extern void orig_lowerMorky();
-        public extern void orig_Update(GameTime gameTime);
 
         public override void Init()
         {
@@ -77,6 +75,14 @@ namespace BlossomTales2
             }
         }
 
+        public void allFishCaught()
+        {
+            if(RandomizerSettings.GamePlay.SkipCutscenes)
+                backToLily();
+            else
+                orig_allFishCaught();
+        }
+
         public void placeMorklaInWater()
         {
             Game1.CurrentLevel.Grid_Collision[29, 19] = 0;
@@ -129,7 +135,10 @@ namespace BlossomTales2
         {
             Game1.CurrentLevel.Grid_Collision[29, 19] = 0;
             Game1.CurrentLevel.Grid_Collision[29, 20] = 0;
-            orig_sink();
+            if (RandomizerSettings.GamePlay.SkipCutscenes)
+                lowerMorky();
+            else
+                orig_sink();
         }
 
         public void lowerMorky()
