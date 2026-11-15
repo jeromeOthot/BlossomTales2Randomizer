@@ -48,6 +48,22 @@ namespace BlossomTales2
             }
         }
 
+        public override void Update(GameTime gameTime)
+        {
+            if (focusCam && Mod_HasOpenedChest() && Game1.player.CurrentAnimation != Player.Animations.GetItem)
+            {
+                focusCam = false;
+                Game1.player.HasMoved = false;
+                Game1.player.CamOffset = new Vector2(0f, 0f);
+            }
+            if (!inited && !Mod_HasCompletedVultureObjective() && Game1.player.Position.Z < 896f)
+            {
+                inited = true;
+                initScene();
+            }
+            Mod_BaseUpdate(gameTime);
+        }
+
         private bool Mod_HasCompletedVultureObjective()
         {
             if (RandomizerSettings.GamePlay.OpenWorldState)
@@ -59,6 +75,26 @@ namespace BlossomTales2
         private bool Mod_HasOpenedChest()
         {
             return Game1Extensions.HasLevelPermaObject("Chest");
+        }
+
+        private void Mod_BaseUpdate(GameTime gameTime)
+        {
+            //Copy-pasting base because it somehow crash at launch
+            tweener.Update((float)gameTime.ElapsedGameTime.TotalSeconds);
+            if (focusCam)
+            {
+                overrideCamera(CameraPosition, 1f);
+            }
+
+            for (int i = 0; i < puppets.Count; i++)
+            {
+                puppets[i].Update(gameTime);
+                if (!puppets[i].Alive)
+                {
+                    puppets.RemoveAt(i);
+                    i--;
+                }
+            }
         }
     }
 }
