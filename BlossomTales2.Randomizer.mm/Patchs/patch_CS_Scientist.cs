@@ -69,6 +69,7 @@ namespace BlossomTales2
             if (!RandomizerSettings.GamePlay.SkipCutscenes)
             {
                 orig_changeLevel();
+                Mod_CompleteScientistObjective();
                 return;
             }
 
@@ -83,6 +84,15 @@ namespace BlossomTales2
             Game1.FadeNewDoorType = 0;
             Game1.player.RemovePlayerControls = false;
             Game1.fadeController.Clear();
+            Mod_CompleteScientistObjective();
+        }
+
+        private void Mod_CompleteScientistObjective()
+        {
+            if(RandomizerSettings.GamePlay.OpenWorldState)
+                Game1Extensions.MarkObjectiveComplete(Globaler.MainGameObjective.dark_fightScientist);
+            else
+                Game1.Globals.MainQuestObjective = Globaler.MainGameObjective.lab_talkToBlacksmith;
         }
 
         private bool Mod_HasOpenedBossChest()
