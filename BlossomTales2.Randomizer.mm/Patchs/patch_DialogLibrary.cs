@@ -135,8 +135,10 @@ namespace BlossomTales2
             }
             else if (Mod_ShouldPlayLowerMorklaDialog())
             {
-                Game1.Dialoger.AddLine("<P>Morkla: You need a key to enter the labyrinth. I ate it long ago.",
-                    "lowerMorkla");
+                if(RandomizerSettings.GamePlay.SkipCutscenes)
+                    LineTrigger("lowerMorkla", 0);
+                else
+                    Game1.Dialoger.AddLine("<P>Morkla: You need a key to enter the labyrinth. I ate it long ago.", "lowerMorkla");
             }
             else
             {
