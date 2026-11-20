@@ -9,7 +9,7 @@ public static class SettingsCatalog
     // here are appended after these, in whatever order reflection returns them.
     private static readonly string[] CategoryDisplayOrder =
     {
-        nameof(RamdomizerSettings.ItemLocalisationSetting),
+        nameof(RamdomizerSettings.GameplaySetting),
     };
 
     public static readonly List<SettingDefinition> Definitions = BuildFromRandomizerSettings();

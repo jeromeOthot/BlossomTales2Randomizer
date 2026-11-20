@@ -1,8 +1,8 @@
 {
-  "ItemLocalisation": {
+  "Gameplay": {
     "SkipCutscenes": true,
     "OpenWorldState": true,
-    "LocationPools": 7
+    "LocationPools": 317
   },
   "SeedNumber": ""
 }
