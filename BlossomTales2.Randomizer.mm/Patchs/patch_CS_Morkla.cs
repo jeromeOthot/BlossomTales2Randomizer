@@ -136,9 +136,15 @@ namespace BlossomTales2
             Game1.CurrentLevel.Grid_Collision[29, 19] = 0;
             Game1.CurrentLevel.Grid_Collision[29, 20] = 0;
             if (RandomizerSettings.GamePlay.SkipCutscenes)
+            {
+                Game1.player.RemovePlayerControls = true;
+
                 lowerMorky();
+            }
             else
+            {
                 orig_sink();
+            }
         }
 
         public void lowerMorky()
