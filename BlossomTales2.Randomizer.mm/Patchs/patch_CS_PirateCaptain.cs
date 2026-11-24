@@ -23,11 +23,6 @@ namespace BlossomTales2
                 {
                     chest.Frame = 7;
                 }
-                else
-                {
-                    Game1.WaterLevelUp = false;
-                }
-
                 Game1.CurrentLevel.LevelObjects.Add(chest);
             }
             else
