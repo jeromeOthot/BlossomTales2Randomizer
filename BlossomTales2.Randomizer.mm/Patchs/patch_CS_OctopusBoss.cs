@@ -64,6 +64,15 @@ namespace BlossomTales2
             });
         }
 
+        public void finalOctoDialog()
+        {
+            Mod_FinalOctoDialog();
+            tweener.Timer(1f).Repeat(2).OnBegin(delegate
+            {
+                Game1.playSoundCue("blank147");
+            });
+        }
+
         internal void achoo()
         {
             Game1.player.RemovePlayerControls = true;
@@ -100,6 +109,14 @@ namespace BlossomTales2
                 finalOctoDialog();
             else
                 Game1.Dialoger.AddLine("Octopus: Freeeeeshhhh fleeeesshhhhhh.", grandpaAgain);
+        }
+
+        private void Mod_FinalOctoDialog()
+        {
+            if(RandomizerSettings.GamePlay.SkipCutscenes)
+                goPlayer();
+            else
+                Game1.Dialoger.AddLine("Octopus: Squeeeeeeze, teeeeaaaar, devoouuuur.", goPlayer);
         }
 
         private void Mod_CompleteGetEyesObjective()
