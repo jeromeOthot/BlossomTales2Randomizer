@@ -101,6 +101,15 @@ namespace BlossomTales2
             Game1.TransitionType = Game1.Transitions.FadeBlack;
             Game1.FadeAlpha = 1;
             Game1.FadeNewLevelName = "jungles-24x20.tmx";
+            if (RandomizerSettings.GamePlay.SkipCutscenes)
+            {
+                Game1.FadeAlpha = 255;
+                Game1.FadeNewDoorNumber = 4;
+                Game1.FadeNewDoorType = 0;
+                Game1.player.RemovePlayerControls = false;
+                Game1.fadeController.Clear();
+                Game1Extensions.MarkObjectiveComplete(Globaler.MainGameObjective.jungles_morklaComplete);
+            }
         }
 
         private void Mod_RaiseOctopusDialog()
