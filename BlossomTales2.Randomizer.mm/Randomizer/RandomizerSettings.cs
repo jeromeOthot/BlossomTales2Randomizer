@@ -8,6 +8,7 @@ namespace BlossomTales2.Randomizer.mm
     public static class RandomizerSettings
     {
         public static uint? SeedNumber = null;
+        public static bool? UnlockAll = null;
         public static GamePlaySettings GamePlay = new GamePlaySettings();
 
         public class GamePlaySettings
@@ -56,6 +57,7 @@ namespace BlossomTales2.Randomizer.mm
             if (loaded != null)
             {
                 SeedNumber = loaded.SeedNumber;
+                UnlockAll = loaded.UnlockAll;
                 if (loaded.GamePlay != null)
                 {
                     GamePlay = loaded.GamePlay;
@@ -66,12 +68,14 @@ namespace BlossomTales2.Randomizer.mm
         private static void InitializeDefaultSettings()
         {
             SeedNumber = null;
+            UnlockAll = null;
             GamePlay = new GamePlaySettings { LocationPools = LocationPool.AllExceptKeyPieces };
         }
 
         private class RandomizerSettingsFile
         {
             public uint? SeedNumber { get; set; }
+            public bool? UnlockAll { get; set; }
 
             public GamePlaySettings GamePlay { get; set; }
           //  public OtherSetting Other { get; set; }

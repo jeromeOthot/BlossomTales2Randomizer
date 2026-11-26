@@ -15,6 +15,12 @@ namespace BlossomTales2
                 RandomizerSingleton.Instance.RandomizeLocations();
                 string json = RandomizerSingleton.Instance.SaveRandomizedLocations();
                 Game1.Perma_Objects.Add(new PermaListItem(json, "RandomizedLocations", Vector3.Zero));
+#if DEBUG
+                if (RandomizerSettings.UnlockAll.HasValue && RandomizerSettings.UnlockAll.Value)
+                {
+                    patch_Game1.UnlockAllForDebug();
+                }
+#endif
             }
         }
     }
