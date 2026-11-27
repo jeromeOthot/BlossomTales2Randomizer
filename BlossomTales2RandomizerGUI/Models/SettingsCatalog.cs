@@ -9,7 +9,7 @@ public static class SettingsCatalog
     // here are appended after these, in whatever order reflection returns them.
     private static readonly string[] CategoryDisplayOrder =
     {
-        nameof(RamdomizerSettings.GameplaySetting),
+        nameof(RamdomizerSettings.ItemLocalisationSetting),
     };
 
     public static readonly List<SettingDefinition> Definitions = BuildFromRandomizerSettings();
@@ -43,6 +43,20 @@ public static class SettingsCatalog
                         CategoryKey = categoryKey,
                         FieldName = field.Name,
                         DefaultValue = (bool)field.GetValue(null)!,
+                    });
+                }
+                else if (field.FieldType == typeof(bool?))
+                {
+                    definitions.Add(new SettingDefinition
+                    {
+                        Key = $"{categoryKey}.{field.Name}",
+                        Label = Humanize(field.Name),
+                        Category = categoryLabel,
+                        CategoryKey = categoryKey,
+                        FieldName = field.Name,
+                        Choices = field.GetCustomAttribute<NullableBoolChoicesAttribute>()
+                                  ?? new NullableBoolChoicesAttribute("Random", "False", "True"),
+                        DefaultValue = (bool?)field.GetValue(null),
                     });
                 }
                 else if (field.FieldType.IsEnum && field.FieldType.IsDefined(typeof(FlagsAttribute), false))

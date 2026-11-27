@@ -17,6 +17,8 @@ namespace BlossomTales2.Randomizer.mm
             public bool OpenWorldState = true;
             public bool RandomizeColiseumCoins = false;
             public LocationPool LocationPools = LocationPool.None;
+            public bool? Mount = null;
+            public bool? Instrument = null;
         }
 
         public class OtherSetting

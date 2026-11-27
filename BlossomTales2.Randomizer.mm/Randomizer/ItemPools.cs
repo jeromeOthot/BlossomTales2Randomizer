@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace BlossomTales2.Randomizer.mm
 {
@@ -12,7 +13,7 @@ namespace BlossomTales2.Randomizer.mm
             { ItemType.Bow, 1},
             { ItemType.Bombs, 1},
             { ItemType.GrappleHook, 1},
-            { ItemType.Guitar, 1},
+            { GetInstrument(), 1},
             { ItemType.Boomerang, 1},
             { ItemType.RexTeleporter, 1},
             { ItemType.Shovel, 1},
@@ -26,6 +27,21 @@ namespace BlossomTales2.Randomizer.mm
             { ItemType.OpenSesame, 1},
             { ItemType.WakeUp, 1},
         };
+
+        private static ItemType GetInstrument()
+        {
+            bool mount = false;
+            if (RandomizerSettings.GamePlay.Instrument.HasValue == false)
+            {
+                mount = (new Random().Next(2)) == 0;
+            }
+            else
+            {
+                mount = RandomizerSettings.GamePlay.Instrument.Value;
+            }
+
+            return (mount == true) ? ItemType.Accordian : ItemType.Guitar;
+        }
 
         private static readonly IReadOnlyDictionary<ItemType, int> s_usefulItems = new Dictionary<ItemType, int>()
         {

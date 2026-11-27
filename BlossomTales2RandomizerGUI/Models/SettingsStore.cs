@@ -17,12 +17,14 @@ public static class SettingsStore
         AllowTrailingCommas = true
     };
 
+    // settings.json lives two folders above the project folder (the project folder is
+    // BlossomTales2RandomizerGUI, inside the BlossomTales2Randomizer repository folder).
     public static string GetSettingsPath() =>
-        Path.Combine(Directory.GetParent(GetProjectRoot())!.FullName, "settings.json");
+        Path.GetFullPath(Path.Combine(GetProjectRoot(), "..", "..", "settings.json"));
 
     // dotnet run/build outputs land in bin/<Config>/<TFM>, several levels under the
-    // project folder. Walk back up to the folder containing the .csproj so settings.json
-    // lives alongside the source instead of inside build output.
+    // project folder. Walk back up to the folder containing the .csproj so the settings
+    // path does not depend on the build output location.
     private static string GetProjectRoot()
     {
         for (var dir = new DirectoryInfo(AppContext.BaseDirectory); dir is not null; dir = dir.Parent)
@@ -58,7 +60,7 @@ public static class SettingsStore
     private static void SaveRoot(JsonObject root) =>
         File.WriteAllText(GetSettingsPath(), root.ToJsonString(WriteOptions));
 
-    public static Dictionary<string, bool> Load(IReadOnlyList<SettingDefinition> catalog)
+    public static Dictionary<string, bool?> Load(IReadOnlyList<SettingDefinition> catalog)
     {
         var root = LoadRoot();
 
@@ -67,7 +69,7 @@ public static class SettingsStore
             def => TryGetSavedValue(root, def, out var value) ? value : def.DefaultValue);
     }
 
-    public static void Save(IReadOnlyList<SettingDefinition> catalog, Dictionary<string, bool> values)
+    public static void Save(IReadOnlyList<SettingDefinition> catalog, Dictionary<string, bool?> values)
     {
         var root = LoadRoot();
 
@@ -89,15 +91,17 @@ public static class SettingsStore
     }
 
     // Flag checkboxes of one field are written back as a single integer: the OR of the
-    // checked flag values (e.g. TreasureChests | Shops = 9).
-    private static JsonNode ToJsonValue(List<SettingDefinition> fieldDefs, Dictionary<string, bool> values)
+    // checked flag values (e.g. TreasureChests | Shops = 9). A bool? combobox is written
+    // as null, false or true.
+    private static JsonNode? ToJsonValue(List<SettingDefinition> fieldDefs, Dictionary<string, bool?> values)
     {
         if (fieldDefs[0].FlagsEnumType is null)
         {
-            return JsonValue.Create(values[fieldDefs[0].Key]);
+            var value = values[fieldDefs[0].Key];
+            return value is null ? null : JsonValue.Create(value.Value);
         }
 
-        var combined = fieldDefs.Where(d => values[d.Key]).Aggregate(0L, (acc, d) => acc | d.FlagValue);
+        var combined = fieldDefs.Where(d => values[d.Key] == true).Aggregate(0L, (acc, d) => acc | d.FlagValue);
 
         return JsonValue.Create(combined);
     }
@@ -112,18 +116,36 @@ public static class SettingsStore
         SaveRoot(root);
     }
 
-    private static bool TryGetSavedValue(JsonObject root, SettingDefinition def, out bool value)
+    private static bool TryGetSavedValue(JsonObject root, SettingDefinition def, out bool? value)
     {
         value = false;
 
-        if (root[def.CategoryKey] is not JsonObject group || group[def.FieldName] is not JsonValue node)
+        if (root[def.CategoryKey] is not JsonObject group || !group.ContainsKey(def.FieldName))
+        {
+            return false;
+        }
+
+        // A bool? combobox keeps an explicit JSON null as "Random" rather than the default.
+        if (def.IsChoice && group[def.FieldName] is null)
+        {
+            value = null;
+            return true;
+        }
+
+        if (group[def.FieldName] is not JsonValue node)
         {
             return false;
         }
 
         if (def.FlagsEnumType is not { } enumType)
         {
-            return node.TryGetValue(out value);
+            if (!node.TryGetValue<bool>(out var flag))
+            {
+                return false;
+            }
+
+            value = flag;
+            return true;
         }
 
         // The saved integer is turned back into the enum so each flag can be tested on it.

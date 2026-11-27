@@ -8,8 +8,8 @@ public sealed class MainForm : Form
     private const int GridColumns = 4;
 
     private readonly List<SettingDefinition> _catalog;
-    private readonly Dictionary<string, bool> _values;
-    private readonly Dictionary<string, CheckBox> _checkboxes = new();
+    private readonly Dictionary<string, bool?> _values;
+    private readonly Dictionary<string, Action<bool?>> _setControlValue = new();
     private readonly Dictionary<string, (Label Header, List<SettingDefinition> Items)> _groupHeaders = new();
     private readonly Label _statusLabel;
     private TextBox _seedTextBox = new();
@@ -174,27 +174,92 @@ public sealed class MainForm : Form
         for (var i = 0; i < items.Count; i++)
         {
             var def = items[i];
-            var checkBox = new CheckBox
-            {
-                Text = def.Label,
-                Checked = _values[def.Key],
-                AutoSize = true,
-                Margin = new Padding(3, 6, 3, 6),
-            };
-            checkBox.CheckedChanged += (_, _) =>
-            {
-                _values[def.Key] = checkBox.Checked;
-                UpdateGroupHeader(category);
-            };
-            checkBox.MouseEnter += (_, _) =>
-                SetStatus(string.IsNullOrEmpty(def.Description) ? DefaultStatusText : def.Description);
-            checkBox.MouseLeave += (_, _) => SetStatus(DefaultStatusText);
+            Control control = def.IsChoice ? BuildChoice(def) : BuildCheckBox(category, def);
 
-            _checkboxes[def.Key] = checkBox;
-            grid.Controls.Add(checkBox, i % GridColumns, i / GridColumns);
+            grid.Controls.Add(control, i % GridColumns, i / GridColumns);
         }
 
         return grid;
+    }
+
+    private CheckBox BuildCheckBox(string category, SettingDefinition def)
+    {
+        var checkBox = new CheckBox
+        {
+            Text = def.Label,
+            Checked = _values[def.Key] == true,
+            AutoSize = true,
+            Margin = new Padding(3, 6, 3, 6),
+        };
+        checkBox.CheckedChanged += (_, _) =>
+        {
+            _values[def.Key] = checkBox.Checked;
+            UpdateGroupHeader(category);
+        };
+        AttachHover(checkBox, def);
+
+        _setControlValue[def.Key] = value => checkBox.Checked = value == true;
+
+        return checkBox;
+    }
+
+    // A bool? setting: one combobox entry per state (null / false / true).
+    private Control BuildChoice(SettingDefinition def)
+    {
+        var choices = def.Choices!;
+        var options = new[]
+        {
+            new ChoiceOption(null, choices.WhenNull),
+            new ChoiceOption(false, choices.WhenFalse),
+            new ChoiceOption(true, choices.WhenTrue),
+        };
+
+        var label = new Label
+        {
+            Text = $"{def.Label}:",
+            AutoSize = true,
+            Margin = new Padding(0, 6, 6, 0),
+        };
+
+        var comboBox = new ComboBox
+        {
+            DropDownStyle = ComboBoxStyle.DropDownList,
+            Width = 110,
+            Margin = new Padding(0, 3, 0, 3),
+        };
+        comboBox.Items.AddRange(options);
+        comboBox.SelectedItem = options.First(o => o.Value == _values[def.Key]);
+        comboBox.SelectedIndexChanged += (_, _) =>
+            _values[def.Key] = ((ChoiceOption)comboBox.SelectedItem!).Value;
+        AttachHover(label, def);
+        AttachHover(comboBox, def);
+
+        _setControlValue[def.Key] = value => comboBox.SelectedItem = options.First(o => o.Value == value);
+
+        var panel = new FlowLayoutPanel
+        {
+            AutoSize = true,
+            AutoSizeMode = AutoSizeMode.GrowAndShrink,
+            FlowDirection = FlowDirection.LeftToRight,
+            WrapContents = false,
+            Margin = new Padding(3),
+        };
+        panel.Controls.Add(label);
+        panel.Controls.Add(comboBox);
+
+        return panel;
+    }
+
+    private void AttachHover(Control control, SettingDefinition def)
+    {
+        control.MouseEnter += (_, _) =>
+            SetStatus(string.IsNullOrEmpty(def.Description) ? DefaultStatusText : def.Description);
+        control.MouseLeave += (_, _) => SetStatus(DefaultStatusText);
+    }
+
+    private sealed record ChoiceOption(bool? Value, string Text)
+    {
+        public override string ToString() => Text;
     }
 
     private Control BuildBottomBar()
@@ -252,8 +317,15 @@ public sealed class MainForm : Form
         return bar;
     }
 
-    private string FormatHeader(string category, List<SettingDefinition> items) =>
-        $"{category}  (Selected: {items.Count(i => _values[i.Key])} of {items.Count})";
+    // Only checkboxes are counted; a panel made of comboboxes shows just its name.
+    private string FormatHeader(string category, List<SettingDefinition> items)
+    {
+        var toggles = items.Where(i => !i.IsChoice).ToList();
+
+        return toggles.Count == 0
+            ? category
+            : $"{category}  (Selected: {toggles.Count(i => _values[i.Key] == true)} of {toggles.Count})";
+    }
 
     private void UpdateGroupHeader(string category)
     {
@@ -294,7 +366,7 @@ public sealed class MainForm : Form
         foreach (var def in _catalog)
         {
             _values[def.Key] = def.DefaultValue;
-            _checkboxes[def.Key].Checked = def.DefaultValue;
+            _setControlValue[def.Key](def.DefaultValue);
         }
 
         foreach (var category in _groupHeaders.Keys)
